@@ -16,7 +16,7 @@ Read this first when picking the project up in a new Claude account or session. 
 - **Registry changes:** only admins add/deactivate sources (logged with a reason); crawler-found official bodies may be added as *provisional* tier B for 30 days (D8), enforced by Postgres row-level security.
 - Nothing is committed to git yet; the team asked not to commit until told.
 
-## What is built and tested (62 tests passing)
+## What is built and tested (76 tests passing)
 
 | Area | What | Files |
 |---|---|---|
@@ -63,7 +63,15 @@ Port 8000 is used by another program on the dev laptop, hence 8010. `.claude/lau
     follow-ups ask only what the founder knows, research questions (prices, market size, laws) are stored as
     `open_questions` on the brief version for Discover; Arabic labels in summary and UI; extractor told the
     founder's language. Test script: `docs/demo/nadafa-plan.txt` + the steps in the demo notes.
-11. **Budget is free text** ("حوالي خمسين الف جنيه"); the Commercial stage will need a normalised amount + currency.
-12. **Model quirks seen live (Fanar):** sometimes writes values in English for Arabic founders, and may put
+11. **Fixed after the PharmaStock run:** labels anywhere in a line (`business model: X budget: Y`), follow-up
+    answers as `q1. ... , q2. ...`, Word-table rows (`Values | ...`); a required value the model deduced is asked
+    ("I assumed the country is Kenya... is that right?"); a required value picked up in passing with 1-3 words
+    ("Pharmacist") is still asked, showing what we have; values picked up in passing never overwrite a field;
+    an upload no longer skips the pending question; the same file uploaded twice is read once; questions not
+    addressed to the founder go to `open_questions`.
+12. **Parallel work:** see [planning/02-parallel-work.md](planning/02-parallel-work.md) (ownership, the brief
+    contract, the colleague's task, git workflow). Fixtures: `tests/fixtures/briefs/`.
+13. **Budget is free text** ("حوالي خمسين الف جنيه"); the Commercial stage will need a normalised amount + currency.
+14. **Model quirks seen live (Fanar):** sometimes writes values in English for Arabic founders, and may put
     "no coding" into technical_preferences. Both are visible in the summary and correctable; consider a
     "fields the founder volunteered vs. the field asked" check if it matters in the demo.
