@@ -1,154 +1,98 @@
-# Venture OS — 30-Hour Execution Plan (current)
+# Venture OS: execution plan (current)
 
-> Last updated 2026-11-16. This file replaces the earlier two-stage version and mirrors the shared team doc.
-> Decisions D1–D11 are in [00-planning-report.md](00-planning-report.md) §15a. Build status is in [../HANDOFF.md](../HANDOFF.md).
+> Updated 2026-11-17. Replaces the earlier 30-hour, all-stages-deep plan. The organizers' conventions are in
+> [`CLAUDE.md`](../../CLAUDE.md) at the repo root and override anything here that disagrees.
+> Status: [../HANDOFF.md](../HANDOFF.md) · who does what: [02-parallel-work.md](02-parallel-work.md) ·
+> background and decisions: [00-planning-report.md](00-planning-report.md).
 
-## 1. Overview
+## 1. What we are building and by when
 
-Three people have 30 hours each (90 person-hours) to ship an end-to-end demo: **founder onboarding chat → all six
-stages (Discover, Validate, Build, Commercial, Launch, Operate), each ending in a founder approval gate**, with every
-claim traced to a dated source. **Feature freeze at H20.**
+An open-source team of AI agents that takes a founder's brief toward a validated, sellable **digital** product,
+through six phases with a gate after each step, and that can recommend **stop** when the evidence is weak.
 
-| Decision | Choice |
-| --- | --- |
-| Spending | **Zero.** No payment method on any account; free tiers, Colab free GPU and local models only (D9) |
-| Model hosting | Hosted open-weight API first (free only), Colab vLLM second (D2, D9) |
-| Onboarding model | Fanar-C-2-27B via the Fanar API, Arabic incl. Egyptian dialect (D11) |
-| Interface | Streamlit (D3) |
-| Demo market | Egypt; English and Arabic (D4); the live idea comes from the judges |
-| Search | Free only: SearXNG + registry sources; CAPMAS / ITC loaded manually (D6) |
-| Licence | Apache-2.0 (D7) |
-| CLAUDE.md | Provided later by the team (D1) |
+| | |
+|---|---|
+| Submission | Whatever is on `main` at the last push before **Tuesday 2026-11-17, 23:59** |
+| Top 5 | Announced Wed 02:00; deck + ≤3 min backup video due Wed 14:00; live demo on an unseen founder brief |
+| Team | 3 people: A (Menna), B, C ([split](02-parallel-work.md)) |
+| Strategy | One part working live end to end, the rest shown in the architecture and labelled STUBBED |
 
-## 2. Any-idea demo
+## 2. Rules that decide the score
 
-The judges give the idea live, so nothing is hard-coded to one business.
-- **Classify, don't hardcode:** the brief is tagged with industry, business model, country and language; tags drive questions, queries and sources.
-- **Ask, don't invent:** missing fields become questions; "skip" records them as unknown.
-- **Safety net:** if the network or model fails, switch to a recorded run of a rehearsed idea and say so.
-- **Rehearse with 3 different ideas** (e.g. a food app, a B2B SaaS tool, a handmade-goods export business).
+| Rule | How we meet it |
+|---|---|
+| Free open-weight model, no paid APIs | Ollama local model in Docker by default (C); Fanar free tier as an extra |
+| No payments of any kind | Payments and delivery are MOCKED and labelled |
+| Founder approval before anything is published, sent, spent or signed | Gates and approvals in code (`approval.py`, onboarding confirmation) |
+| Every market claim sourced or labelled `ASSUMPTION` | Researcher output; the brief is labelled "founder statements, not market facts" |
+| Never: promise income, fake reviews/sign-ups/urgency, impersonate, move money, store credentials, paywall | `guardrails.py` (requests and generated text), tests in `tests/unit/test_guardrails.py` |
+| Excluded products: physical goods, financial/crypto, health or legal advice | `guardrails.check_product()`; excluded briefs cannot be confirmed |
+| Label every mock | README table + labels in the UI |
+| Log every agent action | `decision_log.json` via `log_action()` (7 required keys) |
+| Outputs from a real run, named by phase and step | `outputs/phase<N>_step<M>_*.md` via `write_output()` |
 
-## 3. Agent system (32 AI roles + 6 control components)
+Judging: working prototype 25, architecture 20, evidence & honesty 15, pitch 15, founder control & safety 15,
+reproducibility 10. Breaking a must-never rule or hiding a mock means disqualification.
 
-Kinds: **Agent** = AI loop that picks tools (7 in total). **Step** = one model call, fixed output schema.
-**Rules** = plain code. No agent has a tool that publishes, sends or spends.
+## 3. The six phases (organizers' definition) and our depth
 
-**Control (plain code, shared):** Stage Coordinator, Stage Entry Checker, Evidence Validator, Source Validator,
-Permission Broker, Decision Logger.
-
-| # | Stage | Role | Kind | Produces |
+| Phase | Core step | What we show | Depth | Owner |
 |---|---|---|---|---|
-| 1 | Onboarding | Brief Analyzer (the onboarding chat) | Step | Tagged brief, gaps, founder questions — **built** |
-| 2 | Discover | Research Planner | Step | Sources + queries (AR/EN) |
-| 3 | Discover | Source Finder | Agent | Official sources for an uncovered country (12 discovery rules) |
-| 4 | Discover | Market Research | Agent | Market size, trends, demand signals with sources |
-| 5 | Discover | Competitor Intelligence | Agent | Competitors, sites, apps, prices |
-| 6 | Discover | Evidence Extractor | Step | Claims with exact quote, source, date |
-| 7 | Discover | Audience Hypotheses | Step | Segments labelled as hypotheses |
-| 8 | Discover | Opportunity Synthesizer | Step | Problems/gaps, evidenced or marked assumption |
-| 9 | Discover | Research Critic | Step (different model family) | Weak reasoning, contradictions, overclaims |
-| 10 | Validate | Review and Sentiment Miner | Agent | Verbatim quotes grouped into pain points |
-| 11 | Validate | Competitor Benchmark | Step | Feature/price table, one source per cell |
-| 12 | Validate | Value Proposition | Step | Evidenced pains mapped to solution |
-| 13 | Validate | Experiment Designer | Step | Tests with metric, threshold, cost |
-| 14 | Validate | Go / Revise / Stop | Step | Evidence-ladder score and recommendation |
-| 15 | Build | Product Requirements | Step | PRD, user stories, prioritised MVP features |
-| 16 | Build | UX Flow Designer | Step | Screens, flow, wireframe spec |
-| 17 | Build | Architecture and Data Model | Step | Stack and schema |
-| 18 | Build | MVP Builder | Agent (code, sandboxed) | Landing page + core flow from a fixed template |
-| 19 | Build | QA and Security Reviewer | Step + tools | Tests, dependency and secret scan |
-| 20 | Commercial | Pricing Research | Agent | Sourced competitor prices, pricing hypotheses |
-| 21 | Commercial | Cost and Unit Economics | Step + calculator | Costs, break-even, labelled estimates |
-| 22 | Commercial | Business and Revenue Model | Step | Revenue model, canvas |
-| 23 | Commercial | Legal and Compliance Research | Agent | Country requirements from official sources only, or "unavailable" |
-| 24 | Commercial | Commercial Readiness Checker | Rules | Checklist |
-| 25 | Launch | Go-to-Market and Positioning | Step | Positioning, messaging, channels |
-| 26 | Launch | Content Creator | Step | Drafts only, never sent |
-| 27 | Launch | Launch Planner | Step | Calendar, checklist, KPIs |
-| 28 | Launch | Launch Readiness Validator | Rules | Every external action has its own approval request |
-| 29 | Operate | Metrics Collector | Rules | Real events from the MVP, real vs projected |
-| 30 | Operate | Feedback Analyzer | Step | Themes from real feedback |
-| 31 | Operate | Experiment and Growth Advisor | Step | Ranked next experiments |
-| 32 | Operate | Roadmap and Learning Report | Step | Roadmap; flags earlier stages for revalidation |
+| 0. Onboarding (before Discover) | Founder brief | Chat in Arabic/English, documents, guardrails, versioned brief, product check | **Working** | A |
+| 1. Discover | Find opportunities (+ Mom Test interviews) | Sourced opportunities, interview script, gate with go/repeat/pivot/stop | **Working** (target) | B |
+| 2. Validate | Design the business | Lean Canvas, landing-page draft, waitlist target; sign-ups entered by the founder or MOCKED | Working (thin) | B |
+| 3. Build | Build the product | PRD + MVP template | STUBBED | C |
+| 4. Commercial setup | Set the price and policies | Price hypotheses, draft terms/privacy/refunds; no payments | STUBBED | C |
+| 5. Launch | Open the store; deliver automatically | Store page and launch posts as drafts; delivery MOCKED with idempotency | STUBBED | C |
+| 6. Operate and learn | (none) | Persevere-or-pivot memo | STUBBED | C |
 
-## 4. Stage depth in 30 hours
+Every step ends with a gate: founder approval, a pre-set evidence threshold, or passing tests. Outcomes are
+go, repeat, pivot back, or **stop**. Example to demo: target 100 waitlist sign-ups in 14 days, 12 reached ->
+the gate recommends pivot or stop instead of spinning the result.
 
-| Stage | Depth | Live demo shows |
+## 4. Required repository layout (checked by file name and heading)
+
+| Path | Status | Owner |
 |---|---|---|
-| Onboarding | **Built** | Arabic/English chat, document upload, confirm-before-save |
-| 1 Discover | Full | Live searches, AR/EN sources, claims with quotes and dates |
-| 2 Validate | Full | Review quotes, competitor table, evidence ladder, Go/Revise/Stop |
-| 3 Build | Thin | PRD; MVP Builder fills a landing-page template for the judges' idea |
-| 4 Commercial | Thin | Sourced pricing; cost calculator; Egypt legal pack or visible "no verified source" |
-| 5 Launch | Thin | Drafts; Publish blocked until a scoped approval |
-| 6 Operate | Thin | Real visits from judges opening the landing page |
+| `README.md` with the 8 exact headings | Headings in place; content filled as parts land | C (A drafted) |
+| `LICENSE` (Apache-2.0) | ✅ | - |
+| `docker-compose.yml`: `docker compose up` starts everything | ❌ db + SearXNG only so far | C |
+| `decision_log.json` from the demo run | Code ready (`decision_log.py`); log written at the demo run | all |
+| `outputs/` named by phase and step, incl. a gate decision with **stop** | Code ready (`outputs.py`); onboarding writes `phase1_step0_founder_brief.md` | B, all |
+| `tests/` smoke tests (pipeline steps, gate, nothing goes out without approval) | 172 tests (onboarding, guardrails, log, outputs); gate tests to add | B |
+| `ARCHITECTURE.md` (7 sections, Mermaid) | ❌ | C |
+| `.env.example` placeholders only | ✅ | C keeps it complete |
+| `prompts/` one file per agent prompt | ✅ onboarding prompts; agents add theirs | all |
+| Code names: `orchestrator.py`, `agents/<role>.py`, `gates.py`, `approval.py`, `delivery.py` | ❌ | B, C |
+| `CLAUDE.md` at root, not in `docs/`; trick prompts only under `tests/` | ✅ | - |
 
-Thin stages are built from one shared stage template. Sample data is labelled DEMO DATA; projections are labelled
-estimates; nothing is published, sent or paid for.
+## 5. Timeline (Tuesday)
 
-**Cut order** (decided at H14): merge Audience Hypotheses into Opportunity Synthesizer and UX Flow into Product
-Requirements → drop Source Finder (use the Egypt pack) → make QA a plain test run. Stages and gates are never cut.
-
-## 5. Roles
-
-| Person | Owns | Folders |
-|---|---|---|
-| P1 – Core, Control & Operate | Stage template (coordinator, entry check, gate), approvals, decision log, permission broker, evidence validator rules, CI/evals, Stage 6 analytics + dashboard | core/, db/, api/, security/, stages/operate/, evals/, .github/ |
-| P2 – Evidence & Agents | Model router + replay, SearXNG search, fetch/extract (AR/EN), pgvector hybrid search, registry + source validator, the 7 agents | llm/, tools/, evidence/, registry/, agents/ |
-| P3 – Stages, UI & Demo | Steps and workflows for Stages 1–5, Streamlit screens, landing-page template, demo script, pitch | stages/, ui/, templates/, docs/demo.md |
-
-## 6. Timeline
-
-| Hours | P1 – Core, Control, Operate | P2 – Evidence and Agents | P3 – Stages, UI and Demo |
+| When | A | B | C |
 |---|---|---|---|
-| H0–2 | *All: freeze shared models and the stage template interface* | | |
-| H2–6 | Stage template: coordinator, entry check, gate | Model router + replay, JSON repair | Streamlit shell around the existing onboarding chat |
-| H6–10 | Permission broker, scoped approvals, decision log | SearXNG search (AR+EN), fetch + extract, dated | Stage 1 Discover: planner, extractor, synthesis |
-| H10–14 | Evidence validator rules; DB role tests in CI | Hybrid search (pgvector); market + competitor agents | Stage 2 Validate; gate UI approve/revise |
-| H14–18 | Stage 6 Operate: analytics events + dashboard | Review miner, pricing agent, legal agent (Egypt pack) | Stages 3–5 from template: PRD, MVP Builder, drafts |
-| H18–20 | End-to-end integration, all six stages on replay | Record runs for 3 ideas; Source Finder + validator | Evidence and decision-log views |
-| **H20** | **Feature freeze** | | |
-| H20–24 | Scoring script, CI results page | Fix grounding failures; live run, re-record | Demo script; dry run with 3 ideas |
-| H24–27 | Docs: architecture, safety, measured usage | Colab notebook (self-hosted proof) | Pitch deck; rehearsal 1; backup video |
-| H27–30 | Bug fixes, CI green, tag v0.1 | Bug fixes, help rehearse | Rehearsal 2, polish |
+| Done | Onboarding complete and on `main` | | |
+| 12:00 | Help B wire the brief into the orchestrator; review guardrail use in agents | Orchestrator + Phase 1 with its gate, incl. STOP | `docker compose up` works from a clean clone |
+| 16:00 | README/ARCHITECTURE review; demo script | Phase 2 + gate; pipeline page | ARCHITECTURE.md; phases 3-6 STUBBED |
+| **18:00** | **Feature freeze** | | |
+| 18:00-21:00 | All: empty `decision_log.json`, delete `outputs/`, run the demo with two briefs (one passes, one gets **stop**), commit both | | |
+| 21:00-23:00 | All: fresh clone -> `docker compose up` -> checklist at the end of `CLAUDE.md`; fixes only | | |
+| **by 23:00** | Final merge to `main` and push (1 h buffer) | | |
 
-## 7. Checkpoints
+## 6. Demo (3 minutes, unseen brief)
 
-| Hour | Must be true | Fallback |
-|---|---|---|
-| H6 | Model call works live and on replay; a dummy stage runs through the template and stops at its gate | One model profile; hard-code the gate screen |
-| H10 | Onboarding → confirmed brief → Discover produces dated, sourced claims | Merge Audience into Opportunity |
-| H14 | Discover and Validate run end to end with both gates, on replay | Drop Source Finder; use the Egypt pack |
-| H20 | All six stages run on replay with gates; landing page records a visit on the dashboard | Stages 4–5 one step each; merge UX into PRD |
-| H27 | CI green; rehearsed with 3 different ideas | Fixes only |
+1. Paste the judges' brief into onboarding; show the product check and one refused trick prompt.
+2. Confirm the brief (logged with `approved_by: "founder"`).
+3. Run Phase 1: sourced opportunities, `ASSUMPTION` labels, the gate decision.
+4. Show a **stop** on a weak idea (recorded run if the live one passes).
+5. Show `decision_log.json` and the `outputs/` files from the run.
+6. Backup: the recorded run and video if the network or model fails.
 
-## 8. Tests each person owns (CI, recorded responses, no secrets)
-
-- **P1:** stage N+1 can't start without approval of N; reject → revise → re-approve logged; external action blocked without scoped approval; audit-chain tamper detection; registry role checks (tests/sql/registry_roles.sql) moved into CI.
-- **P2:** replay deterministic; documents have retrieval date + hash; duplicates merged; registry YAML valid; Arabic survives extraction; source validator rules (done).
-- **P3:** step outputs match schemas; every fact claim has evidence; golden demo run passes; no "guaranteed income" phrasing; onboarding flow (done).
-
-## 9. Demo definition of done
-
-- [x] Founder onboarding chat in Arabic/English with document upload, confirm before save
-- [ ] Discover runs; trace shows real searches and fetched AR/EN sources
-- [ ] Validator flags an out-of-date or unsourced claim
-- [ ] Founder rejects a section, only that step re-runs, then approves
-- [ ] Validate: review quotes, competitor table, evidence ladder, Go/Revise/Stop
-- [ ] Build: PRD and a working landing page for the judges' idea
-- [ ] Commercial: sourced pricing, cost estimate, legal from official sources or "no verified source"
-- [ ] Launch: drafts; Publish blocked until scoped approval
-- [ ] Operate: real visits from judges, marked real data
-- [ ] Changing the brief marks later stages Stale
-- [ ] Decision log shows all of the above; CI results page shows latest commit's score
-
-## 10. Risks
+## 7. Risks
 
 | Risk | Mitigation |
 |---|---|
-| Integration breaks at H18 | Shared models frozen at H2; syncs at H6/H10/H14 |
-| Free model tiers rate-limit during the demo (Fanar: 50 req/min) | Cache; recorded backup run; rule-based fallbacks keep onboarding working with no model |
-| Free model access changes or is not actually free | Confirm Fanar terms; keep Colab + local fallback; D9 forbids paid fallback |
-| SearXNG rate-limited by engines | Cache fetches; demo on replay |
-| CAPMAS/ITC slow or blocked | Download 2–3 tables by H10, ingest manually |
-| Team exhaustion | Two staggered 3-hour rest blocks per person |
+| `docker compose up` fails on the judges' machine | Test from a fresh clone at 21:00; small local model; no keys required |
+| Free hosted model rate limits | Local Ollama default; onboarding also works with no model (rule-based) |
+| A must-never rule broken by generated text | `check_output()` on every generated text; guardrail tests |
+| Mock shown as working | README table and UI labels say MOCKED/STUBBED |
+| Late merge conflicts | File ownership in [02-parallel-work.md](02-parallel-work.md); merge small pieces early |

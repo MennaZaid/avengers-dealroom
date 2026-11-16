@@ -1,6 +1,8 @@
 # Venture OS — Planning Report v0.1
 
-> Status: **Superseded in parts** — current plan: [01-execution-plan.md](01-execution-plan.md); current status: [../HANDOFF.md](../HANDOFF.md).
+> Status: **Background document, superseded in parts.** The organizers' `CLAUDE.md` (repo root, received
+> 2026-11-16) sets the required layout and rules; decisions D13-D20 (§15b) record what changed. Current plan:
+> [01-execution-plan.md](01-execution-plan.md); current status: [../HANDOFF.md](../HANDOFF.md).
 > Original status: DRAFT for team review. Nothing is implemented. All model versions, prices and quotas below are
 > **to be re-verified at decision time** — they change monthly. Items marked **[ASSUMPTION]** need confirmation.
 > Date: 2026-11-16
@@ -509,6 +511,19 @@ Have a **recorded replay** of the demo ready in case Wi-Fi/Colab fails (replay l
 | D10 | Founder onboarding = chat bot | chat with document upload; asks for missing brief fields before any stage starts |
 | D11 | Onboarding model = **Fanar-C-2-27B** via the Fanar API | Arabic incl. Egyptian dialect, Apache 2.0; tested 2026-11-16; 50 req/min; free status to confirm |
 | D12 | Scope = **all six stages** | Discover + Validate deep, Build/Commercial/Launch/Operate thin from one template; see 01-execution-plan.md |
+
+## 15b. Decisions after the organizers' rules arrived (2026-11-16/17)
+
+| # | Decision | Consequence |
+|---|---|---|
+| D13 | Follow the organizers' `CLAUDE.md` exactly; it lives at the repo root (replaces D1) | README with 8 fixed headings, `ARCHITECTURE.md`, `decision_log.json`, `outputs/phase<N>_step<M>_*`, `prompts/`, role-named code files |
+| D14 | Deadline is `main` at Tue 2026-11-17 23:59; feature freeze 18:00 | Scope cut to: onboarding + Phase 1 working, Phase 2 thin, Phases 3-6 STUBBED and labelled (replaces D12's depth) |
+| D15 | Team of 3: A onboarding + safety, B pipeline (phases 1-2, gates), C setup + architecture + phases 3-6 | File ownership in 02-parallel-work.md |
+| D16 | Default model: a local open-weight model via Ollama in Docker; Fanar optional (replaces D2/D11 as the default) | `docker compose up` works with no key; onboarding also runs with no model |
+| D17 | No payments of any kind, not even sandbox; delivery MOCKED | Sale to cash shown in ARCHITECTURE.md only, with idempotency and refunds designed but mocked |
+| D18 | Guardrails in plain code: excluded products and must-never requests (EN + AR), `check_output()` on generated text | Excluded briefs cannot be confirmed; refusals logged |
+| D19 | Onboarding confirmation is the first gate (`approved_by: "founder"`), versioned brief is the hand-off | Pipeline reads `load_brief()`; a newer brief version makes later stage runs stale |
+| D20 | Trick prompts and injection test files live only under `tests/`; `outputs/` and `decision_log.json` only from a real run | Moved `docs/demo/` to `tests/fixtures/personas/`; tests write to a temp folder |
 
 **30-hour scope cut** *(superseded by D12 and [01-execution-plan.md](01-execution-plan.md); kept for history)*. Build: brief + questions, Discover DAG, validator rules, 2 gates, approvals/audit log,
 Stage 2 *lite* (competitor matrix, review quotes, evidence ladder, Go/Revise/Stop), Streamlit UI, CI with replay

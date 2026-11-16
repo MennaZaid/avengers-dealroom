@@ -1,0 +1,178 @@
+[
+  {
+    "timestamp": "2026-11-16T23:43:35Z",
+    "agent": "brief_extractor",
+    "action": "extract_fields",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "source_type": "founder message",
+    "fields": [
+      "city",
+      "idea",
+      "problem",
+      "target_customer"
+    ]
+  },
+  {
+    "timestamp": "2026-11-16T23:43:37Z",
+    "agent": "brief_extractor",
+    "action": "extract_fields",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "source_type": "founder message",
+    "fields": [
+      "country"
+    ]
+  },
+  {
+    "timestamp": "2026-11-16T23:43:40Z",
+    "agent": "brief_extractor",
+    "action": "extract_fields",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "source_type": "founder message",
+    "fields": [
+      "budget"
+    ]
+  },
+  {
+    "timestamp": "2026-11-16T23:43:43Z",
+    "agent": "brief_extractor",
+    "action": "extract_fields",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "source_type": "founder message",
+    "fields": [
+      "time_available"
+    ]
+  },
+  {
+    "timestamp": "2026-11-16T23:43:47Z",
+    "agent": "brief_extractor",
+    "action": "extract_fields",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "source_type": "founder message",
+    "fields": [
+      "founder_skills"
+    ]
+  },
+  {
+    "timestamp": "2026-11-16T23:43:50Z",
+    "agent": "brief_extractor",
+    "action": "extract_fields",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "source_type": "founder message",
+    "fields": [
+      "supply_side"
+    ]
+  },
+  {
+    "timestamp": "2026-11-16T23:43:50Z",
+    "agent": "brief_extractor",
+    "action": "read_document",
+    "sources": [],
+    "model": null,
+    "cost": 0.0,
+    "approved_by": null,
+    "document": "nadafa-plan.txt"
+  },
+  {
+    "timestamp": "2026-11-16T23:44:08Z",
+    "agent": "brief_extractor",
+    "action": "extract_fields",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "source_type": "uploaded document nadafa-plan.txt",
+    "fields": [
+      "business_model",
+      "known_competitors",
+      "technical_preferences",
+      "values"
+    ]
+  },
+  {
+    "timestamp": "2026-11-16T23:44:10Z",
+    "agent": "brief_tagger",
+    "action": "tag_brief",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "tags": {
+      "industries": [
+        "home_services"
+      ],
+      "customer_type": "b2c",
+      "revenue_model": "commission",
+      "country_code": "EG",
+      "languages": [
+        "ar",
+        "en"
+      ]
+    }
+  },
+  {
+    "timestamp": "2026-11-16T23:44:15Z",
+    "agent": "followup_writer",
+    "action": "write_followup_questions",
+    "sources": [],
+    "model": "Fanar-C-2-27B",
+    "cost": 0.0,
+    "approved_by": null,
+    "followups": 3,
+    "research_questions": 3
+  },
+  {
+    "timestamp": "2026-11-16T23:44:15Z",
+    "agent": "guardrails",
+    "action": "check_product",
+    "sources": [],
+    "model": null,
+    "cost": 0.0,
+    "approved_by": null,
+    "outcome": "allowed",
+    "categories": []
+  },
+  {
+    "timestamp": "2026-11-16T23:44:16Z",
+    "agent": "founder",
+    "action": "confirm_brief",
+    "sources": [],
+    "model": null,
+    "cost": 0.0,
+    "approved_by": "founder",
+    "version": 1,
+    "changed": [
+      "idea",
+      "problem",
+      "target_customer",
+      "city",
+      "country",
+      "budget",
+      "time_available",
+      "founder_skills",
+      "supply_side",
+      "business_model",
+      "known_competitors",
+      "technical_preferences",
+      "values"
+    ],
+    "product_check": "allowed"
+  }
+]

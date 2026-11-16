@@ -6,7 +6,7 @@
 
 ## 1. Who does what
 
-| | **A: Menna** | **B: colleague 1** | **C: colleague 2** |
+| | **A: Menna** | **B: Roufayda** | **C: Abdelrahman** |
 |---|---|---|---|
 | Area | Onboarding + safety | The pipeline: phases 1-2 + gates | Repo, setup, architecture, later phases |
 | Scores most on | Founder control & safety (15) | Working prototype (25), evidence & honesty (15) | Architecture (20), reproducibility (10), pitch (15) |
@@ -15,7 +15,11 @@
 **Shared files:** announce a change before making it. `api/main.py` (one `include_router` line per person),
 `db/schema.sql` (append your own section only), `pyproject.toml` (C merges dependency requests).
 
-### A: Menna (onboarding + safety)
+### A: Menna (onboarding + safety): ✅ done, on `main` (2026-11-17)
+
+All six items below are built and tested (172 tests), plus: budget parsed to numbers, a supply-side question
+for marketplace ideas, re-checking problem/customer when the idea changes, and `onboarding/briefs.py` for the
+hand-off. Next for A: help B integrate the brief, then README/ARCHITECTURE review and the demo script.
 
 1. **Excluded products** (`guardrails.py`, used by onboarding *and* every agent): physical goods,
    financial/investment/crypto, health or legal advice. The product must be **digital**. Onboarding flags it
@@ -31,7 +35,7 @@
 5. Write `outputs/phase1_step0_founder_brief.md` when the brief is confirmed.
 6. Tests: one guardrail test per must-never rule.
 
-### B: colleague 1 (the working pipeline)
+### B: Roufayda (the working pipeline)
 
 Input: the confirmed brief (`GET /onboarding/briefs/{id}`; fixtures in `tests/fixtures/briefs/`).
 
@@ -50,9 +54,11 @@ Input: the confirmed brief (`GET /onboarding/briefs/{id}`; fixtures in `tests/fi
    landing-page draft with a waitlist target (e.g. 100 sign-ups in 14 days). Sign-up counts are
    **MOCKED**/entered by the founder, never invented. Outputs: `phase2_step1_lean_canvas.md`,
    `phase2_step2_landing_page.html`, `phase2_gate_decision.md`.
-6. `ui/pages/2_Pipeline.py`: run a phase, see outputs with sources, approve / reject at each gate.
+6. `ui/pages/2_pipeline.py`: run a phase, see outputs with sources, approve / reject at each gate. The UI is now
+   multi-page (2026-11-17): a placeholder page with the six-phase layout is in place; replace its body and keep
+   `ui/theme.py` for the header, colours and phase bar.
 
-### C: colleague 2 (repo, setup, architecture, phases 3-6)
+### C: Abdelrahman (repo, setup, architecture, phases 3-6)
 
 1. **One-command setup:** a `Dockerfile` and a `docker-compose.yml` that start db, API, UI and **Ollama**
    with an open-weight model (e.g. `qwen3:8b`), so `docker compose up` gives a working app at
@@ -65,7 +71,8 @@ Input: the confirmed brief (`GET /onboarding/briefs/{id}`; fixtures in `tests/fi
 4. **`ARCHITECTURE.md`** with the 7 sections from `CLAUDE.md`: all six phases (agents, tools, method, output),
    gates with go/repeat/pivot/stop and when STOP is recommended, **sale to cash** (payment triggers delivery,
    refund revokes access, idempotency, reconciliation: all MOCKED), data flow, built vs stubbed, roadmap.
-   Mermaid diagrams. Material: `docs/planning/00-planning-report.md`.
+   Mermaid diagrams. Material: `docs/planning/00-planning-report.md`. **A first version exists (2026-11-17):**
+   keep its "Built vs. stubbed" table and phase statuses in step with what actually lands on `main`.
 5. **Phases 3-6 as STUBBED agents** (only after 1-4): `agents/<role>.py` that produce a labelled STUBBED
    output so the pipeline visibly reaches each phase: Build (PRD + MVP template), Commercial (price
    hypotheses + draft terms/privacy/refund policies), Launch (store page draft, launch posts as drafts,
@@ -86,9 +93,9 @@ Input: the confirmed brief (`GET /onboarding/briefs/{id}`; fixtures in `tests/fi
 
 ## 3. Timeline
 
-| When (Tue) | A | B | C |
+| When (Tue) | A: Menna | B: Roufayda | C: Abdelrahman |
 |---|---|---|---|
-| Mon night | Merge current work to `main` (done first) | Read brief contract, start orchestrator + gates | Dockerfile + compose with Ollama |
+| Mon night | ✅ Merged to `main` | Read brief contract, start orchestrator + gates | Dockerfile + compose with Ollama |
 | 12:00 checkpoint | Guardrails + logging in onboarding | Phase 1 runs end to end with its gate, incl. STOP | `docker compose up` works on a clean clone; README skeleton |
 | 16:00 checkpoint | Prompts in `prompts/`; trick-prompt tests | Phase 2 + gate; pipeline page | ARCHITECTURE.md; phases 3-6 stubs |
 | **18:00 feature freeze** | | | |
