@@ -2,6 +2,8 @@
 
 import json
 
+import pytest
+
 from venture_os.onboarding import chat
 from venture_os.onboarding.analyst import LLMAnalyst
 from venture_os.onboarding.brief import REQUIRED, OnboardingState
@@ -34,7 +36,7 @@ def to_summary(s, extractor=NULL):
 def confirmed_state():
     s = OnboardingState()
     chat.start(s)
-    chat.handle_message(s, "idea: home-cooked meal delivery for office workers", NULL)
+    chat.handle_message(s, "idea: an app to book trusted home cleaners for office workers", NULL)
     chat.handle_message(s, "problem: no time to cook\ntarget customer: employees in Cairo\ncountry: Egypt\n"
                            "budget: 50,000 EGP\ntime available: 20 h/week\nfounder skills: sales", NULL)
     to_summary(s)
@@ -275,7 +277,13 @@ def test_focused_answer_keeps_the_founders_words():
         chat.handle_message(s, f"إجابة {s.asking}", NULL)
     chat.handle_message(s, answer, ext)
     assert s.get("founder_skills").value == answer
-    assert s.get("technical_preferences").status == "inferred"  # picked up from another answer: check it
+    # "nobody codes" is not a technical preference: optional fields are not filled from a focused answer;
+    # the optional question that follows offers technical preferences instead.
+    assert s.get("technical_preferences").status == "unknown"
+    assert s.asking == "supply_side"  # a cleaner-booking app is two-sided: who are the cleaners?
+    chat.handle_message(s, "عمال نظافة فريلانسرز", NULL)
+    assert s.get("supply_side").value == "عمال نظافة فريلانسرز"
+    assert "التفضيلات التقنية" in s.messages[-1].text  # then the optional question offers technical preferences
 
 
 def test_paragraph_answer_still_uses_the_model_per_field():
@@ -481,3 +489,171 @@ def test_followup_answer_does_not_overwrite_an_answered_field():
     chat.handle_message(s, "Pharmacists themselves, usually the owner.", ext)
     assert s.get("target_customer").value == "small independent pharmacies in Nairobi"
     assert s.followups[0].answer == "Pharmacists themselves, usually the owner."
+
+
+# ---------- persona 3 (Sanaa) ----------
+
+def test_egyptian_yes_confirms_the_summary():
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "فكرة: تطبيق لحجز دروس خصوصية", NULL)
+    answer_required(s)
+    to_summary(s)
+    chat.handle_message(s, "ايوه", NULL)
+    assert s.phase == "confirmed" and s.version == 1
+
+
+def test_demo_pdf_is_readable_and_labelled():
+    from pathlib import Path
+
+    from venture_os.onboarding.documents import extract_text
+
+    pdf = Path(__file__).parents[1] / "fixtures" / "personas" / "sanaa-plan.pdf"
+    found = chat.parse_labelled(extract_text(pdf.name, pdf.read_bytes()))
+    assert set(found) == {"business_model", "known_competitors", "technical_preferences", "values"}
+    assert found["business_model"]["value"].startswith("12% commission")
+
+
+def test_quote_with_copied_wrapper_tag_is_still_grounded():
+    """Fanar copied '<untrusted>' into every quote, so the grounding check dropped all fields."""
+    out = LLMExtractor(lambda m: json.dumps({
+        "idea": {"value": "سوق للمنتجات اليدوية", "quote": "<untrusted>marketplace أونلاين"},
+        "budget": {"value": "1M", "quote": "<untrusted>مليون دولار"},  # still not in the text: dropped
+    })).extract("عايزة أعمل marketplace أونلاين للمنتجات", "msg")
+    assert out["idea"]["quote"] == "marketplace أونلاين" and "budget" not in out
+
+
+def test_arabic_to_is_stripped_from_unlabelled_correction():
+    s = confirmed_state()
+    chat.handle_message(s, "غير الميزانية لـ 25 ألف جنيه", NULL)
+    assert s.get("budget").value == "25 ألف جنيه"
+
+
+def test_short_answer_keeps_founders_words_even_if_it_mentions_another_field():
+    ext = FakeExtractor({"القاهرة": {
+        "target_customer": {"value": "أشخاص يحبون المنتجات اليدوية", "quote": "بيحبوا المنتجات اليدوية"},
+        "country": {"value": "مصر", "quote": "برة مصر"},
+    }})
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "idea: سوق للمنتجات اليدوية\nproblem: الوسطاء", NULL)
+    answer = "ناس في القاهرة وبرة مصر بيحبوا المنتجات اليدوية الأصلية"
+    chat.handle_message(s, answer, ext)
+    assert s.get("target_customer").value == answer
+    assert s.get("country").status == "inferred" and s.asking == "__confirm__:country"
+
+
+def test_country_is_never_reasked_as_too_short():
+    ext = FakeExtractor({"Cairo": {"idea": {"value": "x app", "quote": "x app"},
+                                   "problem": {"value": "slow service in Cairo", "quote": "slow service"},
+                                   "country": {"value": "Egypt", "quote": "Egypt"}}})
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "An x app for Egypt because of slow service in Cairo, which is a big problem for many.",
+                        ext)
+    assert "country" not in s.thin
+
+
+# ---------- persona 4 (Darsak) ----------
+
+def test_skip_word_typos_count_as_skip():
+    assert all(chat.is_skip(w) for w in ("تخطس", "تخطي", "skp", "Skip.", "pass"))
+    assert not chat.is_skip("ship products from Aswan") and not chat.is_skip("تخطيط شهري")
+
+
+def test_typo_skip_leaves_followup_unanswered():
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "idea: tutoring", NULL)
+    answer_required(s)
+    chat.handle_message(s, "skip", NULL)  # optional -> first follow-up
+    chat.handle_message(s, "تخطس", NULL)
+    assert s.followups[0].answer is None and s.asking == "__followup__:1"
+
+
+def test_copied_quote_marker_is_removed():
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "> A tutoring platform for high-school maths", NULL)
+    assert s.get("idea").value == "A tutoring platform for high-school maths"
+
+
+# ---------- budget as numbers, two-sided ideas ----------
+
+@pytest.mark.parametrize("text,country,expected", [
+    ("حوالي خمسين الف جنيه", "EG", (50000, 50000, "EGP", "stated")),
+    ("معايا حوالي ٥٠ ألف جنيه", "EG", (50000, 50000, "EGP", "stated")),
+    ("20-30k USD", None, (20000, 30000, "USD", "stated")),
+    ("between 20 and 30 thousand dollars", None, (20000, 30000, "USD", "stated")),
+    ("40 ألف درهم", "AE", (40000, 40000, "AED", "stated")),
+    ("about 1.5 million KES", "KE", (1500000, 1500000, "KES", "stated")),
+    ("50000", "EG", (50000, 50000, "EGP", "country_default")),
+    ("$5k", None, (5000, 5000, "USD", "stated")),
+])
+def test_budget_is_parsed_to_numbers(text, country, expected):
+    from venture_os.onboarding.money import parse_budget
+
+    b = parse_budget(text, country)
+    assert (b["min"], b["max"], b["currency"], b["currency_source"]) == expected
+
+
+def test_budget_without_an_amount_stays_unparsed():
+    from venture_os.onboarding.money import parse_budget
+
+    assert parse_budget("not sure yet", "EG") is None and parse_budget(None) is None
+
+
+def test_summary_and_saved_brief_carry_the_parsed_budget():
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "idea: an online tutoring platform\ncountry: Egypt\nbudget: حوالي خمسين الف جنيه", NULL)
+    answer_required(s)
+    reply = to_summary(s)
+    assert "(= 50,000 EGP)" in reply
+    chat.handle_message(s, "yes", NULL)
+    assert s.saved["budget"] == {"min": 50000, "max": 50000, "currency": "EGP", "currency_source": "stated"}
+
+
+@pytest.mark.parametrize("idea,expected", [
+    ("an app to book trusted home cleaners", True),
+    ("a marketplace connecting women artisans with buyers", True),
+    ("تطبيق لحجز عمال النضافة للبيوت", True),
+    ("منصة تربط المدرسين بأولياء الأمور", True),
+    ("an online course teaching artisans to sell on Instagram", False),
+    ("a stock-tracking tool for pharmacies", False),
+])
+def test_two_sided_ideas_are_detected(idea, expected):
+    s = OnboardingState()
+    s.fields["idea"] = chat.FieldValue(value=idea, status="answered")
+    assert chat.two_sided(s) is expected
+
+
+def test_two_sided_idea_asks_who_supplies_once():
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "idea: an app to book trusted home cleaners", NULL)
+    answer_required(s)
+    assert s.asking == "supply_side" and "two groups" in s.messages[-1].text
+    chat.handle_message(s, "skip", NULL)
+    assert s.asking != "supply_side"
+    assert "supply side" in to_summary(s)  # still listed (unknown) so the founder can add it later
+
+
+def test_one_sided_idea_never_asks_or_shows_supply_side():
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "idea: an online course for Instagram marketing", NULL)
+    answer_required(s)
+    assert s.asking != "supply_side"
+    assert "supply side" not in to_summary(s)
+
+
+def test_model_cannot_add_a_supply_side_to_a_one_sided_idea():
+    ext = FakeExtractor({"Pharmacists": {"supply_side": {"value": "pharmacists", "quote": "Pharmacists"}}})
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "idea: a stock-tracking tool for small pharmacies", NULL)
+    answer_required(s)
+    chat.handle_message(s, "skip", NULL)  # optional -> follow-ups
+    chat.handle_message(s, "Pharmacists themselves, usually the owner.", ext)
+    assert s.get("supply_side").value is None

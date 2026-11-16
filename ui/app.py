@@ -56,6 +56,16 @@ with right:
     st.caption(f"Phase: **{last['phase']}** · Saved version: **{version or '-'}** · Model: {last.get('model', '')}")
     if last.get("unsaved_changes"):
         st.warning(f"Editing: changes are not saved until you reply 'yes' ('cancel' keeps version {version}).")
+    check = last.get("product_check") or {}
+    if check.get("status") == "excluded":
+        st.error("Product check: not allowed (" + ", ".join(check.get("categories", [])) + "). Only digital "
+                 "products; no physical goods, financial/crypto, or health/legal advice. The brief can't be "
+                 "confirmed until the idea changes.")
+    elif check.get("status") == "review":
+        st.warning("Product check: allowed only if the product is digital and gives no medical, legal or "
+                   "financial advice.")
+    elif check.get("status") == "allowed":
+        st.caption("Product check: ✅ digital product, allowed")
     fields = last.get("fields", {})
     from venture_os.onboarding.brief import FIELDS, label  # same field list as the backend
 

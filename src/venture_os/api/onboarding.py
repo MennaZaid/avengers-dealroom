@@ -9,22 +9,25 @@ from fastapi import APIRouter, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 
 from venture_os.api.db import connect
+from venture_os.config import Settings
+from venture_os.guardrails import redact
 from venture_os.llm.client import chat_json, live_enabled
 from venture_os.onboarding import chat
 from venture_os.onboarding.analyst import LLMAnalyst, RuleAnalyst
 from venture_os.onboarding.brief import OnboardingState
 from venture_os.onboarding.documents import MAX_BYTES, DocumentError, extract_text
 from venture_os.onboarding.extract import LLMExtractor, NullExtractor
+from venture_os.outputs import write_output
 
 router = APIRouter(prefix="/onboarding", tags=["onboarding"])
 
 
 def extractor():
-    return LLMExtractor(chat_json) if live_enabled() else NullExtractor()
+    return LLMExtractor(chat_json, model=Settings().llm_model_extract) if live_enabled() else NullExtractor()
 
 
 def analyst():
-    return LLMAnalyst(chat_json) if live_enabled() else RuleAnalyst()
+    return LLMAnalyst(chat_json, model=Settings().llm_model_extract) if live_enabled() else RuleAnalyst()
 
 
 class MessageIn(BaseModel):
@@ -41,6 +44,8 @@ def _out(session_id, state: OnboardingState, reply: str, brief_id=None) -> dict:
         "tags": {k: v.model_dump() for k, v in state.tags.items()},
         "followups": [f.model_dump() for f in state.followups],
         "open_questions": state.open_questions,
+        "product_check": state.product_check,
+        "budget": state.budget_parsed,
         "version": state.version,
         "unsaved_changes": state.phase == "confirming" and state.version > 0,
         "documents": state.documents,
@@ -97,10 +102,13 @@ def post_message(session_id: UUID, body: MessageIn):
             snap = state.snapshot()
             conn.execute(
                 "INSERT INTO brief_versions (brief_id, version, fields, tags, followups, open_questions, "
-                "change_note) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                "product_check, budget, change_note) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)",
                 (brief_id, state.version, json.dumps(snap["fields"]), json.dumps(snap["tags"]),
-                 json.dumps(snap["followups"]), json.dumps(snap["open_questions"]), note),
+                 json.dumps(snap["followups"]), json.dumps(snap["open_questions"]),
+                 json.dumps(snap["product_check"]), json.dumps(snap["budget"]), note),
             )
+            # Phase 1 starts from this brief: written by the run, never by hand.
+            write_output(1, 0, "founder_brief", chat.brief_markdown(state, str(brief_id)))
         _save(conn, session_id, state, brief_id)
     return _out(session_id, state, reply, brief_id)
 
@@ -110,7 +118,7 @@ async def upload_document(session_id: UUID, file: UploadFile):
     data = await file.read(MAX_BYTES + 1)
     name = (file.filename or "upload").replace("/", "_").replace("\\", "_")[:200]
     try:
-        text = extract_text(name, data)
+        text = redact(extract_text(name, data))  # card numbers / passwords are never stored
     except DocumentError as e:
         raise HTTPException(422, str(e)) from e
     sha = hashlib.sha256(data).hexdigest()
@@ -138,7 +146,9 @@ def get_brief(brief_id: UUID):
     means their output is stale."""
     with connect("vos_app") as conn:
         rows = conn.execute(
-            "SELECT version, fields, tags, followups, open_questions, change_note, created_at FROM brief_versions "
+            "SELECT version, fields, tags, followups, open_questions, product_check, budget, change_note, "
+            "created_at "
+            "FROM brief_versions "
             "WHERE brief_id = %s ORDER BY version", (brief_id,)).fetchall()
     if not rows:
         raise HTTPException(404, "brief not found")
@@ -150,6 +160,8 @@ def get_brief(brief_id: UUID):
         "tags": latest["tags"],
         "followups": latest["followups"],
         "open_questions": latest["open_questions"],
+        "product_check": latest["product_check"],
+        "budget": latest["budget"],
         "history": [{"version": r["version"], "change_note": r["change_note"], "created_at": r["created_at"]}
                     for r in rows],
     }

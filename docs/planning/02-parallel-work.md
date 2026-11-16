@@ -1,115 +1,104 @@
-# Working in parallel: Onboarding + Stage framework / Discover
+# Working in parallel: three people, deadline Tuesday 23:59
 
-> 2026-11-16. Two people work at the same time without touching the same files. Read
-> [../HANDOFF.md](../HANDOFF.md) first for setup and the rules (zero spend, never invent, founder gates).
+> Updated 2026-11-16 after the organizers' `CLAUDE.md` (repo root) arrived. The submission is whatever is on
+> `main` at the last push before **Tuesday 23:59**. The checker finds files by name and heading, so the layout
+> in `CLAUDE.md` is part of the score. This plan replaces the earlier two-person version.
 
-## 1. Who owns what
+## 1. Who does what
 
-| | Onboarding (owner: Menna) | Stage framework + Discover planner (owner: colleague) |
-|---|---|---|
-| Code | `src/venture_os/onboarding/`, `src/venture_os/api/onboarding.py` | `src/venture_os/stages/` (new), `src/venture_os/api/stages.py` (new) |
-| UI | `ui/app.py` | `ui/pages/2_Discover.py` (new; Streamlit shows it as a second page) |
-| Tests | `tests/unit/test_onboarding*.py`, `tests/integration/test_onboarding_api.py` | `tests/unit/test_stages*.py`, `tests/integration/test_stages_api.py` (new) |
-| Database | onboarding/brief tables in `db/schema.sql` | a **new section at the end** of `db/schema.sql` |
+| | **A: Menna** | **B: colleague 1** | **C: colleague 2** |
+|---|---|---|---|
+| Area | Onboarding + safety | The pipeline: phases 1-2 + gates | Repo, setup, architecture, later phases |
+| Scores most on | Founder control & safety (15) | Working prototype (25), evidence & honesty (15) | Architecture (20), reproducibility (10), pitch (15) |
+| Owns these files | `src/venture_os/onboarding/`, `api/onboarding.py`, `ui/app.py`, `src/venture_os/guardrails.py` (new), `decision_log.py`, `outputs.py`, `prompts/brief_*.md` | `src/venture_os/orchestrator.py`, `gates.py`, `approval.py`, `agents/` (new), `api/stages.py`, `ui/pages/2_Pipeline.py`, `prompts/<agent>.md` | `Dockerfile`, `docker-compose.yml`, `.env.example`, `src/venture_os/llm/`, `README.md`, `ARCHITECTURE.md`, `.github/`, `agents/` for phases 3-6 |
 
-**Shared files (small, announced edits only):** `src/venture_os/api/main.py` (one `include_router` line
-each), `db/schema.sql` (append only, never edit the other section), `pyproject.toml` (new dependencies),
-`docs/HANDOFF.md`. Tell the other person before you change one of these.
+**Shared files:** announce a change before making it. `api/main.py` (one `include_router` line per person),
+`db/schema.sql` (append your own section only), `pyproject.toml` (C merges dependency requests).
 
-## 2. The contract between the two halves
+### A: Menna (onboarding + safety)
 
-Onboarding ends with a **confirmed, versioned brief**. Everything after it reads the brief through one call:
+1. **Excluded products** (`guardrails.py`, used by onboarding *and* every agent): physical goods,
+   financial/investment/crypto, health or legal advice. The product must be **digital**. Onboarding flags it
+   before confirming and suggests a digital angle (e.g. "a booking app for cleaners" is fine; "selling rugs"
+   is not). Adds a tag `allowed: true/false` with the reason.
+2. **Trick-prompt refusals** in the chat and in agent outputs: fake reviews/testimonials/sign-ups, countdown
+   urgency, income promises, posing as someone, moving money, storing passwords/cards. Polite refusal + log
+   entry. Trick-prompt test cases go in `tests/` only.
+3. **Decision log** in onboarding: every extraction, tagging, follow-up generation and the confirmation
+   (`approved_by: "founder"`) via `log_action(...)`.
+4. **Prompts out of code:** move the extractor/tagger/follow-up prompts to `prompts/brief_extractor.md`,
+   `prompts/brief_tagger.md`, `prompts/followup_questions.md` and load them from there.
+5. Write `outputs/phase1_step0_founder_brief.md` when the brief is confirmed.
+6. Tests: one guardrail test per must-never rule.
 
-```
-GET /onboarding/briefs/{brief_id}
--> { brief_id, version, fields{...}, tags{...}, followups[...], open_questions[...], history[...] }
-```
+### B: colleague 1 (the working pipeline)
 
-Two real examples (fictional personas) are saved as fixtures; build and test against them, so you don't
-need the onboarding chat running:
+Input: the confirmed brief (`GET /onboarding/briefs/{id}`; fixtures in `tests/fixtures/briefs/`).
 
-- [tests/fixtures/briefs/pharmastock_v1.json](../../tests/fixtures/briefs/pharmastock_v1.json): English, B2B,
-  Kenya (no Kenya pack in the registry).
-- [tests/fixtures/briefs/nadafa_v1.json](../../tests/fixtures/briefs/nadafa_v1.json): Egyptian Arabic, B2C, Egypt.
+1. **`orchestrator.py`**: runs phase steps in order; a step starts only if the previous gate passed
+   **for the same brief version** (plain code, not a prompt).
+2. **`gates.py`**: each gate returns `go`, `repeat`, `pivot` or `stop` with the reason and the threshold it
+   used. Recommends **stop** when the evidence is weak (too few sourced claims, an excluded product, a demand
+   test below its pre-set target). Writes `outputs/phase<N>_gate_decision.md` and a log entry with `outcome`.
+3. **`approval.py`**: the founder's approve / reject / revise is the only way past a gate, and the only way
+   anything is "published" (all publishing is MOCKED). Test: nothing goes out without approval.
+4. **Phase 1 Discover, core step "Find opportunities"** (`agents/researcher.py`): search with SearXNG +
+   registry sources, claims with source URL and date, anything unsourced labelled `ASSUMPTION`; plus a
+   Mom Test interview script (`agents/interviewer.py`). Outputs: `phase1_step1_opportunities.md`,
+   `phase1_step2_interview_script.md`, `phase1_gate_decision.md`.
+5. **Phase 2 Validate, core step "Design the business"**: Lean Canvas (`agents/business_designer.py`) and a
+   landing-page draft with a waitlist target (e.g. 100 sign-ups in 14 days). Sign-up counts are
+   **MOCKED**/entered by the founder, never invented. Outputs: `phase2_step1_lean_canvas.md`,
+   `phase2_step2_landing_page.html`, `phase2_gate_decision.md`.
+6. `ui/pages/2_Pipeline.py`: run a phase, see outputs with sources, approve / reject at each gate.
 
-What you can rely on:
+### C: colleague 2 (repo, setup, architecture, phases 3-6)
 
-| Key | Meaning |
+1. **One-command setup:** a `Dockerfile` and a `docker-compose.yml` that start db, API, UI and **Ollama**
+   with an open-weight model (e.g. `qwen3:8b`), so `docker compose up` gives a working app at
+   http://localhost:8501 with no keys. Optional free hosted route (e.g. GPT-OSS on a free tier) through
+   `.env`. Every setting in `.env.example`, placeholders only.
+2. **Model profiles** in `llm/`: Ollama local by default; record tokens per call so cost per run is
+   measured (local = $0).
+3. **`README.md`** with exactly the 8 `##` headings from `CLAUDE.md`, in order, including the "What works
+   and what is mocked" table (each step: Working / MOCKED / STUBBED) and a `$` cost per run.
+4. **`ARCHITECTURE.md`** with the 7 sections from `CLAUDE.md`: all six phases (agents, tools, method, output),
+   gates with go/repeat/pivot/stop and when STOP is recommended, **sale to cash** (payment triggers delivery,
+   refund revokes access, idempotency, reconciliation: all MOCKED), data flow, built vs stubbed, roadmap.
+   Mermaid diagrams. Material: `docs/planning/00-planning-report.md`.
+5. **Phases 3-6 as STUBBED agents** (only after 1-4): `agents/<role>.py` that produce a labelled STUBBED
+   output so the pipeline visibly reaches each phase: Build (PRD + MVP template), Commercial (price
+   hypotheses + draft terms/privacy/refund policies), Launch (store page draft, launch posts as drafts,
+   `delivery.py` mocked with idempotency), Operate (persevere-or-pivot memo).
+6. Pitch deck and ≤3 min backup video (needed Wednesday 14:00 if we reach the top 5).
+
+## 2. Contracts (ready now)
+
+| What | How |
 |---|---|
-| `fields.<name>.value` / `.status` | 12 fields. `status` is `answered`, `from_document`, `inferred` or `unknown`. **`unknown` means unknown: never fill it in.** |
-| `fields.<name>.source` / `.quote` | Where the value came from (chat or `document:<file>`) and the exact words |
-| `tags.industries.value` | 1-3 of a fixed list (see `onboarding/tags.py` `INDUSTRIES`) |
-| `tags.customer_type.value` | `b2c`, `b2b`, `b2b2c`, `b2g`, `unknown` |
-| `tags.revenue_model.value` | `subscription`, `commission`, ... or `unknown` |
-| `tags.country_code.value` | ISO code (`EG`, `KE`) or `unknown` |
-| `tags.languages.value` | `["ar", "en"]` etc.: search in each |
-| `open_questions` | Research questions found during onboarding (prices, market size, laws). **Discover must try to answer these.** |
-| `version` / `history` | Every edit after confirming creates a new version |
+| Brief (**onboarding is complete**) | In Python: `from venture_os.onboarding.briefs import load_brief, is_stale` -> `brief = load_brief(brief_id)` gives a typed `ConfirmedBrief`: `brief.known("budget")` (founder's words or `None`; never fill unknowns), `brief.budget` (`{min, max, currency, currency_source}` or `None`), `brief.tag("country_code")`, `brief.allowed` (False = excluded product: the pipeline must stop), `brief.open_questions` (research questions for Discover), `brief.followups`, `is_stale(brief_id, version_used)`. Over HTTP: `GET /onboarding/briefs/{id}` (same keys + history). Fields: the 12 brief fields + `supply_side` (filled only for marketplace/booking ideas). Without a database: `ConfirmedBrief.from_file("tests/fixtures/briefs/nadafa_v1.json")` (Arabic, two-sided, allowed) or `pharmastock_v1.json` (English, Kenya, product check `review`). Confirming writes `outputs/phase1_step0_founder_brief.md` and a `confirm_brief` log entry with `approved_by: "founder"`. |
+| Guardrails | `from venture_os.guardrails import check_request, check_output, check_product, redact`. Run `check_output(text)` on every generated text before showing it (income promises, fake urgency, fake reviews); block if it returns rules. |
+| Prompts | `from venture_os.prompts import load_prompt` then `load_prompt("researcher", query=...)` reads `prompts/researcher.md` (`## System prompt` section, `$placeholders`). |
+| Decision log | `from venture_os.decision_log import log_action` then `log_action("researcher", "find_opportunities", sources=[...], model="qwen3:8b", cost=0, approved_by=None, outcome=...)`. Writes `decision_log.json`. |
+| Outputs | `from venture_os.outputs import write_output` then `write_output(1, 1, "opportunities", markdown)` -> `outputs/phase1_step1_opportunities.md`; `write_output(1, None, "decision", md, gate=True)` -> `outputs/phase1_gate_decision.md`. |
+| Model call | `venture_os.llm.client.chat_json(messages)` (C adds profiles; the signature stays). |
+| Tests | Never write to the real log/outputs: `tests/conftest.py` redirects both to a temp folder. |
 
-**Contract rule:** onboarding may add keys but will not rename or remove these without telling you first.
+## 3. Timeline
 
-## 3. Your task (colleague): stage framework + Discover Research Planner
+| When (Tue) | A | B | C |
+|---|---|---|---|
+| Mon night | Merge current work to `main` (done first) | Read brief contract, start orchestrator + gates | Dockerfile + compose with Ollama |
+| 12:00 checkpoint | Guardrails + logging in onboarding | Phase 1 runs end to end with its gate, incl. STOP | `docker compose up` works on a clean clone; README skeleton |
+| 16:00 checkpoint | Prompts in `prompts/`; trick-prompt tests | Phase 2 + gate; pipeline page | ARCHITECTURE.md; phases 3-6 stubs |
+| **18:00 feature freeze** | | | |
+| 18:00-21:00 | All: real demo run with 2 briefs, one that passes and one that gets **stop**; `reset_log()` first; commit `outputs/` and `decision_log.json` from that run | | |
+| 21:00-23:00 | All: fresh clone -> `docker compose up` -> run the checklist at the end of `CLAUDE.md`; fix only | | |
+| **by 23:00** | Final merge to `main` and push (one hour of buffer) | | |
 
-These are the next items on the critical path in [01-execution-plan.md](01-execution-plan.md) (H2-H10, P1/P3)
-and depend only on the contract above.
+## 4. Git
 
-### Part A: stage framework (the template every stage uses)
-
-1. **Tables** (new section in `db/schema.sql`):
-   - `stage_runs`: id, brief_id, **brief_version** (the version this run used), stage
-     (`discover`, `validate`, `build`, `commercial`, `launch`, `operate`), status (`running`, `awaiting_approval`,
-     `approved`, `revision_requested`, `rejected`, `failed`), output JSONB, created_at.
-   - `stage_decisions`: stage_run_id, decision (`approve` / `revise` / `reject`), note, created_at.
-     Append-only (no UPDATE/DELETE grants), like an audit log.
-2. **Entry check** (plain code, no model): Discover can start only for a brief that has a confirmed version.
-   Stage N+1 can start only if stage N has an `approve` decision **for the same brief version**.
-3. **Stale:** a run is stale when the brief's latest version is newer than `stage_runs.brief_version`.
-   Return `stale: true` on reads; never delete old runs.
-4. **API** (`api/stages.py`, role `vos_app`):
-   - `POST /stages/{stage}/runs {brief_id}` -> 403 if the entry check fails
-   - `GET /stages/runs?brief_id=...` -> runs with `stale`
-   - `POST /stages/runs/{id}/decision {decision, note}` -> the only way to approve (the gate is code, not a prompt)
-5. **Tests:** stage N+1 refused without approval of N; revise then approve both logged; a brief edit marks
-   the run stale; approval of an old brief version doesn't unlock the next stage.
-
-### Part B: Discover step 1, the Research Planner (rules first, no model needed)
-
-Input: a brief (fixture). Output: a `ResearchPlan` (Pydantic) stored as the run's output:
-
-- **Sources:** from `GET /registry/sources?country=<country_code>` (it returns country + global sources).
-  If no country-specific source exists (Kenya), say so in the plan: `"country_sources": "no verified source"`.
-  Never invent a source.
-- **Queries:** for each topic (market size, competitors, customer pain, pricing, regulation) and each language
-  in `tags.languages`, built from `fields` and `tags`. Add one topic per item in `open_questions`.
-  Use only fields whose status is not `unknown`.
-- **Known competitors** from the brief become competitor queries.
-- Tests with both fixtures: Egypt plan has Arabic + English queries and Egypt sources; Kenya plan is English
-  and reports "no verified source"; no query uses an `unknown` field.
-
-Optional after that: a model call to improve query wording (must keep the same schema; tests use replay).
-
-### Part C: a Discover page
-
-`ui/pages/2_Discover.py`: pick a confirmed brief, start Discover, show the plan, Approve / Request revision
-buttons calling the decision endpoint, a "Stale" badge when the brief changed.
-
-### Done when
-
-- `pytest` green (CI runs without secrets or a live model), `ruff check .` clean.
-- With the API running: confirm a brief in the onboarding page, open the Discover page, run the planner,
-  approve; then edit the brief in onboarding and see the run marked Stale.
-
-## 4. Git workflow
-
-Nothing beyond `first commit` is in git yet, and the team asked not to commit until told. Parallel work
-needs a shared starting point, so once the team agrees:
-
-1. Commit the current state to `main` and push (one person, once).
-2. Each person works on a branch: `onboarding/<topic>` and `stages/<topic>`.
-3. Pull `main` into your branch at least daily; open a pull request to merge; CI must be green.
-4. Never commit `.env` (it is git-ignored). Each person requests their own Fanar key.
-
-## 5. Running both at once
-
-Each person runs their own API, UI and Postgres on their own laptop (see HANDOFF "How to run").
-Restart the API and UI after any change under `src/` (Streamlit reloads `ui/` files only).
+- `main` is the submission. Each person works on a branch (`onboarding/...`, `pipeline/...`, `repo/...`),
+  pulls `main` often, and merges small pieces early; CI must be green.
+- Never commit `.env`. Never hand-write `outputs/` or `decision_log.json`.
+- Trick prompts and injection files live only under `tests/` (see `tests/fixtures/personas/`).

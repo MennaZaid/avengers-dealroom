@@ -220,6 +220,10 @@ ALTER TABLE brief_versions ADD COLUMN IF NOT EXISTS tags JSONB NOT NULL DEFAULT 
 ALTER TABLE brief_versions ADD COLUMN IF NOT EXISTS followups JSONB NOT NULL DEFAULT '[]';
 -- research questions found during onboarding, handed to Discover (not asked to the founder)
 ALTER TABLE brief_versions ADD COLUMN IF NOT EXISTS open_questions JSONB NOT NULL DEFAULT '[]';
+-- guardrails.check_product(): allowed / review / excluded (excluded briefs cannot be confirmed)
+ALTER TABLE brief_versions ADD COLUMN IF NOT EXISTS product_check JSONB NOT NULL DEFAULT '{}';
+-- budget as numbers: {min, max, currency, currency_source}; NULL when the founder's words had no amount
+ALTER TABLE brief_versions ADD COLUMN IF NOT EXISTS budget JSONB;
 
 -- ---------- Row-level security on the registry ----------
 -- Even a buggy validator cannot create an active, non-provisional or tier-A source.

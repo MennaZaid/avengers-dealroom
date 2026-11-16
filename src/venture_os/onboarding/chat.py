@@ -15,8 +15,11 @@ specific to the idea -> summary with tags -> founder confirms -> brief version 1
 
 from __future__ import annotations
 
+import logging
 import re
 
+from venture_os import guardrails
+from venture_os.decision_log import log_action
 from venture_os.onboarding import tags as T
 from venture_os.onboarding.analyst import Analyst, RuleAnalyst
 from venture_os.onboarding.brief import (
@@ -31,12 +34,14 @@ from venture_os.onboarding.brief import (
     label,
 )
 from venture_os.onboarding.extract import Extractor
+from venture_os.onboarding.money import format_budget, parse_budget
 
+_logger = logging.getLogger(__name__)
 ARABIC = re.compile(r"[؀-ۿ]")
 SKIP = re.compile(r"^\s*(skip|pass|don'?t know|i don'?t know|not sure|n/?a|تخطي|تخطى|لا أعرف|لا اعرف|مش عارف)\s*[.!]?\s*$",
                   re.IGNORECASE)
-YES = re.compile(r"^\s*(yes|y|confirm|correct|ok|okay|looks good|save|نعم|أكد|اكد|صحيح|تمام|موافق|احفظ)\s*[.!]?\s*$",
-                 re.IGNORECASE)
+YES = re.compile(r"^\s*(yes|y|yeah|yep|confirm|correct|ok|okay|looks good|save|نعم|أكد|اكد|صحيح|تمام|موافق|احفظ|"
+                 r"أيوه|ايوه|أيوة|ايوة|اه|آه|صح|مظبوط|مضبوط|اوكي|أوكي)\s*[.!]?\s*$", re.IGNORECASE)
 EDIT = re.compile(r"^\s*(edit|change|update|modify|edit brief|تعديل|عدل|تغيير|عايز اغير|عايز أغير)\s*[.!]?\s*$",
                   re.IGNORECASE)
 CANCEL = re.compile(r"^\s*(cancel|undo|keep it|never ?mind|إلغاء|الغاء|خلاص|سيبه)\s*[.!]?\s*$", re.IGNORECASE)
@@ -44,6 +49,9 @@ CANCEL = re.compile(r"^\s*(cancel|undo|keep it|never ?mind|إلغاء|الغاء
 OPTIONAL = "__optional__"
 FOLLOWUP = "__followup__:"
 CONFIRM = "__confirm__:"
+# Descriptive fields where 1-3 words picked up in passing ("Pharmacist") are probably incomplete.
+# Country, city, budget and time are naturally short, so they are not re-asked.
+THIN_FIELDS = {"idea", "problem", "target_customer", "founder_skills"}
 
 TEXT = {
     "greet": {
@@ -135,9 +143,37 @@ TEXT = {
         "en": "So far I noted {label}: \"{value}\". Reply 'yes' if that's all, or give the full answer:",
         "ar": "سجلت حتى الآن {label}: \"{value}\". اكتب 'نعم' إن كان هذا كل شيء، أو اكتب الإجابة الكاملة:",
     },
+    "idea_changed": {
+        "en": "Your idea changed, so let me check the parts that described the old one.",
+        "ar": "تغيّرت فكرتك، لذا دعني أراجع الأجزاء التي كانت تصف الفكرة السابقة.",
+    },
+    "recheck": {
+        "en": "For the new idea, is the {label} still \"{value}\"? Reply 'yes', or type the new {label}.",
+        "ar": "بالنسبة للفكرة الجديدة، هل {label} ما زال \"{value}\"؟ اكتب 'نعم'، أو اكتب القيمة الجديدة.",
+    },
     "doc_again": {
         "en": "I already read {doc}, so I didn't read it again.",
         "ar": "قرأت {doc} من قبل، لذلك لم أقرأه مرة أخرى.",
+    },
+    "confirmed_hint": {
+        "en": "Your brief is saved as version {v}. Type 'edit' to change it.",
+        "ar": "ملفك محفوظ كنسخة {v}. اكتب 'تعديل' لتغييره.",
+    },
+    "summary_hint": {
+        "en": "Reply 'yes' to confirm the brief, or correct a line.",
+        "ar": "اكتب 'نعم' لتأكيد الملف، أو صحح سطراً.",
+    },
+    "product_head": {"en": "Product check:", "ar": "فحص المنتج:"},
+    "product_allowed": {"en": "✅", "ar": "✅"},
+    "product_review": {"en": "⚠️", "ar": "⚠️"},
+    "product_excluded": {"en": "⛔", "ar": "⛔"},
+    "cannot_confirm": {
+        "en": "I can't confirm this brief yet.",
+        "ar": "لا أستطيع تأكيد هذا الملف بعد.",
+    },
+    "doc_instructions": {
+        "en": "{doc} contains instructions to me; I ignored them and only read it as information.",
+        "ar": "يحتوي {doc} على تعليمات موجهة لي؛ تجاهلتها وقرأته كمعلومات فقط.",
     },
     "unknown": {"en": "unknown", "ar": "غير معروف"},
     "doc_tag": {"en": "from document", "ar": "من المستند"},
@@ -214,6 +250,57 @@ def _mark_changed(state: OnboardingState, name: str) -> None:
         state.changed.append(name)
 
 
+def _log(agent: str, action: str, **kw) -> None:
+    """Write a decision_log.json entry; logging problems never break the chat."""
+    try:
+        log_action(agent, action, **kw)
+    except Exception as e:  # noqa: BLE001
+        _logger.warning("decision log write failed: %s", e)
+
+
+def _extract(extractor: Extractor, state: OnboardingState, text: str, what: str) -> dict:
+    """Run the extractor and log the model call (rule-based runs without a model make no entry)."""
+    found = extractor.extract(text, kind=_kind(state, what))
+    if "supply_side" in found and not (two_sided(state) or _TWO_SIDED.search(text)):
+        del found["supply_side"]  # only marketplace / booking ideas have a supply side
+    if (model := getattr(extractor, "model", None)) is not None:
+        _log("brief_extractor", "extract_fields", model=model, cost=0, source_type=what, fields=sorted(found))
+    return found
+
+
+def _product_check(state: OnboardingState) -> guardrails.ProductCheck:
+    """Run the product rules on the brief; log when the result changes."""
+    check = guardrails.check_product(_field_values(state))
+    if check.as_dict() != state.product_check:
+        state.product_check = check.as_dict()
+        _log("guardrails", "check_product", outcome=check.status, categories=check.categories)
+    return check
+
+
+_TWO_SIDED = re.compile(
+    r"marketplace|\bconnect(s|ing)?\b.{0,40}\b(with|to)\b|\bplatform\b.{0,30}\b(to|for|where)\b.{0,25}"
+    r"\b(book|hire|find|order)|\b(book|booking|hire|hiring)\b.{0,30}\b(cleaners?|tutors?|teachers?|drivers?|"
+    r"freelancers?|providers?|workers?|artisans?|nann(y|ies)|technicians?|designers?|coaches?)\b|"
+    r"يربط|تربط|(منصة|تطبيق|ابلكيشن|أبلكيشن).{0,30}(لحجز|تجمع|يجمع)|"
+    r"حجز.{0,15}(عمال|عامل|مدرس|مدرسين|معلم|معلمين|فني|فنيين|سائق|حرفي|حرفيين|مصمم)|"
+    r"(?<![\u0600-\u06FF])سوق (إلكتروني|الكتروني|أونلاين|اونلاين)",
+    re.IGNORECASE)
+
+
+def two_sided(state: OnboardingState) -> bool:
+    """A marketplace or booking platform: paying customers on one side, providers on the other."""
+    text = " ".join(v for k in ("idea", "problem", "target_customer", "business_model")
+                    if (v := state.get(k).value))
+    tags = {k: v.value for k, v in state.tags.items()}
+    return bool(_TWO_SIDED.search(text)) or tags.get("customer_type") == "b2b2c" or (
+        tags.get("revenue_model") == "commission" and "platform" in text.lower())
+
+
+def _parse_budget(state: OnboardingState) -> None:
+    code = state.tags.get("country_code")
+    state.budget_parsed = parse_budget(state.get("budget").value, code.value if code else None)
+
+
 def _kind(state: OnboardingState, what: str) -> str:
     """Tell the extractor which language to write values in (the founder's)."""
     return f"{what}. Write every value in {'Arabic' if state.lang == 'ar' else 'English'}"
@@ -244,6 +331,8 @@ def _retag(state: OnboardingState, analyst: Analyst) -> None:
             _mark_changed(state, f"tag:{name}")
         state.tags[name] = Tag(value=value, basis=basis)
     state.tags_stale = False
+    _log("brief_tagger", "tag_brief", model=getattr(analyst, "model", None), cost=0,
+         tags={k: v.value for k, v in state.tags.items()})
 
 
 # ---------- questions ----------
@@ -276,20 +365,30 @@ def _next_question(state: OnboardingState, analyst: Analyst) -> str | None:
         if state.get(name).status == "inferred":  # deduced, e.g. country from a city: ask, don't assume
             state.asking = f"{CONFIRM}{name}"
             return _confirm_question(state, name)
+        if name in state.recheck:  # the idea changed: does this still hold?
+            state.asking = f"{CONFIRM}{name}"
+            return _t("recheck", state.lang, label=_label(name, state.lang), value=state.get(name).value)
         if name in state.thin:  # picked up in passing, only a few words: ask, showing what we have
             state.asking = f"{CONFIRM}{name}"
             v = state.get(name)
             head = _t("thin_value", state.lang, label=_label(name, state.lang), value=v.value)
             return head + "\n\n" + BY_NAME[name].ask(state.lang)
-    optional = [f for f in FIELDS if not f.required and not state.filled(f.name) and f.name not in state.skipped]
-    if optional and state.asking != OPTIONAL and not state.followups_ready:
+    if two_sided(state) and not state.filled("supply_side") and "supply_side" not in state.skipped:
+        state.asking = "supply_side"
+        return BY_NAME["supply_side"].ask(state.lang)
+    optional = [f for f in FIELDS if not f.required and not state.filled(f.name) and f.name not in state.skipped
+                and f.name != "supply_side"]
+    if optional and not state.optional_offered and not state.followups_ready:
         state.asking = OPTIONAL
+        state.optional_offered = True
         return _t("optional", state.lang, names=", ".join(_label(f.name, state.lang) for f in optional))
     if not state.followups_ready:
         _retag(state, analyst)
         founder_qs, research_qs = analyst.questions(_field_values(state), _tag_values(state), state.lang)
         state.followups = [FollowUp(question=q, source=src) for q, src in founder_qs]
         state.open_questions = research_qs
+        _log("followup_writer", "write_followup_questions", model=getattr(analyst, "model", None), cost=0,
+             followups=len(founder_qs), research_questions=len(research_qs))
         state.followups_ready = True
     for i, fu in enumerate(state.followups):
         if not fu.asked:
@@ -317,6 +416,7 @@ def _advance(state: OnboardingState, analyst: Analyst) -> str:
 
 def summary(state: OnboardingState, analyst: Analyst | None = None) -> str:
     _retag(state, analyst or RuleAnalyst())
+    _parse_budget(state)
     lang = state.lang
     lines = []
     for f in FIELDS:
@@ -328,6 +428,10 @@ def summary(state: OnboardingState, analyst: Analyst | None = None) -> str:
             tag = f" ({_t('doc_tag', lang)}: {v.source.split(':', 1)[1]})"
         else:
             tag = ""
+        if f.name == "supply_side" and not v.value and not two_sided(state):
+            continue
+        if f.name == "budget" and state.budget_parsed and format_budget(state.budget_parsed) != v.value:
+            tag += f" (= {format_budget(state.budget_parsed)})"
         lines.append(f"- {_label(f.name, lang)}{'*' if f.required else ''}: {shown}{tag}")
     out = _t("summary", lang) + "\n\n" + "\n".join(lines)
     if state.tags:
@@ -339,6 +443,8 @@ def summary(state: OnboardingState, analyst: Analyst | None = None) -> str:
             f"- q{i + 1}. {fu.question} → {fu.answer or _t('unknown', lang)}" for i, fu in enumerate(state.followups))
     if state.open_questions:
         out += "\n\n" + _t("open_head", lang) + "\n" + "\n".join(f"- {q}" for q in state.open_questions)
+    check = _product_check(state)
+    out += "\n\n" + _t("product_head", lang) + " " + _t(f"product_{check.status}", lang) + " " + check.reason(lang)
     if state.version:
         out += "\n\n" + _t("summary_edit", lang, v=state.version)
     return out
@@ -404,7 +510,8 @@ def _parse_tag_and_followup_lines(text: str) -> tuple[dict, dict]:
 
 _FILLER = re.compile(
     r"^(?:\s*(?:the|my|our|is|are|was|should|be|will|to|from|change|set|update|make|it|actually|please|now|"
-    r"هو|هي|إلى|الى|غير|غيّر|خلي|خليها|خليه|عدل|يكون|تكون|بتاعي|بتاعنا|يبقى|تبقى|بقى)(?=\s|$|[:=,،-])|\s*[:=,،-])+",
+    r"هو|هي|إلى|الى|لـ|ل|غير|غيّر|خلي|خليها|خليه|عدل|يكون|تكون|بتاعي|بتاعنا|يبقى|تبقى|بقى)(?=\s|$|[:=,،-])|"
+    r"\s*[:=,،-])+",
     re.IGNORECASE)
 
 
@@ -434,13 +541,39 @@ def _unlabelled_correction(text: str) -> tuple[list[str], str | None]:
 
 # ---------- message handling ----------
 
+_SKIP_WORDS = ("skip", "pass", "تخطي", "تخطى")
+
+
+def _one_edit_apart(a: str, b: str) -> bool:
+    """True if a and b differ by at most one inserted, deleted or replaced character."""
+    if abs(len(a) - len(b)) > 1:
+        return False
+    i = 0
+    while i < min(len(a), len(b)) and a[i] == b[i]:
+        i += 1
+    return a[i + 1:] == b[i + 1:] or a[i + 1:] == b[i:] or a[i:] == b[i + 1:]
+
+
+def is_skip(text: str) -> bool:
+    """'skip', 'لا أعرف'... and one-letter typos of a skip word ('تخطس', 'skp')."""
+    if SKIP.match(text):
+        return True
+    word = text.strip(" .!").lower()
+    return " " not in word and any(_one_edit_apart(word, w) for w in _SKIP_WORDS)
+
+
 def handle_message(state: OnboardingState, text: str, extractor: Extractor, analyst: Analyst | None = None) -> str:
     analyst = analyst or RuleAnalyst()
-    text = text.strip()
+    text = re.sub(r"(?m)^\s*>\s?", "", text).strip()  # quote markers left over from copy-pasting
     first_answer = all(m.role != "founder" for m in state.messages)
     if first_answer and ARABIC.search(text):
         state.lang = "ar"
+    refusal = guardrails.check_request(text)
+    text = guardrails.redact(text)  # card numbers and passwords are never stored
     state.messages.append(Message(role="founder", text=text))
+    if refusal:  # a must-never request: refuse, change nothing, repeat what we were waiting for
+        _log("guardrails", "refuse_request", outcome="refused", rule=refusal.rule)
+        return _say(state, refusal.message(state.lang) + "\n\n" + _pending(state, analyst))
 
     if state.phase == "confirmed":
         if YES.match(text):
@@ -457,11 +590,16 @@ def handle_message(state: OnboardingState, text: str, extractor: Extractor, anal
             return _say(state, _confirm(state, analyst))
         if CANCEL.match(text) and state.saved is not None:
             _restore(state, state.saved)
+            _log("founder", "cancel_edit", approved_by="founder", version=state.version)
             return _say(state, _t("cancelled", state.lang, v=state.version))
         return _say(state, _correct(state, text, extractor, analyst))
 
     # collecting
-    if SKIP.match(text):
+    if CANCEL.match(text) and state.saved is not None:  # editing a confirmed brief (e.g. after an idea change)
+        _restore(state, state.saved)
+        _log("founder", "cancel_edit", approved_by="founder", version=state.version)
+        return _say(state, _t("cancelled", state.lang, v=state.version))
+    if is_skip(text):
         if state.asking == OPTIONAL:
             state.skipped += [f.name for f in FIELDS if not f.required and not state.filled(f.name)]
         elif state.asking and state.asking.startswith(CONFIRM):
@@ -469,6 +607,8 @@ def handle_message(state: OnboardingState, text: str, extractor: Extractor, anal
             state.skipped.append(name)  # keeps what we have; an inferred value stays flagged in the summary
             if name in state.thin:
                 state.thin.remove(name)
+            if name in state.recheck:
+                state.recheck.remove(name)
         elif state.asking and not state.asking.startswith(FOLLOWUP):
             state.skipped.append(state.asking)
         return _say(state, _advance(state, analyst))
@@ -481,23 +621,28 @@ def handle_message(state: OnboardingState, text: str, extractor: Extractor, anal
     asked = state.asking
     # Values the model picks up in passing never replace a field we already have (e.g. a follow-up answer
     # "Pharmacists themselves..." must not overwrite the target customer). Labels ("budget: ...") still do.
-    model_found = {k: v for k, v in extractor.extract(text, kind=_kind(state, "founder message")).items()
+    model_found = {k: v for k, v in _extract(extractor, state, text, "founder message").items()
                    if k not in found and (k == asked or not state.filled(k))}
     direct = bool(asked) and asked != OPTIONAL and not asked.startswith(FOLLOWUP)
     other_required = [k for k in model_found if k != asked and BY_NAME[k].required and not state.filled(k)]
-    if direct and not found and not other_required and (asked in model_found or not model_found):
+    # A paragraph that also describes another descriptive field (idea, problem, customers, skills) is split by
+    # the model; an answer that only mentions a country, city or budget in passing is still a focused answer.
+    focused = not any(k in THIN_FIELDS for k in other_required)
+    if direct and not found and focused and (asked in model_found or not model_found):
         # A focused answer to the question we asked: keep the founder's own words (the model's shorter version
-        # can drop details, e.g. "a part-time programmer friend"). The model only fills *other* fields, and
-        # optional ones picked up from an answer to a different question are flagged for the founder to check.
+        # can drop details, e.g. "a part-time programmer friend"). Optional fields are not filled from it
+        # ("no programmer on the team" is not a technical preference; the optional question comes next anyway);
+        # a required one mentioned in passing is kept as inferred and asked about.
         model_found.pop(asked, None)
         found[asked] = {"value": text[:500], "quote": text[:500]}
+        model_found = {k: v for k, v in model_found.items() if BY_NAME[k].required}
         for v in model_found.values():
             v["inferred"] = True
     found.update(model_found)
     already = {k for k in model_found if state.filled(k)}
     _, inferred = _apply(state, found, "answered", "chat")
     for k, v in model_found.items():  # required fields picked up in passing with only a few words
-        if (k != asked and BY_NAME[k].required and k not in already and k not in state.thin
+        if (k != asked and k in THIN_FIELDS and k not in already and k not in state.thin
                 and state.get(k).status == "answered" and len(str(v["value"]).split()) <= 3):
             state.thin.append(k)
     if asked and asked.startswith(FOLLOWUP):
@@ -517,6 +662,8 @@ def _answer_confirm(state: OnboardingState, name: str, text: str) -> None:
     """Reply to 'I assumed X; is that right?' (or 'so far I have X'): yes keeps it, anything else is the value."""
     if name in state.thin:
         state.thin.remove(name)
+    if name in state.recheck:
+        state.recheck.remove(name)
     v = state.get(name)
     rest = _YES_PREFIX.sub("", text, count=1) if _YES_PREFIX.match(text) else None
     if YES.match(text) or rest == "":
@@ -525,6 +672,20 @@ def _answer_confirm(state: OnboardingState, name: str, text: str) -> None:
         return
     value = rest if rest else (_NO_PREFIX.sub("", text, count=1) or text)
     state.fields[name] = FieldValue(value=value[:500], status="answered", source="chat", quote=text[:500])
+
+
+def _pending(state: OnboardingState, analyst: Analyst) -> str:
+    """What the founder should answer next, without moving the conversation on."""
+    if state.phase == "confirmed":
+        return _t("confirmed_hint", state.lang, v=state.version)
+    if state.phase == "confirming":
+        return _t("summary_hint", state.lang)
+    if state.asking in BY_NAME:
+        return BY_NAME[state.asking].ask(state.lang)
+    if state.asking == OPTIONAL:
+        missing = [f for f in FIELDS if not f.required and not state.filled(f.name) and f.name not in state.skipped]
+        return _t("optional", state.lang, names=", ".join(_label(f.name, state.lang) for f in missing))
+    return _repeat_question(state) or _advance(state, analyst)
 
 
 def already_read(state: OnboardingState, filename: str, analyst: Analyst | None = None) -> str:
@@ -555,7 +716,7 @@ def _correct(state: OnboardingState, text: str, extractor: Extractor, analyst: A
 
     found = parse_labelled(text)
     if not found and not updated:
-        found = extractor.extract(text, kind=_kind(state, "founder correction"))
+        found = _extract(extractor, state, text, "founder correction")
     if not found and not updated:
         names, value = _unlabelled_correction(text)
         if len(names) == 1 and value:
@@ -565,6 +726,7 @@ def _correct(state: OnboardingState, text: str, extractor: Extractor, analyst: A
             return _t("which_of", state.lang, names=", ".join(labels), first=labels[0])
         else:
             return _t("which_line", state.lang)
+    old_idea = state.get("idea").value
     if found:
         for name, item in found.items():
             if state.get(name).value != item["value"] or state.get(name).status != "answered":
@@ -574,11 +736,31 @@ def _correct(state: OnboardingState, text: str, extractor: Extractor, analyst: A
             if name in state.skipped:
                 state.skipped.remove(name)
             updated.append(_label(name, state.lang))
+    if "idea" in found and state.get("idea").value != old_idea:
+        return _t("updated", state.lang, names=", ".join(updated)) + "\n\n" + _idea_changed(state, found, analyst)
     return _t("updated", state.lang, names=", ".join(updated)) + "\n\n" + summary(state, analyst)
+
+
+def _idea_changed(state: OnboardingState, found: dict, analyst: Analyst) -> str:
+    """The idea changed in the summary: re-ask what described the old idea and rewrite the follow-ups."""
+    state.recheck = [n for n in ("problem", "target_customer") if state.filled(n) and n not in found]
+    for n in state.recheck:
+        if n in state.skipped:
+            state.skipped.remove(n)
+    state.followups, state.followups_ready, state.open_questions = [], False, []
+    state.tags_stale = True
+    state.phase, state.asking = "collecting", None
+    _log("brief_analyzer", "idea_changed", recheck=list(state.recheck))
+    return _t("idea_changed", state.lang) + "\n\n" + _advance(state, analyst)
 
 
 def _confirm(state: OnboardingState, analyst: Analyst) -> str:
     _retag(state, analyst)
+    _parse_budget(state)
+    check = _product_check(state)
+    if check.status == "excluded":
+        _log("guardrails", "block_confirmation", outcome="excluded", categories=check.categories)
+        return _t("cannot_confirm", state.lang) + " " + check.reason(state.lang)
     for f in FIELDS:
         v = state.get(f.name)
         if not state.filled(f.name):
@@ -593,6 +775,8 @@ def _confirm(state: OnboardingState, analyst: Analyst) -> str:
         return _t("no_change", state.lang, v=state.version)
     changed = [_label(c.removeprefix("tag:"), state.lang) for c in state.changed]
     state.last_changes = list(state.changed)
+    _log("founder", "confirm_brief", approved_by="founder", version=state.version + 1,
+         changed=list(state.changed), product_check=check.status)
     state.version += 1
     state.phase = "confirmed"
     state.saved = state.snapshot()
@@ -606,6 +790,10 @@ def _restore(state: OnboardingState, saved: dict) -> None:
     state.fields = {k: FieldValue.model_validate(v) for k, v in saved["fields"].items()}
     state.tags = {k: Tag.model_validate(v) for k, v in saved["tags"].items()}
     state.followups = [FollowUp.model_validate(f) for f in saved["followups"]]
+    state.open_questions = list(saved.get("open_questions", []))
+    state.product_check = dict(saved.get("product_check", {}))
+    state.budget_parsed = saved.get("budget")
+    state.recheck, state.thin = [], []
     state.phase = "confirmed"
     state.changed = []
     state.tags_stale = False
@@ -614,19 +802,62 @@ def _restore(state: OnboardingState, saved: dict) -> None:
 def handle_document(state: OnboardingState, filename: str, text: str, extractor: Extractor,
                     analyst: Analyst | None = None) -> str:
     analyst = analyst or RuleAnalyst()
-    if state.phase == "confirmed":  # a new document after confirming starts an edit
+    was_confirmed = state.phase == "confirmed"
+    if was_confirmed:  # a new document after confirming starts an edit (if it changes anything)
         state.phase = "confirming"
         state.changed = []
     state.documents.append(filename)
+    _log("brief_extractor", "read_document", document=filename)
+    injected = guardrails.check_request(text)
+    if injected:
+        _log("guardrails", "ignore_document_instructions", document=filename, rule=injected.rule)
     state.messages.append(Message(role="system", text=f"Founder uploaded {filename}"))
     found = parse_labelled(text)  # works with no model: lines like "Budget: 40,000 EGP"
-    found.update({k: v for k, v in extractor.extract(text, kind=_kind(state, f"uploaded document {filename}")).items()
+    found.update({k: v for k, v in _extract(extractor, state, text, f"uploaded document {filename}").items()
                   if k not in found})
     names, inferred = _apply(state, found, "from_document", f"document:{filename}")
     head = (_t("doc_found", state.lang, doc=filename, names=", ".join(_label(n, state.lang) for n in names))
             if names else _t("doc_none", state.lang, doc=filename))
-    if state.phase == "confirming":
+    if injected:
+        head += "\n\n" + _t("doc_instructions", state.lang, doc=filename)
+    if was_confirmed and not names:
+        state.phase = "confirmed"
+        nxt = _t("no_change", state.lang, v=state.version)
+    elif state.phase == "confirming":
         nxt = summary(state, analyst)
     else:  # don't skip the question we were waiting on (a follow-up or an "is that right?")
         nxt = _repeat_question(state) or _advance(state, analyst)
     return _say(state, head + "\n\n" + _inferred_note(state, inferred) + nxt)
+
+
+def brief_markdown(state: OnboardingState, brief_id: str | None = None) -> str:
+    """The confirmed brief as Markdown for outputs/phase1_step0_founder_brief.md (written from a real run)."""
+    status = {"answered": "founder", "from_document": "founder document", "inferred": "inferred (not confirmed)",
+              "unknown": "unknown"}
+    lines = [f"# Founder brief (version {state.version})", ""]
+    if brief_id:
+        lines += [f"Brief id: `{brief_id}`", ""]
+    lines += ["Values are the founder's own statements, not verified market facts. Unknown fields stay unknown.", "",
+              "| Field | Value | Source |", "|---|---|---|"]
+    for f in FIELDS:
+        v = state.get(f.name)
+        src = status.get(v.status, v.status) + (f" ({v.source})" if v.status == "from_document" else "")
+        if "inferred" in v.source and v.status == "answered":
+            src = f'inferred from "{v.quote}", confirmed by founder'
+        value = (v.value or "unknown").replace("|", "/").replace("\n", " ")
+        lines.append(f"| {_label(f.name)}{' *' if f.required else ''} | {value} | {src} |")
+    if state.budget_parsed:
+        lines += ["", f"**Budget (parsed from the founder's words):** {format_budget(state.budget_parsed)}"]
+    check = state.product_check or {}
+    lines += ["", f"**Product check:** {check.get('status', 'not run')}"
+              + (f" ({', '.join(check.get('categories', []))})" if check.get("categories") else ""), "",
+              "## Tags", ""]
+    lines += [f"- {_label(k)}: {', '.join(v.value) if isinstance(v.value, list) else v.value} ({v.basis})"
+              for k, v in state.tags.items()]
+    if state.followups:
+        lines += ["", "## Follow-up answers", ""]
+        lines += [f"- {fu.question} -> {fu.answer or 'unknown'}" for fu in state.followups]
+    if state.open_questions:
+        lines += ["", "## Open questions for Discover (not answered yet)", ""]
+        lines += [f"- {q}" for q in state.open_questions]
+    return "\n".join(lines) + "\n"

@@ -16,7 +16,7 @@ Read this first when picking the project up in a new Claude account or session. 
 - **Registry changes:** only admins add/deactivate sources (logged with a reason); crawler-found official bodies may be added as *provisional* tier B for 30 days (D8), enforced by Postgres row-level security.
 - Nothing is committed to git yet; the team asked not to commit until told.
 
-## What is built and tested (76 tests passing)
+## What is built and tested (172 tests passing)
 
 | Area | What | Files |
 |---|---|---|
@@ -28,6 +28,7 @@ Read this first when picking the project up in a new Claude account or session. 
 | Registry API | Read routes (sources by country/tier/use, corpus, components, endpoints, summary); admin routes with token, logged reasons, deactivate not delete | `src/venture_os/api/registry.py` |
 | Onboarding chat | Asks 7 required + 5 optional fields; Arabic/English; PDF/Word/txt/md upload; "skip" → unknown; summary + corrections; saves a brief version only on "yes"; works with no model; with a model, extracts fields only when a real quote supports them | `src/venture_os/onboarding/`, `src/venture_os/api/onboarding.py`, `ui/app.py` |
 | Brief Analyzer (onboarding) | **Tags** from a fixed vocabulary: industries (19), customer_type, revenue_model, country_code (ISO), languages; rules first, model only within the vocabulary, country/languages always rules, revenue_model "unknown" unless the founder said it; founder can correct (`industry: education`). **Follow-up questions**: up to 3 idea-specific questions (model, filtered to real questions; rule fallback by tag), answers saved, correct with `q2: ...`. **Unlabelled corrections** ("change the budget to 30,000 EGP", "خلي المدينة الجيزة"); asks which line when unclear; Arabic labels. **Inferred values** (country from a city) marked `inferred`, pointed out in chat and summary, never override the founder; on "yes" become answered with source "(inferred, confirmed by founder)". **Edit after confirmation**: any correction, "edit" or a new document reopens the brief; "yes" saves the next version with a change note, "cancel" restores; `GET /onboarding/briefs/{id}` returns latest version + history | `onboarding/tags.py`, `onboarding/analyst.py`, `onboarding/chat.py`, `tests/unit/test_onboarding_analysis.py` |
+| Onboarding: hackathon rules (complete) | **Guardrails** (`guardrails.py`): excluded products (physical goods, financial/crypto, health or legal advice) block confirmation; must-never requests (fake reviews/sign-ups, urgency, income promises, impersonation, moving money, credentials, instruction injection) are refused in English and Arabic; card numbers/passwords are redacted before storage; `check_output()` for agents. **Decision log** (`decision_log.py`): every onboarding action, founder confirmation with `approved_by: "founder"`. **Outputs** (`outputs.py`): `phase1_step0_founder_brief.md` on confirm. **Prompts** in `prompts/`. **Budget** parsed to numbers + currency (`onboarding/money.py`). **Two-sided ideas** ask for the supply side. **Idea change** re-asks problem/customer and rewrites follow-ups. **Hand-off**: `onboarding/briefs.py` (`load_brief`, `is_stale`, `ConfirmedBrief`) | `guardrails.py`, `decision_log.py`, `outputs.py`, `prompts.py`, `prompts/`, `onboarding/money.py`, `onboarding/briefs.py`, `tests/unit/test_guardrails.py`, `tests/unit/test_brief_contract.py` |
 | Model | Fanar-C-2-27B via `https://api.fanar.qa/v1` for extraction. Tested: JSON mode works, Egyptian dialect + English extraction grounded, injection ignored | `src/venture_os/llm/client.py`, `.env` |
 
 ## How to run
@@ -62,7 +63,7 @@ Port 8000 is used by another program on the dev laptop, hence 8010. `.claude/lau
     asked (the model only fills *other* fields, and optional ones picked up that way are marked inferred);
     follow-ups ask only what the founder knows, research questions (prices, market size, laws) are stored as
     `open_questions` on the brief version for Discover; Arabic labels in summary and UI; extractor told the
-    founder's language. Test script: `docs/demo/nadafa-plan.txt` + the steps in the demo notes.
+    founder's language. Test script: `tests/fixtures/personas/nadafa-plan.txt` + the steps in the demo notes.
 11. **Fixed after the PharmaStock run:** labels anywhere in a line (`business model: X budget: Y`), follow-up
     answers as `q1. ... , q2. ...`, Word-table rows (`Values | ...`); a required value the model deduced is asked
     ("I assumed the country is Kenya... is that right?"); a required value picked up in passing with 1-3 words
@@ -71,7 +72,13 @@ Port 8000 is used by another program on the dev laptop, hence 8010. `.claude/lau
     addressed to the founder go to `open_questions`.
 12. **Parallel work:** see [planning/02-parallel-work.md](planning/02-parallel-work.md) (ownership, the brief
     contract, the colleague's task, git workflow). Fixtures: `tests/fixtures/briefs/`.
-13. **Budget is free text** ("حوالي خمسين الف جنيه"); the Commercial stage will need a normalised amount + currency.
-14. **Model quirks seen live (Fanar):** sometimes writes values in English for Arabic founders, and may put
+13. **Test personas** in `tests/fixtures/personas/`: 1 Nadafa (Egyptian Arabic, document upload), 2 PharmaStock (English,
+    Kenya, Word table, injection file), 3 Sanaa (Arabic + English words, PDF, `ايوه`, tag correction, edit ->
+    version 2, cancel). Persona 3 found: Fanar copies the `<untrusted>` tag into quotes (all fields were
+    dropped; now stripped before the quote check), `لـ` left in unlabelled corrections, country re-asked as
+    "too short". All fixed. Open: for a marketplace idea the model may pick the supply side (artisans) as the
+    target customer; the founder corrects it in the summary.
+14. **Budget is free text** ("حوالي خمسين الف جنيه"); the Commercial stage will need a normalised amount + currency.
+15. **Model quirks seen live (Fanar):** sometimes writes values in English for Arabic founders, and may put
     "no coding" into technical_preferences. Both are visible in the summary and correctable; consider a
     "fields the founder volunteered vs. the field asked" check if it matters in the demo.

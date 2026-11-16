@@ -1,5 +1,5 @@
 {
-  "brief_id": "26fddd95-5830-4837-9afc-cdba44fae4fe",
+  "brief_id": "dae357fc-d04e-49ad-a518-6309a79c75d7",
   "version": 1,
   "fields": {
     "city": {
@@ -10,7 +10,7 @@
     },
     "idea": {
       "quote": "build a simple stock-tracking tool for small independent pharmacies",
-      "value": "A stock-tracking tool for small independent pharmacies",
+      "value": "A stock tracking tool for small independent pharmacies",
       "source": "chat",
       "status": "answered"
     },
@@ -37,6 +37,12 @@
       "value": "Small independent pharmacies run out of common medicines due to poor inventory management.",
       "source": "chat",
       "status": "answered"
+    },
+    "supply_side": {
+      "quote": null,
+      "value": null,
+      "source": "chat",
+      "status": "unknown"
     },
     "business_model": {
       "quote": "business model: monthly subscription, 15 USD per pharmacy",
@@ -124,14 +130,30 @@
   "open_questions": [
     "How many pharmacies are there in Nairobi?",
     "What percentage of Kenyan pharmacies use digital tools for inventory management?",
-    "Are there any existing solutions similar to yours available in the Kenyan market?"
+    "Are there existing solutions similar to yours available in the Kenyan market?"
   ],
+  "product_check": {
+    "status": "review",
+    "matched": [
+      "pharmac",
+      "medicine"
+    ],
+    "categories": [
+      "health"
+    ]
+  },
+  "budget": {
+    "max": 3000,
+    "min": 3000,
+    "currency": "USD",
+    "currency_source": "stated"
+  },
   "history": [
     {
       "version": 1,
       "change_note": "Confirmed by founder in onboarding chat",
-      "created_at": "2026-11-16T20:54:06.005201+00:00"
+      "created_at": "2026-11-16T22:26:41.292639+00:00"
     }
   ],
-  "_note": "Fictional test persona (PharmaStock). Shape of GET /onboarding/briefs/{id}; use as a fixture, not real data."
+  "_note": "Fictional test persona (PharmaStock). Shape of GET /onboarding/briefs/{id}; fixture, not real data."
 }

@@ -75,3 +75,61 @@ def test_same_document_twice_is_read_once(client):
     again = client.post(f"/onboarding/sessions/{sid}/documents", files={"file": ("a.txt", b"Country: Kenya")}).json()
     assert first["documents"] == ["a.txt"] and again["documents"] == ["a.txt"]
     assert "already read" in again["reply"]
+
+
+def test_confirmed_brief_writes_output_and_founder_approval(client):
+    import os
+    from pathlib import Path
+
+    from venture_os.decision_log import read_log
+
+    sid = client.post("/onboarding/sessions").json()["session_id"]
+    out = client.post(f"/onboarding/sessions/{sid}/messages",
+                      json={"text": "idea: an app to book home cleaners"}).json()
+    while out["phase"] == "collecting":
+        out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "an answer"}).json()
+        if out["phase"] == "collecting" and ("Optional" in out["reply"] or "(" in out["reply"]):
+            out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "skip"}).json()
+    assert out["product_check"]["status"] == "allowed"
+    out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "yes"}).json()
+    assert out["phase"] == "confirmed"
+
+    brief_file = Path(os.environ["OUTPUTS_DIR"]) / "phase1_step0_founder_brief.md"
+    assert brief_file.exists() and out["brief_id"] in brief_file.read_text(encoding="utf-8")
+    assert client.get(f"/onboarding/briefs/{out['brief_id']}").json()["product_check"]["status"] == "allowed"
+    assert any(e["action"] == "confirm_brief" and e["approved_by"] == "founder" for e in read_log())
+
+
+def test_excluded_product_is_not_saved(client):
+    sid = client.post("/onboarding/sessions").json()["session_id"]
+    out = client.post(f"/onboarding/sessions/{sid}/messages",
+                      json={"text": "idea: an online shop selling handmade rugs"}).json()
+    for _ in range(20):
+        if out["phase"] != "collecting":
+            break
+        out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "skip"}).json()
+    out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "yes"}).json()
+    assert out["phase"] == "confirming" and out["brief_id"] is None and out["product_check"]["status"] == "excluded"
+
+
+def test_pipeline_can_load_the_confirmed_brief_and_see_staleness(client):
+    from venture_os.onboarding.briefs import is_stale, load_brief
+
+    sid = client.post("/onboarding/sessions").json()["session_id"]
+    out = client.post(f"/onboarding/sessions/{sid}/messages",
+                      json={"text": "idea: an online course for Instagram marketing\nbudget: 20 ألف جنيه\n"
+                                    "country: Egypt"}).json()
+    for _ in range(30):
+        if out["phase"] != "collecting":
+            break
+        out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "skip"}).json()
+    out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "yes"}).json()
+    bid = out["brief_id"]
+    brief = load_brief(bid)
+    assert brief.version == 1 and brief.allowed and brief.tag("country_code") == "EG"
+    assert brief.budget["min"] == 20000 and brief.budget["currency"] == "EGP"
+    assert brief.known("time_available") is None and "time_available" in brief.unknown_fields
+    assert not is_stale(bid, 1)
+    client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "budget: 30 ألف جنيه"})
+    client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "yes"})
+    assert is_stale(bid, 1) and load_brief(bid).budget["min"] == 30000 and load_brief(bid, 1).version == 1

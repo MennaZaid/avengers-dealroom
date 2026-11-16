@@ -77,6 +77,16 @@ FIELDS: list[FieldSpec] = [
               "Do you know any competitors already? Names or links help.",
               "هل تعرف منافسين حاليين؟ الأسماء أو الروابط تساعد.",
               ("competitors", "competitor", "competition", "منافسين", "المنافسين", "منافس")),
+    # Asked only for two-sided ideas (a marketplace or booking platform): who supplies, as opposed to who pays.
+    FieldSpec("supply_side", False,
+              "For a marketplace or booking platform: who provides the product or service (the other side from "
+              "the paying customers)",
+              "Your idea connects two groups. Who provides the product or service on your platform (for example "
+              "cleaners, tutors, designers), and how will you find the first ones?",
+              "فكرتك تربط بين مجموعتين. من سيقدم المنتج أو الخدمة على منصتك (مثلاً عمال نظافة، مدرسين، مصممين)، "
+              "وكيف ستجد أول مجموعة منهم؟",
+              ("supply side", "providers", "provider", "sellers", "suppliers", "مقدمي الخدمة", "البائعين",
+               "الموردين", "جانب العرض")),
 ]
 BY_NAME = {f.name: f for f in FIELDS}
 
@@ -85,7 +95,7 @@ LABELS_AR = {
     "idea": "الفكرة", "problem": "المشكلة", "target_customer": "العملاء المستهدفون", "country": "الدولة",
     "city": "المدينة", "budget": "الميزانية", "time_available": "الوقت المتاح", "founder_skills": "مهارات الفريق",
     "business_model": "نموذج العمل", "values": "القيم", "technical_preferences": "التفضيلات التقنية",
-    "known_competitors": "المنافسون المعروفون",
+    "known_competitors": "المنافسون المعروفون", "supply_side": "مقدمو الخدمة",
     # tags
     "industries": "القطاعات", "customer_type": "نوع العملاء", "revenue_model": "نموذج الإيرادات",
     "country_code": "رمز الدولة", "languages": "اللغات",
@@ -143,10 +153,15 @@ class OnboardingState(BaseModel):
     # Required fields the model picked up in passing with only 1-3 words ("Pharmacist"): still asked, showing
     # what we have, so details like "and I can write basic Python" are not lost.
     thin: list[str] = []
+    # Fields that described an earlier idea: asked again ("is the problem still ...?") after the idea changes.
+    recheck: list[str] = []
+    optional_offered: bool = False
     last_changes: list[str] = []  # what the last saved version changed (for its change note)
     # Questions only research can answer (prices, market size, regulations). Not asked to the founder;
     # handed to the Discover stage as open questions.
     open_questions: list[str] = []
+    budget_parsed: dict | None = None  # money.parse_budget(): min, max, currency (None = could not read it)
+    product_check: dict = {}  # guardrails.check_product(): status allowed/review/excluded, categories, matched
 
     def get(self, name: str) -> FieldValue:
         return self.fields.get(name) or FieldValue()
@@ -165,4 +180,6 @@ class OnboardingState(BaseModel):
             "tags": {k: v.model_dump() for k, v in self.tags.items()},
             "followups": [f.model_dump() for f in self.followups],
             "open_questions": list(self.open_questions),
+            "product_check": dict(self.product_check),
+            "budget": self.budget_parsed,
         }
