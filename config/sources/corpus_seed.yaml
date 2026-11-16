@@ -1,0 +1,508 @@
+# Generated from source_registry_seed.xlsx tab 'corpus' on 2026-11-16 by scripts/import_seed.py.
+# Seed list written from memory and NOT yet verified: every URL and license is a claim to check.
+- id: M-001
+  title: Entrepreneurship
+  author_publisher: OpenStax
+  url: https://openstax.org/details/books/entrepreneurship
+  year: null
+  type: textbook
+  topic: business models, validation
+  license: CC BY 4.0
+  tier: B
+  how_we_use_it: Chunk full text into RAG
+  status: keep
+- id: M-002
+  title: Principles of Marketing
+  author_publisher: OpenStax
+  url: https://openstax.org/details/books/principles-marketing
+  year: null
+  type: textbook
+  topic: marketing, positioning, pricing
+  license: CC BY 4.0
+  tier: B
+  how_we_use_it: Chunk full text into RAG
+  status: keep
+- id: M-003
+  title: Introduction to Business
+  author_publisher: OpenStax
+  url: https://openstax.org/details/books/introduction-business
+  year: null
+  type: textbook
+  topic: business basics, operations
+  license: CC BY 4.0
+  tier: B
+  how_we_use_it: Chunk full text into RAG
+  status: keep
+- id: M-004
+  title: Principles of Microeconomics
+  author_publisher: OpenStax
+  url: https://openstax.org/details/books/principles-microeconomics
+  year: null
+  type: textbook
+  topic: market structure, pricing, elasticity
+  license: CC BY 4.0
+  tier: B
+  how_we_use_it: Chunk full text into RAG
+  status: keep
+- id: M-005
+  title: 'Principles of Accounting, Volume 2: Managerial Accounting'
+  author_publisher: OpenStax
+  url: https://openstax.org/details/books/principles-managerial-accounting
+  year: null
+  type: textbook
+  topic: unit economics, break-even, cost behaviour
+  license: CC BY 4.0
+  tier: B
+  how_we_use_it: Chunk full text into RAG
+  status: keep
+- id: M-006
+  title: Principles of Management
+  author_publisher: OpenStax
+  url: https://openstax.org/details/books/principles-management
+  year: null
+  type: textbook
+  topic: strategy, planning, SWOT
+  license: CC BY 4.0
+  tier: B
+  how_we_use_it: Chunk full text into RAG
+  status: keep
+- id: M-007
+  title: Business Statistics (Introductory)
+  author_publisher: OpenStax
+  url: https://openstax.org/details/books/introductory-business-statistics
+  year: null
+  type: textbook
+  topic: sampling, confidence ranges
+  license: CC BY 4.0
+  tier: B
+  how_we_use_it: Chunk full text into RAG
+  status: maybe
+- id: M-008
+  title: Startup School library
+  author_publisher: Y Combinator
+  url: https://www.startupschool.org
+  year: null
+  type: course
+  topic: validation, ideas, growth
+  license: UNKNOWN
+  tier: B
+  how_we_use_it: Own summaries and links only
+  status: maybe
+- id: M-009
+  title: YC Library
+  author_publisher: Y Combinator
+  url: https://www.ycombinator.com/library
+  year: null
+  type: articles
+  topic: startup advice
+  license: UNKNOWN
+  tier: B
+  how_we_use_it: Own summaries and links only
+  status: maybe
+- id: M-010
+  title: The Mom Test
+  author_publisher: Rob Fitzpatrick
+  url: https://www.momtestbook.com
+  year: null
+  type: book
+  topic: customer interviews
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-011
+  title: Talking to Humans
+  author_publisher: Giff Constable
+  url: https://www.talkingtohumans.com
+  year: null
+  type: book
+  topic: customer discovery
+  license: UNKNOWN (reportedly free to read)
+  tier: B
+  how_we_use_it: Verify license, then own summary
+  status: maybe
+- id: M-012
+  title: The Four Steps to the Epiphany
+  author_publisher: Steve Blank
+  url: https://steveblank.com
+  year: null
+  type: book
+  topic: customer development
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-013
+  title: Business Model Generation
+  author_publisher: Osterwalder and Pigneur
+  url: https://www.strategyzer.com
+  year: null
+  type: book
+  topic: business model canvas
+  license: all rights reserved (canvas has a separate CC license, verify)
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-014
+  title: Value Proposition Design
+  author_publisher: Osterwalder et al.
+  url: https://www.strategyzer.com
+  year: null
+  type: book
+  topic: value proposition canvas
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-015
+  title: Testing Business Ideas
+  author_publisher: Bland and Osterwalder
+  url: https://www.strategyzer.com
+  year: null
+  type: book
+  topic: experiment library
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-016
+  title: Running Lean / Lean Canvas
+  author_publisher: Ash Maurya
+  url: https://leanstack.com
+  year: null
+  type: book and site
+  topic: lean canvas, riskiest assumptions
+  license: UNKNOWN
+  tier: B
+  how_we_use_it: Own summary plus links
+  status: maybe
+- id: M-017
+  title: The Lean Startup
+  author_publisher: Eric Ries
+  url: https://theleanstartup.com
+  year: null
+  type: book
+  topic: build-measure-learn, MVP
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-018
+  title: Lean Analytics
+  author_publisher: Croll and Yoskovitz
+  url: https://leananalyticsbook.com
+  year: null
+  type: book
+  topic: metrics by business model
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-019
+  title: Competing Against Luck
+  author_publisher: Christensen et al.
+  url: https://www.christenseninstitute.org
+  year: null
+  type: book
+  topic: jobs to be done
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-020
+  title: Know Your Customers' Jobs to Be Done
+  author_publisher: Christensen et al., Harvard Business Review
+  url: https://hbr.org
+  year: null
+  type: article
+  topic: jobs to be done
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Cite only, no copying
+  status: maybe
+- id: M-021
+  title: The Five Competitive Forces That Shape Strategy
+  author_publisher: Michael Porter, Harvard Business Review
+  url: https://hbr.org
+  year: null
+  type: article
+  topic: five forces
+  license: all rights reserved
+  tier: A
+  how_we_use_it: Cite only, own summary
+  status: maybe
+- id: M-022
+  title: Platform Revolution
+  author_publisher: Parker, Van Alstyne, Choudary
+  url: https://www.platformrevolution.com
+  year: null
+  type: book
+  topic: marketplaces, network effects
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-023
+  title: Monetizing Innovation
+  author_publisher: Madhavan Ramanujam
+  url: https://www.simon-kucher.com
+  year: null
+  type: book
+  topic: pricing
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-024
+  title: Blue Ocean Strategy
+  author_publisher: Kim and Mauborgne
+  url: https://www.blueoceanstrategy.com
+  year: null
+  type: book
+  topic: market gaps, strategy canvas
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-025
+  title: Crossing the Chasm
+  author_publisher: Geoffrey Moore
+  url: https://www.geoffreyamoore.com
+  year: null
+  type: book
+  topic: go-to-market for new products
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-026
+  title: Disciplined Entrepreneurship
+  author_publisher: Bill Aulet
+  url: https://disciplinedentrepreneurship.com
+  year: null
+  type: book
+  topic: 24-step startup method, TAM
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-027
+  title: Traction
+  author_publisher: Weinberg and Mares
+  url: https://www.tractionbook.com
+  year: null
+  type: book
+  topic: 19 acquisition channels
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-028
+  title: Obviously Awesome
+  author_publisher: April Dunford
+  url: https://www.aprildunford.com
+  year: null
+  type: book
+  topic: positioning
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-029
+  title: Trustworthy Online Controlled Experiments
+  author_publisher: Kohavi, Tang, Xu
+  url: https://experimentguide.com
+  year: null
+  type: book
+  topic: A/B testing, experiment design
+  license: all rights reserved
+  tier: A
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-030
+  title: How to Measure Anything
+  author_publisher: Douglas Hubbard
+  url: https://www.hubbardresearch.com
+  year: null
+  type: book
+  topic: estimating with uncertainty
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-031
+  title: Superforecasting
+  author_publisher: Tetlock and Gardner
+  url: https://goodjudgment.com
+  year: null
+  type: book
+  topic: calibrated estimates
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Own summary plus page references
+  status: maybe
+- id: M-032
+  title: GRADE Handbook
+  author_publisher: GRADE Working Group
+  url: https://www.gradeworkinggroup.org
+  year: null
+  type: handbook
+  topic: grading evidence quality
+  license: UNKNOWN
+  tier: A
+  how_we_use_it: Basis for source tier design
+  status: maybe
+- id: M-033
+  title: Shape Up
+  author_publisher: Ryan Singer, Basecamp
+  url: https://basecamp.com/shapeup
+  year: null
+  type: book (free online)
+  topic: scoping and building products
+  license: UNKNOWN
+  tier: B
+  how_we_use_it: Verify license, then own summary
+  status: maybe
+- id: M-034
+  title: Design Sprint Kit
+  author_publisher: Google Ventures and Google
+  url: https://designsprintkit.withgoogle.com
+  year: null
+  type: guide
+  topic: 5-day validation sprint
+  license: UNKNOWN
+  tier: B
+  how_we_use_it: Own summary plus links
+  status: maybe
+- id: M-035
+  title: 16 Startup Metrics
+  author_publisher: Andreessen Horowitz
+  url: https://a16z.com/16-startup-metrics
+  year: null
+  type: article
+  topic: SaaS and marketplace metrics
+  license: UNKNOWN (copyright)
+  tier: B
+  how_we_use_it: Cite only
+  status: maybe
+- id: M-036
+  title: Stripe Atlas guides
+  author_publisher: Stripe
+  url: https://stripe.com/guides/atlas
+  year: null
+  type: guides
+  topic: company setup, pricing, payments
+  license: UNKNOWN (copyright)
+  tier: B
+  how_we_use_it: Cite only
+  status: maybe
+- id: M-037
+  title: Nielsen Norman Group articles
+  author_publisher: NN/g
+  url: https://www.nngroup.com/articles
+  year: null
+  type: articles
+  topic: user research, usability
+  license: all rights reserved
+  tier: B
+  how_we_use_it: Cite only
+  status: maybe
+- id: M-038
+  title: New Enterprises (15.390)
+  author_publisher: MIT OpenCourseWare
+  url: https://ocw.mit.edu
+  year: null
+  type: course
+  topic: entrepreneurship method
+  license: CC BY-NC-SA 4.0 (verify)
+  tier: A
+  how_we_use_it: NC clause, check it fits project license
+  status: maybe
+- id: M-039
+  title: OpenLearn entrepreneurship courses
+  author_publisher: The Open University
+  url: https://www.open.edu/openlearn
+  year: null
+  type: course
+  topic: business start-up basics
+  license: CC BY-NC-SA mostly (verify)
+  tier: A
+  how_we_use_it: NC clause, check it fits project license
+  status: maybe
+- id: M-040
+  title: Endorsement Guides and rules on fake reviews
+  author_publisher: US Federal Trade Commission
+  url: https://www.ftc.gov
+  year: null
+  type: regulation
+  topic: fake reviews, endorsements
+  license: public domain (US gov)
+  tier: A
+  how_we_use_it: Feeds the safety rules
+  status: keep
+- id: M-041
+  title: NIST AI Risk Management Framework
+  author_publisher: NIST
+  url: https://www.nist.gov/itl/ai-risk-management-framework
+  year: null
+  type: framework
+  topic: AI risk, trust
+  license: public domain (US gov)
+  tier: A
+  how_we_use_it: Feeds the safety design
+  status: keep
+- id: M-042
+  title: OECD AI Principles
+  author_publisher: OECD
+  url: https://oecd.ai/en/ai-principles
+  year: null
+  type: principles
+  topic: trustworthy AI
+  license: UNKNOWN
+  tier: A
+  how_we_use_it: Feeds the safety design
+  status: maybe
+- id: M-043
+  title: EU AI Act
+  author_publisher: European Union
+  url: https://eur-lex.europa.eu
+  year: null
+  type: regulation
+  topic: AI obligations
+  license: reuse allowed with attribution (verify)
+  tier: A
+  how_we_use_it: Compliance notes
+  status: maybe
+- id: M-044
+  title: GDPR text
+  author_publisher: European Union
+  url: https://gdpr-info.eu
+  year: null
+  type: regulation
+  topic: personal data
+  license: UNKNOWN (unofficial site, prefer eur-lex.europa.eu)
+  tier: A
+  how_we_use_it: Informational only
+  status: maybe
+- id: M-045
+  title: WIPO IP for startups resources
+  author_publisher: WIPO
+  url: https://www.wipo.int
+  year: null
+  type: guides
+  topic: IP basics
+  license: UNKNOWN
+  tier: A
+  how_we_use_it: Informational only
+  status: maybe
+- id: M-046
+  title: Open Definition / Creative Commons license chooser
+  author_publisher: Creative Commons
+  url: https://creativecommons.org/choose
+  year: null
+  type: reference
+  topic: license checks
+  license: CC BY 4.0 (verify)
+  tier: A
+  how_we_use_it: Used by the license checker
+  status: keep

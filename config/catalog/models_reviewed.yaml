@@ -1,0 +1,139 @@
+# Models reviewed from Hugging Face model cards pasted by the team on 2026-11-16.
+# verified_on = the date the card was read. Only facts stated on the card are recorded;
+# anything the card did not state says "not stated on card". Same schema as tech_candidates.yaml.
+
+- id: T-201
+  kind: model
+  name: openai/gpt-oss-120b
+  url: https://huggingface.co/openai/gpt-oss-120b
+  license: Apache 2.0 (stated on card)
+  status: candidate
+  use: Reasoning profile candidate
+  notes: >-
+    117B params, 5.1B active (MoE, MXFP4). Fits one 80GB GPU, so hosted only for us.
+    Card states function calling, Structured Outputs, configurable reasoning effort.
+    Must be used with the harmony response format. Context length and Arabic support not stated on card.
+    Providers (Hugging Face page via OpenRouter, checked 2026-11-16; USD per 1M tokens input/output, tokens/s, 24h uptime):
+    Prime Intellect 0.08/0.16 74 t/s 100%; CoreWeave 0.03/0.17 46 t/s 91.8%; DigitalOcean 0.06/0.42 62 t/s 100%;
+    Baseten 0.10/0.50 163 t/s 99.3%; Nebius 0.15/0.60 278 t/s 100%; Together AI 0.15/0.60 89 t/s 98.3%;
+    Cerebras 0.35/0.75 664 t/s 100%; Parasail 0.10/0.75 176 t/s 99.6%. Prices change: re-check before relying on them.
+  verified_on: 2026-11-16
+- id: T-202
+  kind: model
+  name: openai/gpt-oss-20b
+  url: https://huggingface.co/openai/gpt-oss-20b
+  license: Apache 2.0 (stated on the 120b card for both)
+  status: candidate
+  use: Extract profile candidate; possible Colab model
+  notes: >-
+    21B params, 3.6B active. Card says it runs within 16GB of memory with MXFP4.
+    Whether that works on a Colab T4 with vLLM is untested. Harmony format required.
+  verified_on: 2026-11-16
+- id: T-203
+  kind: model
+  name: mistralai/Mistral-Large-4-1T-A52B
+  url: https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B
+  license: Mistral Ecosystem Open-Weight License (modified MIT; Model-as-a-Service business needs a separate licence)
+  open_weight: true
+  osi_open: false
+  status: candidate
+  use: Possible judge (different family); API only for us
+  notes: >-
+    ~1T total / ~52B active MoE, 1M context, text+image input. Card states native function calling,
+    JSON output and strict JSON schema; 160+ languages (Arabic not named in the pasted text).
+    Self-hosting needs ~8 GPUs, so only usable through an API (Mistral API id `mistral-large-4`),
+    which would add a second provider key. Not OSI-open: weakens the openness claim if used.
+  verified_on: 2026-11-16
+- id: T-204
+  kind: model
+  name: Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
+  url: https://huggingface.co/Qwen/Qwen2.5-Coder-7B-Instruct-GGUF
+  license: not stated in the pasted card text
+  status: candidate
+  use: Code profile candidate (MVP Builder)
+  notes: >-
+    7.61B params, 32K context in GGUF (128K only for non-GGUF via vLLM YaRN). GGUF is for llama.cpp;
+    for vLLM on Colab use the non-GGUF or an AWQ/GPTQ build instead. 2024 generation: newer Qwen
+    coder releases may exist, check before choosing. Hugging Face page (checked 2026-11-16): not deployed by
+    any Inference Provider, so Colab/self-hosted only unless a non-GGUF Qwen repo is served.
+  verified_on: 2026-11-16
+- id: T-205
+  kind: model
+  name: xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic
+  url: https://huggingface.co/xtools-at/DeepSeek-V4-Pro-Qwen3.5-9B-UNCENSORED-heretic
+  license: not stated in the pasted card text
+  status: rejected
+  use: none
+  notes: >-
+    REJECTED. Safety-removed ("decensored", refusals 3/100 vs 100/100) community fine-tune: conflicts with
+    our safety requirements and would be indefensible to judges. Math/STEM-focused, no coding data,
+    and the card says no Inference Provider serves it. If a ~9B Qwen is wanted, evaluate the official
+    base Qwen/Qwen3.5-9B instead.
+  verified_on: 2026-11-16
+- id: T-206
+  kind: classifier
+  name: Seethal/sentiment_analysis_generic_dataset
+  url: https://huggingface.co/Seethal/sentiment_analysis_generic_dataset
+  license: not stated in the pasted card text
+  status: rejected
+  use: none
+  notes: >-
+    REJECTED for the Review Miner. Fine-tuned from bert-base-uncased, pretrained on English only,
+    so Arabic reviews would be misread. Sentiment stays an LLM step, or find a multilingual classifier.
+  verified_on: 2026-11-16
+- id: T-207
+  kind: reranker
+  name: BAAI/bge-reranker-v2-m3
+  url: https://huggingface.co/BAAI/bge-reranker-v2-m3
+  license: not stated in the pasted card text (check the repo)
+  status: selected
+  use: Rerank retrieved chunks (rerank profile)
+  notes: >-
+    Card confirms the id, multilingual, built on bge-m3, recommended by BAAI for multilingual use and
+    efficiency. Scores can be normalised to 0-1 with normalize=True.
+  verified_on: 2026-11-16
+- id: T-208
+  kind: model
+  name: meta-llama/Meta-Llama-3.1-8B-Instruct
+  url: https://huggingface.co/meta-llama/Meta-Llama-3.1-8B-Instruct
+  license: "Llama 3.1 Community License (custom; gated: requires sharing information with Meta and accepting terms)"
+  open_weight: true
+  osi_open: false
+  status: rejected
+  use: none (evaluated for the onboarding chat)
+  notes: >-
+    REJECTED for onboarding. Card lists 8 supported languages (English, German, French, Italian, Portuguese,
+    Hindi, Spanish, Thai): Arabic is not supported, and the card strongly discourages use in unsupported
+    languages. Also requires "Built with Llama" attribution and a Notice file. 8B, 128k context, tool use
+    supported. Could still suit English-only tasks, but Qwen/gpt-oss cover those with permissive licences.
+  verified_on: 2026-11-16
+- id: T-209
+  kind: model
+  name: ALLaM-AI/ALLaM-7B-Instruct-preview
+  url: https://huggingface.co/ALLaM-AI/ALLaM-7B-Instruct-preview
+  license: "Not named on card: 'Please see the LICENSE file' (check before use)"
+  open_weight: true
+  status: candidate
+  use: Onboarding extraction, Colab fallback (Arabic + English)
+  notes: >-
+    SDAIA (Saudi Arabia). 7B, trained from scratch, Arabic and English. Context only 4,096 tokens, so long
+    documents must be split into chunks. Fits Colab free GPU when quantised. Card does not mention tool
+    calling or JSON output. Self-reported instruction-following is weak (IFEval prompt-strict 38.08,
+    Ar-IFEval prompt-strict 31.34), which matters for strict JSON extraction. Dialect support not stated.
+  verified_on: 2026-11-16
+- id: T-210
+  kind: model
+  name: QCRI/Fanar-2-27B-Instruct
+  url: https://huggingface.co/QCRI/Fanar-2-27B-Instruct
+  license: Apache 2.0 (stated on card; base model is google/gemma-3-27b-pt, whose own terms should be checked)
+  open_weight: true
+  osi_open: true
+  status: selected
+  use: Onboarding extraction via the Fanar API as Fanar-C-2-27B (Arabic incl. Egyptian dialect)
+  notes: >-
+    QCRI/HBKU (Qatar). 27B, continually pretrained from Gemma-3-27B. Arabic (MSA plus Gulf, Levantine and
+    Egyptian dialects) and English. 32,768-token context, tool calling, optional thinking mode, trained to
+    say "I don't know". Self-reported IF-Eval 82.97. Too large for Colab free GPU. Fanar API access is by
+    request: whether it is free is not stated. Aligned with Islamic values and Arabic culture: test that
+    business advice stays neutral (e.g. finance, food and beverage ideas).
+  verified_on: 2026-11-16

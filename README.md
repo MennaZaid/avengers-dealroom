@@ -3,7 +3,7 @@
 Open-source, founder-controlled multi-agent system that turns a business idea into evidence-backed,
 validated deliverables, stage by stage, with explicit founder approval gates and a full decision log.
 
-> Status: hackathon MVP in progress. Planning: [docs/planning/00-planning-report.md](docs/planning/00-planning-report.md)
+> Status: hackathon MVP in progress. **Start here:** [docs/HANDOFF.md](docs/HANDOFF.md) · plan: [docs/planning/01-execution-plan.md](docs/planning/01-execution-plan.md) · architecture: [docs/planning/00-planning-report.md](docs/planning/00-planning-report.md)
 
 ## Quick start
 

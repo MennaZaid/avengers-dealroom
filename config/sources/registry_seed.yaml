@@ -1,0 +1,1532 @@
+# Generated from source_registry_seed.xlsx tab 'registry' on 2026-11-16 by scripts/import_seed.py.
+# Seed list written from memory and NOT yet verified: every URL and license is a claim to check.
+- id: R-001
+  scope: global
+  source_name: World Bank Open Data
+  url: https://data.worldbank.org
+  provides: GDP, population, income, internet use, business indicators
+  access_type: API
+  auth_needed: 'no'
+  license: CC BY 4.0
+  coverage: ~200 economies
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Takes a country code parameter. API base api.worldbank.org/v2
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-002
+  scope: global
+  source_name: World Bank Enterprise Surveys
+  url: https://www.enterprisesurveys.org
+  provides: 'Firm-level data: obstacles, finance, informality'
+  access_type: download
+  auth_needed: registration for microdata
+  license: UNKNOWN
+  coverage: ~150 economies
+  update_frequency: irregular
+  max_age_months: 36
+  tier: A
+  tested_on: null
+  notes: Country coverage uneven
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-003
+  scope: global
+  source_name: World Bank Microdata Library
+  url: https://microdata.worldbank.org
+  provides: Household and firm survey microdata
+  access_type: download
+  auth_needed: registration
+  license: UNKNOWN
+  coverage: global
+  update_frequency: irregular
+  max_age_months: 36
+  tier: A
+  tested_on: null
+  notes: Per-dataset licenses differ
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-004
+  scope: global
+  source_name: World Bank Global Findex
+  url: https://www.worldbank.org/en/publication/globalfindex
+  provides: Account ownership, digital payments, saving, borrowing
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~140 economies
+  update_frequency: every 3 years
+  max_age_months: 36
+  tier: A
+  tested_on: null
+  notes: Good for fintech and payments
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-005
+  scope: global
+  source_name: World Bank Logistics Performance Index
+  url: https://lpi.worldbank.org
+  provides: Logistics quality by country
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~160 economies
+  update_frequency: every 2 years
+  max_age_months: 36
+  tier: A
+  tested_on: null
+  notes: Physical goods, shipping
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-006
+  scope: global
+  source_name: World Bank Remittance Prices
+  url: https://remittanceprices.worldbank.org
+  provides: Cost of sending money by corridor
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global corridors
+  update_frequency: quarterly
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-007
+  scope: global
+  source_name: IMF Data
+  url: https://data.imf.org
+  provides: Macro, financial, fiscal, trade statistics
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~190 countries
+  update_frequency: monthly to annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: SDMX API
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-008
+  scope: global
+  source_name: IMF World Economic Outlook
+  url: https://www.imf.org/en/Publications/WEO
+  provides: Forecasts for growth, inflation, currency
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~190 countries
+  update_frequency: twice a year
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Forecasts, label as projections
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-009
+  scope: global
+  source_name: IMF Financial Access Survey
+  url: https://data.imf.org/en/datasets/IMF.STA:FAS
+  provides: Bank branches, accounts, digital finance
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~189 economies
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-010
+  scope: global
+  source_name: OECD Data Explorer
+  url: https://data-explorer.oecd.org
+  provides: Economy, education, digital, SME data
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN (check per dataset)
+  coverage: OECD members plus partners
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: SDMX API. Coverage skews to OECD
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-011
+  scope: global
+  source_name: UN Data
+  url: https://data.un.org
+  provides: Aggregator of UN agency statistics
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-012
+  scope: global
+  source_name: UN Comtrade
+  url: https://comtradeplus.un.org
+  provides: Bilateral trade by product
+  access_type: API
+  auth_needed: free key
+  license: UNKNOWN
+  coverage: ~200 countries
+  update_frequency: monthly to annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Rate limits on free tier
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-013
+  scope: global
+  source_name: UNCTADstat
+  url: https://unctadstat.unctad.org
+  provides: Trade, investment, digital economy, e-commerce
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-014
+  scope: global
+  source_name: UNCTAD B2C E-commerce Index
+  url: https://unctad.org/topic/ecommerce-and-digital-economy
+  provides: E-commerce readiness by country
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~150 economies
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: e-commerce'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-015
+  scope: global
+  source_name: UN World Population Prospects
+  url: https://population.un.org/wpp
+  provides: Population by age, sex, projections
+  access_type: API
+  auth_needed: 'no'
+  license: CC BY 3.0 IGO (verify)
+  coverage: 237 countries
+  update_frequency: every 2 years
+  max_age_months: 36
+  tier: A
+  tested_on: null
+  notes: Age structure for audience sizing
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-016
+  scope: global
+  source_name: UN Statistics Division
+  url: https://unstats.un.org
+  provides: Classification registries (ISIC, M49) and SDG data
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: varies
+  max_age_months: 36
+  tier: A
+  tested_on: null
+  notes: Use for ISIC industry codes
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-017
+  scope: global
+  source_name: ILOSTAT
+  url: https://ilostat.ilo.org
+  provides: Employment, wages, informality
+  access_type: API
+  auth_needed: 'no'
+  license: CC BY 4.0 (verify)
+  coverage: ~190 countries
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-018
+  scope: global
+  source_name: ITU DataHub
+  url: https://datahub.itu.int
+  provides: Internet, mobile, broadband adoption
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~200 economies
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-019
+  scope: global
+  source_name: ITC Trade Map
+  url: https://www.trademap.org
+  provides: Trade flows by product and country
+  access_type: download
+  auth_needed: registration
+  license: UNKNOWN (check redistribution)
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Check terms before storing
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-020
+  scope: global
+  source_name: ITC Market Access Map
+  url: https://www.macmap.org
+  provides: Tariffs, non-tariff measures
+  access_type: download
+  auth_needed: registration
+  license: UNKNOWN (check redistribution)
+  coverage: global
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-021
+  scope: global
+  source_name: ITC Export Potential Map
+  url: https://exportpotential.intracen.org
+  provides: Export potential by product and market
+  access_type: download
+  auth_needed: registration
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-022
+  scope: global
+  source_name: WTO Stats
+  url: https://stats.wto.org
+  provides: Trade in goods and services
+  access_type: API
+  auth_needed: key
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-023
+  scope: global
+  source_name: FAOSTAT
+  url: https://www.fao.org/faostat
+  provides: Agriculture, food, land use
+  access_type: API
+  auth_needed: 'no'
+  license: CC BY-NC-SA 3.0 IGO (verify)
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: agriculture. NC clause, check project license'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-024
+  scope: global
+  source_name: UNESCO UIS
+  url: https://data.uis.unesco.org
+  provides: Education enrollment, literacy, spending
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: education'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-025
+  scope: global
+  source_name: WHO Global Health Observatory
+  url: https://www.who.int/data/gho
+  provides: Health indicators
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: health'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-026
+  scope: global
+  source_name: UNDP Human Development Reports
+  url: https://hdr.undp.org
+  provides: HDI, inequality, gender indices
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~190 countries
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-027
+  scope: global
+  source_name: UN Tourism data
+  url: https://www.unwto.org/tourism-data
+  provides: Arrivals, receipts, accommodation
+  access_type: download
+  auth_needed: partly paid
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: tourism'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-028
+  scope: global
+  source_name: World Values Survey
+  url: https://www.worldvaluessurvey.org
+  provides: Attitudes and values by country
+  access_type: download
+  auth_needed: registration
+  license: UNKNOWN
+  coverage: ~100 countries
+  update_frequency: every ~5 years
+  max_age_months: 60
+  tier: A
+  tested_on: null
+  notes: Useful for the values field
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-029
+  scope: global
+  source_name: Transparency International CPI
+  url: https://www.transparency.org/en/cpi
+  provides: Corruption perception score
+  access_type: download
+  auth_needed: 'no'
+  license: CC BY-ND 4.0 (verify)
+  coverage: 180 countries
+  update_frequency: annual
+  max_age_months: 24
+  tier: B
+  tested_on: null
+  notes: Risk context
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-030
+  scope: global
+  source_name: WIPO Global Innovation Index
+  url: https://www.wipo.int/global_innovation_index
+  provides: Innovation ecosystem ranking
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~130 economies
+  update_frequency: annual
+  max_age_months: 24
+  tier: B
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-031
+  scope: global
+  source_name: WIPO Lex
+  url: https://www.wipo.int/wipolex
+  provides: IP laws by country
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: varies
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Legal, informational only
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-032
+  scope: global
+  source_name: ILO NATLEX
+  url: https://natlex.ilo.org
+  provides: Labour and social law by country
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: varies
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Legal, informational only
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-033
+  scope: global
+  source_name: UNCTAD data protection tracker
+  url: https://unctad.org/page/data-protection-and-privacy-legislation-worldwide
+  provides: Which countries have privacy laws
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: varies
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Legal, informational only
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-034
+  scope: global
+  source_name: PwC Worldwide Tax Summaries
+  url: https://taxsummaries.pwc.com
+  provides: Corporate and VAT summaries by country
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN (copyright)
+  coverage: ~150 countries
+  update_frequency: annual
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: Link and cite, do not copy text
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-035
+  scope: global
+  source_name: Bank for International Settlements stats
+  url: https://data.bis.org
+  provides: Banking, payments, exchange rates
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: fintech'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-036
+  scope: global
+  source_name: IEA
+  url: https://www.iea.org
+  provides: Energy data and reports
+  access_type: download
+  auth_needed: partly paid
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: energy'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-037
+  scope: global
+  source_name: IRENA
+  url: https://www.irena.org/Data
+  provides: Renewable energy statistics
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: 'Industry: energy'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-038
+  scope: region
+  source_name: Eurostat
+  url: https://ec.europa.eu/eurostat
+  provides: EU statistics incl. digital economy, business demography
+  access_type: API
+  auth_needed: 'no'
+  license: CC BY 4.0 (verify)
+  coverage: EU, EFTA, candidates
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example regional source
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-039
+  scope: region
+  source_name: European Data Portal
+  url: https://data.europa.eu
+  provides: Catalog of EU open datasets
+  access_type: API
+  auth_needed: 'no'
+  license: varies by dataset
+  coverage: EU
+  update_frequency: continuous
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Catalog, use to discover datasets
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-040
+  scope: region
+  source_name: African Development Bank Data Portal
+  url: https://dataportal.opendataforafrica.org
+  provides: African country statistics
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: Africa
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example regional source
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-041
+  scope: region
+  source_name: Asian Development Bank Data
+  url: https://data.adb.org
+  provides: Asia-Pacific indicators
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: Asia-Pacific
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example regional source
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-042
+  scope: region
+  source_name: Inter-American Development Bank Data
+  url: https://data.iadb.org
+  provides: Latin America and Caribbean indicators
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: LAC
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example regional source
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-043
+  scope: region
+  source_name: ECLAC CEPALSTAT
+  url: https://statistics.cepal.org
+  provides: Latin America statistics
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: LAC
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example regional source
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-044
+  scope: region
+  source_name: UNESCAP Data
+  url: https://data.unescap.org
+  provides: Asia-Pacific statistics
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: Asia-Pacific
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example regional source
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-045
+  scope: region
+  source_name: ASEAN Stats Data Portal
+  url: https://www.aseanstats.org
+  provides: ASEAN member statistics
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ASEAN
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example regional source
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-046
+  scope: region
+  source_name: Humanitarian Data Exchange
+  url: https://data.humdata.org
+  provides: Datasets for crisis and low-data settings
+  access_type: API
+  auth_needed: 'no'
+  license: varies by dataset
+  coverage: global, strong in fragile states
+  update_frequency: continuous
+  max_age_months: 24
+  tier: B
+  tested_on: null
+  notes: CKAN API. Useful when official data is thin
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-047
+  scope: country
+  source_name: US Census Bureau
+  url: https://data.census.gov
+  provides: US demographics, business patterns
+  access_type: API
+  auth_needed: free key
+  license: public domain (US gov)
+  coverage: US
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example national source, not required
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-048
+  scope: country
+  source_name: US Bureau of Labor Statistics
+  url: https://www.bls.gov
+  provides: US wages, employment, prices
+  access_type: API
+  auth_needed: free key
+  license: public domain (US gov)
+  coverage: US
+  update_frequency: monthly
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Example national source, not required
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-049
+  scope: country
+  source_name: UK Office for National Statistics
+  url: https://www.ons.gov.uk
+  provides: UK economy and population
+  access_type: API
+  auth_needed: 'no'
+  license: Open Government Licence (verify)
+  coverage: UK
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Example national source, not required
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-050
+  scope: country
+  source_name: US SEC EDGAR
+  url: https://www.sec.gov/edgar
+  provides: Public company filings
+  access_type: API
+  auth_needed: 'no'
+  license: public domain (US gov)
+  coverage: US-listed companies
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Competitor financials where listed
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-051
+  scope: country
+  source_name: UK Companies House API
+  url: https://developer.company-information.service.gov.uk
+  provides: UK company registry
+  access_type: API
+  auth_needed: free key
+  license: Open Government Licence (verify)
+  coverage: UK
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Example company registry
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-052
+  scope: country
+  source_name: data.gov
+  url: https://data.gov
+  provides: Catalog of US open datasets
+  access_type: API
+  auth_needed: 'no'
+  license: varies by dataset
+  coverage: US
+  update_frequency: continuous
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: CKAN-style catalog
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-053
+  scope: global
+  source_name: OpenCorporates
+  url: https://opencorporates.com
+  provides: Company registry aggregator
+  access_type: API
+  auth_needed: paid for volume
+  license: ODbL (verify)
+  coverage: ~140 jurisdictions
+  update_frequency: continuous
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: Competitor and company discovery
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-054
+  scope: global
+  source_name: DataReportal
+  url: https://datareportal.com
+  provides: Internet, social, mobile use by country
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN (check terms)
+  coverage: ~230 countries
+  update_frequency: yearly
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: Reports are PDFs, cite page numbers
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-055
+  scope: global
+  source_name: GSMA Intelligence
+  url: https://www.gsmaintelligence.com
+  provides: Mobile market data
+  access_type: download
+  auth_needed: partly paid
+  license: UNKNOWN (copyright)
+  coverage: global
+  update_frequency: annual
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: Free reports only
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-056
+  scope: global
+  source_name: Global Entrepreneurship Monitor
+  url: https://www.gemconsortium.org
+  provides: Entrepreneurial activity, attitudes by country
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: ~50 economies
+  update_frequency: annual
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Coverage limited to participating countries
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-057
+  scope: global
+  source_name: Pew Research Center
+  url: https://www.pewresearch.org
+  provides: Survey data on tech and society
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: varies
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-058
+  scope: global
+  source_name: World Economic Forum reports
+  url: https://www.weforum.org/reports
+  provides: Global risk, jobs, competitiveness
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN (copyright)
+  coverage: global
+  update_frequency: annual
+  max_age_months: 24
+  tier: B
+  tested_on: null
+  notes: Link and cite
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-059
+  scope: global
+  source_name: Our World in Data
+  url: https://ourworldindata.org
+  provides: Cleaned global datasets with source links
+  access_type: download
+  auth_needed: 'no'
+  license: CC BY 4.0 (verify)
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 24
+  tier: B
+  tested_on: null
+  notes: Trace back to underlying source and cite that
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-060
+  scope: global
+  source_name: Google Trends
+  url: https://trends.google.com
+  provides: Relative search interest by topic and country
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN (check terms)
+  coverage: global
+  update_frequency: live
+  max_age_months: 3
+  tier: C
+  tested_on: null
+  notes: Relative index, not search volume. Official API may be limited
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-061
+  scope: global
+  source_name: Stack Overflow Developer Survey
+  url: https://survey.stackoverflow.co
+  provides: Developer tools, salaries, adoption
+  access_type: download
+  auth_needed: 'no'
+  license: ODbL (verify)
+  coverage: global developers
+  update_frequency: annual
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: 'Industry: SaaS and developer tools'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-062
+  scope: global
+  source_name: Numbeo
+  url: https://www.numbeo.com
+  provides: Crowdsourced cost of living and prices
+  access_type: manual
+  auth_needed: paid API
+  license: UNKNOWN
+  coverage: global cities
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Crowdsourced, label as such
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-063
+  scope: global
+  source_name: Common Crawl
+  url: https://commoncrawl.org
+  provides: Open web crawl archive
+  access_type: download
+  auth_needed: 'no'
+  license: varies by page
+  coverage: global web
+  update_frequency: monthly
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Bulk web text for retrieval, respect source licenses
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-064
+  scope: global
+  source_name: GDELT Project
+  url: https://www.gdeltproject.org
+  provides: Global news events and tone
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: 15 minutes
+  max_age_months: 3
+  tier: C
+  tested_on: null
+  notes: News signal, not ground truth
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-065
+  scope: global
+  source_name: Wikidata
+  url: https://www.wikidata.org
+  provides: 'Structured entities: companies, places, industries'
+  access_type: API
+  auth_needed: 'no'
+  license: CC0 (verify)
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Helps normalise names to IDs
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-066
+  scope: global
+  source_name: Wikimedia API
+  url: https://api.wikimedia.org
+  provides: Wikipedia article text and metadata
+  access_type: API
+  auth_needed: 'no'
+  license: CC BY-SA 4.0
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Share-alike, check project license
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-067
+  scope: global
+  source_name: Wayback Machine API
+  url: https://archive.org/help/wayback_api.php
+  provides: Archived page snapshots
+  access_type: API
+  auth_needed: 'no'
+  license: varies
+  coverage: global web
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Pricing page history of competitors
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-068
+  scope: global
+  source_name: Public Suffix List
+  url: https://publicsuffix.org
+  provides: List used to recognise government and official domains
+  access_type: download
+  auth_needed: 'no'
+  license: MPL 2.0 (verify)
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Supports the official-domain check in discovery
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-069
+  scope: global
+  source_name: Apple App Store customer reviews RSS
+  url: https://developer.apple.com
+  provides: Public app reviews per country store
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN (terms apply)
+  coverage: per country store
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Check terms before storing
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-070
+  scope: global
+  source_name: Google Play reviews
+  url: https://play.google.com
+  provides: App reviews
+  access_type: scrape
+  auth_needed: 'no'
+  license: UNKNOWN (terms apply)
+  coverage: per country store
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: High legal risk. Prefer official routes or manual sampling
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-071
+  scope: global
+  source_name: Reddit API
+  url: https://www.reddit.com/dev/api
+  provides: Forum discussions and pain points
+  access_type: API
+  auth_needed: key
+  license: restricted by Reddit terms
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Read the API terms before any storage
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-072
+  scope: global
+  source_name: Hacker News API
+  url: https://github.com/HackerNews/API
+  provides: Tech and startup discussion
+  access_type: API
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global tech
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-073
+  scope: global
+  source_name: Stack Exchange API
+  url: https://api.stackexchange.com
+  provides: Q and A pain points by topic
+  access_type: API
+  auth_needed: key optional
+  license: CC BY-SA 4.0
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: C
+  tested_on: null
+  notes: Share-alike, check project license
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-074
+  scope: global
+  source_name: GitHub REST API
+  url: https://docs.github.com/rest
+  provides: Open-source competitor activity, stars, releases
+  access_type: API
+  auth_needed: token
+  license: UNKNOWN
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 6
+  tier: C
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-075
+  scope: global
+  source_name: Product Hunt API
+  url: https://api.producthunt.com/v2/docs
+  provides: Launch signals for digital products
+  access_type: API
+  auth_needed: key
+  license: UNKNOWN (terms apply)
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 6
+  tier: C
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-076
+  scope: global
+  source_name: Google Patents
+  url: https://patents.google.com
+  provides: Patent search for competitor IP
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-077
+  scope: global
+  source_name: OpenAlex
+  url: https://openalex.org
+  provides: Papers, authors, citations, open-access links
+  access_type: API
+  auth_needed: 'no'
+  license: CC0
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Best free scholarly API
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-078
+  scope: global
+  source_name: Crossref API
+  url: https://api.crossref.org
+  provides: DOIs and paper metadata
+  access_type: API
+  auth_needed: 'no'
+  license: CC0 metadata (verify)
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-079
+  scope: global
+  source_name: Semantic Scholar API
+  url: https://api.semanticscholar.org
+  provides: Papers, abstracts, citations
+  access_type: API
+  auth_needed: free key
+  license: UNKNOWN (check terms)
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-080
+  scope: global
+  source_name: CORE
+  url: https://core.ac.uk
+  provides: Open access full texts
+  access_type: API
+  auth_needed: free key
+  license: varies by paper
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Full text where license allows
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-081
+  scope: global
+  source_name: arXiv
+  url: https://arxiv.org
+  provides: Preprints (economics, CS, quant methods)
+  access_type: API
+  auth_needed: 'no'
+  license: varies by paper
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: Preprints, label as not peer-reviewed
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-082
+  scope: global
+  source_name: SSRN
+  url: https://www.ssrn.com
+  provides: Social science and business working papers
+  access_type: manual
+  auth_needed: 'no'
+  license: varies by paper
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: Working papers
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-083
+  scope: global
+  source_name: DOAJ
+  url: https://doaj.org
+  provides: Open-access journal directory
+  access_type: API
+  auth_needed: 'no'
+  license: CC0 metadata (verify)
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: null
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-084
+  scope: global
+  source_name: PubMed
+  url: https://pubmed.ncbi.nlm.nih.gov
+  provides: Biomedical literature
+  access_type: API
+  auth_needed: 'no'
+  license: varies by paper
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: 'Industry: health'
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: R-085
+  scope: global
+  source_name: Google Dataset Search
+  url: https://datasetsearch.research.google.com
+  provides: Finds datasets by topic
+  access_type: manual
+  auth_needed: 'no'
+  license: varies
+  coverage: global
+  update_frequency: continuous
+  max_age_months: 12
+  tier: B
+  tested_on: null
+  notes: Discovery tool, not a source itself
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null

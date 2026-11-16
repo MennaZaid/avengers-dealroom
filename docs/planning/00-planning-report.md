@@ -1,6 +1,7 @@
 # Venture OS — Planning Report v0.1
 
-> Status: **DRAFT for team review.** Nothing is implemented. All model versions, prices and quotas below are
+> Status: **Superseded in parts** — current plan: [01-execution-plan.md](01-execution-plan.md); current status: [../HANDOFF.md](../HANDOFF.md).
+> Original status: DRAFT for team review. Nothing is implemented. All model versions, prices and quotas below are
 > **to be re-verified at decision time** — they change monthly. Items marked **[ASSUMPTION]** need confirmation.
 > Date: 2026-11-16
 
@@ -503,8 +504,13 @@ Have a **recorded replay** of the demo ready in case Wi-Fi/Colab fails (replay l
 | D5 | Team = **3 people, 30 hours** (~90 person-hours) | scope cut below |
 | D6 | Search = **free only**: SearXNG + CAPMAS + ITC | CAPMAS/ITC are *sources*, not search engines → registry entries with `access: manual_upload` or portal download, verify terms; ITC tools may require free registration **[verify]** |
 | D7 | Licence = **Apache-2.0** | permissive + patent grant; check dependency licences in CI |
+| D8 | Crawler-found sources: option (a) | official bodies auto-added as provisional tier B (30-day expiry); everything else to admin queue |
+| D9 | **Zero spend** (2026-11-16) | no payment method on any account; only free tiers, free model variants, Colab free GPU and local models; recorded replays for CI and demo backup. Supersedes the cost estimates in section 12 |
+| D10 | Founder onboarding = chat bot | chat with document upload; asks for missing brief fields before any stage starts |
+| D11 | Onboarding model = **Fanar-C-2-27B** via the Fanar API | Arabic incl. Egyptian dialect, Apache 2.0; tested 2026-11-16; 50 req/min; free status to confirm |
+| D12 | Scope = **all six stages** | Discover + Validate deep, Build/Commercial/Launch/Operate thin from one template; see 01-execution-plan.md |
 
-**30-hour scope cut.** Build: brief + questions, Discover DAG, validator rules, 2 gates, approvals/audit log,
+**30-hour scope cut** *(superseded by D12 and [01-execution-plan.md](01-execution-plan.md); kept for history)*. Build: brief + questions, Discover DAG, validator rules, 2 gates, approvals/audit log,
 Stage 2 *lite* (competitor matrix, review quotes, evidence ladder, Go/Revise/Stop), Streamlit UI, CI with replay
 tests + simple JSON results page. Defer: Langfuse, Pages history dashboard polish, Stage 3 stub, Stale propagation UI
 (keep in DB only), Alembic (use a single SQL schema file).
@@ -512,6 +518,8 @@ Suggested split: **P1** core/DB/state machine/gates/CI · **P2** evidence pipeli
 pgvector) + LLM router · **P3** Streamlit UI + prompts/stage steps + demo script & pitch. Hour ~20: freeze features.
 
 ## 15. Decisions needed from the team (before M0)
+
+> All items below are resolved (D1–D12). Kept for history.
 
 1. **CLAUDE.md** — where is it? If it doesn't exist, may I draft one in M0?
 2. ~~**Inference strategy**~~ — ✅ **DECIDED 2026-11-16: (b) hosted open-weight API primary**; Colab vLLM kept as the

@@ -1,0 +1,8 @@
+Nadafa - early business notes (fictional demo founder, not real data)
+
+Business model: commission of 15% on every booking, paid by the household
+Known competitors: Ezhalha, Filkhedma, informal WhatsApp groups of cleaners
+Technical preferences: mobile-first web app, no native app at the start
+Values: fair pay for cleaners, no hidden fees for customers
+
+Rough idea for launch: start with 20 vetted cleaners in New Cairo and Sheikh Zayed.

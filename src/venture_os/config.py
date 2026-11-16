@@ -17,3 +17,4 @@ class Settings(BaseSettings):
     colab_llm_api_key: str = ""
     database_url: str = "postgresql://venture:venture@localhost:5432/venture_os"
     searxng_url: str = "http://localhost:8080"
+    admin_token: str = ""  # empty = admin routes disabled

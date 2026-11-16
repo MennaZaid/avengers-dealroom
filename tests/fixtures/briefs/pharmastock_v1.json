@@ -1,0 +1,137 @@
+{
+  "brief_id": "26fddd95-5830-4837-9afc-cdba44fae4fe",
+  "version": 1,
+  "fields": {
+    "city": {
+      "quote": "Nairobi",
+      "value": "Nairobi",
+      "source": "chat",
+      "status": "answered"
+    },
+    "idea": {
+      "quote": "build a simple stock-tracking tool for small independent pharmacies",
+      "value": "A stock-tracking tool for small independent pharmacies",
+      "source": "chat",
+      "status": "answered"
+    },
+    "budget": {
+      "quote": "budget: 3,000 USD",
+      "value": "3,000 USD",
+      "source": "chat",
+      "status": "answered"
+    },
+    "values": {
+      "quote": "Values | patient data never leaves the pharmacy",
+      "value": "patient data never leaves the pharmacy",
+      "source": "document:pharmastock-pitch.docx",
+      "status": "from_document"
+    },
+    "country": {
+      "quote": "Nairobi",
+      "value": "Kenya",
+      "source": "chat (inferred, confirmed by founder)",
+      "status": "answered"
+    },
+    "problem": {
+      "quote": "they keep running out of common medicines while over-ordering slow ones",
+      "value": "Small independent pharmacies run out of common medicines due to poor inventory management.",
+      "source": "chat",
+      "status": "answered"
+    },
+    "business_model": {
+      "quote": "business model: monthly subscription, 15 USD per pharmacy",
+      "value": "monthly subscription, 15 USD per pharmacy",
+      "source": "chat",
+      "status": "answered"
+    },
+    "founder_skills": {
+      "quote": "I'm a licensed pharmacist and I can write basic Python. No designer yet.",
+      "value": "I'm a licensed pharmacist and I can write basic Python. No designer yet.",
+      "source": "chat",
+      "status": "answered"
+    },
+    "time_available": {
+      "quote": "About 10 hours a week, for 6 months, alongside my pharmacy job",
+      "value": "About 10 hours a week, for 6 months, alongside my pharmacy job",
+      "source": "chat",
+      "status": "answered"
+    },
+    "target_customer": {
+      "quote": "Small independent pharmacies in Nairobi, run by the owner-pharmacist",
+      "value": "Small independent pharmacies in Nairobi, run by the owner-pharmacist",
+      "source": "chat",
+      "status": "answered"
+    },
+    "known_competitors": {
+      "quote": "Known competitors: spreadsheets, paper ledgers, wholesaler ordering apps",
+      "value": "spreadsheets, paper ledgers, wholesaler ordering apps",
+      "source": "document:pharmastock-pitch.docx",
+      "status": "from_document"
+    },
+    "technical_preferences": {
+      "quote": "Technical preferences: Android tablet app that works offline, syncs when online",
+      "value": "Android tablet app that works offline, syncs when online",
+      "source": "document:pharmastock-pitch.docx",
+      "status": "from_document"
+    }
+  },
+  "tags": {
+    "languages": {
+      "basis": "rules",
+      "value": [
+        "en"
+      ]
+    },
+    "industries": {
+      "basis": "model",
+      "value": [
+        "software_saas"
+      ]
+    },
+    "country_code": {
+      "basis": "rules",
+      "value": "KE"
+    },
+    "customer_type": {
+      "basis": "model",
+      "value": "b2b"
+    },
+    "revenue_model": {
+      "basis": "model",
+      "value": "subscription"
+    }
+  },
+  "followups": [
+    {
+      "asked": true,
+      "answer": "Pharmacists themselves, usually the owner. They update stock at the end of each day.",
+      "source": "model",
+      "question": "What features are most important to your target customer?"
+    },
+    {
+      "asked": true,
+      "answer": "200",
+      "source": "model",
+      "question": "Do you plan on hiring any additional staff?"
+    },
+    {
+      "asked": true,
+      "answer": "alone for now",
+      "source": "rules",
+      "question": "Have you talked to any potential customers yet? What did they tell you?"
+    }
+  ],
+  "open_questions": [
+    "How many pharmacies are there in Nairobi?",
+    "What percentage of Kenyan pharmacies use digital tools for inventory management?",
+    "Are there any existing solutions similar to yours available in the Kenyan market?"
+  ],
+  "history": [
+    {
+      "version": 1,
+      "change_note": "Confirmed by founder in onboarding chat",
+      "created_at": "2026-11-16T20:54:06.005201+00:00"
+    }
+  ],
+  "_note": "Fictional test persona (PharmaStock). Shape of GET /onboarding/briefs/{id}; use as a fixture, not real data."
+}

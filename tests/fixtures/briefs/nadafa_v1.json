@@ -1,0 +1,138 @@
+{
+  "brief_id": "6cf092d7-e2cf-4d86-b9d3-da5e832c9d55",
+  "version": 1,
+  "fields": {
+    "city": {
+      "quote": "في القاهرة.",
+      "value": "القاهرة",
+      "source": "chat",
+      "status": "answered"
+    },
+    "idea": {
+      "quote": "عايزة أعمل أبلكيشن لحجز عمال النضافة للبيوت.",
+      "value": "تطبيق لحجز عمال النظافة",
+      "source": "chat",
+      "status": "answered"
+    },
+    "budget": {
+      "quote": "budget: 60,000 EGP",
+      "value": "60,000 EGP",
+      "source": "chat",
+      "status": "answered"
+    },
+    "values": {
+      "quote": "Values: fair pay for cleaners, no hidden fees for customers",
+      "value": "fair pay for cleaners, no hidden fees for customers",
+      "source": "document:nadafa-plan.txt",
+      "status": "from_document"
+    },
+    "country": {
+      "quote": "مصر",
+      "value": "مصر",
+      "source": "chat",
+      "status": "answered"
+    },
+    "problem": {
+      "quote": "المشكلة إن الأسر الشغالة مش لاقية حد موثوق ومواعيده مضبوطة.",
+      "value": "صعوبة العثور على عمال نظافة موثوق بهم",
+      "source": "chat",
+      "status": "answered"
+    },
+    "business_model": {
+      "quote": "Business model: commission of 15% on every booking, paid by the household",
+      "value": "commission of 15% on every booking, paid by the household",
+      "source": "document:nadafa-plan.txt",
+      "status": "from_document"
+    },
+    "founder_skills": {
+      "quote": "أنا شاطرة في التصميم والتسويق على السوشيال ميديا، ومعايا صاحبتي مبرمجة بدوام جزئي",
+      "value": "أنا شاطرة في التصميم والتسويق على السوشيال ميديا، ومعايا صاحبتي مبرمجة بدوام جزئي",
+      "source": "chat",
+      "status": "answered"
+    },
+    "time_available": {
+      "quote": "15 ساعة في الاسبوع لمدة اربع شهور",
+      "value": "15 ساعة في الاسبوع لمدة اربع شهور",
+      "source": "chat",
+      "status": "answered"
+    },
+    "target_customer": {
+      "quote": "عملائي الأسر اللي الزوج والزوجة شغالين في القاهرة الجديدة والشيخ زايد.",
+      "value": "الأسر العاملة في القاهرة الجديدة والشيخ زايد",
+      "source": "chat",
+      "status": "answered"
+    },
+    "known_competitors": {
+      "quote": "Known competitors: Ezhalha, Filkhedma, informal WhatsApp groups of cleaners",
+      "value": "Ezhalha, Filkhedma, informal WhatsApp groups of cleaners",
+      "source": "document:nadafa-plan.txt",
+      "status": "from_document"
+    },
+    "technical_preferences": {
+      "quote": "Technical preferences: mobile-first web app, no native app at the start",
+      "value": "mobile-first web app, no native app at the start",
+      "source": "document:nadafa-plan.txt",
+      "status": "from_document"
+    }
+  },
+  "tags": {
+    "languages": {
+      "basis": "rules",
+      "value": [
+        "ar",
+        "en"
+      ]
+    },
+    "industries": {
+      "basis": "model",
+      "value": [
+        "home_services"
+      ]
+    },
+    "country_code": {
+      "basis": "rules",
+      "value": "EG"
+    },
+    "customer_type": {
+      "basis": "model",
+      "value": "b2c"
+    },
+    "revenue_model": {
+      "basis": "model",
+      "value": "commission"
+    }
+  },
+  "followups": [
+    {
+      "asked": true,
+      "answer": "العمال هيكونوا فريلانسرز، وهنعمل لهم مقابلة وفحص فيش وتشبيه قبل ما يشتغلوا",
+      "source": "model",
+      "question": "هل لديك خطط لتوفير تدريب أو دعم لعمال النظافة الذين ينضمون إلى التطبيق؟"
+    },
+    {
+      "asked": true,
+      "answer": null,
+      "source": "model",
+      "question": "كيف ستضمن جودة الخدمة التي يقدمها عمال النظافة المسجلون في التطبيق؟"
+    },
+    {
+      "asked": true,
+      "answer": null,
+      "source": "model",
+      "question": "ما هي الخطوات التي اتخذتها حتى الآن للتواصل مع العملاء المحتملين في القاهرة الجديدة والشيخ زايد؟"
+    }
+  ],
+  "open_questions": [
+    "ما هو متوسط سعر خدمات التنظيف المنزلية في القاهرة الجديدة والشيخ زايد؟",
+    "كم عدد المنازل في القاهرة الجديدة والشيخ زايد التي قد تحتاج إلى خدمات تنظيف منتظمة؟",
+    "ما هي القوانين المحلية المتعلقة بتوظيف وتدريب عمال النظافة في مصر؟"
+  ],
+  "history": [
+    {
+      "version": 1,
+      "change_note": "Confirmed by founder in onboarding chat",
+      "created_at": "2026-11-16T20:29:04.124190+00:00"
+    }
+  ],
+  "_note": "Fictional test persona (Nadafa, Egyptian Arabic). Shape of GET /onboarding/briefs/{id}; fixture, not real data."
+}

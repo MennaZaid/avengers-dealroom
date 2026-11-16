@@ -1,0 +1,15 @@
+# Which endpoint serves each model profile. Decision D2: hosted open-weight API first, Colab second.
+# Only env var NAMES are stored here and in the database; the values live in .env, never in git or the DB.
+# component_id points at the model family in the catalog when known (T-001 Qwen, T-006 BGE-M3, T-007 BGE reranker).
+- {id: E-001, profile: reasoning, provider: hosted, base_url_env: LLM_BASE_URL, api_key_env: LLM_API_KEY, model_env: LLM_MODEL_REASONING, priority: 1}
+- {id: E-002, profile: reasoning, provider: colab, base_url_env: COLAB_LLM_BASE_URL, api_key_env: COLAB_LLM_API_KEY, model_env: COLAB_LLM_MODEL, priority: 2}
+- {id: E-003, profile: extract, provider: hosted, component_id: T-210, base_url_env: LLM_BASE_URL, api_key_env: LLM_API_KEY, model_env: LLM_MODEL_EXTRACT, priority: 1,
+   notes: "Fanar API (https://api.fanar.qa/v1), model Fanar-C-2-27B. Tested 2026-11-16: JSON mode works; Egyptian dialect and English extraction grounded; injection text ignored. Limit 50 requests/minute"}
+- {id: E-004, profile: extract, provider: colab, base_url_env: COLAB_LLM_BASE_URL, api_key_env: COLAB_LLM_API_KEY, model_env: COLAB_LLM_MODEL, priority: 2}
+- {id: E-005, profile: code, provider: hosted, base_url_env: LLM_BASE_URL, api_key_env: LLM_API_KEY, model_env: LLM_MODEL_CODE, priority: 1}
+- {id: E-006, profile: judge, provider: hosted, base_url_env: LLM_BASE_URL, api_key_env: LLM_API_KEY, model_env: LLM_MODEL_JUDGE, priority: 1,
+   notes: "Must be a different model family from the reasoning model, to reduce self-grading bias"}
+- {id: E-007, profile: embed, provider: local, component_id: T-006, model_name: BAAI/bge-m3, priority: 1,
+   notes: "Card checked 2026-11-16: 1024 dimensions (matches chunks.embedding), 8192 tokens, 100+ languages, dense + sparse + multi-vector output"}
+- {id: E-008, profile: rerank, provider: local, component_id: T-207, model_name: BAAI/bge-reranker-v2-m3, priority: 1,
+   notes: "Card checked 2026-11-16: id confirmed, multilingual"}

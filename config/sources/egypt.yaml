@@ -1,37 +1,56 @@
-# Source registry (Egypt demo). Access methods and licences are UNVERIFIED until marked verified: true.
-- id: capmas
-  name: CAPMAS - Central Agency for Public Mobilization and Statistics
-  type: national_statistics
-  geo: [EG]
-  industries: [all]
-  languages: [ar, en]
-  freshness: varies by dataset
-  access: manual_upload
-  credibility_tier: 1
-  limitations: "Portal-based; check publication date per table"
-  license: "TO VERIFY"
-  verified: false
-- id: itc_trade
-  name: ITC - International Trade Centre trade data tools
-  type: intergovernmental_statistics
-  geo: [global]
-  industries: [trade, export]
-  languages: [en]
-  freshness: annual
-  access: manual_upload
-  credibility_tier: 2
-  limitations: "Trade flows, not domestic consumer demand; may require free registration"
-  license: "TO VERIFY"
-  verified: false
-- id: searxng_web
-  name: Web search via self-hosted SearXNG
-  type: web_search
-  geo: [global]
-  industries: [all]
-  languages: [ar, en]
-  freshness: live
-  access: search_only
-  credibility_tier: null   # assigned per result by credibility scorer
-  limitations: "Result quality varies; each hit must be fetched and dated"
-  license: "Per result site"
-  verified: true
+# Egypt country pack (registry_seed schema). Written from memory, NOT verified: check every URL and licence.
+# discovery_rules.yaml steps 2-5 should confirm or replace these for any new country.
+- id: EG-001
+  scope: country
+  source_name: CAPMAS - Central Agency for Public Mobilization and Statistics
+  url: https://www.capmas.gov.eg
+  provides: National statistics (population, prices, labour, business)
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: Egypt
+  update_frequency: varies
+  max_age_months: 24
+  tier: A
+  tested_on: null
+  notes: Portal-based; download tables and ingest manually; record publication date per table
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: EG-002
+  scope: country
+  source_name: Central Bank of Egypt statistics
+  url: https://www.cbe.org.eg
+  provides: Inflation, exchange rates, banking and payments
+  access_type: download
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: Egypt
+  update_frequency: monthly
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Found via discovery rule 3 pattern; confirm domain
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
+- id: EG-003
+  scope: country
+  source_name: GAFI - General Authority for Investment and Free Zones
+  url: https://www.gafi.gov.eg
+  provides: Company setup procedures, investment rules
+  access_type: manual
+  auth_needed: 'no'
+  license: UNKNOWN
+  coverage: Egypt
+  update_frequency: varies
+  max_age_months: 12
+  tier: A
+  tested_on: null
+  notes: Legal flag - informational only, not legal advice; confirm domain
+  url_status: UNVERIFIED
+  http_status: null
+  robots_ok: null
+  license_detected: null
