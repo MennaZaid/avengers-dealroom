@@ -1,0 +1,37 @@
+# Source registry (Egypt demo). Access methods and licences are UNVERIFIED until marked verified: true.
+- id: capmas
+  name: CAPMAS - Central Agency for Public Mobilization and Statistics
+  type: national_statistics
+  geo: [EG]
+  industries: [all]
+  languages: [ar, en]
+  freshness: varies by dataset
+  access: manual_upload
+  credibility_tier: 1
+  limitations: "Portal-based; check publication date per table"
+  license: "TO VERIFY"
+  verified: false
+- id: itc_trade
+  name: ITC - International Trade Centre trade data tools
+  type: intergovernmental_statistics
+  geo: [global]
+  industries: [trade, export]
+  languages: [en]
+  freshness: annual
+  access: manual_upload
+  credibility_tier: 2
+  limitations: "Trade flows, not domestic consumer demand; may require free registration"
+  license: "TO VERIFY"
+  verified: false
+- id: searxng_web
+  name: Web search via self-hosted SearXNG
+  type: web_search
+  geo: [global]
+  industries: [all]
+  languages: [ar, en]
+  freshness: live
+  access: search_only
+  credibility_tier: null   # assigned per result by credibility scorer
+  limitations: "Result quality varies; each hit must be fetched and dated"
+  license: "Per result site"
+  verified: true

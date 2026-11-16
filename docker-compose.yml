@@ -1,0 +1,15 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_USER: venture
+      POSTGRES_PASSWORD: venture
+      POSTGRES_DB: venture_os
+    ports: ["5432:5432"]
+    volumes: [pgdata:/var/lib/postgresql/data]
+  searxng:
+    image: searxng/searxng:latest
+    ports: ["8080:8080"]
+    volumes: ["./config/searxng:/etc/searxng"]
+volumes:
+  pgdata:

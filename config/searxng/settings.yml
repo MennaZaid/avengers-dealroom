@@ -1,0 +1,7 @@
+# Minimal SearXNG config: enables JSON output for the evidence pipeline.
+use_default_settings: true
+server:
+  secret_key: "change-me-local-only"
+  limiter: false
+search:
+  formats: [html, json]
