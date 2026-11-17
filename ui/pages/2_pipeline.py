@@ -271,6 +271,9 @@ with tabs[5]:
                 (t("judge", j=cr["judge_model"]) if cr.get("judge_model") else ""))
     for f in cr.get("findings") or []:
         st.markdown(f"- **{f['kind']}**: {f['detail']}")
+    for d in cr.get("dropped") or []:  # shown, not hidden: the judge called a past date "in the future"
+        st.caption(("Dropped (calls a past date 'in the future'): " if L != "ar" else
+                    "استُبعد (يصف تاريخاً مضى بأنه في المستقبل): ") + d)
 with tabs[6]:
     table([{k: e.get(k) for k in ("at", "agent", "action", "api", "query", "url", "results", "reason", "error")}
            for e in research.get("trace", [])])
