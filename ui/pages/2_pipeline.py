@@ -173,6 +173,14 @@ def quote(c):
                 + (f" · ⚠️ {', '.join(c['flags'])}" if c.get("flags") else ""))
 
 
+def table(rows: list, **kw) -> None:
+    """A table with its CSV download only when it has rows; never an empty, zero-byte export."""
+    if dv.exportable(rows):
+        st.dataframe(rows, hide_index=True, width="stretch", **kw)
+    else:
+        st.caption(dv.nothing_to_export(L))
+
+
 def rng(m, x):
     return t("unknown") if None in x else f"{x[0]:,.0f} – {x[1]:,.0f} {m['currency']}"
 
@@ -209,20 +217,23 @@ with tabs[2]:
         row.update({c["criterion"]: f"{c['score']:g}" + (" (A)" if c["basis"] == "ASSUMPTION" else "")
                     for c in s["criteria"]})
         rows.append(row)
-    st.dataframe(rows, hide_index=True, width="stretch")
+    table(rows)
     st.caption(t("scores_note"))
 with tabs[3]:
     m = research.get("market") or {}
     if m:
         st.markdown(t("segment", s=m["segment"], g=m["geography"], b=m["beachhead"]))
-        st.dataframe([{t("name"): c["name"], t("kind"): c["kind"], t("price"): c.get("price") or t("no_price"),
-                       t("signal"): c.get("signal"), t("link"): c["url"]} for c in m["competitors"]], hide_index=True,
-                     width="stretch", column_config={t("link"): st.column_config.LinkColumn()})
+        table([{t("name"): c["name"], t("kind"): c["kind"], t("price"): dv.price_cell(c, L),
+                t("signal"): c.get("signal"), t("link"): c["url"]} for c in m["competitors"]],
+              column_config={t("link"): st.column_config.LinkColumn()})
         st.code(m["formula"])
-        st.dataframe([{t("input"): x["name"], t("low"): x["low"], t("high"): x["high"], t("unit"): x["unit"],
-                       t("basis"): x["basis"], t("note"): x["note"]} for x in m["inputs"]], hide_index=True,
-                     width="stretch")
-        st.markdown(f"**TAM** {rng(m, m['tam'])} · **SAM** {rng(m, m['sam'])} · **SOM** {rng(m, m['som'])}")
+        table([{t("input"): x["name"], t("low"): x["low"], t("high"): x["high"], t("unit"): x["unit"],
+                t("basis"): x["basis"], t("note"): x["note"]} for x in m["inputs"]])
+        unknown = dv.market_size_line(m, L)
+        if unknown:
+            st.warning(unknown)
+        else:
+            st.markdown(f"**TAM** {rng(m, m['tam'])} · **SAM** {rng(m, m['sam'])} · **SOM** {rng(m, m['som'])}")
 with tabs[4]:
     ip = research.get("interview_plan") or {}
     if ip:
@@ -261,8 +272,8 @@ with tabs[5]:
     for f in cr.get("findings") or []:
         st.markdown(f"- **{f['kind']}**: {f['detail']}")
 with tabs[6]:
-    st.dataframe([{k: e.get(k) for k in ("at", "agent", "action", "api", "query", "url", "results", "reason", "error")}
-                  for e in research.get("trace", [])], hide_index=True, width="stretch")
+    table([{k: e.get(k) for k in ("at", "agent", "action", "api", "query", "url", "results", "reason", "error")}
+           for e in research.get("trace", [])])
 
 st.divider()
 st.subheader(t("your_decision"))
