@@ -44,7 +44,9 @@ def test_build_runs_after_discover_and_waits_for_one_founder_decision(client, ma
     assert r.status_code == 201 and r.json()["status"] == "running"
     build = run["output"]["build"]
     assert run["status"] == "awaiting_approval", build.get("error")
-    assert build["gate"]["outcome"] == "go" and build["template"] == "booking"
+    # the template follows the product spec (the model's choice of offer kind; "directory" in replay mode)
+    assert build["gate"]["outcome"] == "go"
+    assert build["template"] in {"booking", "directory", "tracker", "library", "calculator"}
     assert "phase3_step5_mvp.html" in build["files"] and bid in build["files"]["phase3_step5_mvp.html"]
 
     # Discover's sourced claims reach Phase 3 as evidence (D1, D2, ... in the build inputs)
