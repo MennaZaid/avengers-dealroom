@@ -10,13 +10,17 @@ NAMES = {
     "pipeline": ("Pipeline", "المراحل"),
     "log": ("Decision log & outputs", "سجل القرارات والمخرجات"),
     "sources": ("Sources", "المصادر"),
+    "validate": ("Phase 2 Validate", "المرحلة 2: التحقق"),
     "build": ("Phase 3 Build", "المرحلة 3: البناء"),
+    "commercial": ("Phase 4 Commercial setup", "المرحلة 4: الإعداد التجاري"),
 }
 i = 1 if ui_lang() == "ar" else 0
 pages = [
     st.Page("pages/1_onboarding.py", title=NAMES["brief"][i], icon="💬", default=True),
     st.Page("pages/2_pipeline.py", title=NAMES["pipeline"][i], icon="🧭"),
+    st.Page("pages/4_validate.py", title=NAMES["validate"][i], icon="🧪"),
     st.Page("pages/5_build.py", title=NAMES["build"][i], icon="🛠️"),
+    st.Page("pages/6_commercial.py", title=NAMES["commercial"][i], icon="💼"),
     st.Page("pages/3_decision_log.py", title=NAMES["log"][i], icon="📜"),
     st.Page("pages/4_sources.py", title=NAMES["sources"][i], icon="📚"),
 ]

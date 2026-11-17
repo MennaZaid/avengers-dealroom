@@ -89,3 +89,19 @@ def test_editing_the_brief_makes_commercial_stale(client, make_brief, phase4):
     runs = client.get("/stages/runs", params={"brief_id": bid, "stage": "commercial"}).json()
     assert runs[0]["stale"]
     assert client.post("/stages/commercial/runs", json={"brief_id": bid}).status_code == 403
+
+
+def test_the_real_phase4_agents_run_through_the_stage(client, make_brief):
+    """No stand-in: commercial_stage.run_commercial_stage (all six steps) behind the stage API."""
+    bid, sid = _approved_build(client, make_brief)
+    _, run = start(client, "commercial", bid)
+    c = run["output"]["commercial"]
+    assert run["status"] == "awaiting_approval", c.get("error")
+    assert c["stubbed"] == []
+    assert c["gate"]["phase"] == 4 and c["gate"]["gate"] == "commercial"
+    assert c["gate"]["outcome"] in ("go", "repeat", "pivot", "stop")
+    assert "phase4_gate_commercial.md" in c["files"] and bid in c["files"]["phase4_gate_commercial.md"]
+    policies = [f for f in c["files"] if f.startswith(("phase4_step3", "phase4_step4", "phase4_step5"))]
+    assert policies and all("not legal advice" in c["files"][f].lower() for f in policies)
+    done = decide(client, run["id"], "reject" if c["gate"]["outcome"] == "stop" else "approve", sid).json()
+    assert done["decisions"][-1]["actor"] == "founder"
