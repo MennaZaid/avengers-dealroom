@@ -4,15 +4,18 @@
   and runs the agents in the background (orchestrator.py); poll GET /stages/runs/{id}.
 - POST /stages/runs/{id}/decision: the ONLY way past a gate (approval.py). Founder-authenticated: the header
   X-Founder-Session must be the onboarding session that confirmed this brief. A model has no such session.
-- Build (Phase 3) starts after an approved Discover while Validate is not built (unbuilt stages are skipped by
-  the entry check). It runs build_stage.run_build_stage in the background with the Discover claims as evidence,
-  stores the gate and every phase3_* file in the run, and waits for the founder's one decision.
+- Validate (Phase 2) starts after an approved Discover for the same brief version. In the background it builds the
+  Lean Canvas, then the landing page step, which DECLARES the demand test (target and days) before drafting the
+  page (publishing MOCKED). The run then waits for the founder's sign-up count:
+  POST /stages/runs/{id}/signups {actual, days_elapsed} runs the demand gate against the declared test; the
+  founder then decides through POST /stages/runs/{id}/decision.
+- Build (Phase 3) starts after an approved Validate. It runs build_stage.run_build_stage in the background with
+  the Discover claims as evidence, stores the gate and every phase3_* file in the run, and waits for the
+  founder's one decision.
 - POST /stages/discover/interviews: the founder's Mom Test notes (stored as written, tagged by rules); the gate
   is re-evaluated with them.
 - POST /stages/approvals: the founder approves one exact draft/payload (publish_landing_page, create_order,
   refund_order) from the UI; GET /stages/approvals/check tells a caller whether that exact content is approved.
-- POST /stages/validate/demand: the founder enters the waitlist sign-ups (or "not run yet"); the demand gate
-  (agents/demand_test.py) recommends go / repeat / pivot / stop and writes phase2_gate_demand.md.
 """
 
 from datetime import date
@@ -33,7 +36,7 @@ from venture_os.evidence.store import EvidenceStore
 router = APIRouter(prefix="/stages", tags=["stages"])
 
 RUN_COLS = "id, brief_id, brief_version, stage, status, output, created_at, updated_at"
-IMPLEMENTED = {"discover", "build"}
+IMPLEMENTED = {"discover", "validate", "build"}
 
 
 class RunIn(BaseModel):
@@ -57,10 +60,9 @@ class ApprovalIn(BaseModel):
     brief_version: int | None = None
 
 
-class DemandIn(BaseModel):
-    brief_id: UUID
-    count: int | None = Field(None, ge=0)     # None = the founder has not run the test
-    days_elapsed: int = Field(ge=0)
+class SignupsIn(BaseModel):
+    actual: int = Field(ge=0, strict=True)        # the founder's real count; never defaulted or generated
+    days_elapsed: int = Field(ge=0, strict=True)
 
 
 class InterviewIn(BaseModel):
@@ -147,6 +149,41 @@ def _build(run_id: str, brief_id: str, version: int) -> None:
                          status="failed")
 
 
+VALIDATE_FILES = ["phase2_step1_lean_canvas.md", "phase2_step2_demand_test_plan.md", "phase2_step2_landing_page.html",
+                  "phase2_gate_demand.md"]
+
+
+def _files(names: list[str]) -> dict[str, str]:
+    from venture_os.outputs import outputs_dir
+
+    return {n: (outputs_dir() / n).read_text(encoding="utf-8") for n in names if (outputs_dir() / n).is_file()}
+
+
+def _validate(run_id: str, brief_id: str, version: int) -> None:
+    """Phase 2 in the background, in this order: Lean Canvas -> demand test DECLARED (target and days fixed
+    before any number exists) -> landing-page draft (publishing MOCKED). Then the run waits for the founder's
+    sign-up count; no gate decision is made here."""
+    from venture_os.agents import business_designer, landing_page
+    from venture_os.build_stage import discover_items
+    from venture_os.onboarding.briefs import load_brief
+
+    store = EvidenceStore()
+    try:
+        brief = load_brief(brief_id, version)
+        store.update_run(run_id, {"validate": {"status": "lean_canvas"}})
+        canvas = business_designer.run(brief_id, brief=brief, evidence_items=discover_items(brief_id, version) or None)
+        store.update_run(run_id, {"validate": {"status": "landing_page", "canvas": canvas.model_dump()}})
+        draft = landing_page.run(brief_id, canvas, brief=brief)  # declares the demand test first
+        store.update_run(run_id, {"validate": {
+            "status": "awaiting_signups", "canvas": canvas.model_dump(),
+            "canvas_md": business_designer.to_markdown(canvas), "demand_test": draft.demand_test,
+            "draft": {**draft.model_dump(exclude={"html"}), "publishing": "MOCKED"}, "draft_html": draft.html,
+            "files": _files(VALIDATE_FILES)}})
+    except Exception as e:  # noqa: BLE001 - a failed run is recorded, not hidden
+        store.update_run(run_id, {"validate": {"status": "failed", "error": f"{type(e).__name__}: {e}"}},
+                         status="failed")
+
+
 @router.get("/briefs")
 def list_briefs():
     """Confirmed briefs (latest version of each), newest first, for picking one in the UI."""
@@ -175,6 +212,15 @@ def start_run(stage: gates.Stage, body: RunIn, background: BackgroundTasks):
     if (brief.get("product_check") or {}).get("status") == "excluded":
         raise HTTPException(403, "excluded product (not a digital product the system may build): the pipeline "
                                  "stops here; reshape the idea in onboarding")
+    if stage == "validate":
+        with connect("vos_app") as conn:
+            run = conn.execute(
+                f"INSERT INTO stage_runs (brief_id, brief_version, stage, status, output) VALUES (%s,%s,%s,%s,%s) "
+                f"RETURNING {RUN_COLS}", (body.brief_id, brief["version"], stage, "running",
+                                          Jsonb({"validate": {"status": "queued"}}))).fetchone()
+            out = _with_state(conn, [run])[0]
+        background.add_task(_validate, str(run["id"]), str(body.brief_id), brief["version"])
+        return out
     if stage == "build":
         with connect("vos_app") as conn:
             run = conn.execute(
@@ -313,16 +359,33 @@ def check_approval(brief_id: UUID, action: str, content_hash: str):
             "decision": approval.founder_decision(brief_id, action, content_hash)}
 
 
-@router.post("/validate/demand")
-def enter_demand(body: DemandIn, x_founder_session: str | None = Header(None)):
-    """The founder's waitlist count goes to the demand gate. The count is never generated."""
+@router.post("/runs/{run_id}/signups")
+def enter_signups(run_id: UUID, body: SignupsIn, x_founder_session: str | None = Header(None)):
+    """The founder's waitlist sign-up count for a Validate run. Runs the demand gate against the test declared
+    before the landing page was drafted, stores the gate in the run, and opens the founder's decision."""
+    from venture_os.agents import demand_test
+
     with connect("vos_app") as conn:
-        if not approval.founder_owns_brief(conn, body.brief_id, x_founder_session):
+        run = conn.execute(f"SELECT {RUN_COLS} FROM stage_runs WHERE id = %s FOR UPDATE", (run_id,)).fetchone()
+        if not run:
+            raise HTTPException(404, "run not found")
+        if not approval.founder_owns_brief(conn, run["brief_id"], x_founder_session):
             raise HTTPException(401, "only the founder can enter the sign-up count (X-Founder-Session)")
+        if run["stage"] != "validate":
+            raise HTTPException(409, "sign-ups belong to a Validate run")
+        v = (run["output"] or {}).get("validate") or {}
+        if not v.get("demand_test") or run["status"] not in ("running", "awaiting_approval", "revision_requested"):
+            raise HTTPException(409, "this run is not waiting for sign-ups (the demand test must be declared first)")
+    test = gates.DemandTest(**v["demand_test"])
     try:
-        from venture_os.agents.demand_test import enter_signups
-    except ImportError as e:
-        raise HTTPException(501, "the Phase 2 demand test (agents/demand_test.py) is not on this branch yet") from e
-    d = enter_signups(str(body.brief_id), body.count, body.days_elapsed)
-    return {"outcome": d.outcome, "reason": d.reason,
-            **{k: getattr(d, k, None) for k in ("metric", "target", "actual", "mocked", "rule")}}
+        d = demand_test.enter_signups(str(run["brief_id"]), body.actual, body.days_elapsed, test=test,
+                                      brief_version=run["brief_version"])
+    except ValueError as e:
+        raise HTTPException(422, str(e)) from e
+    v.update(status="gated", gate=d.model_dump(), signups={"actual": body.actual, "days_elapsed": body.days_elapsed,
+                                                          "source": "founder", "label": demand_test.FOUNDER_LABEL},
+             files={**(v.get("files") or {}), **_files(["phase2_gate_demand.md"])})
+    EvidenceStore().update_run(str(run_id), {"validate": v}, status="awaiting_approval")
+    with connect("vos_app") as conn:
+        return _with_state(conn, [conn.execute(f"SELECT {RUN_COLS} FROM stage_runs WHERE id = %s",
+                                               (run_id,)).fetchone()])[0]

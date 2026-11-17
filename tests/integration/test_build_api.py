@@ -20,16 +20,22 @@ from test_stages_api import (  # noqa: F401  (fixtures and helpers from the Disc
 
 
 def _approved_discover(client, make_brief):
+    """Discover approved, then Validate: canvas + declared test + draft, the founder's count, the founder's go."""
     bid, sid = make_brief("nadafa")
     _, run = start(client, "discover", bid)
     assert decide(client, run["id"], "approve", sid).json()["status"] == "approved"
+    _, val = start(client, "validate", bid)
+    r = client.post(f"/stages/runs/{val['id']}/signups", json={"actual": 140, "days_elapsed": 14},
+                    headers={"X-Founder-Session": sid})
+    assert r.status_code == 200, r.text
+    assert decide(client, val["id"], "approve", sid).json()["status"] == "approved"
     return bid, sid
 
 
 def test_build_needs_an_approved_discover(client, make_brief):
     bid, _sid = make_brief("nadafa")
     r = client.post("/stages/build/runs", json={"brief_id": bid})
-    assert r.status_code == 403 and "discover" in r.json()["detail"]
+    assert r.status_code == 403 and "validate" in r.json()["detail"]
 
 
 def test_build_runs_after_discover_and_waits_for_one_founder_decision(client, make_brief):
