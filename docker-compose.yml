@@ -18,6 +18,9 @@ x-app: &app
     LLM_MODEL_CODE: ${LLM_MODEL_CODE:-}
     LLM_MODEL_JUDGE: ${LLM_MODEL_JUDGE:-}
     ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+    # Embeddings for the evidence/corpus search (hybrid keyword + vector), served by the same Ollama.
+    EMBED_URL: http://ollama:11434
+    EMBED_MODEL: ${EMBED_MODEL:-bge-m3}
 
 services:
   db:
@@ -52,12 +55,12 @@ services:
       timeout: 5s
       retries: 30
 
-  # One-off: download the open-weight model once (cached in the `ollama` volume afterwards).
+  # One-off: download the open-weight model and the embedding model once (cached in the `ollama` volume).
   ollama-pull:
     image: ollama/ollama:0.40.16
     environment:
       OLLAMA_HOST: http://ollama:11434
-    entrypoint: ["ollama", "pull", "${OLLAMA_MODEL:-qwen3:4b-instruct}"]
+    entrypoint: ["sh", "-c", "ollama pull ${OLLAMA_MODEL:-qwen3:4b-instruct} && ollama pull ${EMBED_MODEL:-bge-m3}"]
     restart: "no"
     depends_on:
       ollama: {condition: service_healthy}

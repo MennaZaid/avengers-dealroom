@@ -1,10 +1,15 @@
 """Registry API against a real, seeded Postgres (python db/seed.py). Skipped when the DB is unreachable."""
 
+from pathlib import Path
+
 import psycopg
 import pytest
+import yaml
 from fastapi.testclient import TestClient
 
 from venture_os.config import Settings
+
+CONFIG = Path(__file__).resolve().parents[2] / "config" / "sources"
 
 try:
     with psycopg.connect(Settings().database_url, connect_timeout=2) as _c:
@@ -42,7 +47,9 @@ def test_read_routes(client):
     assert {"EG-001", "R-001"} <= ids  # Egypt pack plus global sources
     assert "R-047" not in ids  # US Census is not returned for Egypt
     assert all(s["tier"] == "A" for s in client.get("/registry/sources", params={"tier": "A"}).json())
-    assert len(client.get("/registry/corpus").json()) == 46
+    corpus_files = ("corpus_seed.yaml", "corpus_digital.yaml")
+    expected = sum(len(yaml.safe_load((CONFIG / f).read_text(encoding="utf-8"))) for f in corpus_files)
+    assert len(client.get("/registry/corpus").json()) == expected
     models = client.get("/registry/components", params={"kind": "model"}).json()
     assert models and all(m["open_weight"] for m in models)
 
