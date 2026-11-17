@@ -31,12 +31,12 @@ rule-based answer). Give Docker about 6 GB of memory. Host ports: see `.env.exam
 | 2. Validate: sign-up count + demand gate | **Working** | `POST /stages/runs/{id}/signups`: count entered by the founder (founder-reported, not verified), never generated; 12 of 100 -> stop |
 | 3. Build: build the product + build gate | **Working** | Evidence -> requirements -> plan -> validation -> single-file HTML MVP -> QA checks -> user guide; one founder approval at the end; payments in the MVP are **MOCKED** |
 | 4. Commercial: pricing research, price, draft policies, readiness + gate | **Working** | Runs after the founder's Go on Build (Pipeline page or the Commercial page); founder decides at the gate. `run_commercial_stage`: only sourced prices (URL + date); min/median/max and break-even in code, labelled ESTIMATE; terms/privacy/refund "DRAFT — not legal advice", citing official registry sources or "No verified official source found"; no payments |
-| 5. Launch: store page and 3 post drafts + gate | **STUBBED**; posting **MOCKED** | Not run by the pipeline yet; nothing is posted |
-| 5. Launch: payments, delivery, refunds, reconciliation | **MOCKED** | Delivery once per order; a refund revokes access; reconciliation flags missing payments; no money moves |
-| 6. Operate: persevere-or-pivot memo + gate | **STUBBED** | Not run by the pipeline yet. Built only from logged results; support and analytics "no data yet" |
+| 5. Launch: store page and 3 post drafts + gate | **STUBBED** (rule-based drafts); posting **MOCKED** | Runs after the founder's Go on Commercial; nothing is posted; the gate recommends go only if the MOCKED sale-to-cash test completes |
+| 5. Launch: payments, delivery, refunds, reconciliation | **MOCKED** | Run inside Phase 5 (`payment_test_log.md`); each test order and refund needs the founder's approval of that exact payload; delivery once per order; a refund revokes access; reconciliation flags missing payments; no money moves |
+| 6. Operate: persevere-or-pivot memo + gate | **Working**; support and analytics **STUBBED** | Runs after the founder's Go on Launch. Built only from logged results; support and analytics say "no data yet" |
 | Founder decisions at stage gates (`approval.py`) | **Working** | Approve / repeat / pivot / stop / waive, logged with `approved_by: "founder"` |
 | Founder approval of exact content (landing page, launch posts, order, refund) | **Working** | `POST /stages/approvals` (UI) or `python -m venture_os.approval` (CLI); the action is refused unless this exact content was approved |
-| Founder decision to pass a phase gate (`pass_phase<N>_gate`: go / repeat / pivot / stop) | **Working** | Only the founder's latest decision "go" passes a gate; the Phase 4-6 agents are still STUBBED and not run by the pipeline |
+| Founder decision to pass a phase gate (`pass_phase<N>_gate`: go / repeat / pivot / stop) | **Working** | Only the founder's latest decision "go" passes a gate; each phase after Validate starts only after that go on the previous phase |
 | Decision log, outputs, cost per run | **Working** | `decision_log.json` (tokens per model call), `outputs/phase<N>_step<M>_*`, `scripts/cost_report.py` |
 
 ## Architecture
@@ -50,12 +50,23 @@ publishing are mocked. Details: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Models and free resources
 
-- **Default:** `qwen3:4b-instruct` (Qwen3-4B-Instruct-2507, Apache-2.0, open-weight) and `bge-m3` embeddings in
-  the Ollama container started by `docker compose up`. No key, no account, CPU is enough. For better quality set
-  `OLLAMA_MODEL` and `LLM_MODEL_EXTRACT` to a larger local model such as `qwen3:8b` in `.env`.
+All models are free: free tiers or a local open-weight model. No paid API is used and none is required.
+
+| Role | Model | Provider | Free tier | Fallback |
+|---|---|---|---|---|
+| Base: onboarding chat, Discover extraction, Build | `Fanar-C-2-27B` | Fanar (`LLM_BASE_URL`, `LLM_MODEL_EXTRACT`) | Yes | Local Ollama `qwen3:4b-instruct`, then the rule-based path |
+| Reasoning and validation (Discover reasoning, Validate) | `openai/gpt-oss-120b` (open-weight) | Groq (`LLM_REASONING_*`, `LLM_VALIDATE_*`) | Yes (8,000 tokens per minute) | Base model, then local Ollama `qwen3:4b-instruct`, then the rule-based path |
+| Judge (research critic, a different model family) | `qwen/qwen3.8-27b` | Groq (`LLM_JUDGE_*`, `LLM_MODEL_JUDGE`) | Yes | Base model, then local Ollama `qwen3:4b-instruct`, then the rule-based path |
+
+- **No account needed:** with no `.env`, `docker compose up` runs every role on `qwen3:4b-instruct`
+  (Qwen3-4B-Instruct-2507, Apache-2.0, open-weight) in the Ollama container, with `bge-m3` embeddings. No key and
+  no GPU are needed.
+- **Routing:** each role tries its own endpoint, then the base endpoint, then local Ollama, then its rule-based
+  path (`src/venture_os/llm/client.py`). The decision log records the model that actually answered.
 - **No model at all:** `LLM_MODE=replay` runs every agent on its rule-based path (this is how CI runs).
-- **Optional:** any free OpenAI-compatible endpoint via `.env` (we tested onboarding with Fanar-C-2-27B on its free
-  tier); never a paid API.
+- **Keys:** only in an untracked `.env`; `.env.example` holds placeholders.
+- **Build:** the MVP tester's headless-browser check is skipped when no Edge or Chrome is installed; the static
+  checks on the HTML file still run.
 - **Also local and free:** PostgreSQL + pgvector, SearXNG search.
 
 ## Cost per run

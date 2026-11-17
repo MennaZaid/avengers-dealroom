@@ -8,9 +8,9 @@ controls the flow. Every phase ends at a **gate** that returns go / repeat / piv
 is published, sent or spent without the founder's explicit approval in the UI. Every claim cites a source URL or
 is labelled `ASSUMPTION`, and every agent action is appended to `decision_log.json`.
 
-Status today: onboarding (the founder brief), guardrails, the source registry, the decision log and the outputs
-writer, the gates and phase 1 Discover are **built and tested**. Phase 2 is being built; phases 3-6 will ship as labelled
-`STUBBED` agents; all payments and delivery are `MOCKED`. See [Built vs. stubbed](#built-vs-stubbed).
+Status today: all six phases run in the pipeline, each after the founder's go on the previous one. Posting,
+payments, delivery and refunds are `MOCKED`; support and analytics are `STUBBED`; the Phase 5 store page and posts
+are rule-based drafts (`STUBBED`). See [Built vs. stubbed](#built-vs-stubbed).
 
 ```mermaid
 flowchart LR
@@ -156,17 +156,22 @@ collected at the start and the founder approves once, at the build gate.
   `phase4_step4_privacy.md`, `phase4_step5_refund_policy.md`, `phase4_step6_readiness.md`,
   `phase4_gate_commercial.md`.
 
-### Phase 5: Launch (core steps: Open the store; deliver automatically) — STUBBED / MOCKED (not run by the pipeline yet)
+### Phase 5: Launch (core steps: Open the store; deliver automatically) — runs in the pipeline; drafts STUBBED, posting and payments MOCKED
 
+- **Entry point:** `launch_stage.run_launch_stage`, started after the founder's go on Commercial.
 - **Agents:** `launch.py`; delivery is `delivery.py`. **Tools:** brief, the sale-to-cash mocks.
 - **Method:** a store page draft and 3 launch post drafts with no urgency, reviews or user counts. Posting a draft
   needs the founder's approval of that exact text and is MOCKED. Delivery is automatic after a (mock) payment and
-  happens once per order.
+  happens once per order. The stage then runs the MOCKED sale-to-cash test (order, payment, delivery, refund,
+  reconciliation); each test order and refund runs only if the founder already approved that exact payload.
+- **Gate:** go if delivery happened once, the refund revoked access and reconciliation flagged the missing
+  payment; otherwise repeat. The founder decides.
 - **Output:** `phase5_step1_store_page.md`, `phase5_step2_launch_posts.md`, `phase5_gate_launch.md`,
   `payment_test_log.md` (from `scripts/payment_test.py`).
 
-### Phase 6: Operate and learn — STUBBED (not run by the pipeline yet)
+### Phase 6: Operate and learn — runs in the pipeline; support and analytics STUBBED
 
+- **Entry point:** `operate_stage.run_operate_stage`, started after the founder's go on Launch.
 - **Agent:** `operator.py`. **Tools:** `decision_log.json` and `outputs/` only.
 - **Method:** a persevere-or-pivot memo built only from logged results (gate outcomes, the founder's sign-up count,
   the payment test); a metric without data says "no data yet"; support and analytics are STUBBED.
@@ -270,9 +275,11 @@ flowchart TD
 | Phase 2 landing page | Working; publishing MOCKED |
 | Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
 | Phase 4 Commercial (pricing research, price, policies, readiness, gate) | Working |
-| Phase 5 store page and launch posts | STUBBED (not run by the pipeline yet); posting MOCKED |
-| Phase 6 persevere-or-pivot memo | STUBBED (not run by the pipeline yet; support, analytics: no data yet) |
-| Payments, delivery, refunds, reconciliation | MOCKED |
+| Phase 5 Launch stage and gate (runs in the pipeline) | Working |
+| Phase 5 store page and launch posts | STUBBED (rule-based drafts); posting MOCKED |
+| Phase 6 persevere-or-pivot memo and gate (runs in the pipeline) | Working |
+| Phase 6 support and analytics | STUBBED (no integrations; the memo says "no data yet") |
+| Payments, delivery, refunds, reconciliation (run inside Phase 5) | MOCKED |
 | `approval.py`: founder decisions at stage gates | Working |
 | Founder approval of exact content: landing page, launch posts, order, refund (`POST /stages/approvals`, CLI) | Working |
 | Founder decision to pass a phase gate (go / repeat / pivot / stop; only "go" passes) | Working |
@@ -282,7 +289,8 @@ The README table is the per-step status.
 ## Roadmap
 
 1. Real waitlist traffic: publish the approved landing page for real (today publishing is MOCKED) so the demand test measures actual sign-ups.
-2. The pipeline runs Phases 5-6 after Commercial (their approvals already exist in `approval.py`).
+2. Discover search quality for niche topics: a first run on a niche brief found no problem quotes or competitor
+   prices, so niche briefs need more targeted queries and sources.
 3. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
 4. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
 5. More country source packs as reviewed YAML (`config/sources/`).
