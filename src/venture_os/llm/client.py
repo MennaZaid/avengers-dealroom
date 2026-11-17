@@ -4,8 +4,16 @@ Default endpoint: the local Ollama service from docker-compose.yml (open-weight 
 Any OpenAI-compatible endpoint works through .env (LLM_BASE_URL / LLM_API_KEY / LLM_MODEL_*).
 Zero spend (decision D9): only local models or free tiers; LLM_PRICE_PER_1M_TOKENS stays 0 for those.
 
-Profiles pick the model: extract (default), reasoning, code, judge. An unset profile falls back to
+Profiles pick the model: extract (default), reasoning, validate, code, judge. An unset profile falls back to
 the extract model, so one local model is enough to run everything.
+
+Routing with fallback (each role on the model it is best at, and a demo never stops on one provider):
+  1. the profile's own endpoint, when LLM_<PROFILE>_BASE_URL is set
+     (LLM_<PROFILE>_API_KEY, LLM_<PROFILE>_MODEL, optional LLM_<PROFILE>_REASONING_EFFORT)
+  2. the base endpoint: LLM_BASE_URL / LLM_API_KEY / the profile's model
+  3. the local open-weight fallback: LLM_FALLBACK_BASE_URL (default: Ollama) / LLM_FALLBACK_MODEL (qwen3:4b-instruct)
+An endpoint that errors, times out or rejects the request is skipped; if all fail, the caller's rule-based path
+runs. The decision log records the model that actually answered.
 
 Every call appends a `CallUsage` (tokens, seconds, cost) to an in-process ledger, so a pipeline run
 can report its own cost:  mark = usage_mark(); ...run...; usage_summary(since=mark)
@@ -13,6 +21,7 @@ can report its own cost:  mark = usage_mark(); ...run...; usage_summary(since=ma
 
 from __future__ import annotations
 
+import os
 import threading
 import time
 from dataclasses import asdict, dataclass
@@ -22,7 +31,10 @@ import httpx
 
 from venture_os.config import Settings
 
-Profile = Literal["extract", "reasoning", "code", "judge"]
+Profile = Literal["extract", "reasoning", "validate", "code", "judge"]
+
+FALLBACK_MODEL = "qwen3:4b-instruct"
+FALLBACK_BASE_URL = "http://localhost:11434/v1"  # Ollama from the host; docker-compose sets the container address
 
 
 @dataclass(frozen=True)
@@ -54,10 +66,65 @@ def model_for(profile: Profile = "extract", s: Settings | None = None) -> str:
     by_profile = {
         "extract": s.llm_model_extract,
         "reasoning": s.llm_model_reasoning,
+        "validate": s.llm_model_reasoning,
         "code": s.llm_model_code,
         "judge": s.llm_model_judge,
     }
-    return by_profile.get(profile) or s.llm_model_extract
+    name = by_profile.get(profile)
+    if not name or looks_like_key(name):
+        name = s.llm_model_extract
+    return "" if looks_like_key(name) else name
+
+
+def looks_like_key(value: str | None) -> bool:
+    """A secret typed into a model-name field must never be sent as a model or written to the decision log."""
+    v = (value or "").strip()
+    return v.startswith(("sk-", "gsk_", "sk_", "xai-", "AIza")) or (len(v) > 60 and " " not in v and "/" not in v)
+
+
+@dataclass(frozen=True)
+class Endpoint:
+    base_url: str
+    api_key: str
+    model: str
+    reasoning_effort: str = ""
+
+
+def endpoints(profile: str = "extract", model: str | None = None, s: Settings | None = None) -> list[Endpoint]:
+    """Where a profile's calls go, in order: its own endpoint, the base endpoint, the local fallback."""
+    s = s or Settings()
+    env = os.environ.get
+    p = profile.upper()
+    out: list[Endpoint] = []
+    if env(f"LLM_{p}_BASE_URL"):
+        out.append(Endpoint(env(f"LLM_{p}_BASE_URL", ""), env(f"LLM_{p}_API_KEY", ""),
+                            model or env(f"LLM_{p}_MODEL") or model_for(profile, s),  # type: ignore[arg-type]
+                            env(f"LLM_{p}_REASONING_EFFORT", "")))
+    if s.llm_base_url:
+        out.append(Endpoint(s.llm_base_url, s.llm_api_key, model or model_for(profile, s),  # type: ignore[arg-type]
+                            s.llm_reasoning_effort))
+    out.append(Endpoint(env("LLM_FALLBACK_BASE_URL") or FALLBACK_BASE_URL, env("LLM_FALLBACK_API_KEY", "ollama"),
+                        env("LLM_FALLBACK_MODEL") or FALLBACK_MODEL, "none"))
+    seen, unique = set(), []
+    for e in out:
+        if e.model and not looks_like_key(e.model) and (e.base_url, e.model) not in seen:
+            seen.add((e.base_url, e.model))
+            unique.append(e)
+    return unique
+
+
+def _post(e: Endpoint, messages: list[dict], timeout: float) -> httpx.Response:
+    payload = {"model": e.model, "messages": messages, "response_format": {"type": "json_object"}, "temperature": 0}
+    if e.reasoning_effort:
+        payload["reasoning_effort"] = e.reasoning_effort
+    url = e.base_url.rstrip("/") + "/chat/completions"
+    headers = {"Authorization": f"Bearer {e.api_key}"} if e.api_key else {}
+    r = httpx.post(url, headers=headers, json=payload, timeout=timeout)
+    if r.status_code == 400 and "reasoning_effort" in payload:  # some providers reject the parameter
+        payload.pop("reasoning_effort")
+        r = httpx.post(url, headers=headers, json=payload, timeout=timeout)
+    r.raise_for_status()
+    return r
 
 
 def chat_json(
@@ -66,29 +133,22 @@ def chat_json(
     timeout: float | None = None,
     profile: Profile = "extract",
 ) -> str:
-    """Send a chat request in JSON mode and return the cleaned JSON text. Records usage."""
+    """Send a chat request in JSON mode and return the cleaned JSON text. Records usage.
+    Tries the profile's endpoints in order (see the module docstring); raises the last error if all fail."""
     s = Settings()
-    model = model or model_for(profile, s)
-    payload = {
-        "model": model,
-        "messages": messages,
-        "response_format": {"type": "json_object"},
-        "temperature": 0,
-    }
-    if s.llm_reasoning_effort:
-        payload["reasoning_effort"] = s.llm_reasoning_effort
-    started = time.monotonic()
-    r = httpx.post(
-        s.llm_base_url.rstrip("/") + "/chat/completions",
-        headers={"Authorization": f"Bearer {s.llm_api_key}"},
-        json=payload,
-        timeout=timeout or s.llm_chat_timeout,
-    )
-    r.raise_for_status()
-    body = r.json()
-    entry = record_usage(profile, model, token_usage(body), time.monotonic() - started, s)
-    log_model_call(entry)
-    return clean_json_text(body["choices"][0]["message"]["content"] or "")
+    error: Exception | None = None
+    for e in endpoints(profile, model, s):
+        started = time.monotonic()
+        try:
+            body = _post(e, messages, timeout or s.llm_chat_timeout).json()
+            text = body["choices"][0]["message"]["content"] or ""
+        except (httpx.HTTPError, ValueError, KeyError, IndexError) as exc:
+            error = exc
+            continue
+        entry = record_usage(profile, e.model, token_usage(body), time.monotonic() - started, s)
+        log_model_call(entry)
+        return clean_json_text(text)
+    raise error or RuntimeError("no model endpoint configured")
 
 
 def token_usage(body: dict) -> dict:
