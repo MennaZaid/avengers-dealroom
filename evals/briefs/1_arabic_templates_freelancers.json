@@ -1,0 +1,125 @@
+{
+  "fields": {
+    "idea": {
+      "value": "حزمة قوالب سيرة ذاتية وقوالب Notion بالعربي للفريلانسرز المصريين",
+      "status": "answered",
+      "source": "chat",
+      "quote": "حزمة قوالب سيرة ذاتية وقوالب Notion بالعربي للفريلانسرز المصريين"
+    },
+    "problem": {
+      "value": "الفريلانسرز المصريين بيضيعوا وقت كبير في عمل سيرة ذاتية وبورتفوليو احترافي بالعربي والإنجليزي",
+      "status": "answered",
+      "source": "chat",
+      "quote": "الفريلانسرز المصريين بيضيعوا وقت كبير في عمل سيرة ذاتية وبورتفوليو احترافي بالعربي والإنجليزي"
+    },
+    "target_customer": {
+      "value": "الفريلانسرز المصريين في التصميم والكتابة والبرمجة",
+      "status": "answered",
+      "source": "chat",
+      "quote": "الفريلانسرز المصريين في التصميم والكتابة والبرمجة"
+    },
+    "country": {
+      "value": "مصر",
+      "status": "answered",
+      "source": "chat",
+      "quote": "مصر"
+    },
+    "city": {
+      "value": "القاهرة",
+      "status": "answered",
+      "source": "chat",
+      "quote": "القاهرة"
+    },
+    "budget": {
+      "value": "5,000 EGP",
+      "status": "answered",
+      "source": "chat",
+      "quote": "5,000 EGP"
+    },
+    "time_available": {
+      "value": "10 ساعات في الأسبوع لمدة 3 شهور",
+      "status": "answered",
+      "source": "chat",
+      "quote": "10 ساعات في الأسبوع لمدة 3 شهور"
+    },
+    "founder_skills": {
+      "value": "مصممة جرافيك وبستخدم Notion كل يوم، وعندي خبرة في كتابة السير الذاتية",
+      "status": "answered",
+      "source": "chat",
+      "quote": "مصممة جرافيك وبستخدم Notion كل يوم، وعندي خبرة في كتابة السير الذاتية"
+    },
+    "values": {
+      "value": "أسعار عادلة، ومفيش تقييمات وهمية",
+      "status": "answered",
+      "source": "chat",
+      "quote": "أسعار عادلة، ومفيش تقييمات وهمية"
+    },
+    "business_model": {
+      "value": "بيع القوالب مرة واحدة",
+      "status": "answered",
+      "source": "chat",
+      "quote": "بيع القوالب مرة واحدة"
+    },
+    "known_competitors": {
+      "value": "Canva, Etsy CV templates",
+      "status": "answered",
+      "source": "chat",
+      "quote": "Canva, Etsy CV templates"
+    },
+    "technical_preferences": {
+      "value": "Notion templates",
+      "status": "answered",
+      "source": "chat",
+      "quote": "Notion templates"
+    },
+    "supply_side": {
+      "value": null,
+      "status": "unknown",
+      "source": null,
+      "quote": null
+    }
+  },
+  "tags": {
+    "industries": {
+      "value": [
+        "professional_services"
+      ],
+      "basis": "rules"
+    },
+    "customer_type": {
+      "value": "b2c",
+      "basis": "rules"
+    },
+    "revenue_model": {
+      "value": "one_off_sales",
+      "basis": "rules"
+    },
+    "country_code": {
+      "value": "EG",
+      "basis": "rules"
+    },
+    "languages": {
+      "value": [
+        "ar",
+        "en"
+      ],
+      "basis": "rules"
+    }
+  },
+  "followups": [],
+  "open_questions": [
+    "كم عدد الفريلانسرز في مصر؟"
+  ],
+  "product_check": {
+    "status": "allowed",
+    "categories": [],
+    "matched": []
+  },
+  "budget": {
+    "min": 5000,
+    "max": 5000,
+    "currency": "EGP",
+    "currency_source": "stated"
+  },
+  "_note": "Rehearsal brief 1 (fictional persona): Arabic template pack for Egyptian freelancers. Expected: go or repeat."
+}

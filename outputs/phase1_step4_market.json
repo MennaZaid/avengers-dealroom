@@ -1,0 +1,212 @@
+{
+ "segment": "Everyone",
+ "geography": "unknown",
+ "beachhead": "Everyone",
+ "competitors": [
+  {
+   "name": "Kindroid: Your Personal AI",
+   "url": "https://apps.apple.com/us/app/kindroid-your-personal-ai/id6451038161",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C3",
+   "signal": "rating_count 11202",
+   "source_id": "D-001"
+  },
+  {
+   "name": "NextGen AI Chat Assistant",
+   "url": "https://apps.apple.com/us/app/nextgen-ai-chat-assistant/id6738577014",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C4",
+   "signal": "rating_count 4303",
+   "source_id": "D-001"
+  },
+  {
+   "name": "Shapes, Inc. - AI with friends",
+   "url": "https://apps.apple.com/us/app/shapes-inc-ai-with-friends/id6747601762",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C5",
+   "signal": "rating_count 2638",
+   "source_id": "D-001"
+  },
+  {
+   "name": "Neural - AI Chatbot Assistant",
+   "url": "https://apps.apple.com/us/app/neural-ai-chatbot-assistant/id6447312365",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C6",
+   "signal": "rating_count 254",
+   "source_id": "D-001"
+  },
+  {
+   "name": "Replika - AI Companion Chat",
+   "url": "https://apps.apple.com/us/app/replika-ai-companion-chat/id1158555867",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C7",
+   "signal": "rating_count 227665",
+   "source_id": "D-001"
+  },
+  {
+   "name": "Chat Unlimited & Ask Brutus AI",
+   "url": "https://apps.apple.com/us/app/chat-unlimited-ask-brutus-ai/id6443925235",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C8",
+   "signal": "rating_count 1119",
+   "source_id": "D-001"
+  },
+  {
+   "name": "Openchat: AI Chatbot Copilot",
+   "url": "https://apps.apple.com/us/app/openchat-ai-chatbot-copilot/id6448482829",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C9",
+   "signal": "rating_count 4582",
+   "source_id": "D-001"
+  },
+  {
+   "name": "GroupMe",
+   "url": "https://apps.apple.com/us/app/groupme/id392796698",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C10",
+   "signal": "rating_count 1559195",
+   "source_id": "D-001"
+  },
+  {
+   "name": "ChatGPT",
+   "url": "https://apps.apple.com/us/app/chatgpt/id6448311069",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C11",
+   "signal": "rating_count 12310102",
+   "source_id": "D-001"
+  },
+  {
+   "name": "ChatSpace - Chat, Talk & Fun",
+   "url": "https://apps.apple.com/us/app/chatspace-chat-talk-fun/id6443834097",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C12",
+   "signal": "rating_count 4131",
+   "source_id": "D-001"
+  },
+  {
+   "name": "Google Chat",
+   "url": "https://apps.apple.com/us/app/google-chat/id1163852619",
+   "kind": "direct",
+   "price": "Free",
+   "pricing_model": "free",
+   "price_claim_id": "C13",
+   "signal": "rating_count 307555",
+   "source_id": "D-001"
+  },
+  {
+   "name": "ChatGPT",
+   "url": "https://searchengineland.com/guide/chatgpt-alternatives",
+   "kind": "direct",
+   "price": null,
+   "pricing_model": null,
+   "price_claim_id": null,
+   "signal": "found online",
+   "source_id": null
+  },
+  {
+   "name": "Gemini",
+   "url": "https://toolzin.com/alternatives/gemini/",
+   "kind": "direct",
+   "price": null,
+   "pricing_model": null,
+   "price_claim_id": null,
+   "signal": "found online",
+   "source_id": null
+  },
+  {
+   "name": "Claude",
+   "url": "https://latenode.com/blog/claude-alternatives",
+   "kind": "direct",
+   "price": null,
+   "pricing_model": null,
+   "price_claim_id": null,
+   "signal": "found online",
+   "source_id": null
+  },
+  {
+   "name": "Meta AI",
+   "url": "https://alternativeto.net/software/meta-ai/",
+   "kind": "direct",
+   "price": null,
+   "pricing_model": null,
+   "price_claim_id": null,
+   "signal": "found online",
+   "source_id": null
+  }
+ ],
+ "inputs": [
+  {
+   "name": "target customers",
+   "low": null,
+   "high": null,
+   "unit": "customers",
+   "claim_id": null,
+   "basis": "ASSUMPTION",
+   "note": "no sourced count of the target customers found: ASSUMPTION needed"
+  },
+  {
+   "name": "price per customer per year",
+   "low": null,
+   "high": null,
+   "unit": "?/year",
+   "claim_id": null,
+   "basis": "ASSUMPTION",
+   "note": "no sourced paid price found: ASSUMPTION needed"
+  },
+  {
+   "name": "share online (internet users)",
+   "low": null,
+   "high": null,
+   "unit": "share",
+   "claim_id": null,
+   "basis": "ASSUMPTION",
+   "note": "no internet-use figure for the country"
+  },
+  {
+   "name": "obtainable share (first years)",
+   "low": 0.01,
+   "high": 0.05,
+   "unit": "share",
+   "claim_id": null,
+   "basis": "ASSUMPTION",
+   "note": "ASSUMPTION: 1-5% of the reachable market in the first years"
+  }
+ ],
+ "formula": "TAM = target customers x price per year; SAM = TAM x share online; SOM = SAM x obtainable share",
+ "tam": [
+  null,
+  null
+ ],
+ "sam": [
+  null,
+  null
+ ],
+ "som": [
+  null,
+  null
+ ],
+ "currency": "?",
+ "notes": [
+  "TAM/SAM/SOM stay unknown until every input is sourced; collect the missing inputs above."
+ ]
+}

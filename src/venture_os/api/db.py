@@ -13,7 +13,7 @@ from psycopg.rows import dict_row
 
 from venture_os.config import Settings
 
-Role = Literal["vos_app", "vos_admin"]
+Role = Literal["vos_app", "vos_admin", "vos_agent"]  # vos_agent: research agents (write evidence only)
 
 
 @contextmanager

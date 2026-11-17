@@ -1,0 +1,228 @@
+"""Stage runs, founder decisions and founder-entered interviews. Runs under the vos_app database role.
+
+- POST /stages/{stage}/runs: the entry check (gates.py, plain code) must pass. Discover saves its plan at once
+  and runs the agents in the background (orchestrator.py); poll GET /stages/runs/{id}.
+- POST /stages/runs/{id}/decision: the ONLY way past a gate (approval.py). Founder-authenticated: the header
+  X-Founder-Session must be the onboarding session that confirmed this brief. A model has no such session.
+- POST /stages/discover/interviews: the founder's Mom Test notes (stored as written, tagged by rules); the gate
+  is re-evaluated with them.
+"""
+
+from datetime import date
+from uuid import UUID
+
+from fastapi import APIRouter, BackgroundTasks, Header, HTTPException
+from psycopg.types.json import Jsonb
+from pydantic import BaseModel, Field
+
+from venture_os import approval, discover_report, gates, orchestrator
+from venture_os.agents import research_planner
+from venture_os.agents.interview_designer import tag_interview
+from venture_os.api.db import connect
+from venture_os.api.onboarding import get_brief
+from venture_os.api.registry import list_sources
+from venture_os.evidence.store import EvidenceStore
+
+router = APIRouter(prefix="/stages", tags=["stages"])
+
+RUN_COLS = "id, brief_id, brief_version, stage, status, output, created_at, updated_at"
+IMPLEMENTED = {"discover"}
+
+
+class RunIn(BaseModel):
+    brief_id: UUID
+
+
+class DecisionIn(BaseModel):
+    decision: gates.Decision          # approve=go, revise=repeat, pivot, reject=stop, waive
+    note: str = Field("", max_length=2000)
+    pivot_to: str | None = Field(None, max_length=40)        # idea id (I1, I2, ...) or "onboarding"
+    waiver_reason: str | None = Field(None, max_length=2000)
+
+
+class InterviewIn(BaseModel):
+    brief_id: UUID
+    person: str = Field(min_length=2, max_length=200)
+    held_on: date | None = None
+    notes: str = Field(min_length=5, max_length=10000)
+    describes_problem: bool = True
+
+
+def toolbox_factory():
+    """Real search/fetch/APIs/store. Tests replace this with offline fakes."""
+    return orchestrator.LiveToolbox(), EvidenceStore()
+
+
+def plan_for(brief: dict) -> research_planner.ResearchPlan:
+    cc = (brief.get("tags", {}).get("country_code") or {}).get("value")
+    cc = cc if isinstance(cc, str) and cc != "unknown" else None
+    sources = list_sources(country=cc, tier=None, use=None, include_inactive=False,
+                           product_scope="digital,any")  # = GET /registry/sources?product_scope=digital,any
+    return research_planner.build_plan(brief, sources)
+
+
+def _latest_version(conn, brief_id) -> int | None:
+    if not conn.execute("SELECT 1 FROM briefs WHERE id = %s", (brief_id,)).fetchone():
+        raise HTTPException(404, "brief not found")
+    return conn.execute("SELECT max(version) AS v FROM brief_versions WHERE brief_id = %s",
+                        (brief_id,)).fetchone()["v"]
+
+
+def _with_state(conn, runs: list[dict]) -> list[dict]:
+    """Add `stale` and the decision log to each run."""
+    if not runs:
+        return runs
+    latest, decisions = {}, {r["id"]: [] for r in runs}
+    for row in conn.execute(
+        "SELECT stage_run_id, decision, note, pivot_to, waiver_reason, actor, created_at FROM stage_decisions "
+        "WHERE stage_run_id = ANY(%s) ORDER BY id", ([r["id"] for r in runs],)
+    ).fetchall():
+        decisions[row.pop("stage_run_id")].append(row)
+    for r in runs:
+        if r["brief_id"] not in latest:
+            latest[r["brief_id"]] = conn.execute(
+                "SELECT max(version) AS v FROM brief_versions WHERE brief_id = %s", (r["brief_id"],)).fetchone()["v"]
+        r["latest_brief_version"] = latest[r["brief_id"]]
+        r["stale"] = gates.is_stale(r["brief_version"], r["latest_brief_version"])
+        r["decisions"] = decisions[r["id"]]
+    return runs
+
+
+def _research(run_id: str, plan: research_planner.ResearchPlan, brief: dict) -> None:
+    toolbox, store = toolbox_factory()
+    orchestrator.run_discover(run_id, plan, brief, toolbox, store)
+
+
+@router.get("/briefs")
+def list_briefs():
+    """Confirmed briefs (latest version of each), newest first, for picking one in the UI."""
+    with connect("vos_app") as conn:
+        return conn.execute(
+            "SELECT * FROM (SELECT DISTINCT ON (brief_id) brief_id, version, fields->'idea'->>'value' AS idea, "
+            "tags->'country_code'->>'value' AS country_code, created_at FROM brief_versions "
+            "ORDER BY brief_id, version DESC) b ORDER BY created_at DESC"
+        ).fetchall()
+
+
+@router.post("/{stage}/runs", status_code=201)
+def start_run(stage: gates.Stage, body: RunIn, background: BackgroundTasks):
+    with connect("vos_app") as conn:
+        latest = _latest_version(conn, body.brief_id)
+        runs = conn.execute("SELECT stage, brief_version, status FROM stage_runs WHERE brief_id = %s",
+                            (body.brief_id,)).fetchall()
+        try:
+            gates.entry_check(stage, latest, [gates.RunView(**r) for r in runs])
+        except gates.GateRefused as e:
+            raise HTTPException(403, str(e)) from e
+    if stage not in IMPLEMENTED:
+        raise HTTPException(501, f"entry check passed, but the {stage} workflow is not built yet")
+    brief = get_brief(body.brief_id)  # the onboarding contract: latest confirmed version
+    if (brief.get("product_check") or {}).get("status") == "excluded":
+        raise HTTPException(403, "excluded product (not a digital product the system may build): the pipeline "
+                                 "stops here; reshape the idea in onboarding")
+    try:
+        plan = plan_for(brief)
+        output, status = {"plan": plan.model_dump(), "research": {"status": "queued", "trace": []}}, "running"
+    except Exception as e:  # noqa: BLE001 - a failed run is recorded, not hidden
+        plan, output, status = None, {"error": f"{type(e).__name__}: {e}"}, "failed"
+    with connect("vos_app") as conn:
+        run = conn.execute(
+            f"INSERT INTO stage_runs (brief_id, brief_version, stage, status, output) VALUES (%s,%s,%s,%s,%s) "
+            f"RETURNING {RUN_COLS}", (body.brief_id, brief["version"], stage, status, Jsonb(output))).fetchone()
+        out = _with_state(conn, [run])[0]
+    if plan is not None:
+        background.add_task(_research, str(run["id"]), plan, brief)
+    return out
+
+
+@router.get("/runs")
+def list_runs(brief_id: UUID, stage: gates.Stage | None = None):
+    with connect("vos_app") as conn:
+        _latest_version(conn, brief_id)
+        sql, args = f"SELECT {RUN_COLS} FROM stage_runs WHERE brief_id = %s", [brief_id]
+        if stage:
+            sql += " AND stage = %s"
+            args.append(stage)
+        return _with_state(conn, conn.execute(sql + " ORDER BY created_at DESC", args).fetchall())
+
+
+@router.get("/runs/{run_id}")
+def get_run(run_id: UUID):
+    with connect("vos_app") as conn:
+        run = conn.execute(f"SELECT {RUN_COLS} FROM stage_runs WHERE id = %s", (run_id,)).fetchone()
+        if not run:
+            raise HTTPException(404, "run not found")
+        return _with_state(conn, [run])[0]
+
+
+@router.get("/runs/{run_id}/claims")
+def run_claims(run_id: UUID):
+    """The run's claims as stored in Postgres, each joined to its stored document."""
+    with connect("vos_app") as conn:
+        return conn.execute(
+            "SELECT c.id, c.topic, c.agent, c.text, c.type, c.quote, c.language, c.flags, c.extracted_by, "
+            "d.url, d.title, d.published_at, d.retrieved_at, d.source_id FROM claims c "
+            "LEFT JOIN documents d ON d.id = c.document_id WHERE c.stage_run_id = %s ORDER BY c.topic, c.created_at",
+            (run_id,)).fetchall()
+
+
+@router.post("/runs/{run_id}/decision")
+def decide(run_id: UUID, body: DecisionIn, x_founder_session: str | None = Header(None)):
+    """The founder's decision at a gate: approve (go), revise (repeat), pivot (to an idea), reject (stop), or
+    waive (go despite missing interviews, reason required)."""
+    with connect("vos_app") as conn:
+        run = conn.execute(f"SELECT {RUN_COLS} FROM stage_runs WHERE id = %s FOR UPDATE", (run_id,)).fetchone()
+        if not run:
+            raise HTTPException(404, "run not found")
+        if not approval.founder_owns_brief(conn, run["brief_id"], x_founder_session):
+            raise HTTPException(401, "only the founder can decide: send the onboarding session that confirmed "
+                                     "this brief as X-Founder-Session")
+        try:
+            approval.record_decision(conn, run, body.decision, body.note, actor=approval.FOUNDER,
+                                     pivot_to=body.pivot_to, waiver_reason=body.waiver_reason)
+        except gates.GateRefused as e:
+            raise HTTPException(409, str(e)) from e
+        out = _with_state(conn, [conn.execute(f"SELECT {RUN_COLS} FROM stage_runs WHERE id = %s",
+                                              (run_id,)).fetchone()])[0]
+    if out["stage"] == "discover":
+        research = (out.get("output") or {}).get("research") or {}
+        discover_report.write_gate(str(run_id), research, {
+            "decision": body.decision, "outcome": gates.OUTCOME[body.decision], "note": body.note,
+            "pivot_to": body.pivot_to, "waiver_reason": body.waiver_reason})
+    return out
+
+
+@router.post("/discover/interviews", status_code=201)
+def add_interview(body: InterviewIn, x_founder_session: str | None = Header(None)):
+    """Store one founder-entered interview exactly as written, tag its lines by rules, and re-evaluate the gate
+    of the brief's latest Discover run."""
+    with connect("vos_app") as conn:
+        if not approval.founder_owns_brief(conn, body.brief_id, x_founder_session):
+            raise HTTPException(401, "only the founder can enter interviews (X-Founder-Session)")
+        tagged = [n.model_dump() for n in tag_interview(body.notes)]
+        row = conn.execute(
+            "INSERT INTO discover_interviews (brief_id, person, held_on, notes, tagged, describes_problem) "
+            "VALUES (%s,%s,%s,%s,%s,%s) RETURNING id, person, held_on, tagged, describes_problem, created_at",
+            (body.brief_id, body.person, body.held_on, body.notes, Jsonb(tagged), body.describes_problem)).fetchone()
+        run = conn.execute(f"SELECT {RUN_COLS} FROM stage_runs WHERE brief_id = %s AND stage = 'discover' "
+                           "ORDER BY created_at DESC LIMIT 1", (body.brief_id,)).fetchone()
+    regated = _regate(run) if run and run["status"] in ("awaiting_approval", "revision_requested") else None
+    return {"interview": row, "noise": [n for n in tagged if not n["counts"]],
+            "gate": regated["gate"] if regated else None}
+
+
+@router.get("/discover/interviews")
+def list_interviews(brief_id: UUID):
+    with connect("vos_app") as conn:
+        return conn.execute("SELECT id, person, held_on, notes, tagged, describes_problem, type, created_at "
+                            "FROM discover_interviews WHERE brief_id = %s ORDER BY created_at", (brief_id,)).fetchall()
+
+
+def _regate(run: dict) -> dict:
+    store = EvidenceStore()
+    result = orchestrator.regate(run, store.interviews(str(run["brief_id"])))
+    output = run["output"]
+    output["research"].update(gate=result["gate"], interviews=result["interviews"])
+    store.update_run(run["id"], output)
+    discover_report.write_gate(str(run["id"]), output["research"])
+    return result

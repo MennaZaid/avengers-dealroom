@@ -1,0 +1,62 @@
+{
+ "brief_id": "0e90137e-445c-43f1-abd4-d8849517daf7",
+ "version": 1,
+ "required": {
+  "idea": "A generic AI chatbot app for everyone",
+  "skills": "I post on social media sometimes",
+  "budget": "0 USD",
+  "time_available": "2 hours a week for 2 months",
+  "target_market": "Everyone",
+  "values": null
+ },
+ "unknown": [
+  "values"
+ ],
+ "optional": {
+  "problem": "People want to chat with AI",
+  "supply_side": null,
+  "business_model": "monthly subscription",
+  "known_competitors": "ChatGPT, Gemini, Claude, Copilot, Meta AI",
+  "technical_preferences": "mobile app"
+ },
+ "tags": {
+  "languages": {
+   "basis": "rules",
+   "value": [
+    "en"
+   ]
+  },
+  "industries": {
+   "basis": "rules",
+   "value": [
+    "software_saas"
+   ]
+  },
+  "country_code": {
+   "basis": "rules",
+   "value": "unknown"
+  },
+  "customer_type": {
+   "basis": "rules",
+   "value": "b2c"
+  },
+  "revenue_model": {
+   "basis": "rules",
+   "value": "subscription"
+  }
+ },
+ "budget_parsed": {
+  "max": 0,
+  "min": 0,
+  "currency": "USD",
+  "currency_source": "stated"
+ },
+ "product_type": {
+  "label": "mobile_app",
+  "group": "digital_product",
+  "trigger": "keyword 'mobile app'",
+  "decided_by": "rules",
+  "clarifying_question": null
+ },
+ "open_questions": []
+}
