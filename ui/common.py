@@ -156,3 +156,27 @@ def api(method: str, path: str, **kw) -> dict | list:
         detail = r.json().get("detail", r.text) if "json" in r.headers.get("content-type", "") else r.text
         raise RuntimeError(detail)
     return r.json()
+
+
+def founder_approval(brief_id: str, action: str, content: str | bytes, session_id: str, key: str = "") -> bool:
+    """Show the SHA-256 of the exact draft/payload and an Approve button for the founder.
+    action: publish_landing_page | create_order | refund_order. Returns True if this exact content is approved.
+    Changing even one character of the content gives a new hash, which needs a new approval."""
+    import hashlib
+
+    digest = hashlib.sha256(content.encode("utf-8") if isinstance(content, str) else content).hexdigest()
+    approved = api("GET", "/stages/approvals/check",
+                   params={"brief_id": brief_id, "action": action, "content_hash": digest})["approved"]
+    st.caption(f"{action} · SHA-256 `{digest[:16]}…`")
+    if approved:
+        st.success("Approved by you: this exact content.")
+        return True
+    if st.button(f"Approve: {action.replace('_', ' ')}", key=f"approve-{action}-{key}-{digest[:8]}",
+                 disabled=not session_id):
+        try:
+            api("POST", "/stages/approvals", headers={"X-Founder-Session": session_id},
+                json={"brief_id": brief_id, "action": action, "content_hash": digest})
+            st.rerun()
+        except RuntimeError as e:
+            st.error(str(e))
+    return False

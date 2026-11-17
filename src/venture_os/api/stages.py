@@ -9,6 +9,10 @@
   stores the gate and every phase3_* file in the run, and waits for the founder's one decision.
 - POST /stages/discover/interviews: the founder's Mom Test notes (stored as written, tagged by rules); the gate
   is re-evaluated with them.
+- POST /stages/approvals: the founder approves one exact draft/payload (publish_landing_page, create_order,
+  refund_order) from the UI; GET /stages/approvals/check tells a caller whether that exact content is approved.
+- POST /stages/validate/demand: the founder enters the waitlist sign-ups (or "not run yet"); the demand gate
+  (agents/demand_test.py) recommends go / repeat / pivot / stop and writes phase2_gate_demand.md.
 """
 
 from datetime import date
@@ -41,6 +45,18 @@ class DecisionIn(BaseModel):
     note: str = Field("", max_length=2000)
     pivot_to: str | None = Field(None, max_length=40)        # idea id (I1, I2, ...) or "onboarding"
     waiver_reason: str | None = Field(None, max_length=2000)
+
+
+class ApprovalIn(BaseModel):
+    brief_id: UUID
+    action: approval.Action
+    content_hash: str = Field(pattern=r"^[0-9a-f]{64}$")   # SHA-256 of the exact draft or payload
+
+
+class DemandIn(BaseModel):
+    brief_id: UUID
+    count: int | None = Field(None, ge=0)     # None = the founder has not run the test
+    days_elapsed: int = Field(ge=0)
 
 
 class InterviewIn(BaseModel):
@@ -270,3 +286,34 @@ def _regate(run: dict) -> dict:
     store.update_run(run["id"], output)
     discover_report.write_gate(str(run["id"]), output["research"])
     return result
+
+
+@router.post("/approvals", status_code=201)
+def approve_content(body: ApprovalIn, x_founder_session: str | None = Header(None)):
+    """The founder approves exactly this content for one outward action (UI channel)."""
+    with connect("vos_app") as conn:
+        try:
+            return approval.record_founder_approval(body.brief_id, body.action, body.content_hash,
+                                                    session_id=x_founder_session or "", channel="ui", conn=conn)
+        except PermissionError as e:
+            raise HTTPException(401, str(e)) from e
+
+
+@router.get("/approvals/check")
+def check_approval(brief_id: UUID, action: str, content_hash: str):
+    return {"approved": approval.has_founder_approval(brief_id, action, content_hash)}
+
+
+@router.post("/validate/demand")
+def enter_demand(body: DemandIn, x_founder_session: str | None = Header(None)):
+    """The founder's waitlist count goes to the demand gate. The count is never generated."""
+    with connect("vos_app") as conn:
+        if not approval.founder_owns_brief(conn, body.brief_id, x_founder_session):
+            raise HTTPException(401, "only the founder can enter the sign-up count (X-Founder-Session)")
+    try:
+        from venture_os.agents.demand_test import enter_signups
+    except ImportError as e:
+        raise HTTPException(501, "the Phase 2 demand test (agents/demand_test.py) is not on this branch yet") from e
+    d = enter_signups(str(body.brief_id), body.count, body.days_elapsed)
+    return {"outcome": d.outcome, "reason": d.reason,
+            **{k: getattr(d, k, None) for k in ("metric", "target", "actual", "mocked", "rule")}}

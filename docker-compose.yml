@@ -1,6 +1,7 @@
-# One-command setup: `docker compose up`, then open http://localhost:8501
-# No keys needed: the default model is open-weight and runs locally in the `ollama` service ($0 per run).
-# Optional: put a free hosted OpenAI-compatible endpoint in .env (LLM_BASE_URL, LLM_API_KEY, LLM_MODEL_*).
+# One-command setup: `docker compose up`, then open http://localhost:8501 (the UI prints the URL when ready).
+# No .env and no keys needed: the open-weight model qwen3:4b-instruct runs locally in the `ollama` service ($0).
+# The app starts without waiting for the model download; until the model is ready every agent uses its
+# rule-based fallback. Optional settings (host ports, a free hosted endpoint): see .env.example.
 name: venture-os
 
 x-app: &app
@@ -9,6 +10,7 @@ x-app: &app
   environment: &app-env
     DATABASE_URL: postgresql://venture:venture@db:5432/venture_os
     SEARXNG_URL: http://searxng:8080
+    PROMPTS_DIR: /app/prompts
     LLM_MODE: ${LLM_MODE:-live}
     LLM_BASE_URL: ${LLM_BASE_URL:-http://ollama:11434/v1}
     LLM_API_KEY: ${LLM_API_KEY:-ollama}
@@ -17,6 +19,7 @@ x-app: &app
     LLM_REASONING_EFFORT: ${LLM_REASONING_EFFORT-none}
     LLM_MODEL_CODE: ${LLM_MODEL_CODE:-}
     LLM_MODEL_JUDGE: ${LLM_MODEL_JUDGE:-}
+    LLM_PRICE_PER_1M_TOKENS: ${LLM_PRICE_PER_1M_TOKENS:-0}
     ADMIN_TOKEN: ${ADMIN_TOKEN:-}
     # Embeddings for the evidence/corpus search (hybrid keyword + vector), served by the same Ollama.
     EMBED_URL: http://ollama:11434
@@ -29,7 +32,7 @@ services:
       POSTGRES_USER: venture
       POSTGRES_PASSWORD: venture
       POSTGRES_DB: venture_os
-    ports: ["5432:5432"]
+    ports: ["${DB_PORT:-5432}:5432"]
     volumes: [pgdata:/var/lib/postgresql/data]
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U venture -d venture_os"]
@@ -37,7 +40,7 @@ services:
       timeout: 3s
       retries: 30
 
-  # One-off: create the schema and load the source registry + tech catalog (safe to re-run).
+  # One-off: create the schema and load the source registry + tech catalog (safe to re-run; migrates columns).
   seed:
     <<: *app
     command: ["python", "db/seed.py"]
@@ -47,7 +50,7 @@ services:
 
   ollama:
     image: ollama/ollama:0.40.16
-    ports: ["11434:11434"]
+    ports: ["${OLLAMA_PORT:-11434}:11434"]
     volumes: [ollama:/root/.ollama]
     healthcheck:
       test: ["CMD", "ollama", "list"]
@@ -55,31 +58,37 @@ services:
       timeout: 5s
       retries: 30
 
-  # One-off: download the open-weight model and the embedding model once (cached in the `ollama` volume).
+  # One-off: download the open-weight model and the embedding model once (cached in the `ollama` volume), then
+  # warm the chat model with a tiny request so the first founder message is not slow. Nothing waits for this:
+  # the app works (rule-based) until it finishes.
   ollama-pull:
     image: ollama/ollama:0.40.16
     environment:
       OLLAMA_HOST: http://ollama:11434
-    entrypoint: ["sh", "-c", "ollama pull ${OLLAMA_MODEL:-qwen3:4b-instruct} && ollama pull ${EMBED_MODEL:-bge-m3}"]
+      MODEL: ${OLLAMA_MODEL:-qwen3:4b-instruct}
+      EMBED: ${EMBED_MODEL:-bge-m3}
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["ollama pull \"$$MODEL\" && ollama pull \"$$EMBED\" && ollama run \"$$MODEL\" 'Reply with OK.' > /dev/null && echo \"model $$MODEL ready\""]
     restart: "no"
     depends_on:
       ollama: {condition: service_healthy}
 
   searxng:
     image: searxng/searxng:2026.11.13-219b63b20
-    ports: ["8080:8080"]
+    ports: ["${SEARXNG_PORT:-8080}:8080"]
     volumes: ["./config/searxng:/etc/searxng"]
 
   api:
     <<: *app
     command: ["uvicorn", "venture_os.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
-    ports: ["8010:8000"]
-    # The demo run's decision_log.json and outputs/ land in the repo (they are committed).
+    ports: ["${API_PORT:-8010}:8000"]
+    # The demo run's decision_log.json, outputs/ and data/ land in the repo folder (log and outputs are committed).
     volumes: [".:/workspace"]
     environment:
       <<: *app-env
       DECISION_LOG_PATH: /workspace/decision_log.json
       OUTPUTS_DIR: /workspace/outputs
+      DATA_DIR: /workspace/data
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
       interval: 5s
@@ -87,17 +96,18 @@ services:
       retries: 30
     depends_on:
       seed: {condition: service_completed_successfully}
-      ollama-pull: {condition: service_completed_successfully}
+      ollama: {condition: service_healthy}
       searxng: {condition: service_started}
 
   ui:
     <<: *app
-    command: ["streamlit", "run", "ui/app.py", "--server.port", "8501", "--server.address", "0.0.0.0",
-              "--server.headless", "true", "--browser.gatherUsageStats", "false"]
+    entrypoint: ["/bin/sh", "-c"]
+    command: ["echo \"Venture OS is ready: open http://localhost:$$UI_HOST_PORT\" && exec streamlit run ui/app.py --server.port 8501 --server.address 0.0.0.0 --server.headless true --browser.gatherUsageStats false"]
     environment:
       <<: *app-env
       API_URL: http://api:8000
-    ports: ["8501:8501"]
+      UI_HOST_PORT: ${UI_PORT:-8501}
+    ports: ["${UI_PORT:-8501}:8501"]
     depends_on:
       api: {condition: service_healthy}
 

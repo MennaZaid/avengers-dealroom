@@ -103,13 +103,22 @@ flowchart LR
 - **Output:** `phase1_step1_brief`, `phase1_step2_opportunities`, `phase1_step3_idea_scores`, `phase1_step4_market`,
   `phase1_step5_interview_plan` and `phase1_gate_decision` (`.md` + `.json` each).
 
-### Phase 2: Validate — in progress (core step: design the business)
+### Phase 2: Validate (core step: Design the business) — Working
 
-- **Agents:** business designer (`agents/business_designer.py`).
-- **Tools:** the phase-1 evidence store, guardrails on every generated text.
-- **Method:** a Lean Canvas built only from evidenced pains; a landing-page draft with a pre-set waitlist target
-  (e.g. 100 sign-ups in 14 days). Sign-up counts are entered by the founder or `MOCKED`, never invented.
-- **Output:** `phase2_step1_lean_canvas.md`, `phase2_step2_landing_page.html`, `phase2_gate_decision.md`.
+- **Agents:** `business_designer.py` (Lean Canvas), `landing_page.py` (draft page), `demand_test.py` (result +
+  gate). **Tools:** confirmed brief, Phase 1 evidence items (`evidence.load`), `gates.plan_demand_test` /
+  `demand_gate`, guardrails. Model optional (`prompts/business_designer.md`, `prompts/landing_page.md`).
+- **Method:**
+  1. *Lean Canvas:* 9 boxes; every entry is FOUNDER (quoted brief field), EVIDENCED (evidence id + URL + date),
+     ASSUMPTION, or UNKNOWN (never filled in). A model-cited evidence id that does not exist becomes ASSUMPTION;
+     income statements are dropped. Names the riskiest assumption.
+  2. *Demand test declared first:* target 100 waitlist sign-ups in 14 days is fixed before the page exists.
+  3. *Landing page:* one self-contained HTML file (no external URLs), email-only waitlist that sends nothing,
+     banner "DRAFT — not published (MOCKED)"; copy is checked for testimonials, user counts, countdowns, scarcity
+     and income claims. Publishing needs the founder's approval of the exact draft hash and is MOCKED.
+  4. *Result:* the sign-up count is entered by the founder ("founder-reported, not verified"); never generated.
+- **Output:** `phase2_step1_lean_canvas.md`, `phase2_step2_demand_test_plan.md`, `phase2_step2_landing_page.html`,
+  `phase2_gate_demand.md`; evidence items for Phase 3 (riskiest assumption, demand result, gate outcome).
 
 ### Phase 3: Build — Working (core step: build the product)
 
@@ -127,27 +136,31 @@ collected at the start and the founder approves once, at the build gate.
 - **Output:** `phase3_step1_build_inputs.md` … `phase3_step5_mvp.html` … `phase3_step8_evidence_summary.md`,
   `phase3_gate_build.md`. Live on CPU with `qwen3:4b-instruct`: about 6 minutes per run.
 
-### Phase 4: Commercial setup — STUBBED
+### Phase 4: Commercial setup (core step: Set the price and policies) — STUBBED
 
-- **Agents:** pricing, policies.
-- **Method:** price hypotheses from sourced competitor prices; draft terms, privacy and refund policies labelled
-  as drafts that need local professional review. Country rules come only from official sources, or the output
-  says no verified source exists.
-- **Output:** `phase4_step1_pricing.md`, `phase4_step2_policies.md` (labelled `STUBBED`).
+- **Agents:** `pricing.py`, `policies.py`. **Tools:** brief, evidence items with competitor prices.
+- **Method:** price hypotheses where each price is the founder's stated model, a sourced competitor price, or
+  ASSUMPTION; no income or sales forecast. Draft terms, privacy and refund policy headed "DRAFT, not legal advice;
+  have it reviewed"; the refund policy describes what `refunds.py` does (founder approves, access revoked).
+  No payments of any kind.
+- **Output:** `phase4_step1_pricing.md`, `phase4_step2_policies.md`, `phase4_gate_pricing.md`,
+  `phase4_gate_policies.md`.
 
-### Phase 5: Sell, deliver, get paid — MOCKED
+### Phase 5: Launch (core steps: Open the store; deliver automatically) — STUBBED / MOCKED
 
-- **Agents:** launch planner, delivery (`delivery.py`).
-- **Method:** a store page draft and launch posts as drafts only; checkout is mocked (no payments of any kind); see
-  [Sale to cash](#sale-to-cash).
-- **Output:** `phase5_step1_store_page.md`, `outputs/payment_test_log.md` (labelled `MOCKED`).
+- **Agents:** `launch.py`; delivery is `delivery.py`. **Tools:** brief, the sale-to-cash mocks.
+- **Method:** a store page draft and 3 launch post drafts with no urgency, reviews or user counts. Posting a draft
+  needs the founder's approval of that exact text and is MOCKED. Delivery is automatic after a (mock) payment and
+  happens once per order.
+- **Output:** `phase5_step1_store_page.md`, `phase5_step2_launch_posts.md`, `phase5_gate_launch.md`,
+  `payment_test_log.md` (from `scripts/payment_test.py`).
 
 ### Phase 6: Operate and learn — STUBBED
 
-- **Agents:** learning reporter.
-- **Method:** compare real metrics with the targets set at the gates; recommend persevere or pivot; send new
-  evidence back to Discover and mark earlier gate decisions as stale when they no longer hold.
-- **Output:** `phase6_step1_persevere_or_pivot.md` (labelled `STUBBED`).
+- **Agent:** `operator.py`. **Tools:** `decision_log.json` and `outputs/` only.
+- **Method:** a persevere-or-pivot memo built only from logged results (gate outcomes, the founder's sign-up count,
+  the payment test); a metric without data says "no data yet"; support and analytics are STUBBED.
+- **Output:** `phase6_step1_pivot_memo.md`, `phase6_gate_operate.md`.
 
 ## Gates
 
@@ -161,12 +174,14 @@ starts only if the previous gate passed **for the same brief version**; editing 
 | 1 Evidence (built) | Claims with a real source URL after research | 0 sourced -> stop; fewer than 5 -> repeat; otherwise go |
 | 1 Discover (built) | Thresholds from `config/gates/discover.yaml`, logged before research: ≥ 5 pain claims with quotes from ≥ 3 domains, ≥ 2 competitors with sourced prices, a top idea scoring ≥ 3.0 with every fit criterion ≥ 2, ≥ 5 founder interviews with ≥ 3 showing past behaviour | stop if: excluded product, zero sourced pain, no idea fits the founder's budget and time, or ≥ 8 free alternatives with nothing that differentiates. Pivot if the starting idea fails but an alternative passes. Go if every check passes; otherwise repeat, listing what to collect. The founder may waive only the interview checks, with a written reason |
 | 2 Demand (built) | Waitlist sign-ups against a target **declared before the test** (e.g. 100 in 14 days); count entered by the founder or labelled MOCKED, never generated | target reached -> go; >= 50% -> repeat; >= 25% -> pivot; below 25% -> stop |
-| 3 Build | Core flow works; tests pass | go / repeat / stop |
-| 4 Commercial | Price and policies drafted; legal items sourced or marked "no verified source" | go / repeat |
-| 5 Sell | Mocked purchase, delivery and refund flows all pass | go / repeat |
+| 3 Build (built) | Build inputs (stop if Phase 2 said stop), plan validation, MVP QA checks | go / repeat / stop; the founder approves once |
+| 4 Pricing (stub) | A founder-stated or sourced price exists | go; none -> repeat; excluded -> stop |
+| 4 Policies (stub) | Terms, privacy and refund drafts present and labelled DRAFT, not legal advice | go / repeat |
+| 5 Launch (stub) | Drafts pass the guardrails; every external action needs its own founder approval | go |
+| 6 Operate (stub) | Logged gate outcomes and the founder's demand result | any stop -> stop; any pivot -> pivot; missing results -> repeat; all go -> go |
 
 Every gate decision is written to `outputs/phase<N>_gate_<name>.md` (`phase1_gate_product.md`,
-`phase1_gate_evidence.md`, `phase2_gate_demand.md`) and logged with its `outcome`, the target and the actual value.
+`phase1_gate_evidence.md`, `phase2_gate_demand.md`, `phase4_gate_pricing.md`, ...) and logged with its `outcome`, the target and the actual value.
 Thresholds are fixed in code; a demand target is frozen when the test is declared, so it cannot be lowered after a
 weak result (example: 12 of 100 sign-ups in 14 days -> **stop**). A gate only recommends: the founder approves,
 rejects or asks for a revision, and only approval moves on.
@@ -178,23 +193,24 @@ reasons; the founder can pivot (edit the brief) or stop.
 
 ## Sale to cash
 
-All of this is `MOCKED`: no payments of any kind, not even a sandbox. The system never holds, moves or refunds
-money by itself.
+All of it is **MOCKED**: no payment provider, no sandbox, no network, no money. State is a local JSON file.
 
 ```mermaid
 sequenceDiagram
-  participant C as Customer (test)
-  participant P as Payment provider (MOCKED)
-  participant W as Webhook handler
-  participant D as Delivery
-  participant R as Reconciliation
-  C->>P: checkout (order_id)
-  P->>W: payment_succeeded(order_id, event_id)
-  W->>W: event_id already processed? -> ignore (idempotency)
-  W->>D: grant access once per order_id
-  P->>W: refund_succeeded(order_id)
-  W->>D: revoke access
-  R->>R: match orders, payments, fees, payouts
+  participant F as Founder (approval.py)
+  participant P as payments.py
+  participant D as delivery.py
+  participant R as refunds.py
+  participant C as reconcile.py
+  F->>P: approve exact order (product, price, currency)
+  P->>P: create_order (refused without approval)
+  Note over P: mock event "succeeded" (event id)
+  P->>D: payment triggers delivery
+  D->>D: idempotency key = order id: grant access to phase3_step5_mvp.html once
+  Note over P,D: same event again -> no-op; deliver again -> no-op
+  F->>R: approve exact refund (order, amount)
+  R->>D: refund revokes access
+  C->>C: match orders, payments, fees (0), payouts (0); report each mismatch
 ```
 
 - **Payment triggers delivery:** only a confirmed payment event grants access.
@@ -203,6 +219,13 @@ sequenceDiagram
 - **Reconciliation:** orders, payments, fees and payouts are matched; mismatches are listed in
   `outputs/payment_test_log.md`.
 - The founder approves the price and turning on checkout; going live is outside the hackathon scope.
+- **Approval of the exact content (`approval.py`):**
+  - Publishing the landing page, creating an order and refunding an order each check
+    `has_founder_approval(brief_id, action, sha256)` first.
+  - The approval covers that exact draft or payload: changing one character needs a new approval.
+  - Only the founder records an approval: in the UI (founder session) or in the CLI by typing `approve`
+    (`python -m venture_os.approval`).
+  - The `founder_approvals` table refuses any other actor, channel or session, and agents can only read it.
 
 ## Data flow
 
@@ -229,26 +252,27 @@ flowchart TD
 
 | Part | Status |
 |---|---|
-| Onboarding chat, document reading, versioned brief | Working |
-| Guardrails (excluded products, refusals, output checks, redaction) | Working |
-| Source registry, catalog, source validator, registry API | Working |
-| Decision log and outputs writer | Working |
-| Gates (product, evidence, demand; thresholds fixed before the result) | Working |
-| Orchestrator, founder approval (decisions need the founder's session; the database accepts only actor `founder`) | Working |
+| Onboarding (brief, tags, follow-ups, versions, product check, guardrails) | Working |
+| Gates: product, evidence, demand | Working |
+| Decision log, outputs, prompts, token metering, cost report | Working |
 | Phase 1 Discover agents and gate | Working |
-| Phase 2 Validate agents | In progress |
+| Phase 2 Validate: Lean Canvas, demand test, demand gate | Working |
+| Phase 2 landing page | Working draft; publishing MOCKED |
 | Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
-| Phases 4, 6 agents | STUBBED (planned) |
-| Phase 5 payments, delivery, refunds, reconciliation | MOCKED (planned) |
-| One-command setup with a local open-weight model (Ollama) | In progress |
+| Phase 4 pricing and policies | STUBBED |
+| Phase 5 store page and launch posts | STUBBED; posting MOCKED |
+| Phase 6 persevere-or-pivot memo | STUBBED (support, analytics: no data yet) |
+| Payments, delivery, refunds, reconciliation | MOCKED |
+| `approval.py`: founder decisions at stage gates | Working |
+| Founder approval of single actions (publish page, post, order, refund, pass a phase 4-6 gate) | STUBBED: refused until `approval.py` can confirm an approval of that exact action |
 
-This table is updated as parts land on `main`; the README's "What works and what is mocked" table is the short
-version.
+The README table is the per-step status.
 
 ## Roadmap
 
-1. Phases 1-2 with gates, including a run that ends in STOP.
-2. `docker compose up` with a local open-weight model, so no key is needed.
-3. Phases 3-6 as labelled stubs, then real agents one phase at a time.
-4. Test-mode payments with idempotent delivery and reconciliation.
-5. More country packs for the registry and verified licences for every source.
+1. Founder approval of single actions in the UI (`approval.py`), so the mocked publish, post, order and
+   refund flows can run end to end.
+2. The orchestrator runs Phase 2 and Phases 4-6 after Discover and Build.
+3. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
+4. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
+5. More country source packs as reviewed YAML (`config/sources/`).
