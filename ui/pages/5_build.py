@@ -23,11 +23,9 @@ T = {
     "session": ("Your founder session (from the onboarding page; needed to decide)",
                 "جلسة المؤسس (من صفحة الإعداد؛ مطلوبة لاتخاذ القرار)"),
     "from_p1": ("From Phase 1 (Discover)", "من المرحلة 1 (الاكتشاف)"),
-    "p1_none": (("Build starts after you approve Phase 1 (Discover) for brief v{v}. Phase 2 (Validate) is not in the "
-                "pipeline yet, so Build follows Discover."),
-                ("يبدأ البناء بعد موافقتك على المرحلة 1 (الاكتشاف) للموجز النسخة {v}. المرحلة 2 (التحقق) ليست في "
-                "المسار بعد، لذا يأتي البناء بعد الاكتشاف.")),
-    "to_p1": ("Go to Phase 1 Discover →", "← الانتقال إلى المرحلة 1: الاكتشاف"),
+    "p1_none": ("Build starts after you approve Phase 2 (Validate) for brief v{v}.",
+                "يبدأ البناء بعد موافقتك على المرحلة 2 (التحقق) للموجز النسخة {v}."),
+    "to_p1": ("Go to the Pipeline page (Validate) →", "← الانتقال إلى صفحة المراحل (التحقق)"),
     "p1_rec": ("Discover recommended **{rec}**; you decided **{dec}**", "أوصى الاكتشاف بـ **{rec}**؛ وقرارك: **{dec}**"),
     "p1_claims": (("Discover findings carried into Build: {n} claims ({f} sourced facts). They appear as D1, D2… in "
                   "the build inputs."),
@@ -102,8 +100,10 @@ headers = {"X-Founder-Session": sid} if sid else {}
 discover = [r for r in api("GET", "/stages/runs", params={"brief_id": brief_id, "stage": "discover"})
             if r["brief_version"] == latest]
 approved = next((r for r in discover if r["status"] == "approved"), None)
+validated = any(r["brief_version"] == latest and r["status"] == "approved"
+                for r in api("GET", "/stages/runs", params={"brief_id": brief_id, "stage": "validate"}))
 st.subheader(t("from_p1"))
-if not approved:
+if not (approved and validated):
     st.info(t("p1_none", v=latest))
     st.page_link("pages/2_pipeline.py", label=t("to_p1"))
     st.stop()
