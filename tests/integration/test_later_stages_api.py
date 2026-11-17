@@ -76,3 +76,21 @@ def test_all_six_phases_run_in_order_with_one_founder_decision_each(client, make
     stages = {r["stage"]: r["status"] for r in client.get("/stages/runs", params={"brief_id": bid}).json()}
     assert stages == {"discover": "approved", "validate": "approved", "build": "approved",
                       "commercial": "approved", "launch": "approved", "operate": "rejected"}
+
+
+def test_the_real_phase5_and_phase6_entry_points_run_through_the_stages(client, make_brief):
+    """No stand-ins: launch_stage.run_launch_stage and operate_stage.run_operate_stage behind the stage API.
+    No test order or refund was approved by the founder, so no money step may have run."""
+    bid, sid = _approved(client, make_brief, "commercial")
+    _, launch = start(client, "launch", bid)
+    lo = launch["output"]["launch"]
+    assert launch["status"] == "awaiting_approval", lo.get("error")
+    assert lo["gate"]["phase"] == 5 and lo["gate"]["gate"] == "launch"
+    assert all(bid in text for name, text in lo["files"].items() if name.endswith(".md"))
+    assert decide(client, launch["id"], "approve", sid).json()["status"] == "approved"
+    _, operate = start(client, "operate", bid)
+    oo = operate["output"]["operate"]
+    assert operate["status"] == "awaiting_approval", oo.get("error")
+    assert oo["gate"]["phase"] == 6 and oo["gate"]["gate"] == "operate"
+    done = decide(client, operate["id"], "reject" if oo["gate"]["outcome"] == "stop" else "approve", sid).json()
+    assert done["decisions"][-1]["actor"] == "founder"

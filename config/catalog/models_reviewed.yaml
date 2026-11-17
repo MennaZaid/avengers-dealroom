@@ -66,7 +66,7 @@
   use: none
   notes: >-
     REJECTED. Safety-removed ("decensored", refusals 3/100 vs 100/100) community fine-tune: conflicts with
-    our safety requirements and would be indefensible to judges. Math/STEM-focused, no coding data,
+    our safety requirements and could not be justified. Math/STEM-focused, no coding data,
     and the card says no Inference Provider serves it. If a ~9B Qwen is wanted, evaluate the official
     base Qwen/Qwen3.5-9B instead.
   verified_on: 2026-11-16
