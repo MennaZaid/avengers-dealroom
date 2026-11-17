@@ -9,6 +9,8 @@
   page (publishing MOCKED). The run then waits for the founder's sign-up count:
   POST /stages/runs/{id}/signups {actual, days_elapsed} runs the demand gate against the declared test; the
   founder then decides through POST /stages/runs/{id}/decision.
+- Commercial (Phase 4) starts after an approved Build: commercial_stage.run_commercial_stage in the background
+  (STUBBED with a 'repeat' recommendation until that entry point exists), then the founder's one decision.
 - Build (Phase 3) starts after an approved Validate. It runs build_stage.run_build_stage in the background with
   the Discover claims as evidence, stores the gate and every phase3_* file in the run, and waits for the
   founder's one decision.
@@ -18,7 +20,7 @@
   refund_order) from the UI; GET /stages/approvals/check tells a caller whether that exact content is approved.
 """
 
-from datetime import date
+from datetime import UTC, date, datetime
 from uuid import UUID
 
 from fastapi import APIRouter, BackgroundTasks, Header, HTTPException
@@ -36,7 +38,7 @@ from venture_os.evidence.store import EvidenceStore
 router = APIRouter(prefix="/stages", tags=["stages"])
 
 RUN_COLS = "id, brief_id, brief_version, stage, status, output, created_at, updated_at"
-IMPLEMENTED = {"discover", "validate", "build"}
+IMPLEMENTED = {"discover", "validate", "build", "commercial"}
 
 
 class RunIn(BaseModel):
@@ -184,6 +186,31 @@ def _validate(run_id: str, brief_id: str, version: int) -> None:
                          status="failed")
 
 
+def _commercial(run_id: str, brief_id: str, version: int) -> None:
+    """Phase 4 in the background: commercial_stage.run_commercial_stage (pricing, price, policy drafts, readiness,
+    gate) with no approval inside the stage; the run then waits for the founder's one decision. Until that entry
+    point exists, the run is recorded as STUBBED with a 'repeat' recommendation, never as a pass."""
+    store = EvidenceStore()
+    try:
+        try:
+            from venture_os.commercial_stage import run_commercial_stage
+        except ImportError:
+            gate = gates.GateDecision(
+                phase=4, gate="commercial", outcome="repeat", rule="STUBBED: no Phase 4 entry point",
+                reason="STUBBED: the Phase 4 agents (commercial_stage.run_commercial_stage) are not on main yet. "
+                       "No price or policy was produced.", decided_at=datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"))
+            store.update_run(run_id, {"commercial": {"status": "done", "gate": gate.model_dump(), "files": {},
+                                                     "stubbed": ["all Phase 4 steps"]}}, status="awaiting_approval")
+            return
+        result = run_commercial_stage(brief_id, version)
+        store.update_run(run_id, {"commercial": {
+            "status": "done", "gate": result.decision.model_dump(), "files": _files(list(result.files)),
+            "stubbed": list(getattr(result, "stubbed", []) or [])}}, status="awaiting_approval")
+    except Exception as e:  # noqa: BLE001 - a failed run is recorded, not hidden
+        store.update_run(run_id, {"commercial": {"status": "failed", "error": f"{type(e).__name__}: {e}"}},
+                         status="failed")
+
+
 @router.get("/briefs")
 def list_briefs():
     """Confirmed briefs (latest version of each), newest first, for picking one in the UI."""
@@ -212,6 +239,15 @@ def start_run(stage: gates.Stage, body: RunIn, background: BackgroundTasks):
     if (brief.get("product_check") or {}).get("status") == "excluded":
         raise HTTPException(403, "excluded product (not a digital product the system may build): the pipeline "
                                  "stops here; reshape the idea in onboarding")
+    if stage == "commercial":
+        with connect("vos_app") as conn:
+            run = conn.execute(
+                f"INSERT INTO stage_runs (brief_id, brief_version, stage, status, output) VALUES (%s,%s,%s,%s,%s) "
+                f"RETURNING {RUN_COLS}", (body.brief_id, brief["version"], stage, "running",
+                                          Jsonb({"commercial": {"status": "queued"}}))).fetchone()
+            out = _with_state(conn, [run])[0]
+        background.add_task(_commercial, str(run["id"]), str(body.brief_id), brief["version"])
+        return out
     if stage == "validate":
         with connect("vos_app") as conn:
             run = conn.execute(
