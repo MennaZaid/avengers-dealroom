@@ -3,6 +3,7 @@ Discover is approved. Arabic or English (sidebar language; the layout flips righ
 
 import time
 
+import discover_view as dv
 import streamlit as st
 from common import API, api, phase_bar, setup, ui_lang
 
@@ -83,7 +84,6 @@ STATUS = {"running": ("⏳ researching", "⏳ جارٍ البحث"),
           "awaiting_approval": ("🟡 waiting for your decision", "🟡 بانتظار قرارك"), "approved": ("✅ go", "✅ متابعة"),
           "revision_requested": ("🔁 repeat", "🔁 إعادة"), "pivoted": ("↩️ pivot", "↩️ تحويل"),
           "rejected": ("⛔ stop", "⛔ إيقاف"), "failed": ("❌ failed", "❌ فشل")}
-REC = {"go": "success", "repeat": "warning", "pivot": "warning", "stop": "error"}
 PHASE_STATUS = {0: "Working", 1: "Working", 2: "Working", 3: "Working", 4: "STUBBED", 5: "MOCKED", 6: "STUBBED"}
 i = 1 if L == "ar" else 0
 
@@ -134,7 +134,11 @@ run = runs[0] if len(runs) == 1 else next(r for r in runs if r["id"] == st.selec
     t("run"), [r["id"] for r in runs], format_func=lambda rid: next(
         f"{r['created_at'][:19]} · v{r['brief_version']} · {status(r['status'])}" for r in runs if r["id"] == rid)))
 research = (run["output"] or {}).get("research") or {}
-st.markdown(t("status", s=status(run["status"]), v=run["brief_version"]))
+gate = research.get("gate") or {}
+if gate:  # the gate's recommendation is the most visible line, coloured by outcome
+    _el, _md = dv.gate_banner(gate, L)
+    getattr(st, _el)(_md)
+st.markdown(f"**{dv.run_label(run['status'], L)}** · v{run['brief_version']}")
 if run["stale"]:
     st.warning(t("stale", v=run["latest_brief_version"]))
 if run["status"] == "running":
@@ -149,11 +153,7 @@ if run["status"] == "failed":
     st.error(research.get("error") or t("failed"))
     st.stop()
 
-gate = research.get("gate") or {}
 if gate:
-    getattr(st, REC.get(gate["recommendation"], "info"))(
-        t("rec", o=gate["recommendation"].upper()) + (f" → {gate['pivot_to']}" if gate.get("pivot_to") else "")
-        + " — " + " ".join(gate.get("reasons", [])))
     c1, c2 = st.columns([3, 2])
     c1.dataframe([{t("check"): c["check"], t("target"): c["target"], t("actual"): str(c["actual"]),
                    t("passed"): "✅" if c["passed"] else "❌"} for c in gate.get("checks", [])],
