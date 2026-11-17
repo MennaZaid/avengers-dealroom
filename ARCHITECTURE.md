@@ -203,6 +203,13 @@ sequenceDiagram
 - **Reconciliation:** orders, payments, fees and payouts are matched; mismatches are listed in
   `outputs/payment_test_log.md`.
 - The founder approves the price and turning on checkout; going live is outside the hackathon scope.
+- **Approval of the exact content (`approval.py`):**
+  - Publishing the landing page, creating an order and refunding an order each check
+    `has_founder_approval(brief_id, action, sha256)` first.
+  - The approval covers that exact draft or payload: changing one character needs a new approval.
+  - Only the founder records an approval: in the UI (founder session) or in the CLI by typing `approve`
+    (`python -m venture_os.approval`).
+  - The `founder_approvals` table refuses any other actor, channel or session, and agents can only read it.
 
 ## Data flow
 

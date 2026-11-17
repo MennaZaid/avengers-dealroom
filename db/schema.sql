@@ -376,3 +376,34 @@ CREATE TABLE IF NOT EXISTS discover_interviews (
 GRANT SELECT, INSERT ON discover_interviews TO vos_app;
 GRANT SELECT ON discover_interviews TO vos_agent;
 GRANT SELECT ON onboarding_sessions TO vos_app;
+
+-- ---------------------------------------------------------------- founder approvals for outward actions
+-- Publishing, creating an order and refunding happen only with a founder approval of the EXACT content
+-- (SHA-256 of the draft or payload), made in the UI or CLI. approval.has_founder_approval() checks this table.
+CREATE TABLE IF NOT EXISTS founder_approvals (
+  id            BIGSERIAL PRIMARY KEY,
+  brief_id      UUID NOT NULL REFERENCES briefs(id),
+  action        TEXT NOT NULL CHECK (action IN ('publish_landing_page', 'create_order', 'refund_order')),
+  content_hash  TEXT NOT NULL CHECK (content_hash ~ '^[0-9a-f]{64}$'),
+  actor         TEXT NOT NULL DEFAULT 'founder' CHECK (actor = 'founder'),
+  channel       TEXT NOT NULL CHECK (channel IN ('ui', 'cli')),
+  session_id    UUID NOT NULL REFERENCES onboarding_sessions(id),
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+CREATE INDEX IF NOT EXISTS founder_approvals_lookup ON founder_approvals (brief_id, action, content_hash);
+
+-- The session must be the onboarding session that confirmed this brief (checked again here, not only in code).
+CREATE OR REPLACE FUNCTION founder_approvals_session_owns_brief() RETURNS trigger AS $$
+BEGIN
+  IF NOT EXISTS (SELECT 1 FROM onboarding_sessions WHERE id = NEW.session_id AND brief_id = NEW.brief_id) THEN
+    RAISE EXCEPTION 'founder approval refused: the session does not own this brief';
+  END IF;
+  RETURN NEW;
+END $$ LANGUAGE plpgsql SECURITY DEFINER SET search_path = public;
+DROP TRIGGER IF EXISTS founder_approvals_owner ON founder_approvals;
+CREATE TRIGGER founder_approvals_owner BEFORE INSERT ON founder_approvals
+  FOR EACH ROW EXECUTE FUNCTION founder_approvals_session_owns_brief();
+
+GRANT SELECT, INSERT ON founder_approvals TO vos_app;   -- append-only: no UPDATE or DELETE for anyone but the owner
+GRANT USAGE ON SEQUENCE founder_approvals_id_seq TO vos_app;
+GRANT SELECT ON founder_approvals TO vos_agent;          -- agents may check an approval, never write one
