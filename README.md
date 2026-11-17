@@ -72,15 +72,7 @@ All models are free: free tiers or a local open-weight model. No paid API is use
 
 ## Cost per run
 
-About $0.00 per run (Fanar-C-2-27B, openai/gpt-oss-120b, qwen/qwen3.8-27b and local qwen3:4b-instruct, ~153k tokens).
-
-Committed demo run (2026-11-17, brief `3e540c9c`, phases 1-6): 77 model calls, 152,561 tokens. Fanar-C-2-27B 17
-calls (18,371 tokens), openai/gpt-oss-120b 10 (12,281), qwen/qwen3.8-27b 1 (3,822), local qwen3:4b-instruct
-fallback 49 (118,087). Output of `python scripts/cost_report.py` on the committed `decision_log.json`.
-
-All models are local or free tiers and no paid API is used, so the dollar cost is $0.00. Measured, not estimated:
-every model call is logged with its prompt and completion tokens, and `python scripts/cost_report.py` sums them
-from `decision_log.json`.
+About $0.00 per run (Fanar-C-2-27B, openai/gpt-oss-120b, qwen/qwen3.8-27b, qwen3:4b-instruct, ~153k tokens)
 
 ## Demo video
 
