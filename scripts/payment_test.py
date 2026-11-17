@@ -36,6 +36,7 @@ def terminal_approve(brief_id: str, action: str, payload: dict, session_id: str 
 
 
 def run_scenario(brief_id: str, approve: Approve) -> list[tuple[str, str]]:
+    A, B = f"ord_A_{str(brief_id)[:8]}", f"ord_B_{str(brief_id)[:8]}"  # one test per brief
     steps: list[tuple[str, str]] = []
 
     def step(name: str, fn):
@@ -52,20 +53,20 @@ def run_scenario(brief_id: str, approve: Approve) -> list[tuple[str, str]]:
 
     a = step("1. create order A (founder approval)", lambda: payments.create_order(
         brief_id, PRODUCT, PRICE, CURRENCY, approved("create_order", payments.order_payload(
-            brief_id, PRODUCT, PRICE, CURRENCY)), order_id="ord_A")["id"])
+            brief_id, PRODUCT, PRICE, CURRENCY)), order_id=A)["id"])
     if a is None:
         return steps
-    step("2. mock payment event evt_A1 succeeded", lambda: payments.payment_event("ord_A", "evt_A1")["status"])
-    step("3. same event evt_A1 again (duplicate)", lambda: payments.payment_event("ord_A", "evt_A1")["status"])
-    grants = sum(1 for e in read_log() if e["action"] == "grant_access" and e.get("order_id") == "ord_A")
+    step("2. mock payment event evt_A1 succeeded", lambda: payments.payment_event(A, f"{A}_evt1")["status"])
+    step("3. same event evt_A1 again (duplicate)", lambda: payments.payment_event(A, f"{A}_evt1")["status"])
+    grants = sum(1 for e in read_log() if e["action"] == "grant_access" and e.get("order_id") == A)
     steps.append(("4. deliveries for order A", f"{grants} (expected 1)"))
-    steps.append(("4b. access after payment", str(delivery.has_access("ord_A"))))
-    step("5. refund order A (founder approval)", lambda: refunds.refund("ord_A", approved(
-        "refund_order", {"order_id": "ord_A", "amount": PRICE, "currency": CURRENCY}))["order_id"])
-    steps.append(("5b. access after refund", str(delivery.has_access("ord_A"))))
+    steps.append(("4b. access after payment", str(delivery.has_access(A))))
+    step("5. refund order A (founder approval)", lambda: refunds.refund(A, approved(
+        "refund_order", {"order_id": A, "amount": PRICE, "currency": CURRENCY}))["order_id"])
+    steps.append(("5b. access after refund", str(delivery.has_access(A))))
     step("6. create order B; its payment never arrives", lambda: payments.create_order(
         brief_id, PRODUCT, PRICE, CURRENCY, approved("create_order", payments.order_payload(
-            brief_id, PRODUCT, PRICE, CURRENCY)), order_id="ord_B")["id"])
+            brief_id, PRODUCT, PRICE, CURRENCY)), order_id=B)["id"])
     report = reconcile.reconcile()
     summary = (f"{len(report['orders'])} orders, {len(report['issues'])} mismatches, "
                f"fees {report['fees_total']}, payouts {report['payouts_total']}")
