@@ -13,7 +13,9 @@ docker compose up
 Then open **http://localhost:8501** (the UI logs this URL when ready; API docs at http://localhost:8010/docs).
 No `.env` and no keys are needed. The first start downloads the open-weight models (`qwen3:4b-instruct`, about
 2.5 GB, and the `bge-m3` embeddings) into a Docker volume; the app is usable right away with rule-based fallbacks
-and uses the models once the download finishes. Give Docker about 6 GB of memory. Host ports: see `.env.example`.
+and uses the models once the download finishes (measured on a laptop: the app answers about 25 s after
+`docker compose up`; while the model is still loading, a chat reply can take up to 2 minutes before the
+rule-based answer). Give Docker about 6 GB of memory. Host ports: see `.env.example`.
 
 ## What works and what is mocked
 
@@ -23,17 +25,18 @@ and uses the models once the download finishes. Give Docker about 6 GB of memory
 | Guardrails (excluded products, must-never requests) | **Working** | Refuses fake reviews, income promises, impersonation, moving money, credentials |
 | Product gate | **Working** | Excluded products (physical, financial/crypto, health or legal advice) stop |
 | 1. Discover: find opportunities + evidence gate | **Working** | Live web + free APIs; verbatim-quoted claims or `ASSUMPTION`; ideas scored, market sized bottom-up, Mom Test script; founder decides. Critic's judge model **STUBBED** unless a different-family model is set |
-| 2. Validate: Lean Canvas | **Working** | Every entry FOUNDER / EVIDENCED (id + URL + date) / ASSUMPTION / UNKNOWN; riskiest assumption named |
-| 2. Validate: demand test plan | **Working** | 100 waitlist sign-ups in 14 days, declared before any result |
-| 2. Validate: landing page | **Working** draft; publishing **MOCKED** | Self-contained HTML, email-only waitlist that sends nothing, "DRAFT — not published (MOCKED)" banner |
-| 2. Validate: sign-up count + demand gate | **Working** | Count entered by the founder (founder-reported, not verified), never generated; 12 of 100 -> stop |
+| 2. Validate: Lean Canvas | Agents built; pipeline wiring in progress | Every entry FOUNDER / EVIDENCED (id + URL + date) / ASSUMPTION / UNKNOWN; riskiest assumption named |
+| 2. Validate: demand test plan | Agents built; pipeline wiring in progress | 100 waitlist sign-ups in 14 days, declared before any result |
+| 2. Validate: landing page | Agents built; pipeline wiring in progress; publishing **MOCKED** | Self-contained HTML, email-only waitlist that sends nothing, "DRAFT — not published (MOCKED)" banner |
+| 2. Validate: sign-up count + demand gate | **Working** | `POST /stages/validate/demand`: count entered by the founder (founder-reported, not verified), never generated; 12 of 100 -> stop |
 | 3. Build: build the product + build gate | **Working** | Evidence -> requirements -> plan -> validation -> single-file HTML MVP -> QA checks -> user guide; one founder approval at the end; payments in the MVP are **MOCKED** |
-| 4. Commercial: price hypotheses, draft policies + gates | **STUBBED** | Prices from the founder or sourced, else ASSUMPTION; terms/privacy/refund drafts "not legal advice" |
-| 5. Launch: store page and 3 post drafts + gate | **STUBBED**; posting **MOCKED** | Nothing is posted |
+| 4. Commercial: price hypotheses, draft policies + gates | **STUBBED** | Not run by the pipeline yet. Prices from the founder or sourced, else ASSUMPTION; terms/privacy/refund drafts "not legal advice" |
+| 5. Launch: store page and 3 post drafts + gate | **STUBBED**; posting **MOCKED** | Not run by the pipeline yet; nothing is posted |
 | 5. Launch: payments, delivery, refunds, reconciliation | **MOCKED** | Delivery once per order; a refund revokes access; reconciliation flags missing payments; no money moves |
-| 6. Operate: persevere-or-pivot memo + gate | **STUBBED** | Built only from logged results; support and analytics "no data yet" |
+| 6. Operate: persevere-or-pivot memo + gate | **STUBBED** | Not run by the pipeline yet. Built only from logged results; support and analytics "no data yet" |
 | Founder decisions at stage gates (`approval.py`) | **Working** | Approve / repeat / pivot / stop / waive, logged with `approved_by: "founder"` |
-| Founder approval of single actions (publish page, post, order, refund) | **STUBBED** | Every such action refuses until `approval.py` can confirm a founder approval of that exact action |
+| Founder approval of exact content (landing page, order, refund) | **Working** | `POST /stages/approvals` (UI) or `python -m venture_os.approval` (CLI); the action is refused unless this exact content was approved |
+| Founder approval of launch posts and of passing the Phase 4-6 gates | **STUBBED** | `approval.py` does not accept these actions yet, so they are always refused |
 | Decision log, outputs, cost per run | **Working** | `decision_log.json` (tokens per model call), `outputs/phase<N>_step<M>_*`, `scripts/cost_report.py` |
 
 ## Architecture
