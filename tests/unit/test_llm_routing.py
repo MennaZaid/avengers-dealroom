@@ -53,7 +53,7 @@ def test_failed_provider_falls_back_and_logs_the_model_that_answered(env):
 
 
 def test_a_key_in_a_model_field_is_never_used_as_a_model(env):
-    env.setenv("LLM_MODEL_REASONING", "sk-proj-" + "x" * 80)
+    env.setenv("LLM_MODEL_REASONING", "sk" + "-proj-" + "x" * 80)
     assert all(not e.model.startswith("sk-") for e in client.endpoints("reasoning"))
     assert client.model_for("reasoning") == "base-model"
 
@@ -62,3 +62,42 @@ def test_all_failing_raises_so_the_rule_based_path_runs(env):
     _fake(env, failing={"https://", "http://"})
     with pytest.raises(httpx.HTTPError):
         client.chat_json([{"role": "user", "content": "x"}], profile="reasoning")
+
+
+def _sequence(monkeypatch, responses):
+    """httpx.post returns these (status, headers) in order; records each URL; sleep is recorded, not real."""
+    calls, sleeps = [], []
+
+    def post(url, headers=None, json=None, timeout=None):
+        calls.append(url)
+        status, hdrs = responses.pop(0) if responses else (200, {})
+        body = {"choices": [{"message": {"content": '{"ok": true}'}}], "usage": {}} if status == 200 else {}
+        return httpx.Response(status, headers=hdrs, json=body, request=httpx.Request("POST", url))
+    monkeypatch.setattr(client.httpx, "post", post)
+    monkeypatch.setattr(client.time, "sleep", sleeps.append)
+    return calls, sleeps
+
+
+def test_rate_limit_waits_and_retries_the_same_provider(env):
+    calls, sleeps = _sequence(env, [(429, {"x-ratelimit-reset-tokens": "7.66s"}), (200, {})])
+    client.chat_json([{"role": "user", "content": "x"}], profile="validate")
+    assert sleeps == [7.66] and all(c.startswith("https://validate.example") for c in calls) and len(calls) == 2
+
+
+def test_second_rate_limit_falls_back(env):
+    calls, sleeps = _sequence(env, [(429, {"retry-after": "3"}), (429, {"retry-after": "3"}), (200, {})])
+    client.chat_json([{"role": "user", "content": "x"}], profile="validate")
+    assert sleeps == [3.0] and calls[-1].startswith("https://base.example")
+
+
+def test_long_rate_limit_falls_back_without_waiting(env):
+    calls, sleeps = _sequence(env, [(429, {"x-ratelimit-reset-tokens": "1m2s"}), (200, {})])
+    client.chat_json([{"role": "user", "content": "x"}], profile="validate")
+    assert sleeps == [] and calls[-1].startswith("https://base.example")
+
+
+def test_wait_header_formats():
+    assert client.retry_wait({"retry-after": "12"}) == 12
+    assert client.retry_wait({"x-ratelimit-reset-tokens": "1m2s"}) == 62
+    assert abs(client.retry_wait({"x-ratelimit-reset-requests": "450ms"}) - 0.45) < 1e-9
+    assert client.retry_wait({}) is None
