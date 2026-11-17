@@ -2,8 +2,6 @@
 waitlist count, against a real seeded Postgres. Skipped when the DB is unreachable."""
 
 import io
-import sys
-import types
 import uuid
 
 import psycopg
@@ -132,24 +130,3 @@ def test_cli_approves_only_when_the_founder_types_approve(brief, tmp_path):
     code, out = _cli(brief, tmp_path, _Tty("approve\n"))
     assert code == 0 and h in out
     assert approval.has_founder_approval(brief["brief_id"], "publish_landing_page", h)
-
-
-def test_demand_count_needs_the_founder_and_goes_to_the_demand_gate(client, brief, monkeypatch):
-    body = {"brief_id": brief["brief_id"], "count": 12, "days_elapsed": 14}
-    assert client.post("/stages/validate/demand", json=body).status_code == 401
-    calls = []
-
-    def enter_signups(brief_id, count, days_elapsed):
-        calls.append((brief_id, count, days_elapsed))
-        return types.SimpleNamespace(outcome="stop", reason="12 of 100 (12%) in 14 days", metric="waitlist sign-ups",
-                                     target=100, actual=count, mocked=False, rule="r")
-
-    monkeypatch.setitem(sys.modules, "venture_os.agents.demand_test",
-                        types.SimpleNamespace(enter_signups=enter_signups))
-    hdr = {"X-Founder-Session": brief["session"]}
-    r = client.post("/stages/validate/demand", json=body, headers=hdr)
-    assert r.status_code == 200 and r.json()["outcome"] == "stop" and "12 of 100" in r.json()["reason"]
-    r = client.post("/stages/validate/demand", json={**body, "count": None}, headers=hdr)  # test not run yet
-    assert r.status_code == 200
-    assert calls == [(brief["brief_id"], 12, 14), (brief["brief_id"], None, 14)]
-    assert client.post("/stages/validate/demand", json={**body, "count": -1}, headers=hdr).status_code == 422

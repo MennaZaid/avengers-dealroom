@@ -161,7 +161,7 @@ def test_discover_run_lands_in_postgres_and_the_founder_decides(client, make_bri
     assert all(e["approved_by"] == "founder" for e in gate_entries)
     gate_md = (Path(os.environ["OUTPUTS_DIR"]) / "phase1_gate_decision.md").read_text(encoding="utf-8")
     assert "outcome: **go**" in gate_md
-    assert client.post("/stages/validate/runs", json={"brief_id": bid}).status_code == 501  # gate passed
+    assert client.post("/stages/validate/runs", json={"brief_id": bid}).status_code == 201  # gate passed: Phase 2 runs
 
     add_version(bid, "nadafa", 2)  # the founder edits the brief: the run is stale, Phase 2 is refused again
     runs = client.get("/stages/runs", params={"brief_id": bid}).json()
