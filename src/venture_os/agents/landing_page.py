@@ -197,7 +197,7 @@ def _default_chat() -> tuple[Chat | None, str | None]:
     from venture_os.llm.client import chat_json, live_enabled, model_for
     if not live_enabled():
         return None, None
-    return chat_json, model_for("extract")
+    return (lambda messages: chat_json(messages, profile="validate")), model_for("validate")
 
 
 def _ask_model(chat: Chat, canvas: Any, lang: str) -> dict | None:
