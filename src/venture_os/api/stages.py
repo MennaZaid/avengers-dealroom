@@ -9,8 +9,9 @@
   page (publishing MOCKED). The run then waits for the founder's sign-up count:
   POST /stages/runs/{id}/signups {actual, days_elapsed} runs the demand gate against the declared test; the
   founder then decides through POST /stages/runs/{id}/decision.
-- Commercial (Phase 4) starts after an approved Build: commercial_stage.run_commercial_stage in the background
-  (STUBBED with a 'repeat' recommendation until that entry point exists), then the founder's one decision.
+- Commercial (Phase 4), Launch (Phase 5: posting and sale-to-cash MOCKED) and Operate (Phase 6) each start after
+  the founder's go on the previous phase: <phase>_stage.run_<phase>_stage in the background (STUBBED with a
+  'repeat' recommendation until that entry point exists), then the founder's one decision.
 - Build (Phase 3) starts after an approved Validate. It runs build_stage.run_build_stage in the background with
   the Discover claims as evidence, stores the gate and every phase3_* file in the run, and waits for the
   founder's one decision.
@@ -38,7 +39,7 @@ from venture_os.evidence.store import EvidenceStore
 router = APIRouter(prefix="/stages", tags=["stages"])
 
 RUN_COLS = "id, brief_id, brief_version, stage, status, output, created_at, updated_at"
-IMPLEMENTED = {"discover", "validate", "build", "commercial"}
+IMPLEMENTED = {"discover", "validate", "build", "commercial", "launch", "operate"}
 
 
 class RunIn(BaseModel):
@@ -186,29 +187,39 @@ def _validate(run_id: str, brief_id: str, version: int) -> None:
                          status="failed")
 
 
-def _commercial(run_id: str, brief_id: str, version: int) -> None:
-    """Phase 4 in the background: commercial_stage.run_commercial_stage (pricing, price, policy drafts, readiness,
-    gate) with no approval inside the stage; the run then waits for the founder's one decision. Until that entry
-    point exists, the run is recorded as STUBBED with a 'repeat' recommendation, never as a pass."""
+# Phases 4-6: one entry point each (owned by the phase's author), run in the background with no approval inside
+# the stage; the run then waits for the founder's one decision. A missing entry point gives a STUBBED run with a
+# 'repeat' recommendation, never a pass. stage -> (phase, module, function, what it would have produced)
+LATER_STAGES = {
+    "commercial": (4, "commercial_stage", "run_commercial_stage", "No price or policy was produced."),
+    "launch": (5, "launch_stage", "run_launch_stage",
+               "No store page or launch post was drafted; nothing was posted or sold (MOCKED)."),
+    "operate": (6, "operate_stage", "run_operate_stage", "No persevere-or-pivot memo was written."),
+}
+
+
+def _later_stage(stage: str, run_id: str, brief_id: str, version: int) -> None:
+    import importlib
+
+    phase, module, func, missing = LATER_STAGES[stage]
     store = EvidenceStore()
     try:
         try:
-            from venture_os.commercial_stage import run_commercial_stage
-        except ImportError:
+            run_stage = getattr(importlib.import_module(f"venture_os.{module}"), func)
+        except (ImportError, AttributeError):
             gate = gates.GateDecision(
-                phase=4, gate="commercial", outcome="repeat", rule="STUBBED: no Phase 4 entry point",
-                reason="STUBBED: the Phase 4 agents (commercial_stage.run_commercial_stage) are not on main yet. "
-                       "No price or policy was produced.", decided_at=datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"))
-            store.update_run(run_id, {"commercial": {"status": "done", "gate": gate.model_dump(), "files": {},
-                                                     "stubbed": ["all Phase 4 steps"]}}, status="awaiting_approval")
+                phase=phase, gate=stage, outcome="repeat", rule=f"STUBBED: no Phase {phase} entry point",
+                reason=f"STUBBED: the Phase {phase} agents ({module}.{func}) are not on main yet. {missing}",
+                decided_at=datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"))
+            store.update_run(run_id, {stage: {"status": "done", "gate": gate.model_dump(), "files": {},
+                                              "stubbed": [f"all Phase {phase} steps"]}}, status="awaiting_approval")
             return
-        result = run_commercial_stage(brief_id, version)
-        store.update_run(run_id, {"commercial": {
+        result = run_stage(brief_id, version)
+        store.update_run(run_id, {stage: {
             "status": "done", "gate": result.decision.model_dump(), "files": _files(list(result.files)),
             "stubbed": list(getattr(result, "stubbed", []) or [])}}, status="awaiting_approval")
     except Exception as e:  # noqa: BLE001 - a failed run is recorded, not hidden
-        store.update_run(run_id, {"commercial": {"status": "failed", "error": f"{type(e).__name__}: {e}"}},
-                         status="failed")
+        store.update_run(run_id, {stage: {"status": "failed", "error": f"{type(e).__name__}: {e}"}}, status="failed")
 
 
 @router.get("/briefs")
@@ -239,14 +250,14 @@ def start_run(stage: gates.Stage, body: RunIn, background: BackgroundTasks):
     if (brief.get("product_check") or {}).get("status") == "excluded":
         raise HTTPException(403, "excluded product (not a digital product the system may build): the pipeline "
                                  "stops here; reshape the idea in onboarding")
-    if stage == "commercial":
+    if stage in LATER_STAGES:
         with connect("vos_app") as conn:
             run = conn.execute(
                 f"INSERT INTO stage_runs (brief_id, brief_version, stage, status, output) VALUES (%s,%s,%s,%s,%s) "
                 f"RETURNING {RUN_COLS}", (body.brief_id, brief["version"], stage, "running",
-                                          Jsonb({"commercial": {"status": "queued"}}))).fetchone()
+                                          Jsonb({stage: {"status": "queued"}}))).fetchone()
             out = _with_state(conn, [run])[0]
-        background.add_task(_commercial, str(run["id"]), str(body.brief_id), brief["version"])
+        background.add_task(_later_stage, stage, str(run["id"]), str(body.brief_id), brief["version"])
         return out
     if stage == "validate":
         with connect("vos_app") as conn:
