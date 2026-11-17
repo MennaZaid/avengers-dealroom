@@ -106,6 +106,28 @@ def language_picker() -> None:
                      horizontal=True)
 
 
+def resume_session() -> None:
+    """After a page refresh the browser forgets the confirmed brief. The founder pastes their own session id to
+    resume: the brief comes from that session only, never from a list of stored briefs."""
+    if (st.session_state.get("brief") or {}).get("id"):
+        return
+    with st.sidebar.form("resume-session"):
+        sid = st.text_input("Resume with your founder session / استئناف بجلسة المؤسس", type="password")
+        if st.form_submit_button("Resume / استئناف") and sid.strip():
+            try:
+                s = api("GET", f"/onboarding/sessions/{sid.strip()}")
+            except RuntimeError as e:
+                st.error(str(e))
+                return
+            if not s.get("brief_id"):
+                st.error("This session has no confirmed brief yet. / لا يوجد موجز مؤكد في هذه الجلسة.")
+                return
+            st.session_state.sid = sid.strip()
+            st.session_state.last = s
+            st.session_state.brief = {"id": s["brief_id"], "version": s.get("version"), "phase": s.get("phase")}
+            st.rerun()
+
+
 def esc(text) -> str:
     return html.escape(str(text or ""))
 
@@ -114,6 +136,7 @@ def setup(title: str, subtitle: str = "", active_phase: int | None = None, lang:
     """lang=None: follow the sidebar language switch (Auto follows the conversation), so every page flips to
     right-to-left for Arabic without each page having to ask for it."""
     lang = lang or ui_lang()
+    resume_session()
     st.markdown(CSS, unsafe_allow_html=True)
     if lang == "ar":
         st.markdown(RTL_CSS, unsafe_allow_html=True)
