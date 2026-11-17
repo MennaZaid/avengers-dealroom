@@ -18,7 +18,7 @@ from collections.abc import Callable
 
 from venture_os import delivery, payments, reconcile, refunds
 from venture_os.decision_log import read_log
-from venture_os.outputs import write_named
+from venture_os.outputs import outputs_dir
 
 Approve = Callable[[str, str, dict], dict | None]
 PRODUCT, PRICE, CURRENCY = "MVP access (Phase 3 output)", 15.0, "USD"
@@ -36,7 +36,6 @@ def terminal_approve(brief_id: str, action: str, payload: dict, session_id: str 
 
 
 def run_scenario(brief_id: str, approve: Approve) -> list[tuple[str, str]]:
-    A, B = f"ord_A_{str(brief_id)[:8]}", f"ord_B_{str(brief_id)[:8]}"  # one test per brief
     steps: list[tuple[str, str]] = []
 
     def step(name: str, fn):
@@ -53,20 +52,20 @@ def run_scenario(brief_id: str, approve: Approve) -> list[tuple[str, str]]:
 
     a = step("1. create order A (founder approval)", lambda: payments.create_order(
         brief_id, PRODUCT, PRICE, CURRENCY, approved("create_order", payments.order_payload(
-            brief_id, PRODUCT, PRICE, CURRENCY)), order_id=A)["id"])
+            brief_id, PRODUCT, PRICE, CURRENCY)), order_id="ord_A")["id"])
     if a is None:
         return steps
-    step("2. mock payment event evt_A1 succeeded", lambda: payments.payment_event(A, f"{A}_evt1")["status"])
-    step("3. same event evt_A1 again (duplicate)", lambda: payments.payment_event(A, f"{A}_evt1")["status"])
-    grants = sum(1 for e in read_log() if e["action"] == "grant_access" and e.get("order_id") == A)
+    step("2. mock payment event evt_A1 succeeded", lambda: payments.payment_event("ord_A", "evt_A1")["status"])
+    step("3. same event evt_A1 again (duplicate)", lambda: payments.payment_event("ord_A", "evt_A1")["status"])
+    grants = sum(1 for e in read_log() if e["action"] == "grant_access" and e.get("order_id") == "ord_A")
     steps.append(("4. deliveries for order A", f"{grants} (expected 1)"))
-    steps.append(("4b. access after payment", str(delivery.has_access(A))))
-    step("5. refund order A (founder approval)", lambda: refunds.refund(A, approved(
-        "refund_order", {"order_id": A, "amount": PRICE, "currency": CURRENCY}))["order_id"])
-    steps.append(("5b. access after refund", str(delivery.has_access(A))))
+    steps.append(("4b. access after payment", str(delivery.has_access("ord_A"))))
+    step("5. refund order A (founder approval)", lambda: refunds.refund("ord_A", approved(
+        "refund_order", {"order_id": "ord_A", "amount": PRICE, "currency": CURRENCY}))["order_id"])
+    steps.append(("5b. access after refund", str(delivery.has_access("ord_A"))))
     step("6. create order B; its payment never arrives", lambda: payments.create_order(
         brief_id, PRODUCT, PRICE, CURRENCY, approved("create_order", payments.order_payload(
-            brief_id, PRODUCT, PRICE, CURRENCY)), order_id=B)["id"])
+            brief_id, PRODUCT, PRICE, CURRENCY)), order_id="ord_B")["id"])
     report = reconcile.reconcile()
     summary = (f"{len(report['orders'])} orders, {len(report['issues'])} mismatches, "
                f"fees {report['fees_total']}, payouts {report['payouts_total']}")
@@ -82,7 +81,10 @@ def write_log(brief_id: str, steps: list[tuple[str, str]]) -> str:
              ("No payment provider, no sandbox, no network: every payment, delivery and refund below is a mock "
               "record. Fees and payouts are 0 because no money moves."), "", "| Step | Result |", "|---|---|"]
     lines += [f"| {n} | {r.replace('|', '/')} |" for n, r in steps]
-    return str(write_named("payment_test_log.md", "\n".join(lines) + "\n"))  # guardrail-checked write
+    path = outputs_dir() / "payment_test_log.md"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return str(path)
 
 
 def main(argv: list[str] | None = None) -> None:

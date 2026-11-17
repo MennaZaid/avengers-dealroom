@@ -1,169 +1,103 @@
 {
  "gate": {
-  "note": "A recommendation only: the founder decides at the gate.",
+  "recommendation": "stop",
+  "reasons": [
+   "founder fit fails: no idea can be built within the stated budget and time"
+  ],
   "checks": [
    {
     "check": "product_type",
-    "actual": "template_or_asset",
-    "passed": true,
-    "target": "digital, not excluded"
+    "target": "digital, not excluded",
+    "actual": "mobile_app",
+    "passed": true
    },
    {
     "check": "problem_fact_claims",
-    "actual": 5,
-    "passed": true,
-    "target": ">= 5"
+    "target": ">= 5",
+    "actual": 2,
+    "passed": false
    },
    {
     "check": "problem_source_domains",
-    "actual": 2,
-    "passed": false,
-    "target": ">= 3"
+    "target": ">= 3",
+    "actual": 1,
+    "passed": false
    },
    {
     "check": "priced_competitors",
+    "target": ">= 2 with a sourced paid price",
     "actual": 0,
-    "passed": false,
-    "target": ">= 2 with a sourced paid price"
+    "passed": false
    },
    {
     "check": "top_idea",
-    "actual": "I0 3.4",
-    "passed": true,
-    "target": "score >= 3.0, every fit >= 2"
+    "target": "score >= 3.0, every fit >= 2",
+    "actual": "I0 3.0",
+    "passed": false
    },
    {
     "check": "interviews",
+    "target": ">= 5 founder-entered",
     "actual": 0,
-    "passed": false,
-    "target": ">= 5 founder-entered"
+    "passed": false
    },
    {
     "check": "interviews_past_behaviour",
+    "target": ">= 3 past behaviour",
     "actual": 0,
-    "passed": false,
-    "target": ">= 3 past behaviour"
+    "passed": false
    }
   ],
-  "reasons": [
-   "evidence is thin but not negative: collect what is listed, then run again"
-  ],
-  "pivot_to": null,
   "thresholds": {
-   "interviews": 5,
-   "top_idea_score": 3.0,
-   "fit_criterion_min": 2,
-   "priced_competitors": 2,
    "problem_fact_claims": 5,
    "problem_source_domains": 3,
+   "priced_competitors": 2,
+   "top_idea_score": 3.0,
+   "fit_criterion_min": 2,
+   "interviews": 5,
    "interviews_past_behaviour": 3
   },
+  "pivot_to": null,
   "collect_next": [
-   "problem_source_domains: quotes from more different sites (now 2, target >= 3)",
+   "problem_fact_claims: more quotes from people describing the problem (forums, reviews, Q&A) (now 2, target >= 5)",
+   "problem_source_domains: quotes from more different sites (now 1, target >= 3)",
    "priced_competitors: competitors' published prices (pricing pages, store listings) (now 0, target >= 2 with a sourced paid price)",
+   "top_idea: a stronger idea, or more evidence for the scores marked ASSUMPTION (now I0 3.0, target score >= 3.0, every fit >= 2)",
    "interviews: 5 more Mom Test interviews entered by the founder (now 0, target >= 5 founder-entered)",
    "interviews_past_behaviour: interviews where the person describes the problem from a real past event (now 0, target >= 3 past behaviour)"
   ],
-  "recommendation": "repeat"
+  "note": "A recommendation only: the founder decides at the gate."
  },
  "critic": {
-  "dropped": [],
   "findings": [
    {
-    "kind": "stale",
-    "detail": "1 claims are stale",
-    "claim_ids": [
-     "C6"
-    ]
-   },
-   {
-    "kind": "undated",
-    "detail": "11 claims are undated",
-    "claim_ids": [
-     "C1",
-     "C2",
-     "C7",
-     "C9",
-     "C10",
-     "C18",
-     "C19",
-     "C20",
-     "C21",
-     "C22",
-     "C24"
-    ]
-   },
-   {
     "kind": "unsourced_idea",
-    "detail": "I0 'Arabic CV & Notion Portfolio Template Bundle' cites no pain quote",
+    "detail": "I1 'AI Prompt Templates for Social Media Posts' cites no pain quote",
     "claim_ids": []
    },
    {
     "kind": "unsourced_idea",
-    "detail": "I1 'Arabic Freelance CV & Portfolio Online Course' cites no pain quote",
+    "detail": "I2 'A Simple AI-Powered Social Media Content Guide' cites no pain quote",
     "claim_ids": []
    },
    {
     "kind": "unsourced_idea",
-    "detail": "I2 'E‑book: The Arabic Freelancer’s Guide to CVs & Portfolios' cites no pain quote",
+    "detail": "I3 'AI-Powered Browser Extension for Quick Prompts' cites no pain quote",
     "claim_ids": []
    },
    {
     "kind": "unsourced_idea",
-    "detail": "I3 'Simple Notion‑Powered CV Generator Web App' cites no pain quote",
+    "detail": "I4 'Community for AI Prompt Sharing' cites no pain quote",
     "claim_ids": []
    },
    {
-    "kind": "unsourced_idea",
-    "detail": "I4 'Monthly Arabic Template Club (Community)' cites no pain quote",
+    "kind": "broad_target",
+    "detail": "the brief's target is 'everyone': name one specific group of people to interview and sell to first",
     "claim_ids": []
-   },
-   {
-    "kind": "model",
-    "detail": "All five ideas (I0-I4) assert that freelancers in Egypt spend significant time or waste hours creating Arabic/English CVs and portfolios, but none of the provided claims (C1-C28) contain any data, survey, or quote supporting this specific pain point.",
-    "claim_ids": []
-   },
-   {
-    "kind": "model",
-    "detail": "Claim C14 states that 'around 0' of the Business Services firms on the portal have a specific attribute, which is a nonsensical or broken data point that undermines the credibility of the source used for market analysis in ideas I0-I4.",
-    "claim_ids": [
-     "C14"
-    ]
-   },
-   {
-    "kind": "model",
-    "detail": "Claims C11, C12, C13, and C14 are derived from a directory listing page (superbcompanies.com) that appears to be auto-generated or broken (evidenced by C14's '0' count and C12's incomplete sentence), making them unreliable evidence for the market landscape described in the ideas.",
-    "claim_ids": [
-     "C11",
-     "C12",
-     "C13",
-     "C14"
-    ]
-   },
-   {
-    "kind": "model",
-    "detail": "The ideas focus on CV/portfolio creation for freelancers, but the provided claims primarily discuss corporate HR services, banking complaint portals, and general business service directories, creating a disconnect between the cited evidence and the proposed solutions.",
-    "claim_ids": [
-     "C3",
-     "C4",
-     "C5",
-     "C7",
-     "C8",
-     "C16",
-     "C18",
-     "C20",
-     "C21"
-    ]
    }
   ],
-  "judge_model": "qwen/qwen3.8-27b",
-  "model_review": "The evidence base is critically weak because none of the provided claims support the core pain point of freelancers struggling with CV creation. The cited sources are largely irrelevant corporate directories, banking forms, or broken data points that do not validate the market need for the proposed Arabic CV tools."
+  "model_review": "skipped: judge family 'qwen' is the same as the generator's",
+  "judge_model": "qwen3:4b-instruct"
  },
- "decision": {
-  "decision": "approve",
-  "outcome": "go",
-  "note": "",
-  "pivot_to": null,
-  "waiver_reason": null
- }
+ "decision": null
 }

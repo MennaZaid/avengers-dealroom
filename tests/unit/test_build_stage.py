@@ -18,11 +18,6 @@ STAGE_FILES = ["phase3_step1_build_inputs.md", "phase3_step2_requirements.md", "
                "phase3_step7_user_guide.md", "phase3_step8_evidence_summary.md", "phase3_gate_build.md"]
 
 
-def SPEC(msgs):
-    from test_product_spec import model_for
-    return model_for("pharmastock_v1", "tracker_dashboard")(msgs)
-
-
 def brief(name="pharmastock_v1.json", **over):
     b = ConfirmedBrief.from_file(FIX / name)
     return b.model_copy(update=over) if over else b
@@ -31,11 +26,11 @@ def brief(name="pharmastock_v1.json", **over):
 def test_full_stage_without_a_model_ends_in_go():
     b = brief()
     r = run_build_stage(b, use_browser=False)
-    assert r.decision.outcome == "go" and r.template == "directory" and r.plan_rounds == 1 and r.test_attempts == 1
+    assert r.decision.outcome == "go" and r.template == "tracker" and r.plan_rounds == 1 and r.test_attempts == 1
     for f in STAGE_FILES:
         assert b.brief_id in (OUT() / f).read_text(encoding="utf-8"), f
     actions = [e["action"] for e in read_log()]
-    assert actions == ["collect_build_inputs", "map_evidence_to_requirements", "spec_product", "plan_mvp", "validate_mvp_plan",
+    assert actions == ["collect_build_inputs", "map_evidence_to_requirements", "plan_mvp", "validate_mvp_plan",
                        "build_mvp", "test_mvp", "write_mvp_docs", "build_gate", "run_build_stage"]
     assert all(e["approved_by"] is None for e in read_log())  # nobody approves inside the stage
 
@@ -55,7 +50,7 @@ def test_a_plan_that_keeps_failing_is_replanned_then_falls_back_to_the_fixed_pla
             calls["plan"] += 1
             return json.dumps({"title": "The best certified app", "tagline": "x", "fields": [
                 {"label": "Item", "type": "text"}, {"label": "Qty", "type": "number"}]})
-        return SPEC(msgs)  # the product spec prompt gets a usable answer; others "{}"
+        return "{}"
 
     r = run_build_stage(brief(), chat_json=stubborn_model, model="fake", use_browser=False)
     assert calls["plan"] == 3  # first plan + 2 re-plans, each with the validator's feedback
@@ -67,7 +62,7 @@ def test_unsafe_model_copy_is_rebuilt_with_fixed_text():
     def model(msgs):
         if "short help text" in msgs[0]["content"]:
             return json.dumps({"help": {"home": "Guaranteed income for every pharmacy!"}})
-        return SPEC(msgs)  # the product spec prompt gets a usable answer; others "{}"
+        return "{}"
 
     # check_output() drops the bad line already in the builder, so the first test passes;
     r = run_build_stage(brief(), chat_json=model, model="fake", use_browser=False)

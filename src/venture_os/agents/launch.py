@@ -16,7 +16,7 @@ from venture_os.agents import stubbed
 POST_ACTION = "publish_launch_post"
 
 
-def run(brief_id: str, *, brief: Any = None, record_gate: bool = True):
+def run(brief_id: str, *, brief: Any = None):
     if brief is None:
         from venture_os.onboarding.briefs import load_brief
         brief = load_brief(brief_id)
@@ -43,8 +43,6 @@ def run(brief_id: str, *, brief: Any = None, record_gate: bool = True):
         md += [f"## Post {i}", "", p, ""]
     stubbed.write_checked(5, 2, "launch_posts", "\n".join(md) + "\n")
     stubbed.log_step("launch", "draft_launch_posts", brief_id, posts=len(drafts))
-    if not record_gate:  # launch_stage records one gate for the whole phase
-        return None
     return stubbed.record_gate(5, "launch", "go",
                                "Store page and posts are drafts; nothing goes out without the founder's approval.",
                                "drafts pass the guardrails and every external action needs approval -> go", brief_id)

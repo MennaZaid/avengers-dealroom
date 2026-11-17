@@ -212,7 +212,7 @@ def _standard_queries(key: str, lang: Lang, w: _Words, competitors: list[str]) -
         return [
             _q(lang, "{t} challenges {p}" if en else "تحديات {t} في {p}", t=w.target, p=w.place),
             _q(lang, "{pr} {p}", pr=w.problem, p=w.place),
-            _q(lang, "{t} {pr}", t=w.target, pr=w.problem),  # customer + pain, not the product category
+            _q(lang, "{i} customer complaints {c}" if en else "شكاوى عملاء {i} في {c}", i=w.industry, c=w.country),
             _q(lang, "{pr} reddit" if en else "{pr} تجربتي", pr=w.problem),  # people describing the problem
         ]
     if key == "pricing":

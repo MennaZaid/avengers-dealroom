@@ -1,8 +1,7 @@
 {
- "who": "Egyptian freelancers in design, writing and programming, in Cairo, Egypt",
+ "who": "Everyone",
  "where_to_find": [
-  "People posting about this problem on eg.kfh.com (where the pain quotes came from)",
-  "People posting about this problem on fra.gov.eg (where the pain quotes came from)",
+  "People posting about this problem on news.ycombinator.com (where the pain quotes came from)",
   "Groups and communities where the target customers already meet (online and local)",
   "Introductions from each person you interview (ask at the end)"
  ],
@@ -10,7 +9,7 @@
  "guides": {
   "en": {
    "questions": [
-    "Tell me about the last time you ran into this: \"Egyptian freelancers waste a lot of time making a professional CV and portfolio in Arabic and English\". What happened?",
+    "Tell me about the last time you ran into this: \"People want to chat with AI\". What happened?",
     "What did you do about it? What have you tried so far?",
     "What did that cost you, in money or hours?",
     "How do you handle it today? Which tools, apps or people do you use?",
@@ -25,29 +24,11 @@
     "Do you like this idea?",
     "Pitching your product before they describe the problem"
    ]
-  },
-  "ar": {
-   "questions": [
-    "احكِ لي عن آخر مرة واجهت فيها ده: \"Egyptian freelancers waste a lot of time making a professional CV and portfolio in Arabic and English\". إيه اللي حصل؟",
-    "عملت إيه وقتها؟ إيه اللي جربته لحد دلوقتي؟",
-    "ده كلّفك كام، فلوس أو ساعات؟",
-    "إزاي بتتعامل مع الموضوع ده دلوقتي؟ بتستخدم أنهي أدوات أو تطبيقات أو ناس؟",
-    "ليه الحاجات اللي جربتها محلّتش المشكلة؟",
-    "امتى آخر مرة دفعت في حاجة عشان تتعامل مع ده؟ كانت إيه؟",
-    "مين كمان بيشارك لما بتتعامل مع ده؟",
-    "مين كمان المفروض أتكلم معاه عن الموضوع ده؟"
-   ],
-   "avoid": [
-    "هل ممكن تستخدم تطبيق ...؟",
-    "هتدفع كام في ...؟",
-    "الفكرة عاجباك؟",
-    "تعرض المنتج قبل ما يحكي المشكلة"
-   ]
   }
  },
  "lint": [
   {
-   "question": "Tell me about the last time you ran into this: \"Egyptian freelancers waste a lot of time making a professional CV and portfolio in Arabic and English\". What happened?",
+   "question": "Tell me about the last time you ran into this: \"People want to chat with AI\". What happened?",
    "ok": true,
    "problems": [],
    "rewrite": null
@@ -92,54 +73,6 @@
   },
   {
    "question": "Who else should I talk to about this?",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "احكِ لي عن آخر مرة واجهت فيها ده: \"Egyptian freelancers waste a lot of time making a professional CV and portfolio in Arabic and English\". إيه اللي حصل؟",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "عملت إيه وقتها؟ إيه اللي جربته لحد دلوقتي؟",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "ده كلّفك كام، فلوس أو ساعات؟",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "إزاي بتتعامل مع الموضوع ده دلوقتي؟ بتستخدم أنهي أدوات أو تطبيقات أو ناس؟",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "ليه الحاجات اللي جربتها محلّتش المشكلة؟",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "امتى آخر مرة دفعت في حاجة عشان تتعامل مع ده؟ كانت إيه؟",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "مين كمان بيشارك لما بتتعامل مع ده؟",
-   "ok": true,
-   "problems": [],
-   "rewrite": null
-  },
-  {
-   "question": "مين كمان المفروض أتكلم معاه عن الموضوع ده؟",
    "ok": true,
    "problems": [],
    "rewrite": null

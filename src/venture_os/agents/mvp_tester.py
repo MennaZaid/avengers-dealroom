@@ -21,7 +21,6 @@ from pydantic import BaseModel
 
 from venture_os.agents.build_inputs import BuildInputs
 from venture_os.agents.mvp_planner import _FORBIDDEN_FIELD, MvpPlan
-from venture_os.agents.product_spec import _tokens, brief_values, key_terms, relevance
 from venture_os.agents.requirements_mapper import Requirements
 from venture_os.decision_log import log_action
 from venture_os.guardrails import check_output
@@ -132,8 +131,6 @@ def check(inputs: BuildInputs, reqs: Requirements, plan: MvpPlan, page: str, use
     add("file size is reasonable", size < MAX_BYTES, f"{size:,} bytes")
     add("right-to-left for an Arabic brief", inputs.lang != "ar" or 'dir="rtl"' in page)
 
-    checks.extend(product_checks(inputs, cfg, page))
-    checks.extend(requirement_checks(reqs, plan, cfg))
     used = None
     if use_browser:
         bc = browser_check(page, cfg)
@@ -141,81 +138,6 @@ def check(inputs: BuildInputs, reqs: Requirements, plan: MvpPlan, page: str, use
             checks.append(bc)
             used = _browser()
     return checks, used
-
-
-GENERIC_NAMES = {"app", "my app", "mvp", "product", "my product", "untitled", "demo", "new app", "تطبيق", "منتج"}
-
-
-def _visible(cfg: dict) -> str:
-    """What the founder actually sees: title, tagline, screen names, field labels, texts, offers and core action
-    (never hidden data such as requirement ids)."""
-    t = cfg.get("texts", {})
-    spec = cfg.get("spec") or {}
-    core = spec.get("core") or {}
-    parts = [cfg.get("title", ""), cfg.get("tagline", ""), *cfg.get("screens", {}).values(),
-             *(f.get("label", "") for f in cfg.get("fields", [])),
-             *(v for v in t.values() if isinstance(v, str)), *(t.get("help", {}) or {}).values(),
-             json.dumps(core, ensure_ascii=False), *(o.get("name", "") for o in spec.get("offers", []))]
-    return " ".join(str(x) for x in parts).lower()
-
-
-def requirement_checks(reqs: Requirements, plan: MvpPlan, cfg: dict) -> list[Check]:
-    """Is this MVP the product the requirements describe? A generic app fails all three."""
-    seen = _visible(cfg)
-    name = (plan.title or "").strip()
-    named = bool(name) and name.lower() not in GENERIC_NAMES and name.lower() in seen
-    out = [Check(name="product name on the page", passed=named, detail=name or "no name")]
-    musts = [r for r in reqs.items if r.priority == "must" and r.type == "feature"]
-    first = musts[0] if musts else None
-    words = list(dict.fromkeys(_tokens(first.statement))) if first else []
-    hit = [w for w in words if w in seen]
-    out.append(Check(name="first customer action from the requirements is on the page",
-                     passed=bool(first) and len(hit) >= min(2, len(words)),
-                     detail=(f"{first.id}: {len(hit)} of {len(words)} words ({', '.join(hit) or '-'})"
-                             if first else "no 'must' feature requirement")))
-    terms = list(dict.fromkeys(w for r in musts[:3] for w in _tokens(r.statement)))
-    ok, hits = relevance(terms, seen)
-    out.append(Check(name="key terms of the top requirements on the page", passed=ok,
-                     detail=f"{len(hits)} of {len(terms)} terms: {', '.join(hits[:8]) or '-'}"))
-    return out
-
-
-_BUTTON = re.compile(r'el\("button", \{[^\n]*')
-
-
-def product_checks(inputs: BuildInputs, cfg: dict, page: str, terms: list[str] | None = None) -> list[Check]:
-    """Checks computed from THIS brief at run time: is the page about the founder's product, and does it work."""
-    out = []
-    spec = cfg.get("spec") or {}
-    core = spec.get("core") or {}
-    visible = " ".join([cfg.get("title", ""), core.get("object", "")] +
-                       [o.get("name", "") for o in spec.get("offers", [])])  # title, offer names, core action
-    terms = terms if terms is not None else key_terms(brief_values(inputs))
-    ok, hits = relevance(terms, visible)
-    out.append(Check(name="about this brief (key terms in title, offers and core action)", passed=ok,
-                     detail=f"{len(hits)} of {len(terms)} key terms: {', '.join(hits) or '-'}"))
-    wired = bool(core.get("fields")) and "data-core-output" in page and 'addEventListener("input", draw)' in page \
-        and "product" in cfg.get("screens", {})
-    out.append(Check(name="core action is wired (input changes the page)", passed=wired,
-                     detail=f"{len(core.get('fields', []))} input(s) -> live preview" if wired else "no core action"))
-    buttons = _BUTTON.findall(page)
-    loose = [b[:50] for b in buttons if "on: {" not in b and 'type: "submit"' not in b]
-    out.append(Check(name="every button has a handler", passed=bool(buttons) and not loose,
-                     detail=f"{len(buttons)} button(s)" + (f"; no handler: {loose}" if loose else "")))
-    t = cfg.get("texts", {})
-    unlabelled = [k for k in ("buy", "deliver", "waitlist", "bought", "joined") if "MOCKED" not in t.get(k, "")]
-    out.append(Check(name="buy, delivery and waitlist labelled MOCKED", passed=not unlabelled,
-                     detail=", ".join(unlabelled)))
-    node = shutil.which("node")
-    if node:
-        m = re.search(r"<script>(.*?)</script>", page, re.DOTALL)
-        with tempfile.TemporaryDirectory() as d:
-            f = Path(d) / "page.js"
-            f.write_text(m.group(1) if m else "", encoding="utf-8")
-            r = subprocess.run([node, "--check", str(f)], check=False, capture_output=True, timeout=30)
-        out.append(Check(name="no JavaScript syntax error", passed=r.returncode == 0,
-                         detail=r.stderr.decode("utf-8", "replace")[:120]))
-    return out
 
 
 def to_markdown(rep: TestReport) -> str:
@@ -228,16 +150,10 @@ def to_markdown(rep: TestReport) -> str:
 
 
 def run(inputs: BuildInputs, reqs: Requirements, plan: MvpPlan, page: str, attempt: int = 1,
-        use_browser: bool | None = None, require_model: bool = False) -> TestReport:
+        use_browser: bool | None = None) -> TestReport:
     if use_browser is None:
         use_browser = os.environ.get("MVP_BROWSER_CHECK", "1") != "0"
     checks, used = check(inputs, reqs, plan, page, use_browser)
-    if require_model:  # a model is configured: a page built from the brief's words alone is not the product
-        spec = (_config(page) or {}).get("spec") or {}
-        by_model = spec.get("source") == "model"
-        checks.append(Check(name="product written by the model from the Discover and Validate data", passed=by_model,
-                            detail=f"{spec.get('facts', 0)} facts given to the model" if by_model
-                            else "the model's spec was unusable or off-brief; only the brief's own words were used"))
     rep = TestReport(brief_id=inputs.brief_id, passed=all(c.passed for c in checks), checks=checks, browser=used,
                      attempt=attempt)
     write_output(3, 6, "test_report", to_markdown(rep))

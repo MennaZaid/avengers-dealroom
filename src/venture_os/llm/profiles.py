@@ -18,11 +18,15 @@ from __future__ import annotations
 
 import json
 import os
+import time
 from collections.abc import Callable
 from dataclasses import dataclass
 
+import httpx
+
 from venture_os.config import Settings
 from venture_os.llm import client
+from venture_os.llm.client import clean_json_text
 
 DEFAULT_MODEL = "qwen3:4b-instruct"  # same default as docker-compose.yml
 DEFAULT_BASE_URL = "http://localhost:11434/v1"  # Ollama from the host
@@ -41,12 +45,22 @@ class Profile:
         """One JSON-mode chat call. Returns the JSON text (reasoning blocks and fences stripped).
         Timeout: LLM_TIMEOUT seconds (default 900; a 4B model on a laptop CPU writes ~4 tokens/s)."""
         timeout = timeout or float(os.environ.get("LLM_TIMEOUT", "900"))
-        mark = client.usage_mark()
-        text = client.chat_json(messages, timeout=timeout, profile=self.name)  # type: ignore[arg-type]
-        for c in client.usage_calls(mark):  # the model that actually answered (after any fallback)
-            _USAGE.append({"profile": self.name, "model": c.model, "prompt_tokens": c.prompt_tokens,
-                           "completion_tokens": c.completion_tokens})
-        return text
+        key = os.environ.get(self.api_key_env, "") if self.api_key_env else Settings().llm_api_key
+        headers = {"Authorization": f"Bearer {key}"} if key else {}
+        payload = {"model": self.model, "messages": messages, "temperature": 0,
+                   "response_format": {"type": "json_object"}}
+        if self.reasoning_effort:
+            payload["reasoning_effort"] = self.reasoning_effort
+        started = time.monotonic()
+        r = httpx.post(self.base_url.rstrip("/") + "/chat/completions", headers=headers, timeout=timeout,
+                       json=payload)
+        r.raise_for_status()
+        data = r.json()
+        usage = data.get("usage") or {}
+        client.record_usage(self.name, self.model, usage, time.monotonic() - started)  # team cost ledger
+        _USAGE.append({"profile": self.name, "model": self.model, "prompt_tokens": usage.get("prompt_tokens"),
+                       "completion_tokens": usage.get("completion_tokens")})
+        return clean_json_text(data["choices"][0]["message"]["content"] or "")
 
 
 _USAGE: list[dict] = []  # token counts per call for the run report (cost stays $0 on free/local models)

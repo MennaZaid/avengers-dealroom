@@ -1,6 +1,6 @@
 """Phase 3, step 2: MVP planner.
 
-The template (booking, directory, tracker, library, calculator) follows the product spec's offer kind; each template
+Code picks one of five templates from the idea (booking, directory, tracker, library, calculator); each template
 has fixed screens and flows, so the plan always holds together. The model (prompts/mvp_planner.md) only fills
 the title, tagline, the main record's form fields and which requirements each screen covers; code checks every
 value. If the model is unavailable or its answer is unusable, a fixed per-template plan is used.
@@ -39,19 +39,25 @@ TEMPLATES: dict[str, dict] = {
     "booking": {"screens": {"home": ("Services", "الخدمات"), "add": ("Book", "احجز"),
                             "list": ("My bookings", "حجوزاتي"), "providers": ("Providers", "مقدمو الخدمة"),
                             "feedback": ("Feedback", "رأيك")},
-                "flows": [["home", "add", "list"], ["providers", "home"], ["list", "feedback"]]},
+                "flows": [["home", "add", "list"], ["providers", "home"], ["list", "feedback"]],
+                "words": ("book", "booking", "appointment", "schedul", "reserve", "حجز", "موعد", "مواعيد")},
     "directory": {"screens": {"home": ("Browse", "تصفح"), "add": ("Add a listing", "أضف عرضاً"),
                               "list": ("My listings", "عروضي"), "feedback": ("Feedback", "رأيك")},
-                  "flows": [["home"], ["add", "list"], ["list", "feedback"]]},
+                  "flows": [["home"], ["add", "list"], ["list", "feedback"]],
+                  "words": ("marketplace", "directory", "listing", "connect", "سوق", "دليل", "يربط", "تربط")},
     "tracker": {"screens": {"home": ("Dashboard", "لوحة المتابعة"), "add": ("Add a record", "أضف سجلاً"),
                             "list": ("Records", "السجلات"), "feedback": ("Feedback", "رأيك")},
-                "flows": [["add", "list", "home"], ["home", "feedback"]]},
+                "flows": [["add", "list", "home"], ["home", "feedback"]],
+                "words": ("track", "stock", "inventory", "monitor", "log", "تتبع", "مخزون", "متابعة", "جرد")},
     "library": {"screens": {"home": ("Library", "المكتبة"), "add": ("Add an item", "أضف عنصراً"),
                             "list": ("Saved", "المحفوظات"), "feedback": ("Feedback", "رأيك")},
-                "flows": [["home", "list"], ["add", "home"], ["home", "feedback"]]},
+                "flows": [["home", "list"], ["add", "home"], ["home", "feedback"]],
+                "words": ("course", "lesson", "template", "content", "tutorial", "library", "learn", "كورس", "دروس",
+                          "قوالب", "محتوى", "تعليم", "دورة")},
     "calculator": {"screens": {"home": ("Calculator", "الحاسبة"), "list": ("Saved results", "النتائج المحفوظة"),
                                "feedback": ("Feedback", "رأيك")},
-                   "flows": [["home", "list"], ["home", "feedback"]]},
+                   "flows": [["home", "list"], ["home", "feedback"]],
+                   "words": ("calculat", "estimate", "quote", "compute", "حاسبة", "حساب", "تقدير")},
 }
 # Fixed fields per template (fallback and safe defaults): (English label, Arabic label, type)
 _DEFAULT_FIELDS = {
@@ -94,14 +100,15 @@ class MvpPlan(BaseModel):
     model: str | None = None
 
 
-# Offer kind (decided by the product spec, i.e. by the model) -> which fixed screens support the product screen.
-KIND_TEMPLATE = {"tracker_dashboard": "tracker", "booking_service": "booking", "marketplace": "directory",
-                 "interactive_tool": "calculator", "content_course": "library", "digital_download": "library"}
-
-
-def choose_template(offer_kind: str | None = None) -> str:
-    """No keyword matching: the template follows the offer kind from the product spec; unknown -> directory."""
-    return KIND_TEMPLATE.get(offer_kind or "", "directory")
+def choose_template(inputs: BuildInputs, reqs: Requirements) -> str:
+    """Rules, not the model: count template words in the idea, problem and requirements."""
+    text = " ".join([i.text for i in inputs.items if i.kind in ("idea", "pain", "supply")] +
+                    [r.statement for r in reqs.items]).lower()
+    scores = {t: sum(text.count(w) for w in spec["words"]) for t, spec in TEMPLATES.items()}
+    if any(i.kind == "supply" for i in inputs.items):
+        scores["booking"] += 1  # two-sided: providers + customers
+    best = max(scores, key=lambda t: scores[t])
+    return best if scores[best] > 0 else "directory"
 
 
 def _screens(template: str, lang: str) -> dict[str, str]:
@@ -202,7 +209,7 @@ def to_markdown(plan: MvpPlan, reqs: Requirements) -> str:
     rq = {r.id: r for r in reqs.items}
     lines = ["# Phase 3, step 3: MVP plan", "", f"Brief id: `{plan.brief_id}`", "",
              f"**{plan.title}**: {plan.tagline}", "",
-             (f"Template: **{plan.template}** (follows the product spec's offer kind). Drafted by: "
+             (f"Template: **{plan.template}** (chosen by fixed rules from the idea). Drafted by: "
              f"{'model ' + (plan.model or '') if plan.source == 'model' else 'fixed rules (no model)'}."), "",
              "## Screens", ""]
     for sid, name in plan.screens.items():
@@ -223,7 +230,7 @@ def to_markdown(plan: MvpPlan, reqs: Requirements) -> str:
 
 
 def run(inputs: BuildInputs, reqs: Requirements, chat_json: Callable[[list[dict]], str] | None = None,
-        model: str | None = None, feedback: list[str] | None = None, offer_kind: str | None = None) -> MvpPlan:
+        model: str | None = None, feedback: list[str] | None = None) -> MvpPlan:
     """`feedback`: problems found by the validator in the previous round (logged; the plan is redone)."""
     if chat_json is None:
         from venture_os.config import Settings
@@ -231,7 +238,7 @@ def run(inputs: BuildInputs, reqs: Requirements, chat_json: Callable[[list[dict]
         from venture_os.llm.client import live_enabled
         if live_enabled():
             chat_json, model = live_chat, model or Settings().llm_model_extract
-    template = choose_template(offer_kind)
+    template = choose_template(inputs, reqs)
     plan = None
     if chat_json is not None:
         try:

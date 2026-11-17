@@ -1,10 +1,8 @@
-"""Run one founder brief through the whole pipeline: Discover -> Validate -> Build -> Commercial -> Launch -> Operate.
+"""Demo run: one founder brief through the whole pipeline, Discover -> Validate -> Build -> Commercial setup.
 
 Usage:
-  python scripts/run_pipeline_demo.py --brief-id <id> [--api http://localhost:8010]
-
-The brief must be one the founder described and confirmed in the onboarding chat (the id is shown there).
-There are no stored or sample briefs: the system works on whatever idea the founder brings.
+  python scripts/run_pipeline_demo.py evals/briefs/3_weak_chatbot_wrapper.json [--api http://localhost:8010]
+  python scripts/run_pipeline_demo.py --brief-id <id> [--api ...]        # continue an existing brief
 
 Every run goes through the stage API like the UI. The script NEVER decides and never enters a number: at each
 gate it prints the recommendation and waits until the founder decides in the UI (Pipeline page), and in
@@ -16,10 +14,14 @@ from __future__ import annotations
 
 import sys
 import time
+from pathlib import Path
 
 import httpx
 
-STAGES = ("discover", "validate", "build", "commercial", "launch", "operate")
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from run_demo_brief import load  # stores a rehearsal brief + the founder session that owns it)
+
+STAGES = ("discover", "validate", "build", "commercial")
 WAITING = {"running", "queued"}
 POLL = 5
 
@@ -104,15 +106,17 @@ def run_stage(api: str, brief_id: str, stage: str) -> bool:
 def main() -> None:
     args = sys.argv[1:]
     api = args[args.index("--api") + 1] if "--api" in args else "http://localhost:8010"
-    if "--brief-id" not in args:
-        raise SystemExit("usage: python scripts/run_pipeline_demo.py --brief-id <id from the onboarding chat>")
-    brief_id = args[args.index("--brief-id") + 1]
-    print(f"brief {brief_id}: decide at each gate on the Pipeline page with the session that confirmed it")
+    if "--brief-id" in args:
+        brief_id = args[args.index("--brief-id") + 1]
+        print(f"brief {brief_id} (existing; use the founder session that confirmed it)")
+    else:
+        brief_id, session = load(Path(args[0]))
+        print(f"brief {brief_id}\nfounder session {session}  <- paste this on the Pipeline page to decide")
     for stage in STAGES:
         if not run_stage(api, brief_id, stage):
             print(f"pipeline ends at {stage}: the founder did not choose go (or the stage was refused).")
             return
-    print("All six phases approved by the founder. Posting, payments and delivery stayed MOCKED.")
+    print("Phases 1-4 approved by the founder. Phase 5 (sell/deliver) is MOCKED and Phase 6 STUBBED.")
 
 
 if __name__ == "__main__":

@@ -52,7 +52,7 @@ const el = (tag, attrs, ...kids) => {
     if (k === "on") for (const [ev, fn] of Object.entries(v)) n.addEventListener(ev, fn);
     else if (v !== null && v !== undefined) n.setAttribute(k, v);
   }
-  for (const k of kids.flat(Infinity)) n.append(k instanceof Node ? k : document.createTextNode(String(k ?? "")));
+  for (const k of kids.flat()) n.append(k instanceof Node ? k : document.createTextNode(String(k ?? "")));
   return n;
 };
 const nums = C.fields.filter(f => f.type === "number");
@@ -101,77 +101,7 @@ const providerFields = [
   {id: "p3", label: T.provider_area, type: "text", required: false},
 ];
 
-// Fills {f1}-style slots with what the customer typed (text only, never HTML).
-const fill = (line, vals) => String(line).replace(/\{(f\d+)\}/g, (m, id) => vals[id] || "…");
-function sampleText(vals) {
-  const S = C.spec;
-  return [fill(S.sample_title, vals), ""].concat(S.sample_lines.map(l => fill(l, vals))).join("\n");
-}
-function downloadSample(vals) {
-  try {
-    const blob = new Blob([sampleText(vals) + "\n\n" + T.banner + "\n"], {type: "text/plain;charset=utf-8"});
-    const a = el("a", {href: URL.createObjectURL(blob), download: "sample-" + C.brief_id.slice(0, 8) + ".txt"});
-    document.body.append(a); a.click(); a.remove();
-  } catch (e) { /* downloads blocked: the preview stays on screen */ }
-}
-
-const BLOCKS = {
-  hero(sec, S) {
-    sec.append(el("div", {class: "card", "data-block": "hero"}, el("h2", {}, S.sample_title),
-      el("p", {}, C.tagline)));
-  },
-  offers(sec, S) {
-    sec.append(el("h3", {}, T.offers));
-    S.offers.forEach((o, i) => {
-      const status = el("p", {class: "muted", "data-order-status": ""});
-      const deliver = el("button", {class: "small", type: "button", hidden: "", "data-action": "deliver", on: {click: () => downloadSample(lastVals)}}, T.deliver);
-      sec.append(el("div", {class: "card", "data-block": "offer"},
-        el("b", {}, o.name), el("div", {}, T.inside + ": " + o.contents), el("div", {}, T.for + ": " + o.for),
-        el("div", {}, T.price + ": " + o.price + (o.price_assumed ? " (" + T.assumption + ")" : "")),
-        el("button", {class: "primary", type: "button", "data-action": "buy", on: {click: () => {
-          const orders = load("orders"); orders.push({offer: i, _at: new Date().toLocaleString(), mocked: true});
-          save("orders", orders); status.textContent = T.bought; deliver.hidden = false; }}}, T.buy),
-        status, deliver));
-    });
-  },
-  core(sec, S) {
-    const out = el("pre", {class: "card", "data-core-output": "", style: "white-space:pre-wrap"});
-    const form = el("form", {"data-block": "core"}, el("h3", {}, T.try),
-      el("p", {class: "help"}, S.core.verb + " " + S.core.object + " " + S.core.result),
-      S.core.fields.map(f => fieldInput(Object.assign({type: "text"}, f), "k_")));
-    const draw = () => { lastVals = {}; S.core.fields.forEach(f => { lastVals[f.id] = form.elements[f.id].value; });
-      out.textContent = sampleText(lastVals); };
-    form.addEventListener("input", draw);
-    form.addEventListener("submit", (e) => { e.preventDefault(); draw(); });
-    sec.append(form, el("h3", {}, T.preview), out,
-      el("button", {class: "small", type: "button", "data-action": "print", on: {click: () => window.print()}}, T.print), " ",
-      el("button", {class: "small", type: "button", "data-action": "download", on: {click: () => downloadSample(lastVals)}}, T.download));
-    draw();
-  },
-  delivery(sec, S) { sec.append(el("p", {class: "muted", "data-block": "delivery"}, T.delivery + ": " + S.delivery)); },
-  waitlist(sec) {
-    const msg = el("p", {class: "muted"});
-    const form = el("form", {"data-block": "waitlist"}, el("label", {for: "w_email"}, T.email),
-      el("input", {id: "w_email", name: "email", type: "email", required: ""}),
-      el("button", {class: "primary", type: "submit"}, T.waitlist), msg);
-    form.addEventListener("submit", (e) => { e.preventDefault();
-      const w = load("waitlist"); w.push({email: form.elements.email.value, _at: new Date().toLocaleString()});
-      save("waitlist", w); form.reset(); msg.textContent = T.joined; });
-    sec.append(form);
-  },
-  faq(sec, S) {
-    if (!S.faq.length) return;
-    sec.append(el("h3", {}, T.faq));
-    S.faq.forEach(([q, a]) => sec.append(el("details", {class: "card", "data-block": "faq"}, el("summary", {}, q), el("p", {}, a))));
-  },
-};
-let lastVals = {};
-
 const SCREENS = {
-  product(sec) {  // block order comes from the product spec
-    const S = C.spec;
-    S.blocks.filter(b => BLOCKS[b]).forEach(b => BLOCKS[b](sec, S));
-  },
   add(sec) {
     const fields = C.fields.slice();
     const providers = load("providers");

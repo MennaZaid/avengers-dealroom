@@ -1,68 +1,62 @@
 {
- "brief_id": "3e540c9c-0f6b-43ed-b4f6-aabf69c1c037",
+ "brief_id": "0e90137e-445c-43f1-abd4-d8849517daf7",
  "version": 1,
  "required": {
-  "idea": "Create a bundle of CV and Notion templates in Arabic for Egyptian freelancers.",
-  "skills": "design on Canva and Notion, and content writing",
-  "budget": "3000egp",
-  "time_available": "10 hours a week for two month",
-  "target_market": "Egyptian freelancers in design, writing and programming, in Cairo, Egypt",
+  "idea": "A generic AI chatbot app for everyone",
+  "skills": "I post on social media sometimes",
+  "budget": "0 USD",
+  "time_available": "2 hours a week for 2 months",
+  "target_market": "Everyone",
   "values": null
  },
  "unknown": [
   "values"
  ],
  "optional": {
-  "problem": "Egyptian freelancers waste a lot of time making a professional CV and portfolio in Arabic and English",
+  "problem": "People want to chat with AI",
   "supply_side": null,
-  "business_model": null,
-  "known_competitors": null,
-  "technical_preferences": null
+  "business_model": "monthly subscription",
+  "known_competitors": "ChatGPT, Gemini, Claude, Copilot, Meta AI",
+  "technical_preferences": "mobile app"
  },
  "tags": {
   "languages": {
    "basis": "rules",
    "value": [
-    "en",
-    "ar"
+    "en"
    ]
   },
   "industries": {
-   "basis": "model",
+   "basis": "rules",
    "value": [
-    "professional_services",
-    "education"
+    "software_saas"
    ]
   },
   "country_code": {
    "basis": "rules",
-   "value": "EG"
+   "value": "unknown"
   },
   "customer_type": {
-   "basis": "model",
+   "basis": "rules",
    "value": "b2c"
   },
   "revenue_model": {
    "basis": "rules",
-   "value": "unknown"
+   "value": "subscription"
   }
  },
  "budget_parsed": {
-  "max": 300,
-  "min": 300,
-  "currency": "EGP",
+  "max": 0,
+  "min": 0,
+  "currency": "USD",
   "currency_source": "stated"
  },
  "product_type": {
-  "label": "template_or_asset",
+  "label": "mobile_app",
   "group": "digital_product",
-  "trigger": "keyword 'template'",
+  "trigger": "keyword 'mobile app'",
   "decided_by": "rules",
   "clarifying_question": null
  },
- "open_questions": [
-  "What is the average price range for similar template bundles targeting Egyptian freelancers?",
-  "What is the estimated number of active freelance designers, writers, and programmers currently based in Cairo?",
-  "Are there any legal requirements or licenses needed when selling digital products like this within Egypt?"
- ]
+ "open_questions": []
 }

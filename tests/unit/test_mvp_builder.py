@@ -21,7 +21,7 @@ def setup(name="pharmastock_v1.json", template=None):
     inp = build_inputs.collect(ConfirmedBrief.from_file(FIX / name))
     reqs = requirements_mapper.Requirements(brief_id=inp.brief_id, source="rules",
                                             items=requirements_mapper._number(requirements_mapper.from_rules(inp)))
-    plan = mvp_planner.from_rules(inp, reqs, template or mvp_planner.choose_template())
+    plan = mvp_planner.from_rules(inp, reqs, template or mvp_planner.choose_template(inp, reqs))
     return inp, reqs, plan
 
 
@@ -48,8 +48,7 @@ def test_no_sample_data_is_shipped():
     _inp, _reqs, plan = setup("nadafa_v1.json", "booking")
     cfg = config_of(mvp_builder.render(mvp_builder.config(plan, {}, 1)))
     assert set(cfg) == {"brief_id", "brief_version", "lang", "template", "title", "tagline", "screens", "fields",
-                        "screen_requirements", "texts", "spec"}  # no items, providers or reviews
-    assert cfg["spec"] is None  # no spec given: no product blocks
+                        "screen_requirements", "texts"}  # no items, providers or reviews
 
 
 def test_hostile_text_cannot_escape_the_page():

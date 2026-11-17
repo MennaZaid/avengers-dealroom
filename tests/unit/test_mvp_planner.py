@@ -23,9 +23,8 @@ def model(answer):
 
 
 def test_template_is_chosen_by_rules():
-    assert mvp_planner.choose_template("booking_service") == "booking"  # the offer kind decides, no keywords
-    assert mvp_planner.choose_template("tracker_dashboard") == "tracker"
-    assert mvp_planner.choose_template(None) == mvp_planner.choose_template("other") == "directory"
+    assert mvp_planner.choose_template(*setup("nadafa_v1.json")) == "booking"  # cleaner booking app
+    assert mvp_planner.choose_template(*setup("pharmastock_v1.json")) == "tracker"  # stock tracking
 
 
 def test_rules_plan_is_complete_and_in_the_brief_language():
@@ -56,7 +55,7 @@ def test_model_values_are_checked():
 def test_unusable_model_answer_falls_back_to_rules():
     inp, reqs = setup("pharmastock_v1.json")
     plan = mvp_planner.run(inp, reqs, chat_json=model({"title": "x", "fields": []}), model="qwen3:4b-instruct")
-    assert plan.source == "rules" and plan.model is None and plan.template == "directory"  # no offer kind given: no guess
+    assert plan.source == "rules" and plan.model is None and plan.template == "tracker"
 
 
 def test_no_title_with_an_income_promise():
@@ -82,5 +81,5 @@ def test_run_writes_the_plan_and_a_log_entry():
     inp, reqs = setup("nadafa_v1.json")
     mvp_planner.run(inp, reqs, chat_json=None)
     text = (Path(os.environ["OUTPUTS_DIR"]) / "phase3_step3_mvp_plan.md").read_text(encoding="utf-8")
-    assert "Brief id:" in text and "directory" in text and "Fits the founder's constraints" in text
+    assert "Brief id:" in text and "booking" in text and "Fits the founder's constraints" in text
     assert read_log()[-1]["agent"] == "mvp_planner"

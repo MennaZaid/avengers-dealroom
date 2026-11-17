@@ -190,49 +190,6 @@ def interview_summary(rows: list[dict]) -> list[dict]:
     return out
 
 
-def pain_statement(db) -> str:
-    """Customer + pain, in the founder's words (falls back to the idea when the brief names no problem)."""
-    who = db.optional.get("target_customer") or db.required.get("target_market") or ""
-    what = db.optional.get("problem") or db.required.get("idea") or ""
-    return f"{who} {what}".strip()
-
-
-def relevance_filter(evidence: list, statement: str, cfg: dict, trace: Trace, embed=None) -> tuple[list, dict]:
-    """Drop pain pages whose bge-m3 cosine similarity to the pain statement is under relevance.min_similarity.
-    Runs only with live models (never in tests/CI); without an embedding model it is skipped, never a crash."""
-    from venture_os.config import Settings
-
-    if embed is None:
-        if os.environ.get("LLM_MODE", Settings().llm_mode) != "live":
-            return evidence, {"ran": False, "reason": "LLM_MODE is not live"}
-        from venture_os.evidence.retrieval import embed
-    min_sim = float((cfg.get("relevance") or {}).get("min_similarity", 0.35))
-    pages = [e for e in evidence if e.chunks]
-    if not statement or not pages:
-        return evidence, {"ran": False, "reason": "no pain statement or no pages"}
-    try:
-        vecs = embed([statement] + [" ".join(c.text for c in e.chunks)[:2000] for e in pages])
-    except Exception as e:  # noqa: BLE001 - no embedding model: keep every page, say so
-        trace.add("relevance_filter", "skipped", reason=f"{type(e).__name__}: embedding model unavailable")
-        return evidence, {"ran": False, "reason": "embedding model unavailable"}
-
-    def cos(a, b):
-        na, nb = sum(x * x for x in a) ** 0.5, sum(x * x for x in b) ** 0.5
-        return sum(x * y for x, y in zip(a, b, strict=True)) / (na * nb) if na and nb else 0.0
-
-    kept, dropped = [], 0
-    for e, v in zip(pages, vecs[1:], strict=True):
-        sim = cos(vecs[0], v)
-        if sim >= min_sim:
-            kept.append(e)
-        else:
-            dropped += 1
-            trace.add("relevance_filter", "drop_page", query=e.query, url=e.chunks[0].url,
-                      similarity=round(sim, 3), threshold=min_sim)
-    trace.add("relevance_filter", "done", kept=len(kept), dropped=dropped, threshold=min_sim)
-    return kept + [e for e in evidence if not e.chunks], {"ran": True, "kept": len(kept), "dropped": dropped}
-
-
 def run_discover(run_id: str, plan: ResearchPlan, brief: dict, toolbox: Toolbox, store: Any,
                  budget: Budget | None = None, write_files: bool = True) -> dict:
     cfg = gates.load_config()
@@ -286,7 +243,6 @@ def run_discover(run_id: str, plan: ResearchPlan, brief: dict, toolbox: Toolbox,
                 f_comp = pool.submit(comp_agent.run)
                 pain_ev, market_res, comp_res = f_pain.result(), f_market.result(), f_comp.result()
             api_found = market_definer.api_competitors(plan, db, toolbox, trace)
-            pain_ev, relevance = relevance_filter(pain_ev, pain_statement(db), cfg, trace)
             claims = extract_claims(pain_ev + market_res.evidence + comp_res.evidence, plan, chat_x,
                                     extract.model if extract else None)
             reach = None
@@ -322,11 +278,10 @@ def run_discover(run_id: str, plan: ResearchPlan, brief: dict, toolbox: Toolbox,
                                             brief_text=" ".join(str(v) for v in (db.required | db.optional).values() if v))
             interviews = interview_summary(store.interviews(brief["brief_id"]) if hasattr(store, "interviews") else [])
             gate = gates.evaluate_discover(db.product_type.group, db.product_type.label, claims, market.competitors,
-                                           scores, interviews, cfg, relevance=relevance)
+                                           scores, interviews, cfg)
             ids = store.save_claims(run_id, _claim_rows(claims))
             research.update(
-                status="done", relevance=relevance, claims=[c.model_dump() for c in claims],
-                ideas=[i.model_dump() for i in ideas],
+                status="done", claims=[c.model_dump() for c in claims], ideas=[i.model_dump() for i in ideas],
                 scores=[s.model_dump() for s in scores], market=market.model_dump(),
                 interview_plan=iplan.model_dump(), critic=critic.model_dump(), gate=gate.model_dump(),
                 interviews=interviews, report=run_report([c.model_dump() for c in claims if c.type == "fact"],
@@ -397,7 +352,7 @@ def regate(run: dict, interviews_rows: list[dict]) -> dict:
     scores = [IdeaScore.model_validate(s) for s in research.get("scores") or []]
     interviews = interview_summary(interviews_rows)
     gate = gates.evaluate_discover(pt.get("group", "ambiguous"), pt.get("label", "?"), claims, comps, scores,
-                                   interviews, relevance=research.get("relevance"))
+                                   interviews)
     log_action("gate", "evaluate_discover_gate", sources=[], model=None, cost=0.0, approved_by=None,
                run_id=str(run["id"]), stage="discover", outcome=gate.recommendation, trigger="interviews updated",
                interviews=len(interviews))

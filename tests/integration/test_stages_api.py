@@ -97,7 +97,6 @@ def make_brief():
                       "(SELECT id FROM stage_runs WHERE brief_id = %s)", (bid,))
             c.execute("DELETE FROM stage_runs WHERE brief_id = %s", (bid,))
             c.execute("DELETE FROM discover_interviews WHERE brief_id = %s", (bid,))
-            c.execute("DELETE FROM founder_approvals WHERE brief_id = %s", (bid,))
             c.execute("DELETE FROM onboarding_sessions WHERE brief_id = %s", (bid,))
             c.execute("DELETE FROM brief_versions WHERE brief_id = %s", (bid,))
             c.execute("DELETE FROM briefs WHERE id = %s", (bid,))

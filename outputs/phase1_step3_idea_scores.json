@@ -5,204 +5,51 @@
    "criteria": [
     {
      "criterion": "pain_evidence",
-     "score": 3.0,
+     "score": 5.0,
      "evidence_ids": [
-      "C7"
+      "C1"
      ],
      "basis": "evidenced",
-     "note": "C7 mentions changes in Egyptian human resources landscape, including new labor laws and digital HR systems, implying freelancers may face challenges in creating professional documents like CVs in a ch"
+     "note": "The founder directly tested the app against others and found it worked better than free alternatives, showing real user pain and a gap in performance."
     },
     {
      "criterion": "people_pay",
-     "score": 2.0,
+     "score": 4.0,
      "evidence_ids": [
-      "C24"
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
      ],
      "basis": "evidenced",
-     "note": "C24 references Notion resume templates being sold, suggesting there is market demand for such tools, though it does not specify pricing or Arabic-language offerings."
+     "note": "Multiple free AI chat apps exist, and many are rated highly, indicating that users are willing to pay for AI chat, even if currently using free options."
     },
     {
      "criterion": "competition",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "No evidence directly addresses competition in Arabic CV or Notion portfolio templates for Egyptian freelancers; only general mentions of HR services and business services exist."
-    },
-    {
-     "criterion": "skill_fit",
-     "score": 4.0,
-     "evidence_ids": [
-      "brief:skills"
-     ],
-     "basis": "evidenced",
-     "note": "skills match: design, notion, writing"
-    },
-    {
-     "criterion": "budget_fit",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "~$50 cash needed; budget compared in the founder's own currency only when it is USD; otherwise ASSUMPTION"
-    },
-    {
-     "criterion": "time_fit",
-     "score": 5.0,
-     "evidence_ids": [
-      "brief:time_available"
-     ],
-     "basis": "evidenced",
-     "note": "~30 h needed (ASSUMPTION) vs ~87 h available"
-    },
-    {
-     "criterion": "values_fit",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "The founder's values are not stated in the brief, so there is no evidence to confirm alignment with stated values."
-    },
-    {
-     "criterion": "digital_deliverability",
-     "score": 5.0,
-     "evidence_ids": [
-      "brief:product_type"
-     ],
-     "basis": "evidenced",
-     "note": "product type template_or_asset"
-    },
-    {
-     "criterion": "reachable_market",
-     "score": 4.0,
-     "evidence_ids": [
-      "C28"
-     ],
-     "basis": "evidenced",
-     "note": "Individuals using the Internet (% of population), Egypt, Arab Rep., 2024: 74.6"
-    }
-   ],
-   "total": 3.4,
-   "proposed_by": "openai/gpt-oss-120b (proposed) + rules"
-  },
-  {
-   "idea_id": "I2",
-   "criteria": [
-    {
-     "criterion": "pain_evidence",
-     "score": 3.0,
-     "evidence_ids": [
-      "C7"
-     ],
-     "basis": "evidenced",
-     "note": "C7 mentions changes in Egyptian labor and HR practices, implying freelancers face evolving needs in structuring portfolios and CVs, but does not directly describe Arabic/English CV drafting pain."
-    },
-    {
-     "criterion": "people_pay",
      "score": 2.0,
      "evidence_ids": [
-      "C24"
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
      ],
      "basis": "evidenced",
-     "note": "C24 references Notion resume templates being sold, suggesting commercial value, but only in English and not specifically for Arabic freelancers or in Egypt."
-    },
-    {
-     "criterion": "competition",
-     "score": 3.0,
-     "evidence_ids": [
-      "C18",
-      "C19",
-      "C20",
-      "C21",
-      "C22"
-     ],
-     "basis": "evidenced",
-     "note": "Multiple evidence items mention existing HR and staffing companies in Egypt, indicating a competitive landscape, but no direct competition for CV/portfolio guides in Arabic."
-    },
-    {
-     "criterion": "skill_fit",
-     "score": 4.0,
-     "evidence_ids": [
-      "brief:skills"
-     ],
-     "basis": "evidenced",
-     "note": "skills match: writing"
-    },
-    {
-     "criterion": "budget_fit",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "~$30 cash needed; budget compared in the founder's own currency only when it is USD; otherwise ASSUMPTION"
-    },
-    {
-     "criterion": "time_fit",
-     "score": 5.0,
-     "evidence_ids": [
-      "brief:time_available"
-     ],
-     "basis": "evidenced",
-     "note": "~40 h needed (ASSUMPTION) vs ~87 h available"
-    },
-    {
-     "criterion": "values_fit",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "Founder's values are not stated, so no alignment can be assessed. The idea is niche and may not reflect broader values."
-    },
-    {
-     "criterion": "digital_deliverability",
-     "score": 5.0,
-     "evidence_ids": [
-      "brief:product_type"
-     ],
-     "basis": "evidenced",
-     "note": "product type ebook_or_guide"
-    },
-    {
-     "criterion": "reachable_market",
-     "score": 4.0,
-     "evidence_ids": [
-      "C28"
-     ],
-     "basis": "evidenced",
-     "note": "Individuals using the Internet (% of population), Egypt, Arab Rep., 2024: 74.6"
-    }
-   ],
-   "total": 3.4,
-   "proposed_by": "openai/gpt-oss-120b (proposed) + rules"
-  },
-  {
-   "idea_id": "I4",
-   "criteria": [
-    {
-     "criterion": "pain_evidence",
-     "score": 3.0,
-     "evidence_ids": [
-      "C7"
-     ],
-     "basis": "evidenced",
-     "note": "C7 mentions changes in Egyptian HR landscape, including new labor laws and digital HR systems, implying freelancers face evolving needs in creating professional materials like CVs."
-    },
-    {
-     "criterion": "people_pay",
-     "score": 2.0,
-     "evidence_ids": [
-      "C24"
-     ],
-     "basis": "evidenced",
-     "note": "C24 references Notion resume templates being offered, but does not indicate a paid subscription or membership model for Arabic templates specifically."
-    },
-    {
-     "criterion": "competition",
-     "score": 3.0,
-     "evidence_ids": [
-      "C18",
-      "C19",
-      "C20",
-      "C21",
-      "C22"
-     ],
-     "basis": "evidenced",
-     "note": "Multiple evidence items describe existing HR and staffing companies in Egypt, suggesting a competitive market for workforce services, but no direct competition for Arabic CV/Notion templates."
+     "note": "Many free AI chat apps are already available, and the market is saturated with strong free alternatives, especially from major players like ChatGPT and Replika."
     },
     {
      "criterion": "skill_fit",
@@ -215,26 +62,106 @@
     },
     {
      "criterion": "budget_fit",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "~$30 cash needed; budget compared in the founder's own currency only when it is USD; otherwise ASSUMPTION"
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$300 cash needed (ASSUMPTION) vs $0"
     },
     {
      "criterion": "time_fit",
-     "score": 5.0,
+     "score": 1.0,
      "evidence_ids": [
       "brief:time_available"
      ],
      "basis": "evidenced",
-     "note": "~30 h needed (ASSUMPTION) vs ~87 h available"
+     "note": "~300 h needed (ASSUMPTION) vs ~17 h available"
     },
     {
      "criterion": "values_fit",
      "score": 3.0,
      "evidence_ids": [],
      "basis": "ASSUMPTION",
-     "note": "Founder's values are not stated, and no evidence links the idea to any stated values; thus, values fit is unsupported."
+     "note": "The founder's stated values are missing, so alignment with values cannot be assessed. The idea promotes accessibility, but no values are provided."
+    },
+    {
+     "criterion": "digital_deliverability",
+     "score": 5.0,
+     "evidence_ids": [
+      "brief:product_type"
+     ],
+     "basis": "evidenced",
+     "note": "product type mobile_app"
+    },
+    {
+     "criterion": "reachable_market",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
+    }
+   ],
+   "total": 3.0,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
+  },
+  {
+   "idea_id": "I4",
+   "criteria": [
+    {
+     "criterion": "pain_evidence",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence directly addresses the pain of finding and sharing AI prompts in a simple, non-competitive way."
+    },
+    {
+     "criterion": "people_pay",
+     "score": 2.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence shows that anyone pays for a solution to the prompt-sharing pain; all listed alternatives are free."
+    },
+    {
+     "criterion": "competition",
+     "score": 1.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The evidence shows many free AI chatbot apps exist, but none are focused on prompt sharing; the market is saturated with free tools, and no differentiation is evident."
+    },
+    {
+     "criterion": "skill_fit",
+     "score": 4.0,
+     "evidence_ids": [
+      "brief:skills"
+     ],
+     "basis": "evidenced",
+     "note": "skills match: social media"
+    },
+    {
+     "criterion": "budget_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$30 cash needed (ASSUMPTION) vs $0"
+    },
+    {
+     "criterion": "time_fit",
+     "score": 1.89,
+     "evidence_ids": [
+      "brief:time_available"
+     ],
+     "basis": "evidenced",
+     "note": "~30 h needed (ASSUMPTION) vs ~17 h available"
+    },
+    {
+     "criterion": "values_fit",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The founder's stated values are missing; no alignment with values can be assessed."
     },
     {
      "criterion": "digital_deliverability",
@@ -247,16 +174,14 @@
     },
     {
      "criterion": "reachable_market",
-     "score": 4.0,
-     "evidence_ids": [
-      "C28"
-     ],
-     "basis": "evidenced",
-     "note": "Individuals using the Internet (% of population), Egypt, Arab Rep., 2024: 74.6"
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
     }
    ],
-   "total": 3.1,
-   "proposed_by": "openai/gpt-oss-120b (proposed) + rules"
+   "total": 2.59,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
   },
   {
    "idea_id": "I1",
@@ -264,31 +189,23 @@
     {
      "criterion": "pain_evidence",
      "score": 3.0,
-     "evidence_ids": [
-      "C7"
-     ],
-     "basis": "evidenced",
-     "note": "C7 mentions changes in Egyptian labor market and rising demand for HR services, implying freelancers face challenges in building professional profiles, though not directly about CV/portfolio creation "
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence cites real people describing pain related to social media content creation or AI prompt crafting."
     },
     {
      "criterion": "people_pay",
      "score": 2.0,
      "evidence_ids": [],
      "basis": "ASSUMPTION",
-     "note": "No evidence shows competitors charging for Arabic CV/portfolio creation; all evidence relates to HR services or labor laws, not course-based solutions."
+     "note": "No evidence shows that competitors charge for solving social media content creation with AI prompts; all listed apps are free."
     },
     {
      "criterion": "competition",
-     "score": 2.0,
-     "evidence_ids": [
-      "C18",
-      "C19",
-      "C20",
-      "C21",
-      "C22"
-     ],
-     "basis": "evidenced",
-     "note": "Multiple entries describe existing HR and staffing companies in Egypt, but none offer Arabic CV or portfolio courses; competition is in HR services, not digital course content."
+     "score": 1.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The evidence lists many free AI chatbot apps, but none are focused on social media content or prompt templates, indicating no differentiation potential."
     },
     {
      "criterion": "skill_fit",
@@ -301,26 +218,28 @@
     },
     {
      "criterion": "budget_fit",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "~$50 cash needed; budget compared in the founder's own currency only when it is USD; otherwise ASSUMPTION"
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$50 cash needed (ASSUMPTION) vs $0"
     },
     {
      "criterion": "time_fit",
-     "score": 4.83,
+     "score": 1.89,
      "evidence_ids": [
       "brief:time_available"
      ],
      "basis": "evidenced",
-     "note": "~60 h needed (ASSUMPTION) vs ~87 h available"
+     "note": "~30 h needed (ASSUMPTION) vs ~17 h available"
     },
     {
      "criterion": "values_fit",
      "score": 3.0,
      "evidence_ids": [],
      "basis": "ASSUMPTION",
-     "note": "The founder's values are not stated; no evidence connects to values like inclusivity, empowerment, or accessibility for Egyptian freelancers."
+     "note": "The founder's values are not stated, and the idea does not explicitly align with any stated values."
     },
     {
      "criterion": "digital_deliverability",
@@ -329,20 +248,18 @@
       "brief:product_type"
      ],
      "basis": "evidenced",
-     "note": "product type online_course"
+     "note": "product type template_or_asset"
     },
     {
      "criterion": "reachable_market",
-     "score": 4.0,
-     "evidence_ids": [
-      "C28"
-     ],
-     "basis": "evidenced",
-     "note": "Individuals using the Internet (% of population), Egypt, Arab Rep., 2024: 74.6"
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
     }
    ],
-   "total": 2.98,
-   "proposed_by": "openai/gpt-oss-120b (proposed) + rules"
+   "total": 2.29,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
   },
   {
    "idea_id": "I3",
@@ -350,27 +267,35 @@
     {
      "criterion": "pain_evidence",
      "score": 3.0,
-     "evidence_ids": [
-      "C7"
-     ],
-     "basis": "evidenced",
-     "note": "C7 mentions changes in Egyptian labor market and rising demand for HR services, implying freelancers face growing need to present themselves professionally, but does not directly describe CV-building "
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No real people describe pain in the provided evidence; the founder's own experience is not cited as a pain point."
     },
     {
      "criterion": "people_pay",
      "score": 2.0,
      "evidence_ids": [],
      "basis": "ASSUMPTION",
-     "note": "No evidence shows any service charging for CV generation, especially in Arabic or for Egyptian freelancers."
+     "note": "No evidence shows that anyone pays for AI-powered content generation tools; all listed alternatives are free, but no one pays for solving this specific pain."
     },
     {
      "criterion": "competition",
-     "score": 2.0,
+     "score": 1.0,
      "evidence_ids": [
-      "C24"
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
      ],
      "basis": "evidenced",
-     "note": "C24 references existing Notion resume templates, suggesting competition in template design, but no indication of commercial CV generators for Arabic speakers or freelancers."
+     "note": "Multiple free AI chatbot apps exist, indicating a saturated market with strong free alternatives."
     },
     {
      "criterion": "skill_fit",
@@ -383,26 +308,28 @@
     },
     {
      "criterion": "budget_fit",
-     "score": 3.0,
-     "evidence_ids": [],
-     "basis": "ASSUMPTION",
-     "note": "~$150 cash needed; budget compared in the founder's own currency only when it is USD; otherwise ASSUMPTION"
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$50 cash needed (ASSUMPTION) vs $0"
     },
     {
      "criterion": "time_fit",
-     "score": 1.93,
+     "score": 1.0,
      "evidence_ids": [
       "brief:time_available"
      ],
      "basis": "evidenced",
-     "note": "~150 h needed (ASSUMPTION) vs ~87 h available"
+     "note": "~80 h needed (ASSUMPTION) vs ~17 h available"
     },
     {
      "criterion": "values_fit",
      "score": 3.0,
      "evidence_ids": [],
      "basis": "ASSUMPTION",
-     "note": "No founder values are stated, so no alignment can be assessed. The idea targets Egyptian freelancers, which may reflect local relevance, but no explicit values are provided."
+     "note": "The founder values social media posting and daily web use, but no explicit values are stated; alignment is inferred but not clearly demonstrated."
     },
     {
      "criterion": "digital_deliverability",
@@ -411,20 +338,96 @@
       "brief:product_type"
      ],
      "basis": "evidenced",
-     "note": "product type web_app"
+     "note": "product type browser_extension"
     },
     {
      "criterion": "reachable_market",
-     "score": 4.0,
-     "evidence_ids": [
-      "C28"
-     ],
-     "basis": "evidenced",
-     "note": "Individuals using the Internet (% of population), Egypt, Arab Rep., 2024: 74.6"
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
     }
    ],
-   "total": 2.69,
-   "proposed_by": "openai/gpt-oss-120b (proposed) + rules"
+   "total": 2.2,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
+  },
+  {
+   "idea_id": "I2",
+   "criteria": [
+    {
+     "criterion": "pain_evidence",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence cites user pain related to AI for social media content creation."
+    },
+    {
+     "criterion": "people_pay",
+     "score": 2.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence shows competitors charging for solving social media content creation with AI."
+    },
+    {
+     "criterion": "competition",
+     "score": 1.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "Evidence lists many free AI chatbot apps, but none relate to social media content creation; competition is not relevant to the idea's domain."
+    },
+    {
+     "criterion": "skill_fit",
+     "score": 2.0,
+     "evidence_ids": [
+      "brief:skills"
+     ],
+     "basis": "evidenced",
+     "note": "no matching skill stated"
+    },
+    {
+     "criterion": "budget_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$100 cash needed (ASSUMPTION) vs $0"
+    },
+    {
+     "criterion": "time_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:time_available"
+     ],
+     "basis": "evidenced",
+     "note": "~100 h needed (ASSUMPTION) vs ~17 h available"
+    },
+    {
+     "criterion": "values_fit",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "Founder's values are not explicitly stated, and no evidence confirms alignment with stated values."
+    },
+    {
+     "criterion": "digital_deliverability",
+     "score": 3.0,
+     "evidence_ids": [
+      "brief:product_type"
+     ],
+     "basis": "evidenced",
+     "note": "product type other_digital"
+    },
+    {
+     "criterion": "reachable_market",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
+    }
+   ],
+   "total": 2.1,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
   }
  ]
 }
