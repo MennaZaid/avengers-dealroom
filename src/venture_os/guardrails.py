@@ -147,6 +147,13 @@ _RULES: dict[str, list[str]] = {
         (r"\b(tell|promise|assure)\b.{0,10}\b(customers|buyers|users|clients|people|them)\b.{0,25}"
          r"\b(will|they'?ll)\b.{0,10}(" + _MONEY_EARN + r"|\bget rich\b|\bprofit\b)"),
         r"(ربح|أرباح|ارباح|دخل|مكسب|نجاح) (مضمون|مضمونة|أكيد|اكيد)",
+        # "guarantee this makes $10k a month", "it will earn $500", "passive income", "risk-free"
+        r"(?<!\bnot a )(?<!\bno )\bguarantee[ds]?\b.{0,30}" + _MONEY_EARN.replace(r"\b(earn|make|making|earning)\b",
+                                                                                   r"\b(earns?|makes?|making|earning)\b"),
+        r"\b(will|'ll|would)\s+(make|earn|bring in|generate)\b.{0,10}(\$|£|€)\s?\d",
+        r"(?<!\bno )(?<!\bnot )(?<!\bwithout )\bpassive income\b", r"(?<!\bnot )(?<!\bnever )\brisk[- ]free\b",
+        _A + r"(اضمن|اضمنلي|تضمن|ضمان|مضمون).{0,30}(هيكسب|يكسب|هتكسب|سيكسب|هيربح|يربح|هتربح|سيربح|هيجيب|سيحقق)",
+        r"(?<!لا )(?<!بدون )دخل (سلبي|ثابت مضمون)", r"(?<!ليس )(?<!غير )(بدون|من غير) (أي )?(مخاطرة|مخاطر)",
         _A + r"(اضمن|اضمنلي|تضمن|تضمنلي|أكدلي|اكدلي|وعدني|اوعدني).{0,25}"
         r"(ربح|أرباح|ارباح|دخل|مكسب|نجاح|فلوس|هكسب|هاكسب|أكسب|اكسب|هربح|أربح|اربح|هنجح|أنجح|انجح)",
         # Egyptian dialect: "they'll earn 10 thousand pounds a month, guaranteed" (an amount, then a guarantee)
@@ -160,6 +167,17 @@ _RULES: dict[str, list[str]] = {
         # signing as someone else: "sign the email as Mohamed Salah" / "as a customer" (not "as me" / "as my company")
         r"\bsign(ed|ing)?\b.{0,30}\bas (a customer|a happy customer|(?-i:[A-Z][a-z]+ [A-Z][a-z]+))",
         _A + r"(انتحل|اتقمص|تقمص|كأنك|كانك).{0,20}(عميل|زبون|المؤسس|شركة|براند|أنا|انا)",
+        (r"\b(write|reply|post|email|speak|act)\b.{0,10}\b(as|pretending to be)\b.{0,5}\b(the founder|a customer|"
+        r"another brand|a competitor)\b"),
+        _A + r"(اتظاهر|تظاهر|اتظاهري|اعمل نفسك|اعملي نفسك|اكتب باسم|ابعت باسم|رد باسم).{0,20}"
+        r"(المؤسس|عميل|زبون|العملاء|شركة|براند|علامة)",
+    ],
+    "paywall_core": [
+        (r"\b(lock|hide|put|gate|move)\b.{0,30}\b(core|main|key|essential|basic)\b.{0,15}\bfeatures?\b.{0,25}"
+        r"\b(behind|paywall|premium|paid)\b"),
+        r"\bpaywall\b.{0,30}\b(core|main|key|essential)\b.{0,10}\bfeatures?\b",
+        _A + r"(اقفل|قفل|اخفي|خبي|حط|خلي).{0,30}(الميزة|الخاصية|الميزات|الخصائص|الفيتشر) "
+        r"(الأساسية|الاساسية|الرئيسية).{0,25}(مدفوع|مدفوعة|اشتراك|بفلوس|بيوول|paywall)",
     ],
     "move_money": [
         r"\b(transfer|wire|withdraw)\b.{0,30}\b(money|funds|payment|\$|usd|egp|aed|sar)\b",
@@ -197,6 +215,8 @@ REFUSALS = {
                        "لا أستطيع أن أعدك بدخل أو نجاح. يمكنني عرض الأدلة مع الفكرة وضدها، والمخاطر."),
     "impersonation": ("I can't pose as you, a customer or another brand.",
                       "لا أستطيع انتحال شخصيتك أو شخصية عميل أو علامة تجارية أخرى."),
+    "paywall_core": ("I can't put the product's core feature behind a paywall: core features stay open.",
+                     "لا أستطيع وضع الميزة الأساسية للمنتج خلف اشتراك مدفوع: الميزات الأساسية تبقى متاحة."),
     "move_money": ("I can't move, charge or refund money. Payments in this system are mocked only.",
                    "لا أستطيع تحويل أموال أو خصمها أو استردادها. المدفوعات في هذا النظام وهمية (MOCKED) فقط."),
     "store_credentials": (("Please don't share passwords or card numbers: I never store them, and I removed them "
@@ -215,10 +235,25 @@ class Refusal:
         return REFUSALS[self.rule][1 if lang == "ar" else 0]
 
 
+# Text that denies or disclaims a promise ("not a guarantee", "no income is promised", "not risk-free"): the rest
+# of that sentence is not a promise, so it is masked (same length, positions kept) before the rules run.
+_DISCLAIMER = re.compile(
+    r"\b(not( an?)?|no|never( an?)?|without (any |a )?|isn'?t( an?)?)\s*(guarantee[ds]?|promise[ds]?|risk[- ]free)"
+    r"[^.!?؟\n]*"
+    r"|\bno (income|result|outcome|success|revenue|profit)s?\b[^.!?؟\n]{0,40}\b(promised|guaranteed)\b"
+    r"|(لا|ليس|بدون|مش|من غير) (يوجد |هناك )?(ضمان|نضمن|نعد|وعد|مضمون)[^.!؟\n]*",
+    re.IGNORECASE)
+
+
+def _masked(text: str) -> str:
+    return _DISCLAIMER.sub(lambda m: " " * len(m.group(0)), text)
+
+
 def check_request(text: str) -> Refusal | None:
     """A founder message the system must refuse, or None."""
     if _CARD.search(text):
         return Refusal("store_credentials")
+    text = _masked(text)
     for rule, pats in _COMPILED.items():
         if any(p.search(text) for p in pats):
             return Refusal(rule)
@@ -245,6 +280,7 @@ _OUTPUT_COMPILED = {r: [re.compile(p, re.IGNORECASE) for p in ps] for r, ps in _
 
 def check_output(text: str) -> list[str]:
     """Must-never rules broken by generated text (empty list = OK). Agents must not show text that fails."""
+    text = _masked(text)
     return [rule for rule, pats in _OUTPUT_COMPILED.items() if any(p.search(text) for p in pats)]
 
 
@@ -255,8 +291,10 @@ def scrub_output(text: str) -> tuple[str, list[str]]:
     fired = []
     for rule, pats in _OUTPUT_COMPILED.items():
         for p in pats:
-            text, n = p.subn(f"[REMOVED by guardrails: {rule}]", text)
-            if n and rule not in fired:
+            spans = [m.span() for m in p.finditer(_masked(text))]  # disclaimers are never removed
+            for a, b in reversed(spans):
+                text = text[:a] + f"[REMOVED by guardrails: {rule}]" + text[b:]
+            if spans and rule not in fired:
                 fired.append(rule)
     return text, fired
 
