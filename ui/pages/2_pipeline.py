@@ -112,8 +112,12 @@ if not briefs:
 labels = {b["brief_id"]: f"{(b['idea'] or 'untitled')[:70]} · {b['country_code'] or '?'} · v{b['version']}"
           for b in briefs}
 confirmed = (st.session_state.get("brief") or {}).get("id")
-keys = list(labels)
-brief_id = st.selectbox(t("brief"), keys, format_func=labels.get, index=keys.index(confirmed) if confirmed in keys else 0)
+if confirmed not in labels:  # Discover opens only for the brief the founder confirmed in this session
+    st.info(t("no_brief"))
+    st.page_link("pages/1_onboarding.py", label="→ " + t("brief"))
+    st.stop()
+brief_id = confirmed
+st.markdown(f"**{t('brief')}:** {labels[brief_id]}")
 latest = next(b["version"] for b in briefs if b["brief_id"] == brief_id)
 sid = st.text_input(t("session"), value=st.session_state.get("sid", ""), type="password")
 headers = {"X-Founder-Session": sid} if sid else {}
