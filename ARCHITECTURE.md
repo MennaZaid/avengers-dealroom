@@ -289,8 +289,11 @@ The README table is the per-step status.
 ## Roadmap
 
 1. Real waitlist traffic: publish the approved landing page for real (today publishing is MOCKED) so the demand test measures actual sign-ups.
-2. Discover search quality for niche topics: a first run on a niche brief found no problem quotes or competitor
-   prices, so niche briefs need more targeted queries and sources.
-3. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
-4. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
-5. More country source packs as reviewed YAML (`config/sources/`).
+2. Discover search for niche topics: on the CV/Notion template brief the search returned pages about outsourcing
+   and web-design agencies, with 0 problem quotes and 0 priced competitors.
+3. Pass today's date to the critic model: in the same run it misread a 2024 source date as "in the future".
+4. An MVP builder driven by a product spec from any brief: the CV/Notion brief produced a generic library app that
+   still passed all 15 checks, so the checks need relevance to the brief (what is sold, the first customer action).
+5. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
+6. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
+7. More country source packs as reviewed YAML (`config/sources/`).
