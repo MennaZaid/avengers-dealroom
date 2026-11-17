@@ -136,15 +136,25 @@ collected at the start and the founder approves once, at the build gate.
 - **Output:** `phase3_step1_build_inputs.md` … `phase3_step5_mvp.html` … `phase3_step8_evidence_summary.md`,
   `phase3_gate_build.md`. Live on CPU with `qwen3:4b-instruct`: about 6 minutes per run.
 
-### Phase 4: Commercial setup (core step: Set the price and policies) — STUBBED (not run by the pipeline yet)
+### Phase 4: Commercial setup (core step: Set the price and policies) — Working (stage logic); pipeline wiring in progress
 
-- **Agents:** `pricing.py`, `policies.py`. **Tools:** brief, evidence items with competitor prices.
-- **Method:** price hypotheses where each price is the founder's stated model, a sourced competitor price, or
-  ASSUMPTION; no income or sales forecast. Draft terms, privacy and refund policy headed "DRAFT, not legal advice;
-  have it reviewed"; the refund policy describes what `refunds.py` does (founder approves, access revoked).
+- **Entry point:** `commercial_stage.run_commercial_stage(brief_id, brief_version) -> CommercialResult` (gate
+  decision, files, stubbed steps). No approval inside; the stage API starts it only after the founder's Go on Build
+  for the same brief version, and the founder decides on its gate through `POST /stages/runs/{id}/decision`.
+- **Agents (plain code, no model needed):** `agents/commercial_pricing.py` (pricing research, price setter),
+  `agents/policy_drafter.py` (terms, privacy, refund), readiness checker. **Tools:** Phase 1-2 evidence items and
+  the approved Discover run's claims; the source registry (official legal sources for the brief's country).
+- **Method:** thresholds are logged before step 1. (1) Only prices from an EVIDENCED item with a source URL and a
+  date are used; others are counted and left out. (2) Min / median / max in the main currency; proposed price =
+  median; break-even = the founder's stated budget ÷ median price, as paying customer-months and per month over the
+  founder's stated months; every figure labelled ESTIMATE, no income promised. (3-5) Each policy starts with
+  "DRAFT — not legal advice"; country law only from official registry sources, otherwise "No verified official
+  source found for <country>"; the refund policy says the founder approves each refund and an approved refund
+  revokes access. (6) A readiness checklist. Findings are saved as Phase 4 evidence items for Phase 5.
   No payments of any kind.
-- **Output:** `phase4_step1_pricing.md`, `phase4_step2_policies.md`, `phase4_gate_pricing.md`,
-  `phase4_gate_policies.md`.
+- **Output:** `phase4_step1_pricing_research.md`, `phase4_step2_price.md`, `phase4_step3_terms.md`,
+  `phase4_step4_privacy.md`, `phase4_step5_refund_policy.md`, `phase4_step6_readiness.md`,
+  `phase4_gate_commercial.md`.
 
 ### Phase 5: Launch (core steps: Open the store; deliver automatically) — STUBBED / MOCKED (not run by the pipeline yet)
 
@@ -175,13 +185,12 @@ starts only if the previous gate passed **for the same brief version**; editing 
 | 1 Discover (built) | Thresholds from `config/gates/discover.yaml`, logged before research: ≥ 5 pain claims with quotes from ≥ 3 domains, ≥ 2 competitors with sourced prices, a top idea scoring ≥ 3.0 with every fit criterion ≥ 2, ≥ 5 founder interviews with ≥ 3 showing past behaviour | stop if: excluded product, zero sourced pain, no idea fits the founder's budget and time, or ≥ 8 free alternatives with nothing that differentiates. Pivot if the starting idea fails but an alternative passes. Go if every check passes; otherwise repeat, listing what to collect. The founder may waive only the interview checks, with a written reason |
 | 2 Demand (built) | Waitlist sign-ups against a target **declared before the test** (e.g. 100 in 14 days); count entered by the founder or labelled MOCKED, never generated | target reached -> go; >= 50% -> repeat; >= 25% -> pivot; below 25% -> stop |
 | 3 Build (built) | Build inputs (stop if Phase 2 said stop), plan validation, MVP QA checks | go / repeat / stop; the founder approves once |
-| 4 Pricing (stub) | A founder-stated or sourced price exists | go; none -> repeat; excluded -> stop |
-| 4 Policies (stub) | Terms, privacy and refund drafts present and labelled DRAFT, not legal advice | go / repeat |
+| 4 Commercial (built) | Sourced prices (URL + date), break-even vs the founder's budget and months, readiness checklist | go: ready; repeat: fewer than 3 sourced prices or a missing section; pivot: break-even needs more than 100 paying customers a month within the founder's months; stop: excluded product or every sourced price free |
 | 5 Launch (stub) | Drafts pass the guardrails; every external action needs its own founder approval | go |
 | 6 Operate (stub) | Logged gate outcomes and the founder's demand result | any stop -> stop; any pivot -> pivot; missing results -> repeat; all go -> go |
 
 Every gate decision is written to `outputs/phase<N>_gate_<name>.md` (`phase1_gate_product.md`,
-`phase1_gate_evidence.md`, `phase2_gate_demand.md`, `phase4_gate_pricing.md`, ...) and logged with its `outcome`, the target and the actual value.
+`phase1_gate_evidence.md`, `phase2_gate_demand.md`, `phase4_gate_commercial.md`, ...) and logged with its `outcome`, the target and the actual value.
 Thresholds are fixed in code; a demand target is frozen when the test is declared, so it cannot be lowered after a
 weak result (example: 12 of 100 sign-ups in 14 days -> **stop**). A gate only recommends: the founder approves,
 rejects or asks for a revision, and only approval moves on.
@@ -260,7 +269,7 @@ flowchart TD
 | Phase 2 sign-up count + demand gate (`POST /stages/runs/{id}/signups`) | Working |
 | Phase 2 landing page | Working; publishing MOCKED |
 | Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
-| Phase 4 pricing and policies | STUBBED (not run by the pipeline yet) |
+| Phase 4 Commercial (pricing research, price, policies, readiness, gate) | Working (stage logic); pipeline wiring in progress |
 | Phase 5 store page and launch posts | STUBBED (not run by the pipeline yet); posting MOCKED |
 | Phase 6 persevere-or-pivot memo | STUBBED (not run by the pipeline yet; support, analytics: no data yet) |
 | Payments, delivery, refunds, reconciliation | MOCKED |
