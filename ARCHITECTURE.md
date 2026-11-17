@@ -12,6 +12,13 @@ Status today: all six phases run in the pipeline, each after the founder's go on
 payments, delivery and refunds are `MOCKED`; support and analytics are `STUBBED`; the Phase 5 store page and posts
 are rule-based drafts (`STUBBED`). See [Built vs. stubbed](#built-vs-stubbed).
 
+- Gate outcomes are go, repeat, pivot or stop; the gate recommends and the founder decides. See [Gates](#gates).
+- STOP is recommended on weak evidence: excluded product, too few sourced claims, or a missed demand target. See [When the system recommends STOP](#gates).
+- Sale to cash: founder-approved order -> mock payment -> delivery once -> refund revokes access -> reconciliation. See [Sale to cash](#sale-to-cash).
+
+Inside a phase, each step is guarded by code checks: the interview script linter, score caps on unevidenced
+criteria, the research critic, and the MVP QA checks.
+
 ```mermaid
 flowchart LR
   F[Founder] -->|chat + documents| OB[Onboarding<br/>founder brief]
@@ -98,7 +105,7 @@ flowchart LR
        them about past behaviour;
      - the founder's notes are tagged, and only past behaviour, current workarounds, money or time already spent
        and commitments count as evidence.
-  6. Critic: rule checks, plus a judge model of a **different family** when one is configured (otherwise the
+  6. Critic: rule checks, plus a second-opinion model of a **different family** when one is configured (otherwise the
      critic says the model review was skipped).
 - **Output:** `phase1_step1_brief`, `phase1_step2_opportunities`, `phase1_step3_idea_scores`, `phase1_step4_market`,
   `phase1_step5_interview_plan` and `phase1_gate_decision` (`.md` + `.json` each).
@@ -164,8 +171,13 @@ collected at the start and the founder approves once, at the build gate.
   `phase4_step4_privacy.md`, `phase4_step5_refund_policy.md`, `phase4_step6_readiness.md`,
   `phase4_gate_commercial.md`.
 
-### Phase 5: Launch (core steps: Open the store; deliver automatically) — runs in the pipeline; drafts STUBBED, posting and payments MOCKED
+### Phase 5: Launch: sell, deliver, get paid (core steps: Open the store; deliver automatically) — runs in the pipeline; drafts STUBBED, posting and payments MOCKED
 
+- **Store page contains:** the product, who it is for, the problem it addresses and the founder's stated price
+  model, marked "DRAFT, not published (MOCKED)"; no urgency, reviews or user counts.
+- **How a mock buyer receives it:** a founder-approved test order -> mock payment -> `delivery.deliver` grants
+  access to the Phase 3 MVP once per order (an access code; a repeat event does not deliver twice) -> a refund
+  calls `revoke`, after which `has_access` is false.
 - **Entry point:** `launch_stage.run_launch_stage`, started after the founder's go on Commercial.
 - **Agents:** `launch.py`; delivery is `delivery.py`. **Tools:** brief, the sale-to-cash mocks.
 - **Method:** a store page draft and 3 launch post drafts with no urgency, reviews or user counts. Posting a draft
@@ -199,8 +211,8 @@ starts only if the previous gate passed **for the same brief version**; editing 
 | 2 Demand (built) | Waitlist sign-ups against a target **declared before the test** (e.g. 100 in 14 days); count entered by the founder or labelled MOCKED, never generated | target reached -> go; >= 50% -> repeat; >= 25% -> pivot; below 25% -> stop |
 | 3 Build (built) | Build inputs (stop if Phase 2 said stop), plan validation, MVP QA checks | go / repeat / stop; the founder approves once |
 | 4 Commercial (built) | Sourced prices (URL + date), break-even vs the founder's budget and months, readiness checklist | go: ready; repeat: fewer than 3 sourced prices or a missing section; pivot: break-even needs more than 100 paying customers a month within the founder's months; stop: excluded product or every sourced price free |
-| 5 Launch (stub) | Drafts pass the guardrails; every external action needs its own founder approval | go |
-| 6 Operate (stub) | Logged gate outcomes and the founder's demand result | any stop -> stop; any pivot -> pivot; missing results -> repeat; all go -> go |
+| 5 Launch (built; drafts STUBBED, posting and payments MOCKED) | Drafts pass the guardrails; the MOCKED sale-to-cash test delivers once, revokes access on refund and reconciliation flags the missing payment; every external action needs its own founder approval | go: the test completed; repeat: it could not run (no founder approval of the test order and refund); pivot / stop: not recommended by this gate's code, available as the founder's decision |
+| 6 Operate (built; support and analytics STUBBED) | Logged gate outcomes, the founder's demand result and the payment test, from `decision_log.json` and `outputs/` only | stop: any logged stop; pivot: any logged pivot; repeat: no sign-up count or no logged gate, or any logged repeat; go: every logged gate go |
 
 Every gate decision is written to `outputs/phase<N>_gate_<name>.md` (`phase1_gate_product.md`,
 `phase1_gate_evidence.md`, `phase2_gate_demand.md`, `phase4_gate_commercial.md`, ...) and logged with its `outcome`, the target and the actual value.
