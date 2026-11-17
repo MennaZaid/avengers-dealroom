@@ -71,9 +71,11 @@ All models are free: free tiers or a local open-weight model. No paid API is use
 
 ## Cost per run
 
-**About $0.00 per run** (local `qwen3:4b-instruct`, no paid APIs). Measured, not estimated: every model call is
-logged with its prompt and completion tokens, and `python scripts/cost_report.py` sums them from
-`decision_log.json`. The token count of the committed demo run is added here from that report after the run.
+**Demo run (date, models, tokens): to be added from `python scripts/cost_report.py` on the committed log.**
+
+All models are local or free tiers and no paid API is used, so the dollar cost is $0.00. Measured, not estimated:
+every model call is logged with its prompt and completion tokens, and `python scripts/cost_report.py` sums them
+from `decision_log.json`.
 
 ## Demo video
 
