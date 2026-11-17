@@ -29,7 +29,8 @@ Background and decisions D1-D20: [planning/00-planning-report.md](planning/00-pl
 | Decision log, outputs, prompts loader | Complete (shared by all agents) | `decision_log.py`, `outputs.py`, `prompts.py`, `prompts/` |
 | Brief hand-off to the pipeline | Complete | `onboarding/briefs.py`, fixtures in `tests/fixtures/briefs/` |
 | Source registry, tech catalog, source validator, registry API | Complete (seed rows unverified) | `config/`, `db/`, `registry/`, `api/registry.py` |
-| Orchestrator, gates, approval, Phase 1-2 agents | In progress (B) | `orchestrator.py`, `gates.py`, `approval.py`, `agents/` |
+| Gates and Phase 2 Validate (Lean Canvas, landing page, demand gate with STOP) | In progress (Menna) | `gates.py`, `agents/business_designer.py`, `agents/landing_page.py` |
+| Orchestrator, approval, Phase 1 Discover | In progress (Roufayda) | `orchestrator.py`, `approval.py`, `agents/researcher.py`, `agents/interviewer.py` |
 | Docker one-command setup, local model, ARCHITECTURE.md, phases 3-6 stubs | In progress (C) | `Dockerfile`, `docker-compose.yml`, `llm/`, `ARCHITECTURE.md` |
 | README (8 headings) | Headings and honest status in place; updated as parts land | `README.md` |
 
@@ -83,13 +84,14 @@ Arabic, rejecting a guess, `.md` after confirming), 5 guardrails (excluded produ
 
 | # | Item | Owner |
 |---|---|---|
-| 1 | `docker compose up` starts db, API, UI and a local open-weight model (Ollama); copy `prompts/` into the image or set `PROMPTS_DIR` | C |
-| 2 | `ARCHITECTURE.md` with the 7 required sections and Mermaid diagrams | C |
-| 3 | Orchestrator + gates + approval; Phase 1 and 2 agents; gate STOP on weak evidence; `check_output()` on all generated text | B |
-| 4 | Stage runs store the `brief_version` they used and show Stale via `is_stale()` | B |
-| 5 | Phases 3-6 as STUBBED agents with labelled outputs | C |
-| 6 | Record tokens per model call so cost per run is measured | C |
+| 1 | `docker compose up` starts db, API, UI and a local open-weight model (Ollama); copy `prompts/` into the image or set `PROMPTS_DIR` | Abdelrahman |
+| 2 | Keep `ARCHITECTURE.md` and the README status table in step with `main` | Abdelrahman |
+| 3a | `gates.py` (shared), Phase 2 agents, demand gate with STOP; demo briefs and script | Menna |
+| 3b | Orchestrator + approval; Phase 1 agents with `evidence_gate`; `check_output()` on all generated text | Roufayda |
+| 4 | Stage runs store the `brief_version` they used and show Stale via `is_stale()` | Roufayda |
+| 5 | Phases 3-6 as STUBBED agents with labelled outputs | Abdelrahman |
+| 6 | Record tokens per model call so cost per run is measured | Abdelrahman |
 | 7 | Demo run: empty the log, delete `outputs/`, run two briefs (one stop), commit both | All, after 18:00 |
-| 8 | Registry seed rows are unverified (`UNVERIFIED`); verify the Egypt pack used in the demo | B |
-| 9 | Fanar: free status and base-model terms unconfirmed; it is optional now (local model is the default) | C |
-| 10 | Postgres service in CI so integration tests run on every push | C |
+| 8 | Registry seed rows are unverified (`UNVERIFIED`); verify the Egypt pack used in the demo | Roufayda |
+| 9 | Fanar: free status and base-model terms unconfirmed; it is optional now (local model is the default) | Abdelrahman |
+| 10 | Postgres service in CI so integration tests run on every push | Abdelrahman |
