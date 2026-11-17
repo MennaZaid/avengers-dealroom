@@ -114,6 +114,10 @@ def check_product(fields: dict[str, str | None]) -> ProductCheck:
 # Requests aimed at the system. Patterns need an instruction ("write 50 reviews"), not a product feature
 # ("customers can post reviews"), so normal answers about the idea are not refused.
 _A = r"(?<![\u0600-\u06FF])"  # Arabic word start
+# Earning with money named: "make 10k", "earn 20,000 EGP", "make money". Not "make a CV in 10 minutes".
+_MONEY_EARN = (r"\b(earn|make|making|earning)\b.{0,15}(\d[\d,.]*\s*(k\b|EGP|USD|\$|pounds|dollars|a month|"
+               r"per month|/month)|\$|\b(money|income|profits?|revenue|EGP|USD|pounds|dollars|thousands?)\b)")
+
 _RULES: dict[str, list[str]] = {
     "fake_reviews": [
         (r"\b(write|generate|create|make|post|draft)\b.{0,15}\b(\d+|some|a few|many|fake|positive|good|five|5)\b.{0,15}"
@@ -139,17 +143,22 @@ _RULES: dict[str, list[str]] = {
         r"\bguarantee[ds]?\b.{0,40}\b(income|profit|success|money|sales|revenue)\b",
         r"\b(promise|tell|assure)\b.{0,15}\b(me|us)\b.{0,25}\b(make|earn|succeed|be rich|profit)\b",
         r"\b(guarantee|promise)\b.{0,10}\b(i|we|me|us)\b.{0,15}\b(make|earn|succeed|profit|get rich)\b",
-        r"\b(earn|make)\b.{0,40}\bguarantee[ds]?\b",
+        _MONEY_EARN + r".{0,40}\bguarantee[ds]?\b",
         (r"\b(tell|promise|assure)\b.{0,10}\b(customers|buyers|users|clients|people|them)\b.{0,25}"
-         r"\b(will|they'?ll)\b.{0,10}\b(earn|make|profit|get rich)\b"),
+         r"\b(will|they'?ll)\b.{0,10}(" + _MONEY_EARN + r"|\bget rich\b|\bprofit\b)"),
         r"(ربح|أرباح|ارباح|دخل|مكسب|نجاح) (مضمون|مضمونة|أكيد|اكيد)",
         _A + r"(اضمن|اضمنلي|تضمن|تضمنلي|أكدلي|اكدلي|وعدني|اوعدني).{0,25}"
         r"(ربح|أرباح|ارباح|دخل|مكسب|نجاح|فلوس|هكسب|هاكسب|أكسب|اكسب|هربح|أربح|اربح|هنجح|أنجح|انجح)",
+        # Egyptian dialect: "they'll earn 10 thousand pounds a month, guaranteed" (an amount, then a guarantee)
+        (_A + r"(هيكسب|هيكسبوا|هتكسب|هتكسبوا|يكسبوا|هيربح|هيربحوا|هتربح|يربحوا|هيعمل|هيعملوا).{0,30}"
+         r"([0-9٠-٩]|ألف|آلاف|الف|جنيه|دولار).{0,40}(مضمون|مضمونة|أكيد|اكيد)"),
     ],
     "impersonation": [
         r"\b(pretend|pose)\b.{0,15}\b(to be|as)\b", r"\bimpersonat",
         r"\b(reply|write|post|answer)\b.{0,20}\bas (if you were|if you are|the founder|me|a customer)\b",
-        r"\bas if (it'?s|it is|it were|it came|it was|they are) (from|by|written by|posted by)\b",
+        r"\bas if (it'?s|it is|it were|it came|it was|they are) (from|by|written by|posted by) (?!(a|an|my|our|me)\b)",
+        # signing as someone else: "sign the email as Mohamed Salah" / "as a customer" (not "as me" / "as my company")
+        r"\bsign(ed|ing)?\b.{0,30}\bas (a customer|a happy customer|(?-i:[A-Z][a-z]+ [A-Z][a-z]+))",
         _A + r"(انتحل|اتقمص|تقمص|كأنك|كانك).{0,20}(عميل|زبون|المؤسس|شركة|براند|أنا|انا)",
     ],
     "move_money": [
