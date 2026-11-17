@@ -303,5 +303,13 @@ if run["status"] == "approved" and not run.get("stale"):
     _mod = importlib.util.module_from_spec(_spec)
     _spec.loader.exec_module(_mod)
     _mod.render(brief_id, sid)
+    # Phase 4 Commercial (same render as pages/6_commercial.py), shown once the founder approved Build (page 5)
+    builds = api("GET", "/stages/runs", params={"brief_id": brief_id, "stage": "build"})
+    if builds and builds[0]["status"] == "approved" and not builds[0].get("stale"):
+        st.divider()
+        _spec4 = importlib.util.spec_from_file_location("commercial_page", Path(__file__).with_name("6_commercial.py"))
+        _mod4 = importlib.util.module_from_spec(_spec4)
+        _spec4.loader.exec_module(_mod4)
+        _mod4.render(brief_id, sid)
 else:
     st.caption(t("validate_later"))
