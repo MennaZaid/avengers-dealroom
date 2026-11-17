@@ -125,16 +125,24 @@ flowchart LR
 One multi-agent stage, `build_stage.run_build_stage(brief)`, with **no founder approval inside it**: everything is
 collected at the start and the founder approves once, at the build gate.
 
-- **Agents:** `build_inputs` (entry check, code), `requirements_mapper`, `mvp_planner`, `mvp_validator`,
-  `mvp_builder`, `mvp_tester` (code + headless browser), `docs_writer` (code).
-- **Method:** confirmed brief + Phase 1-2 evidence items, each labelled EVIDENCED / FOUNDER-STATED / INFERRED /
-  ASSUMPTION -> requirements that cite their inputs (code sets each label and caps priority by evidence strength)
-  -> a plan on one of five fixed templates (booking, directory, tracker, library, calculator) chosen by rules ->
-  fixed-rule validation (coverage, traceability, unchecked claims, forbidden fields; up to 2 automatic re-plans) ->
-  a single self-contained HTML MVP (the model writes copy only, never code; no sample data; data stays on the
-  device; payments MOCKED; Arabic right-to-left) -> 15 QA and safety checks -> user guide and evidence summary.
-- **Output:** `phase3_step1_build_inputs.md` … `phase3_step5_mvp.html` … `phase3_step8_evidence_summary.md`,
-  `phase3_gate_build.md`. Live on CPU with `qwen3:4b-instruct`: about 6 minutes per run.
+- **Agents:** `build_inputs` (entry check, code), `requirements_mapper`, `product_spec`, `mvp_planner`,
+  `mvp_validator`, `mvp_builder`, `mvp_tester` (code + headless browser), `docs_writer` (code).
+- **Method:** confirmed brief + the approved Discover findings + the approved Validate Lean Canvas (read from the
+  database), each item labelled EVIDENCED / FOUNDER-STATED / INFERRED / ASSUMPTION -> requirements that cite their
+  inputs -> a **product spec** written by the model from those facts: offer kind, offers (what is inside, for
+  whom, price), the customer's first action, input fields, sample content, delivery, FAQ and block order. Code
+  checks every value: one without a known source is labelled ASSUMPTION, must-never text is dropped, and a spec
+  whose own names are not about this brief is rejected. -> a plan whose supporting screens follow the offer kind
+  (no keyword matching) -> fixed-rule validation (up to 2 automatic re-plans) -> a single self-contained HTML MVP
+  built from fixed, tested blocks (hero, try-it form with live preview, offers, buy and delivery MOCKED, waitlist
+  MOCKED, FAQ); the model fills text only, shown as text; data stays on the device; Arabic right-to-left -> tests.
+- **Tests:** 15 QA and safety checks plus checks computed from the brief at run time: key terms of this brief in
+  the title, offers and core action; the core action is wired; every button has a handler; buy, delivery and
+  waitlist labelled MOCKED; when a model is configured, the product was written by the model. On failure: one
+  repair pass with the failures fed back, then rules only, then the failure goes to the gate (repeat).
+- **Without a model** (replay, CI): no category is guessed; the page uses only the founder's own words.
+- **Output:** `phase3_step1_build_inputs.md`, `phase3_step3_product_spec.md`, `phase3_step3_mvp_plan.md` …
+  `phase3_step5_mvp.html` … `phase3_step8_evidence_summary.md`, `phase3_gate_build.md`.
 
 ### Phase 4: Commercial setup (core step: Set the price and policies) — Working
 
@@ -273,7 +281,7 @@ flowchart TD
 | Phase 2 Validate: Lean Canvas, demand test plan | Working |
 | Phase 2 sign-up count + demand gate (`POST /stages/runs/{id}/signups`) | Working |
 | Phase 2 landing page | Working; publishing MOCKED |
-| Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
+| Phase 3 Build stage (8 agents incl. the product spec, build gate, single-file HTML MVP) | Working; buy, delivery and waitlist in the MVP MOCKED |
 | Phase 4 Commercial (pricing research, price, policies, readiness, gate) | Working |
 | Phase 5 Launch stage and gate (runs in the pipeline) | Working |
 | Phase 5 store page and launch posts | STUBBED (rule-based drafts); posting MOCKED |
@@ -292,8 +300,9 @@ The README table is the per-step status.
 2. Discover search for niche topics: on the CV/Notion template brief the search returned pages about outsourcing
    and web-design agencies, with 0 problem quotes and 0 priced competitors.
 3. Pass today's date to the critic model: in the same run it misread a 2024 source date as "in the future".
-4. An MVP builder driven by a product spec from any brief: the CV/Notion brief produced a generic library app that
-   still passed all 15 checks, so the checks need relevance to the brief (what is sold, the first customer action).
+4. MVP quality on live models: the CV/Notion brief once produced a generic library app that passed all 15 checks.
+   The product-spec builder and relevance checks now catch that; next is a browser test of the core action on
+   every live run and more block types (quiz, checklist, provider list).
 5. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
 6. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
 7. More country source packs as reviewed YAML (`config/sources/`).
