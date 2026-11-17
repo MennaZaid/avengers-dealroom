@@ -315,5 +315,12 @@ if run["status"] == "approved" and not run.get("stale"):
         _mod4 = importlib.util.module_from_spec(_spec4)
         _spec4.loader.exec_module(_mod4)
         _mod4.render(brief_id, sid)
+        # Phases 5 and 6 (same view), each shown once the founder approved the phase before it
+        for _prev, _stage in (("commercial", "launch"), ("launch", "operate")):
+            _runs = api("GET", "/stages/runs", params={"brief_id": brief_id, "stage": _prev})
+            if not (_runs and _runs[0]["status"] == "approved" and not _runs[0].get("stale")):
+                break
+            st.divider()
+            _mod4.render(brief_id, sid, _stage)
 else:
     st.caption(t("validate_later"))

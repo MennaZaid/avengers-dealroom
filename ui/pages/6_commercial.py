@@ -1,7 +1,8 @@
 """Phase 4 Commercial setup: price and draft policies (no payments of any kind), ending at the founder's gate.
 Uses the stage API only. Steps the Phase 4 agents report as not built are labelled STUBBED. Arabic or English.
 
-render(brief_id, session_id) is also shown inside the pipeline page once Build is approved."""
+render(brief_id, session_id, stage) is also used inside the pipeline page for Phase 4 (after Build), Phase 5 Launch
+(after Commercial; posting and sale-to-cash MOCKED) and Phase 6 Operate (after Launch)."""
 
 import streamlit as st
 from common import api, setup, ui_lang
@@ -33,6 +34,32 @@ T = {
                  "تمت الموافقة على الإعداد التجاري: المرحلة 5 هي التالية (STUBBED/MOCKED)."),
     "need_session": ("Enter your founder session to decide.", "أدخل جلسة المؤسس لاتخاذ القرار."),
 }
+# Per-stage text for the phases that share this view: (title, start note, start button, gate label, label line,
+# approved line)
+STAGE_T = {
+    "commercial": {k: T[v] for k, v in (("title", "title"), ("start_note", "start_note"), ("start", "start"),
+                                         ("gate", "gate"), ("label", "legal"), ("approved", "approved"))},
+    "launch": {
+        "title": ("Phase 5 · Sell, deliver, get paid", "المرحلة 5: البيع والتسليم والتحصيل"),
+        "start_note": ("Drafts the store page and launch posts, then runs the MOCKED sale-to-cash test.",
+                       "يكتب مسودة صفحة المتجر ومنشورات الإطلاق، ثم يشغّل اختبار البيع إلى التحصيل (MOCKED)."),
+        "start": ("▶ Start Phase 5", "▶ ابدأ المرحلة 5"),
+        "gate": ("**Launch gate: {o}** · {r}", "**بوابة الإطلاق: {o}** · {r}"),
+        "label": ("MOCKED: nothing is posted, sold or charged. Posting needs your approval of the exact text.",
+                  "MOCKED: لا يُنشر ولا يُباع ولا يُحصّل أي شيء. النشر يحتاج موافقتك على النص نفسه."),
+        "approved": ("Phase 5 approved: Phase 6 Operate is next.", "تمت الموافقة على المرحلة 5: التالية هي المرحلة 6."),
+    },
+    "operate": {
+        "title": ("Phase 6 · Operate and learn", "المرحلة 6: التشغيل والتعلّم"),
+        "start_note": ("Writes the persevere-or-pivot memo from logged results only.",
+                       "يكتب مذكرة الاستمرار أو التحويل من النتائج المسجلة فقط."),
+        "start": ("▶ Start Phase 6", "▶ ابدأ المرحلة 6"),
+        "gate": ("**Operate gate: {o}** · {r}", "**بوابة التشغيل: {o}** · {r}"),
+        "label": ("Built only from logged results; where there is no data yet it says so.",
+                  "مبني فقط على النتائج المسجلة؛ وحيث لا توجد بيانات بعد يُذكر ذلك."),
+        "approved": ("Phase 6 approved: the last gate is passed.", "تمت الموافقة على المرحلة 6: تم اجتياز آخر بوابة."),
+    },
+}
 STATUS = {"queued": ("⏳ queued", "⏳ في الانتظار"), "running": ("⏳ running", "⏳ قيد التشغيل"),
           "awaiting_approval": ("🟡 waiting for your decision", "🟡 بانتظار قرارك"), "approved": ("✅ go", "✅ متابعة"),
           "revision_requested": ("🔁 repeat", "🔁 إعادة"), "pivoted": ("↩️ pivot", "↩️ تحويل"),
@@ -53,23 +80,27 @@ def _post(path: str, headers: dict | None = None, **body) -> None:
         st.error(str(e))  # e.g. Build not approved for this brief version
 
 
-def render(brief_id: str, session_id: str) -> None:
+def render(brief_id: str, session_id: str, stage: str = "commercial") -> None:
+    def ts(key, **kw):
+        v = STAGE_T[stage][key][i]
+        return v.format(**kw) if kw else v
+
     headers = {"X-Founder-Session": session_id} if session_id else {}
-    st.subheader(t("title"))
-    runs = api("GET", "/stages/runs", params={"brief_id": brief_id, "stage": "commercial"})
+    st.subheader(ts("title"))
+    runs = api("GET", "/stages/runs", params={"brief_id": brief_id, "stage": stage})
     if not runs:
-        st.caption(t("start_note"))
-        if st.button(t("start"), key=f"c-start-{brief_id}", type="primary"):
-            _post("/stages/commercial/runs", brief_id=brief_id)
+        st.caption(ts("start_note"))
+        if st.button(ts("start"), key=f"{stage}-start-{brief_id}", type="primary"):
+            _post(f"/stages/{stage}/runs", brief_id=brief_id)
         return
     run = runs[0]
-    c = (run.get("output") or {}).get("commercial") or {}
+    c = (run.get("output") or {}).get(stage) or {}
     s = run["status"]
     st.markdown(t("status", s=STATUS[s][i] if s in STATUS else s, v=run["brief_version"])
                 + (t("stale") if run.get("stale") else ""))
     if (s in ("rejected", "revision_requested", "pivoted", "failed") or run.get("stale")) and \
             st.button(t("again"), key=f"c-again-{run['id']}"):
-        _post("/stages/commercial/runs", brief_id=brief_id)
+        _post(f"/stages/{stage}/runs", brief_id=brief_id)
     if s == "failed":
         st.error(c.get("error", "failed"))
         return
@@ -80,13 +111,13 @@ def render(brief_id: str, session_id: str) -> None:
 
     if c.get("stubbed"):
         st.warning(t("stubbed", s=", ".join(c["stubbed"])))
-    st.caption(t("legal"))
+    st.caption(ts("label"))
     for name, text in (c.get("files") or {}).items():
         with st.expander(name, expanded=False):
             st.markdown(text)
     g = c.get("gate")
     if g:
-        REC.get(g["outcome"], st.info)(t("gate", o=g["outcome"].upper(), r=g["reason"]))
+        REC.get(g["outcome"], st.info)(ts("gate", o=g["outcome"].upper(), r=g["reason"]))
         st.caption(t("rule", r=g.get("rule")))
     for dec in run.get("decisions") or []:
         st.caption(t("decided", at=dec["created_at"][:19], d=dec["decision"]) + (f": {dec['note']}" if dec["note"] else ""))
@@ -105,7 +136,7 @@ def render(brief_id: str, session_id: str) -> None:
         if not session_id:
             st.caption(t("need_session"))
     if s == "approved":
-        st.success(t("approved"))
+        st.success(ts("approved"))
 
 
 if __name__ == "__main__":  # opened as its own page
