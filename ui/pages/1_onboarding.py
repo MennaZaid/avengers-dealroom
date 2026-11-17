@@ -63,7 +63,8 @@ def t(key: str, lang: str, **kw) -> str:
 
 
 def start_session() -> None:
-    out = api("POST", "/onboarding/sessions")
+    choice = st.session_state.get("ui_lang_choice", "auto")
+    out = api("POST", "/onboarding/sessions", json={"lang": "ar" if choice == "ar" else "en"})
     st.session_state.sid = out["session_id"]
     st.session_state.chat = [("assistant", out["reply"])]
     st.session_state.last = out
@@ -86,6 +87,10 @@ if "sid" not in st.session_state:
         st.error(t("api_down", ui_lang(), e=e))
         st.stop()
 
+founder_spoke = any(role == "user" for role, _ in st.session_state.chat)
+choice = st.session_state.get("ui_lang_choice", "auto")
+if not founder_spoke and choice in ("en", "ar") and st.session_state.last.get("lang") != choice:
+    start_session()  # greeting in the language the founder just picked
 last = st.session_state.last
 lang = ui_lang()  # interface language: sidebar choice, else the conversation's language
 talk = last.get("lang", "en")  # the conversation's language (words sent to the bot)

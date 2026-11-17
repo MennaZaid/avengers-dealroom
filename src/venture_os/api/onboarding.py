@@ -3,6 +3,7 @@ loads and saves state. Runs under the vos_app database role."""
 
 import hashlib
 import json
+from typing import Literal
 from uuid import UUID, uuid4
 
 from fastapi import APIRouter, HTTPException, UploadFile
@@ -33,6 +34,10 @@ def analyst():
 
 class MessageIn(BaseModel):
     text: str = Field(min_length=1, max_length=5000)
+
+
+class NewSession(BaseModel):
+    lang: Literal["en", "ar"] = "en"  # language of the greeting; the founder's first message can change it
 
 
 def _out(session_id, state: OnboardingState, reply: str, brief_id=None) -> dict:
@@ -74,9 +79,9 @@ def _save(conn, session_id: UUID, state: OnboardingState, brief_id=None) -> None
 
 
 @router.post("/sessions", status_code=201)
-def new_session():
+def new_session(body: NewSession | None = None):
     sid = uuid4()
-    state = OnboardingState(session_id=str(sid))
+    state = OnboardingState(session_id=str(sid), lang=(body or NewSession()).lang)
     reply = chat.start(state)
     with connect("vos_app") as conn:
         conn.execute("INSERT INTO onboarding_sessions (id, state) VALUES (%s, %s)", (sid, state.model_dump_json()))

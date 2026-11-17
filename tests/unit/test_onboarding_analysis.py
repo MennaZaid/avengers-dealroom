@@ -655,3 +655,29 @@ def test_model_cannot_add_a_supply_side_to_a_one_sided_idea():
     chat.handle_message(s, "skip", NULL)  # optional -> follow-ups
     chat.handle_message(s, "Pharmacists themselves, usually the owner.", ext)
     assert s.get("supply_side").value is None
+
+
+# ---------- greeting language ----------
+
+def test_session_started_in_arabic_greets_in_arabic():
+    s = OnboardingState(lang="ar")
+    assert "مرحباً" in chat.start(s) and "فكرة" in s.messages[-1].text
+
+
+def test_founders_first_message_decides_the_language_both_ways():
+    s = OnboardingState(lang="ar")
+    chat.start(s)
+    reply = chat.handle_message(s, "An app to book home cleaners in Cairo", NULL)
+    assert s.lang == "en" and "problem" in reply
+    s2 = OnboardingState()
+    chat.start(s2)
+    chat.handle_message(s2, "تطبيق لحجز عمال النظافة", NULL)
+    assert s2.lang == "ar"
+
+
+def test_a_later_message_does_not_change_the_language():
+    s = OnboardingState()
+    chat.start(s)
+    chat.handle_message(s, "An app to book home cleaners", NULL)
+    chat.handle_message(s, "مشكلة الثقة في العمال", NULL)
+    assert s.lang == "en"

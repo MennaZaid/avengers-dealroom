@@ -164,3 +164,10 @@ def test_new_session_has_no_log_entries_from_others(client):
     client.post("/onboarding/sessions")
     sid = client.post("/onboarding/sessions").json()["session_id"]
     assert client.get(f"/onboarding/sessions/{sid}/log").json() == []
+
+
+def test_session_can_start_in_arabic(client):
+    out = client.post("/onboarding/sessions", json={"lang": "ar"}).json()
+    assert out["lang"] == "ar" and "مرحباً" in out["reply"]
+    assert client.post("/onboarding/sessions").json()["lang"] == "en"  # default stays English
+    assert client.post("/onboarding/sessions", json={"lang": "fr"}).status_code == 422
