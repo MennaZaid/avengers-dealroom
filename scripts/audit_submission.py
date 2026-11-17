@@ -21,7 +21,9 @@ BANNED = re.compile(r"guarantee|passive income|testimonial|countdown|only \d+ (l
                     re.IGNORECASE)
 CLAIM = re.compile(r"\b(market size|market of|TAM|SAM|SOM|demand for|competitors? charge|average price)\b",
                    re.IGNORECASE)
-SDK = re.compile(r"\b(stripe|paypal|braintree|razorpay)\b", re.IGNORECASE)
+# Names are stored reversed so this checker never matches its own source.
+_SDK_NAMES = [n[::-1] for n in ("epirts", "lapyap", "eertniarb", "yaprozar")]
+SDK = re.compile(r"\b(" + "|".join(_SDK_NAMES) + r")\b", re.IGNORECASE)
 ADDRESS = re.compile(r"(dear|to the|attention|hello) (judges?|reviewers?|graders?)|(judges?|reviewers?|graders?)"
                      r" (should|please|will notice)|please (score|grade|award)|give us (full|top) (marks|score)",
                      re.IGNORECASE)
