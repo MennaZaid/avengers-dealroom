@@ -86,14 +86,14 @@ def evidence_items(test: gates.DemandTest, count: int | None, days_elapsed: int,
     today = datetime.now(UTC).date().isoformat()
     items = []
     if riskiest:
-        items.append({"phase": 2, "kind": "riskiest_assumption", "label": "assumption", "sources": [], "date": today,
-                      "text": riskiest, "quote": None})
+        items.append({"phase": 2, "kind": "claim", "label": "assumption", "sources": [], "date": today,
+                      "text": f"Riskiest assumption: {riskiest}", "quote": None})
     if count is not None:
-        items.append({"phase": 2, "kind": "demand_result", "label": "founder_stated", "sources": [], "date": today,
+        items.append({"phase": 2, "kind": "demand", "label": "founder_stated", "sources": [], "date": today,
                       "quote": None,
-                      "text": (f"{count} of {test.target} {test.metric} in {days_elapsed} days "
+                      "text": (f"Demand test result: {count} of {test.target} {test.metric} in {days_elapsed} days "
                                f"(target declared {test.declared_at}; {FOUNDER_LABEL})")})
-    items.append({"phase": 2, "kind": "demand_gate", "label": "inferred", "sources": [], "date": today, "quote": None,
+    items.append({"phase": 2, "kind": "other", "label": "inferred", "sources": [], "date": today, "quote": None,
                   "text": f"Phase 2 demand gate: {decision.outcome}. {decision.reason}"})
     return items
 

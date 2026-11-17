@@ -21,6 +21,9 @@ x-app: &app
     LLM_MODEL_JUDGE: ${LLM_MODEL_JUDGE:-}
     LLM_PRICE_PER_1M_TOKENS: ${LLM_PRICE_PER_1M_TOKENS:-0}
     ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+    # Embeddings for the evidence/corpus search (hybrid keyword + vector), served by the same Ollama.
+    EMBED_URL: http://ollama:11434
+    EMBED_MODEL: ${EMBED_MODEL:-bge-m3}
 
 services:
   db:
@@ -55,15 +58,17 @@ services:
       timeout: 5s
       retries: 30
 
-  # One-off: download the model once (cached in the `ollama` volume), then warm it with a tiny request so the
-  # first founder message is not slow. Nothing waits for this: the app works (rule-based) until it finishes.
+  # One-off: download the open-weight model and the embedding model once (cached in the `ollama` volume), then
+  # warm the chat model with a tiny request so the first founder message is not slow. Nothing waits for this:
+  # the app works (rule-based) until it finishes.
   ollama-pull:
     image: ollama/ollama:0.40.16
     environment:
       OLLAMA_HOST: http://ollama:11434
       MODEL: ${OLLAMA_MODEL:-qwen3:4b-instruct}
+      EMBED: ${EMBED_MODEL:-bge-m3}
     entrypoint: ["/bin/sh", "-c"]
-    command: ["ollama pull \"$$MODEL\" && ollama run \"$$MODEL\" 'Reply with OK.' > /dev/null && echo \"model $$MODEL ready\""]
+    command: ["ollama pull \"$$MODEL\" && ollama pull \"$$EMBED\" && ollama run \"$$MODEL\" 'Reply with OK.' > /dev/null && echo \"model $$MODEL ready\""]
     restart: "no"
     depends_on:
       ollama: {condition: service_healthy}

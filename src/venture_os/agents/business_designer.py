@@ -63,7 +63,8 @@ KIND_TO_BOX = {
     "pain": "problem", "problem": "problem", "competitor": "problem", "alternative": "problem",
     "customer": "customer_segments", "segment": "customer_segments", "audience": "customer_segments",
     "market_size": "customer_segments", "price": "revenue_streams", "competitor_price": "revenue_streams",
-    "channel": "channels",
+    "channel": "channels", "market": "customer_segments", "supply": "customer_segments",
+    "revenue": "revenue_streams", "demand": "key_metrics",
 }
 
 # Expected income is never stated (revenue streams describe how money would come in, not how much).

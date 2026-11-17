@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+import venture_os
 from venture_os import gates
 from venture_os.agents import demand_test as dt
 from venture_os.decision_log import read_log
@@ -22,6 +23,7 @@ def store(monkeypatch):
     fake.Item = lambda **kw: kw
     fake.add = lambda brief_id, items: added.extend((brief_id, i) for i in items)
     monkeypatch.setitem(sys.modules, "venture_os.evidence", fake)
+    monkeypatch.setattr(venture_os, "evidence", fake, raising=False)  # the package attribute wins over sys.modules
     return added
 
 
@@ -54,7 +56,7 @@ def test_no_count_is_repeat_and_no_number_is_made_up(store):
     assert d.outcome == "repeat" and d.actual is None
     assert "has not been measured" in _gate_file()
     assert not [e for e in read_log() if e["action"] == "enter_signup_count"]
-    assert [i["kind"] for _, i in store] == ["demand_gate"]  # no demand_result without a real count
+    assert [i["kind"] for _, i in store] == ["other"]  # only the gate outcome; no demand result without a count
 
 
 @pytest.mark.parametrize("bad", [12.5, -1, True, "12"])
@@ -66,15 +68,26 @@ def test_count_must_be_a_real_whole_number(store, bad):
 def test_evidence_items_have_the_right_labels(store):
     dt.enter_signups(BRIEF, 12, 14, test=_test(), riskiest_assumption="Pharmacists want a stock app")
     items = {i["kind"]: i for b, i in store if b == BRIEF}
-    assert items["riskiest_assumption"]["label"] == "assumption"
-    assert items["demand_result"]["label"] == "founder_stated" and "12 of 100" in items["demand_result"]["text"]
-    assert items["demand_gate"]["label"] == "inferred" and items["demand_gate"]["text"].split(".")[0].endswith(
+    assert items["claim"]["label"] == "assumption" and items["claim"]["text"].startswith("Riskiest assumption:")
+    assert items["demand"]["label"] == "founder_stated" and "12 of 100" in items["demand"]["text"]
+    assert items["other"]["label"] == "inferred" and items["other"]["text"].split(".")[0].endswith(
         ("stop", "pivot"))
     assert read_log()[-1]["written"] is True
 
 
+def test_items_are_valid_for_the_real_evidence_module():
+    from venture_os import evidence
+    dt.enter_signups(BRIEF, 12, 14, test=_test(), riskiest_assumption="Pharmacists want a stock app")
+    stored = evidence.load(BRIEF)
+    assert [(i.kind, i.label) for i in stored] == [("claim", "assumption"), ("demand", "founder_stated"),
+                                                   ("other", "inferred")]
+    assert read_log()[-1]["written"] is True
+
+
 def test_missing_evidence_module_is_reported_not_hidden(monkeypatch):
-    monkeypatch.setitem(sys.modules, "venture_os.evidence", None)  # import fails
+    broken = types.ModuleType("venture_os.evidence")  # an evidence module without add(): writing fails
+    monkeypatch.setitem(sys.modules, "venture_os.evidence", broken)
+    monkeypatch.setattr(venture_os, "evidence", broken, raising=False)
     d = dt.enter_signups(BRIEF, 12, 14, test=_test())
     assert d.outcome in ("stop", "pivot")
     entry = read_log()[-1]
@@ -91,6 +104,6 @@ def test_uses_the_test_declared_by_the_landing_page_step(store):
     draft = lp.run(brief.brief_id, canvas, brief=brief, chat=None)
     d = dt.enter_signups(brief.brief_id, 12, 14)  # CLI path: test + riskiest assumption read from outputs/
     assert d.target == 100 and draft.demand_test["declared_at"] in d.rule
-    assert any(i["kind"] == "riskiest_assumption" for _, i in store)
+    assert any(i["text"].startswith("Riskiest assumption:") for _, i in store)
     with pytest.raises(ValueError):
         dt.enter_signups("another-brief", 12, 14)

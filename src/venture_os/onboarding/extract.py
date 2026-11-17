@@ -54,6 +54,10 @@ class LLMExtractor:
         out: Extracted = {}
         norm_text = " ".join(text.split())
         for name, item in raw.items():
+            if isinstance(item, str) and item.strip():
+                # Small local models sometimes answer {"city": "Cairo"} without a quote. Keep such a value only
+                # if it is word for word in the text (it is then its own quote); anything else is dropped.
+                item = {"value": item, "quote": item, "inferred": False}
             if name not in known or not isinstance(item, dict):
                 continue
             value, quote = str(item.get("value") or "").strip(), str(item.get("quote") or "").strip()
@@ -62,7 +66,7 @@ class LLMExtractor:
             quote = re.sub(r"</?untrusted>", "", quote).strip()
             if not value or not quote:
                 continue
-            if " ".join(quote.split()) not in norm_text:  # grounding check: quote must be real
+            if " ".join(quote.split()).casefold() not in norm_text.casefold():  # grounding: the quote must be real
                 continue
             out[name] = {"value": value[:500], "quote": quote[:500], "inferred": _inferred(name, value, quote, item)}
         return out

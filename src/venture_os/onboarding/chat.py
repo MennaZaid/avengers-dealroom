@@ -578,8 +578,8 @@ def handle_message(state: OnboardingState, text: str, extractor: Extractor, anal
     analyst = analyst or RuleAnalyst()
     text = re.sub(r"(?m)^\s*>\s?", "", text).strip()  # quote markers left over from copy-pasting
     first_answer = all(m.role != "founder" for m in state.messages)
-    if first_answer and ARABIC.search(text):
-        state.lang = "ar"
+    if first_answer and re.search(r"[A-Za-z\u0600-\u06FF]", text):
+        state.lang = "ar" if ARABIC.search(text) else "en"  # the founder's own language wins over the greeting's
     refusal = guardrails.check_request(text)
     text = guardrails.redact(text)  # card numbers and passwords are never stored
     state.messages.append(Message(role="founder", text=text))

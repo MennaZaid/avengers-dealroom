@@ -65,14 +65,45 @@ html, body, [class*="css"], .stMarkdown, .stChatMessage, button, input, textarea
 /* Each paragraph takes its direction from its own first letters: Arabic right-to-left, English left-to-right. */
 [data-testid="stChatMessage"] p, [data-testid="stChatMessage"] li {
   unicode-bidi: plaintext; text-align: start; }
+/* What the founder types: Arabic runs right-to-left from the first letter, even before the language is known. */
+[data-testid="stChatInput"] textarea { unicode-bidi: plaintext; text-align: start; }
+.vos-card .val { unicode-bidi: plaintext; text-align: start; }
 </style>
 """
 
+# Arabic interface: the page runs right-to-left (columns, tabs, alerts, lists flip), while every paragraph still
+# takes its own direction from its text, so English values inside Arabic pages (document text, URLs, numbers with
+# units) are not scrambled. Code, tables and JSON stay left-to-right.
 RTL_CSS = """
 <style>
-[data-testid="stChatInput"] textarea { direction: rtl; text-align: right; }
+.block-container, [data-testid="stSidebar"] { direction: rtl; }
+.block-container p, .block-container li, .block-container label,
+[data-testid="stSidebar"] p, [data-testid="stSidebar"] span { unicode-bidi: plaintext; text-align: start; }
+.block-container h1, .block-container h2, .block-container h3, .vos-section { text-align: right; }
+[data-testid="stAlert"] { direction: rtl; text-align: right; }
+[data-baseweb="tab-list"] { direction: rtl; }
+.block-container ul, .block-container ol { padding-right: 1.4em; padding-left: 0; }
+.vos-card .lbl { flex-direction: row; }
+.block-container code, .block-container pre, [data-testid="stDataFrame"], [data-testid="stJson"],
+[data-testid="stTable"] { direction: ltr; text-align: left; unicode-bidi: isolate; }
 </style>
 """
+
+LANG_CHOICES = {"auto": "Auto / تلقائي", "en": "English", "ar": "العربية"}
+
+
+def ui_lang() -> str:
+    """Interface language: the founder's choice in the sidebar, otherwise the conversation's language."""
+    choice = st.session_state.get("ui_lang_choice", "auto")
+    if choice in ("en", "ar"):
+        return choice
+    return (st.session_state.get("last") or {}).get("lang", "en")
+
+
+def language_picker() -> None:
+    """Sidebar switch for the interface language (the bot answers in the founder's language either way)."""
+    st.sidebar.radio("Language / اللغة", list(LANG_CHOICES), format_func=LANG_CHOICES.get, key="ui_lang_choice",
+                     horizontal=True)
 
 
 def esc(text) -> str:
@@ -84,9 +115,10 @@ def setup(title: str, subtitle: str = "", active_phase: int | None = None, lang:
     if lang == "ar":
         st.markdown(RTL_CSS, unsafe_allow_html=True)
     model = st.session_state.get("model_label", "")
+    d = "rtl" if lang == "ar" else "ltr"
     st.markdown(
-        f'<div class="vos-header"><div><h1>🧭 {esc(title)}</h1><div class="sub">{esc(subtitle)}</div></div>'
-        f'<span class="vos-badge">{esc(model) or "Venture OS"}</span></div>', unsafe_allow_html=True)
+        f'<div class="vos-header" dir="{d}"><div><h1>🧭 {esc(title)}</h1><div class="sub">{esc(subtitle)}</div></div>'
+        f'<span class="vos-badge" dir="ltr">{esc(model) or "Venture OS"}</span></div>', unsafe_allow_html=True)
     if active_phase is not None:
         phase_bar(active_phase, lang)
 
@@ -111,7 +143,7 @@ def chip(text: str, kind: str) -> str:
 
 def card(label: str, value: str | None, chip_html: str = "", lang: str = "en") -> str:
     d = "rtl" if lang == "ar" else "ltr"
-    val = f'<div class="val">{esc(value)}</div>' if value else f'<div class="val empty">{"—"}</div>'
+    val = f'<div class="val" dir="auto">{esc(value)}</div>' if value else '<div class="val empty">—</div>'
     return f'<div class="vos-card" dir="{d}"><div class="lbl"><span>{esc(label)}</span>{chip_html}</div>{val}</div>'
 
 

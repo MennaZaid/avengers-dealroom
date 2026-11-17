@@ -257,3 +257,122 @@ GRANT SELECT ON corpus_items, source_requests, source_candidates TO vos_admin;
 GRANT SELECT, INSERT, UPDATE ON onboarding_sessions TO vos_app;
 GRANT SELECT, INSERT ON founder_documents, briefs, brief_versions TO vos_app;
 GRANT SELECT ON briefs, brief_versions TO vos_agent;
+
+-- ---------- Stage runs and founder decisions (owner: stage framework) ----------
+-- A run pins the brief version it used; a newer brief version makes it stale (never deleted).
+CREATE TABLE IF NOT EXISTS stage_runs (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  brief_id      UUID NOT NULL,
+  brief_version INT NOT NULL,
+  stage         TEXT NOT NULL CHECK (stage IN ('discover','validate','build','commercial','launch','operate')),
+  status        TEXT NOT NULL DEFAULT 'running'
+                CHECK (status IN ('running','awaiting_approval','approved','revision_requested','rejected','failed')),
+  output        JSONB,
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  FOREIGN KEY (brief_id, brief_version) REFERENCES brief_versions(brief_id, version)
+);
+CREATE INDEX IF NOT EXISTS stage_runs_brief_idx ON stage_runs (brief_id, stage);
+
+-- Founder decisions: append-only, like an audit log (no UPDATE/DELETE grants).
+CREATE TABLE IF NOT EXISTS stage_decisions (
+  id            BIGSERIAL PRIMARY KEY,
+  stage_run_id  UUID NOT NULL REFERENCES stage_runs(id),
+  decision      TEXT NOT NULL CHECK (decision IN ('approve','revise','reject')),
+  note          TEXT NOT NULL DEFAULT '',
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+GRANT SELECT, INSERT ON stage_runs, stage_decisions TO vos_app;
+GRANT UPDATE (status, updated_at) ON stage_runs TO vos_app;   -- output is written once, at insert
+GRANT USAGE ON SEQUENCE stage_decisions_id_seq TO vos_app;
+GRANT SELECT ON stage_runs, stage_decisions TO vos_agent;
+
+-- Discover evidence: each claim points at the stored page (documents) and passage (chunks) it was quoted from.
+-- A `fact` must have a document and an exact quote; the Research Critic's rule flags are kept with it.
+CREATE TABLE IF NOT EXISTS claims (
+  id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  stage_run_id  UUID NOT NULL REFERENCES stage_runs(id),
+  topic         TEXT NOT NULL,                      -- market_size | competitors | ... | open_question_N
+  agent         TEXT NOT NULL,                      -- market_research | competitor_intelligence
+  text          TEXT NOT NULL,
+  type          TEXT NOT NULL CHECK (type IN ('fact','inference','assumption')),
+  document_id   UUID REFERENCES documents(id),
+  chunk_id      UUID REFERENCES chunks(id),
+  quote         TEXT,
+  language      TEXT,
+  flags         TEXT[] NOT NULL DEFAULT '{}',       -- undated | stale | web_source | other_country | quote_not_found
+  extracted_by  TEXT NOT NULL CHECK (extracted_by IN ('rules','model')),
+  created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+  CHECK (type <> 'fact' OR (document_id IS NOT NULL AND quote IS NOT NULL))
+);
+CREATE INDEX IF NOT EXISTS claims_run_idx ON claims (stage_run_id, topic);
+
+-- Research agents (vos_agent) write evidence and report run progress; they cannot decide on a run.
+GRANT SELECT, INSERT ON claims TO vos_agent;
+GRANT SELECT ON claims TO vos_app;
+GRANT UPDATE (status, output, updated_at) ON stage_runs TO vos_agent;
+
+-- Gate outcomes go / repeat / pivot / stop (approve / revise / pivot / reject). Widen the checks on existing DBs.
+ALTER TABLE stage_decisions DROP CONSTRAINT IF EXISTS stage_decisions_decision_check;
+ALTER TABLE stage_decisions ADD CONSTRAINT stage_decisions_decision_check
+  CHECK (decision IN ('approve','revise','pivot','reject'));
+ALTER TABLE stage_runs DROP CONSTRAINT IF EXISTS stage_runs_status_check;
+ALTER TABLE stage_runs ADD CONSTRAINT stage_runs_status_check
+  CHECK (status IN ('running','awaiting_approval','approved','revision_requested','pivoted','rejected','failed'));
+
+-- ---------- Digital-products scope for the registry (Discover spec) ----------
+-- product_scope: which products a source serves. The system builds digital products only, so the research
+-- planner uses digital + any. Existing rows get 'any' by default; config/sources/registry_updates.yaml sets
+-- 'physical' / 'digital' through the logged admin path (registry.update_source).
+ALTER TABLE sources ADD COLUMN IF NOT EXISTS product_scope TEXT NOT NULL DEFAULT 'any';
+ALTER TABLE sources DROP CONSTRAINT IF EXISTS sources_product_scope_check;
+ALTER TABLE sources ADD CONSTRAINT sources_product_scope_check CHECK (product_scope IN ('digital','physical','any'));
+ALTER TABLE sources ADD COLUMN IF NOT EXISTS limitations TEXT;   -- terms, quotas, keys, what it cannot tell us
+ALTER TABLE sources ADD COLUMN IF NOT EXISTS test_url TEXT;      -- endpoint the reachability check calls
+CREATE INDEX IF NOT EXISTS sources_scope_idx ON sources (product_scope);
+
+-- Discovery rules (how agents find official sources), seeded from config/sources/discovery_rules*.yaml.
+CREATE TABLE IF NOT EXISTS discovery_rules (
+  step          INT PRIMARY KEY,
+  name          TEXT NOT NULL,
+  action        TEXT NOT NULL,
+  verification  TEXT,
+  output        TEXT,
+  product_scope TEXT NOT NULL DEFAULT 'any' CHECK (product_scope IN ('digital','physical','any')),
+  created_by    TEXT NOT NULL,
+  updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+GRANT SELECT ON discovery_rules TO vos_agent, vos_app, vos_validator;
+GRANT SELECT, INSERT, UPDATE ON discovery_rules TO vos_admin;
+-- Hybrid search needs the agents to write embeddings on corpus and live chunks (already UPDATE on chunks).
+
+-- ---------- Discover: founder decisions with pivot/waiver, and founder-entered interviews ----------
+ALTER TABLE stage_decisions ADD COLUMN IF NOT EXISTS actor TEXT NOT NULL DEFAULT 'founder';
+ALTER TABLE stage_decisions ADD COLUMN IF NOT EXISTS pivot_to TEXT;        -- idea id, or 'onboarding'
+ALTER TABLE stage_decisions ADD COLUMN IF NOT EXISTS waiver_reason TEXT;
+ALTER TABLE stage_decisions DROP CONSTRAINT IF EXISTS stage_decisions_decision_check;
+ALTER TABLE stage_decisions ADD CONSTRAINT stage_decisions_decision_check
+  CHECK (decision IN ('approve','revise','pivot','reject','waive'));
+ALTER TABLE stage_decisions DROP CONSTRAINT IF EXISTS stage_decisions_actor_check;
+ALTER TABLE stage_decisions ADD CONSTRAINT stage_decisions_actor_check CHECK (actor = 'founder');  -- never a model
+ALTER TABLE stage_decisions DROP CONSTRAINT IF EXISTS stage_decisions_waiver_check;
+ALTER TABLE stage_decisions ADD CONSTRAINT stage_decisions_waiver_check
+  CHECK (decision <> 'waive' OR length(coalesce(waiver_reason, '')) >= 10);
+
+-- Mom Test interviews: entered by the founder only (primary_founder_reported). Notes are stored exactly as
+-- written; tags come from plain rules over those words (agents/interview_designer.tag_note).
+CREATE TABLE IF NOT EXISTS discover_interviews (
+  id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  brief_id          UUID NOT NULL REFERENCES briefs(id),
+  person            TEXT NOT NULL,          -- anonymous label
+  held_on           DATE,
+  notes             TEXT NOT NULL,
+  tagged            JSONB NOT NULL,         -- [{text, tags, counts}]
+  describes_problem BOOLEAN NOT NULL DEFAULT TRUE,
+  type              TEXT NOT NULL DEFAULT 'primary_founder_reported' CHECK (type = 'primary_founder_reported'),
+  created_at        TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+GRANT SELECT, INSERT ON discover_interviews TO vos_app;
+GRANT SELECT ON discover_interviews TO vos_agent;
+GRANT SELECT ON onboarding_sessions TO vos_app;
