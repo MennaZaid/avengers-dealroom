@@ -103,7 +103,7 @@ flowchart LR
 - **Output:** `phase1_step1_brief`, `phase1_step2_opportunities`, `phase1_step3_idea_scores`, `phase1_step4_market`,
   `phase1_step5_interview_plan` and `phase1_gate_decision` (`.md` + `.json` each).
 
-### Phase 2: Validate (core step: Design the business) — agents built; pipeline wiring in progress
+### Phase 2: Validate (core step: Design the business) — Working
 
 - **Agents:** `business_designer.py` (Lean Canvas), `landing_page.py` (draft page), `demand_test.py` (result +
   gate). **Tools:** confirmed brief, Phase 1 evidence items (`evidence.load`), `gates.plan_demand_test` /
@@ -256,9 +256,9 @@ flowchart TD
 | Gates: product, evidence, demand | Working |
 | Decision log, outputs, prompts, token metering, cost report | Working |
 | Phase 1 Discover agents and gate | Working |
-| Phase 2 Validate: Lean Canvas, demand test plan | Agents built; pipeline wiring in progress |
-| Phase 2 sign-up count + demand gate (`POST /stages/validate/demand`) | Working |
-| Phase 2 landing page | Agent built, pipeline wiring in progress; publishing MOCKED |
+| Phase 2 Validate: Lean Canvas, demand test plan | Working |
+| Phase 2 sign-up count + demand gate (`POST /stages/runs/{id}/signups`) | Working |
+| Phase 2 landing page | Working; publishing MOCKED |
 | Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
 | Phase 4 pricing and policies | STUBBED (not run by the pipeline yet) |
 | Phase 5 store page and launch posts | STUBBED (not run by the pipeline yet); posting MOCKED |
@@ -272,7 +272,7 @@ The README table is the per-step status.
 
 ## Roadmap
 
-1. Wire the Lean Canvas and landing page into the stage API and pipeline page (Phase 2 end to end).
+1. Real waitlist traffic: publish the approved landing page for real (today publishing is MOCKED) so the demand test measures actual sign-ups.
 2. The orchestrator runs Phases 4-6 (their approvals already exist in `approval.py`).
 3. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
 4. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
