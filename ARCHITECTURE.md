@@ -103,7 +103,7 @@ flowchart LR
 - **Output:** `phase1_step1_brief`, `phase1_step2_opportunities`, `phase1_step3_idea_scores`, `phase1_step4_market`,
   `phase1_step5_interview_plan` and `phase1_gate_decision` (`.md` + `.json` each).
 
-### Phase 2: Validate (core step: Design the business) — Working
+### Phase 2: Validate (core step: Design the business) — agents built; pipeline wiring in progress
 
 - **Agents:** `business_designer.py` (Lean Canvas), `landing_page.py` (draft page), `demand_test.py` (result +
   gate). **Tools:** confirmed brief, Phase 1 evidence items (`evidence.load`), `gates.plan_demand_test` /
@@ -136,7 +136,7 @@ collected at the start and the founder approves once, at the build gate.
 - **Output:** `phase3_step1_build_inputs.md` … `phase3_step5_mvp.html` … `phase3_step8_evidence_summary.md`,
   `phase3_gate_build.md`. Live on CPU with `qwen3:4b-instruct`: about 6 minutes per run.
 
-### Phase 4: Commercial setup (core step: Set the price and policies) — STUBBED
+### Phase 4: Commercial setup (core step: Set the price and policies) — STUBBED (not run by the pipeline yet)
 
 - **Agents:** `pricing.py`, `policies.py`. **Tools:** brief, evidence items with competitor prices.
 - **Method:** price hypotheses where each price is the founder's stated model, a sourced competitor price, or
@@ -146,7 +146,7 @@ collected at the start and the founder approves once, at the build gate.
 - **Output:** `phase4_step1_pricing.md`, `phase4_step2_policies.md`, `phase4_gate_pricing.md`,
   `phase4_gate_policies.md`.
 
-### Phase 5: Launch (core steps: Open the store; deliver automatically) — STUBBED / MOCKED
+### Phase 5: Launch (core steps: Open the store; deliver automatically) — STUBBED / MOCKED (not run by the pipeline yet)
 
 - **Agents:** `launch.py`; delivery is `delivery.py`. **Tools:** brief, the sale-to-cash mocks.
 - **Method:** a store page draft and 3 launch post drafts with no urgency, reviews or user counts. Posting a draft
@@ -155,7 +155,7 @@ collected at the start and the founder approves once, at the build gate.
 - **Output:** `phase5_step1_store_page.md`, `phase5_step2_launch_posts.md`, `phase5_gate_launch.md`,
   `payment_test_log.md` (from `scripts/payment_test.py`).
 
-### Phase 6: Operate and learn — STUBBED
+### Phase 6: Operate and learn — STUBBED (not run by the pipeline yet)
 
 - **Agent:** `operator.py`. **Tools:** `decision_log.json` and `outputs/` only.
 - **Method:** a persevere-or-pivot memo built only from logged results (gate outcomes, the founder's sign-up count,
@@ -256,23 +256,24 @@ flowchart TD
 | Gates: product, evidence, demand | Working |
 | Decision log, outputs, prompts, token metering, cost report | Working |
 | Phase 1 Discover agents and gate | Working |
-| Phase 2 Validate: Lean Canvas, demand test, demand gate | Working |
-| Phase 2 landing page | Working draft; publishing MOCKED |
+| Phase 2 Validate: Lean Canvas, demand test plan | Agents built; pipeline wiring in progress |
+| Phase 2 sign-up count + demand gate (`POST /stages/validate/demand`) | Working |
+| Phase 2 landing page | Agent built, pipeline wiring in progress; publishing MOCKED |
 | Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
-| Phase 4 pricing and policies | STUBBED |
-| Phase 5 store page and launch posts | STUBBED; posting MOCKED |
-| Phase 6 persevere-or-pivot memo | STUBBED (support, analytics: no data yet) |
+| Phase 4 pricing and policies | STUBBED (not run by the pipeline yet) |
+| Phase 5 store page and launch posts | STUBBED (not run by the pipeline yet); posting MOCKED |
+| Phase 6 persevere-or-pivot memo | STUBBED (not run by the pipeline yet; support, analytics: no data yet) |
 | Payments, delivery, refunds, reconciliation | MOCKED |
 | `approval.py`: founder decisions at stage gates | Working |
-| Founder approval of single actions (publish page, post, order, refund, pass a phase 4-6 gate) | STUBBED: refused until `approval.py` can confirm an approval of that exact action |
+| Founder approval of exact content: landing page, launch posts, order, refund (`POST /stages/approvals`, CLI) | Working |
+| Founder decision to pass a phase gate (go / repeat / pivot / stop; only "go" passes) | Working |
 
 The README table is the per-step status.
 
 ## Roadmap
 
-1. Founder approval of single actions in the UI (`approval.py`), so the mocked publish, post, order and
-   refund flows can run end to end.
-2. The orchestrator runs Phase 2 and Phases 4-6 after Discover and Build.
+1. Wire the Lean Canvas and landing page into the stage API and pipeline page (Phase 2 end to end).
+2. The orchestrator runs Phases 4-6 (their approvals already exist in `approval.py`).
 3. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
 4. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
 5. More country source packs as reviewed YAML (`config/sources/`).

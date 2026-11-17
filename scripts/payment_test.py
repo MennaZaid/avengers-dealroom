@@ -1,6 +1,6 @@
 """MOCKED sale-to-cash test run -> outputs/payment_test_log.md (written from this real run, never by hand).
 
-    python scripts/payment_test.py --brief-id <id>
+    python scripts/payment_test.py --brief-id <id> --session <founder session id>
 
 Scenario: order -> mock payment event -> the same event again (no-op) -> delivery happens once -> refund (access
 revoked) -> a second order whose payment never arrives -> reconcile (flags the missing payment).
@@ -24,14 +24,14 @@ Approve = Callable[[str, str, dict], dict | None]
 PRODUCT, PRICE, CURRENCY = "MVP access (Phase 3 output)", 15.0, "USD"
 
 
-def terminal_approve(brief_id: str, action: str, payload: dict) -> dict | None:
+def terminal_approve(brief_id: str, action: str, payload: dict, session_id: str = "") -> dict | None:
     """The founder approves in the terminal; the approval is stored by approval.py (fails closed)."""
     answer = input(f"Founder: approve {action} {payload}? Type 'approve' or 'reject': ").strip().lower()
     if answer != "approve":
         return None
     digest = payments.content_hash(payload)
     module = importlib.import_module("venture_os.approval")  # ImportError -> nothing runs
-    module.record_founder_approval(brief_id=brief_id, action=action, content_hash=digest)  # TODO(approval.py)
+    module.record_founder_approval(brief_id, action, digest, session_id=session_id, channel="cli")
     return {"approved_by": "founder", "action": action, "content_hash": digest}
 
 
@@ -90,8 +90,9 @@ def write_log(brief_id: str, steps: list[tuple[str, str]]) -> str:
 def main(argv: list[str] | None = None) -> None:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--brief-id", required=True)
+    p.add_argument("--session", required=True, help="the founder's onboarding session id")
     a = p.parse_args(argv)
-    steps = run_scenario(a.brief_id, terminal_approve)
+    steps = run_scenario(a.brief_id, lambda b, act, pl: terminal_approve(b, act, pl, a.session))
     print(write_log(a.brief_id, steps))
     for n, r in steps:
         print(f"{n}: {r}")
