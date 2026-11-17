@@ -94,3 +94,24 @@ def test_the_real_phase5_and_phase6_entry_points_run_through_the_stages(client, 
     assert oo["gate"]["phase"] == 6 and oo["gate"]["gate"] == "operate"
     done = decide(client, operate["id"], "reject" if oo["gate"]["outcome"] == "stop" else "approve", sid).json()
     assert done["decisions"][-1]["actor"] == "founder"
+
+
+def test_launch_shows_the_exact_payloads_and_runs_only_after_the_founder_approves_them(client, make_brief):
+    """Phase 5's MOCKED sale-to-cash test needs the founder's approval of the exact test order and refund. The
+    stage never approves: before approval it recommends repeat; after the founder approves both, go."""
+    bid, sid = _approved(client, make_brief, "commercial")
+    items = client.get("/stages/launch/approvals", params={"brief_id": bid}).json()
+    assert [x["action"] for x in items] == ["create_order", "refund_order"]
+    assert not any(x["approved"] for x in items) and items[0]["payload"]["brief_id"] == bid
+    _, first = start(client, "launch", bid)
+    assert first["output"]["launch"]["gate"]["outcome"] == "repeat"
+    decide(client, first["id"], "revise", sid)
+    for x in items:   # the founder approves each exact payload in the UI (founder session required)
+        body = {"brief_id": bid, "action": x["action"], "content_hash": x["content_hash"]}
+        assert client.post("/stages/approvals", json=body).status_code == 401
+        assert client.post("/stages/approvals", json=body, headers={"X-Founder-Session": sid}).status_code == 201
+    assert all(x["approved"] for x in client.get("/stages/launch/approvals", params={"brief_id": bid}).json())
+    _, second = start(client, "launch", bid)
+    out = second["output"]["launch"]
+    assert out["gate"]["outcome"] == "go", out["gate"]["reason"]
+    assert "MOCKED" in out["files"]["payment_test_log.md"]

@@ -80,6 +80,35 @@ def _post(path: str, headers: dict | None = None, **body) -> None:
         st.error(str(e))  # e.g. Build not approved for this brief version
 
 
+APPROVE_T = {
+    "head": ("Your approval of the exact test payloads (MOCKED: no money moves)",
+             "موافقتك على بيانات الاختبار نفسها (MOCKED: لا تنتقل أي أموال)"),
+    "why": (("The sale-to-cash test runs only after you approve these exact payloads. Changing one character needs "
+            "a new approval."), ("لا يعمل اختبار البيع إلى التحصيل إلا بعد موافقتك على هذه البيانات نفسها. تغيير حرف "
+                               "واحد يحتاج موافقة جديدة.")),
+    "approve": ("Approve", "موافقة"), "approved": ("Approved by you", "وافقت عليها"),
+    "then": ("After approving both, run Phase 5 again.", "بعد الموافقة على الاثنين، أعد تشغيل المرحلة 5."),
+}
+
+
+def _launch_approvals(brief_id: str, session_id: str, headers: dict) -> None:
+    """Phase 5 needs the founder's approval of the exact MOCKED test order and refund before its test can run."""
+    items = api("GET", "/stages/launch/approvals", params={"brief_id": brief_id})
+    st.markdown(f"**{APPROVE_T['head'][i]}**")
+    st.caption(APPROVE_T["why"][i])
+    for it in items:
+        c1, c2 = st.columns([4, 1])
+        c1.markdown(f"`{it['action']}` · {it['label']} · SHA-256 `{it['content_hash'][:16]}…`")
+        c1.json(it["payload"], expanded=False)
+        if it["approved"]:
+            c2.success(APPROVE_T["approved"][i])
+        elif c2.button(APPROVE_T["approve"][i], key=f"appr-{it['action']}-{brief_id}", disabled=not session_id):
+            _post("/stages/approvals", headers, brief_id=brief_id, action=it["action"],
+                  content_hash=it["content_hash"])
+    if not all(it["approved"] for it in items):
+        st.caption(APPROVE_T["then"][i])
+
+
 def render(brief_id: str, session_id: str, stage: str = "commercial") -> None:
     def ts(key, **kw):
         v = STAGE_T[stage][key][i]
@@ -88,6 +117,8 @@ def render(brief_id: str, session_id: str, stage: str = "commercial") -> None:
     headers = {"X-Founder-Session": session_id} if session_id else {}
     st.subheader(ts("title"))
     runs = api("GET", "/stages/runs", params={"brief_id": brief_id, "stage": stage})
+    if stage == "launch":
+        _launch_approvals(brief_id, session_id, headers)
     if not runs:
         st.caption(ts("start_note"))
         if st.button(ts("start"), key=f"{stage}-start-{brief_id}", type="primary"):
