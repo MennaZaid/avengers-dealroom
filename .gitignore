@@ -7,3 +7,6 @@ __pycache__/
 *.egg-info/
 data/
 results/
+
+# per-brief working data of pipeline runs (evidence items)
+runs/
