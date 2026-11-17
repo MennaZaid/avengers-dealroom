@@ -4,6 +4,8 @@
     write_output(1, None, "decision", md, gate=True)  -> outputs/phase1_gate_decision.md
 
 Only the pipeline writes here (never by hand). Text formats only. Directory from OUTPUTS_DIR (default outputs/).
+Every write runs the guardrail check first (guardrails.scrub_output): a span that breaks a must-never rule is
+replaced by [REMOVED by guardrails: <rule>] and the removal is logged, so no output carries it.
 """
 
 from __future__ import annotations
@@ -33,7 +35,23 @@ def output_name(phase: int, step: int | None, name: str, ext: str = "md", gate: 
 
 
 def write_output(phase: int, step: int | None, name: str, content: str, ext: str = "md", gate: bool = False) -> Path:
-    path = outputs_dir() / output_name(phase, step, name, ext, gate)
+    return write_named(output_name(phase, step, name, ext, gate), content)
+
+
+def write_named(filename: str, content: str) -> Path:
+    """The one write path into outputs/ (also for fixed names such as payment_test_log.md): the guardrail check
+    runs first."""
+    from venture_os.guardrails import scrub_output
+
+    if "/" in filename or "\\" in filename or filename.rsplit(".", 1)[-1] not in TEXT_EXTS:
+        raise ValueError(f"outputs/ takes plain text file names only: {filename!r}")
+    content, fired = scrub_output(content)
+    if fired:
+        from venture_os.decision_log import log_action
+
+        log_action("guardrails", "refuse_output", sources=[], model=None, cost=0, approved_by=None, file=filename,
+                   rules=fired)
+    path = outputs_dir() / filename
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     return path

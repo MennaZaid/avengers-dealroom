@@ -10,6 +10,10 @@ thresholds:
   fit_criterion_min: 2            # every "fit" criterion of that idea at least this
   interviews: 5                   # founder-entered Mom Test interviews ...
   interviews_past_behaviour: 3    # ... of which describe the problem from past behaviour
+  relevant_pages: 3               # pain pages that pass the relevance filter below (0 -> stop)
+
+relevance:                        # before claim extraction: bge-m3 cosine similarity of each pain page to the
+  min_similarity: 0.35            # pain statement (customer + problem); pages under this are dropped and logged
 
 freshness_months:                 # claims older than this are stale and don't count
   pain: 36

@@ -8,7 +8,8 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
-    llm_mode: Literal["replay", "live"] = "replay"
+    # live = call the models; none = rule-based only, no model at all (replay is the same, kept for CI and old .env)
+    llm_mode: Literal["none", "replay", "live"] = "replay"
     llm_base_url: str = ""
     llm_api_key: str = ""
     llm_model_reasoning: str = ""

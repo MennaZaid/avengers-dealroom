@@ -18,7 +18,7 @@ from collections.abc import Callable
 
 from venture_os import delivery, payments, reconcile, refunds
 from venture_os.decision_log import read_log
-from venture_os.outputs import outputs_dir
+from venture_os.outputs import write_named
 
 Approve = Callable[[str, str, dict], dict | None]
 PRODUCT, PRICE, CURRENCY = "MVP access (Phase 3 output)", 15.0, "USD"
@@ -82,10 +82,7 @@ def write_log(brief_id: str, steps: list[tuple[str, str]]) -> str:
              ("No payment provider, no sandbox, no network: every payment, delivery and refund below is a mock "
               "record. Fees and payouts are 0 because no money moves."), "", "| Step | Result |", "|---|---|"]
     lines += [f"| {n} | {r.replace('|', '/')} |" for n, r in steps]
-    path = outputs_dir() / "payment_test_log.md"
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
-    return str(path)
+    return str(write_named("payment_test_log.md", "\n".join(lines) + "\n"))  # guardrail-checked write
 
 
 def main(argv: list[str] | None = None) -> None:

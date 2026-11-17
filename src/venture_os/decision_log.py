@@ -12,12 +12,50 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import threading
 from datetime import UTC, datetime
 from pathlib import Path
 
 REQUIRED_KEYS = ("timestamp", "agent", "action", "sources", "model", "cost", "approved_by")
 _lock = threading.Lock()
+
+
+# Gate decision entries (not threshold settings) must also carry an "outcome".
+_GATE_DECISION = re.compile(r"(_gate|_gate_decision|_gate_passed|_gate_pass_refused|^evaluate_\w+_gate)$")
+
+
+def validate_entry(e: dict) -> dict:
+    """Raise ValueError if `e` does not follow the decision_log.json format; return it unchanged otherwise."""
+    missing = [k for k in REQUIRED_KEYS if k not in e]
+    if missing:
+        raise ValueError(f"decision_log entry missing keys: {missing}")
+    problems = []
+    if not isinstance(e["timestamp"], str) or not e["timestamp"]:
+        problems.append("timestamp must be a non-empty string")
+    for k in ("agent", "action"):
+        if not isinstance(e[k], str) or not e[k].strip():
+            problems.append(f"{k} must be a non-empty string")
+    if not isinstance(e["sources"], list) or not all(isinstance(u, str) for u in e["sources"]):
+        problems.append("sources must be a list of strings (URLs)")
+    if e["model"] is not None and not isinstance(e["model"], str):
+        problems.append("model must be a string or null")
+    if isinstance(e["cost"], bool) or not isinstance(e["cost"], (int, float)) or e["cost"] < 0:
+        problems.append("cost must be a number >= 0 (USD)")
+    if e["approved_by"] not in (None, "founder"):
+        problems.append('approved_by must be "founder" or null')
+    if e.get("agent") == "gate" and isinstance(e.get("action"), str) and _GATE_DECISION.search(e["action"])             and not (isinstance(e.get("outcome"), str) and e["outcome"]):
+        problems.append("a gate decision entry needs an outcome")
+    if problems:
+        raise ValueError("bad decision_log entry: " + "; ".join(problems))
+    return e
+
+
+def _sources(sources) -> list:
+    """A list of URLs. A single string is refused (list("https://...") would silently split it into letters)."""
+    if isinstance(sources, (str, bytes)):
+        raise TypeError("sources must be a list of URLs, not a single string")
+    return list(sources or [])
 
 
 def log_path() -> Path:
@@ -40,12 +78,13 @@ def log_action(agent: str, action: str, *, sources: list[str] | None = None, mod
         "timestamp": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "agent": agent,
         "action": action,
-        "sources": list(sources or []),
+        "sources": _sources(sources),
         "model": model,
         "cost": float(cost),
         "approved_by": approved_by,
         **extra,
     }
+    validate_entry(entry)
     path = log_path()
     with _lock:
         entries = _read(path)
@@ -69,12 +108,13 @@ def log_actions(calls: list[dict]) -> list[dict]:
             "timestamp": c.pop("timestamp", None) or datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
             "agent": c.pop("agent"),
             "action": c.pop("action"),
-            "sources": list(c.pop("sources", None) or []),
+            "sources": _sources(c.pop("sources", None)),
             "model": c.pop("model", None),
             "cost": float(c.pop("cost", 0.0)),
             "approved_by": approved_by,
             **c,
         })
+        validate_entry(entries[-1])
     if not entries:
         return entries
     path = log_path()

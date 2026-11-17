@@ -39,7 +39,8 @@ PAST = [r"\blast time\b", r"\btell me about\b", r"\bwhat did you\b", r"\bhave yo
         r"\bhow do you (?:currently|handle|deal)\b", r"\bwhat have you (?:already )?tried\b", r"\bhow much did\b",
         r"\bcost you\b", r"\bwhen did\b", r"\bhow often\b", r"\bwho else\b", r"\bwhat happened\b", r"\bwalk me through\b",
         r"آخر مرة", r"احك", r"ماذا فعلت", r"عملت (?:ايه|إيه)", r"جربت", r"جرّبت", r"كلف", r"كلّف", r"دفعت",
-        r"كيف تتعامل", r"(?:ازاي|إزاي) بتتعامل", r"متى", r"امتى", r"من غيرك", r"ماذا حدث", r"حصل (?:ايه|إيه)"]
+        r"كيف تتعامل", r"(?:ازاي|إزاي) بتتعامل", r"متى", r"امتى", r"من غيرك", r"ماذا حدث", r"حصل (?:ايه|إيه)",
+        r"(?:مين|من) (?:كمان|تاني|غيرك)"]  # "who else" (referral and who is involved), as in English
 REWRITE = {
     "en": {"hypothetical": "When did this last happen, and what did you do about it?",
            "pitch": "Tell me about the last time this problem came up for you.",
@@ -167,6 +168,8 @@ QUESTIONS = {
            "مين كمان بيشارك لما بتتعامل مع ده؟",
            "مين كمان المفروض أتكلم معاه عن الموضوع ده؟"],
 }
+NO_PROBLEM_FIRST = {"en": "Tell me about the last time you ran into this problem. What happened?",
+                    "ar": "احكِ لي عن آخر مرة واجهت فيها المشكلة دي. إيه اللي حصل؟"}
 AVOID = {"en": ["Would you use an app that ...?", "How much would you pay for ...?", "Do you like this idea?",
                 "Pitching your product before they describe the problem"],
          "ar": ["هل ممكن تستخدم تطبيق ...؟", "هتدفع كام في ...؟", "الفكرة عاجباك؟", "تعرض المنتج قبل ما يحكي المشكلة"]}
@@ -200,10 +203,11 @@ def plan(db: DiscoverBrief, pain: list[Claim], idea_title: str | None = None,
                   w.lower() not in (problem or "").lower()][:4]
     guides, lint = {}, []
     for lang in langs:
-        fill = (problem if problem and lang_of(problem) == lang else
-                ("the problem we're asking about" if lang == "en" else "المشكلة اللي بنسأل عنها")).rstrip(". ")
-        qs = [q.format(problem=fill) for q in QUESTIONS[lang]] + [q for q in extra_questions or []
-                                                                  if lang_of(q) == lang]
+        # The founder's own problem wording, in whatever language it was written; without one, question 1 asks
+        # about "this problem" in plain words (never a placeholder).
+        fill = problem.strip().rstrip(". ") if problem and problem.strip() else None
+        first = QUESTIONS[lang][0].format(problem=fill) if fill else NO_PROBLEM_FIRST[lang]
+        qs = [first, *QUESTIONS[lang][1:]] + [q for q in extra_questions or [] if lang_of(q) == lang]
         final, results = lint_script(qs, fill, idea_terms)
         guides[lang] = {"questions": final, "avoid": AVOID[lang]}
         lint += results

@@ -16,5 +16,5 @@ def _isolated_runs(tmp_path, monkeypatch):
 
 @pytest.fixture(autouse=True)
 def _no_live_model(monkeypatch):
-    """Tests never call a real model, whatever the developer's .env says (CI runs the same way)."""
-    monkeypatch.setenv("LLM_MODE", "replay")
+    """Tests never call a real model, whatever the developer's .env says: rule-based mode (LLM_MODE=none)."""
+    monkeypatch.setenv("LLM_MODE", "none")

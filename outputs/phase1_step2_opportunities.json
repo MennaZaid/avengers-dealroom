@@ -2,87 +2,82 @@
  "ideas": [
   {
    "id": "I0",
-   "title": "A generic AI chatbot app for everyone",
-   "description": "A simple, no-subscription AI chat app that lets users chat with AI using everyday prompts, designed for people who want quick, free access to AI without complexity or cost.",
-   "product_type": "mobile_app",
+   "title": "Arabic CV & Notion Portfolio Template Bundle",
+   "description": "A collection of ready‑to‑use Canva CV templates and Notion portfolio pages in Arabic and English, tailored for Egyptian freelancers in design, writing and programming.",
+   "product_type": "template_or_asset",
    "origin": "starting_idea",
-   "built_by": "qwen3:4b-instruct",
-   "pain": "People want to chat with AI without needing to install multiple apps or pay for subscriptions.",
-   "pain_claim_ids": [
-    "C1"
-   ],
-   "why_founder": "The founder posts on social media, so they understand how to share simple, engaging content. They have zero budget and only 2 hours a week, so this idea requires minimal development and relies on existing AI APIs. It aligns with the goal of offering accessible AI to everyone.",
+   "built_by": "openai/gpt-oss-120b",
+   "pain": "Freelancers spend too much time creating professional CVs and portfolios in Arabic and English",
+   "pain_claim_ids": [],
+   "why_founder": "The founder already creates designs in Canva and builds Notion pages, and can write the accompanying copy. The 3000 EGP budget covers template assets and a simple sales page, and 80 hours (10 h/week × 2 months) is enough to design, translate, package and market the bundle.",
    "assumptions": [
-    "The founder can use a free AI API (like OpenAI's free tier or Hugging Face) to power the chatbot without cost.",
-    "The core functionality (chatting with AI) can be built in a simple mobile app using no-code tools or basic coding (e.g., React Native or Flutter) within 2 hours/week over 2 months.",
-    "The target market of 'everyone' includes users who are new to AI and want a simple, free entry point."
+    "Assumes Egyptian freelancers are looking for Arabic‑language templates",
+    "Assumes the founder can host and sell the bundle on a low‑cost platform (e.g., Gumroad)",
+    "Assumes no major legal or licensing issues with using Canva assets",
+    "ASSUMPTION: no pain quote cited for this idea"
    ]
   },
   {
    "id": "I1",
-   "title": "AI Prompt Templates for Social Media Posts",
-   "description": "A collection of ready-to-use AI prompt templates designed for people who post on social media, helping them generate engaging content quickly.",
-   "product_type": "template_or_asset",
+   "title": "Arabic Freelance CV & Portfolio Online Course",
+   "description": "A short video‑based course (5‑7 lessons) that walks freelancers through creating a professional Arabic CV and Notion portfolio step‑by‑step, with downloadable worksheets and template files.",
+   "product_type": "online_course",
    "origin": "alternative",
-   "built_by": "qwen3:4b-instruct",
-   "pain": "People want to create social media content without spending time crafting prompts or learning AI tools.",
+   "built_by": "openai/gpt-oss-120b",
+   "pain": "Freelancers waste time figuring out how to build a professional CV and portfolio in Arabic and English",
    "pain_claim_ids": [],
-   "why_founder": "The founder already posts on social media, so they understand content creation pain points. This product requires no development, only content curation, and fits within 2 hours/week and zero budget.",
+   "why_founder": "The founder can record screen tutorials, write scripts, and reuse existing Canva/Notion designs. Free or low‑cost course platforms keep the budget within 3000 EGP, and the content can be produced within the 80‑hour window.",
    "assumptions": [
-    "The founder can gather and organize real-world prompt examples from their own experience.",
-    "The templates will be useful to people who want to generate content without AI expertise.",
-    "There is demand for simple, actionable AI tools for everyday creators.",
+    "Assumes learners are comfortable with video learning",
+    "Assumes the founder can acquire a basic course‑hosting plan at low cost",
     "ASSUMPTION: no pain quote cited for this idea"
    ]
   },
   {
    "id": "I2",
-   "title": "A Simple AI-Powered Social Media Content Guide",
-   "description": "An ebook or guide that teaches users how to use AI to create social media content, with practical examples and prompts.",
-   "product_type": "other_digital",
+   "title": "E‑book: The Arabic Freelancer’s Guide to CVs & Portfolios",
+   "description": "A PDF guide (≈30 pages) that explains best practices, provides copy‑and‑paste text blocks, and includes links to the Canva and Notion templates, all in Arabic and English.",
+   "product_type": "ebook_or_guide",
    "origin": "alternative",
-   "built_by": "qwen3:4b-instruct",
-   "pain": "People want to learn how to use AI for social media content without needing technical skills or expensive tools.",
+   "built_by": "openai/gpt-oss-120b",
+   "pain": "Freelancers spend too much time drafting CV content and structuring portfolios in Arabic and English",
    "pain_claim_ids": [],
-   "why_founder": "The founder has experience posting on social media and can write in a relatable tone. This ebook can be built with minimal effort using free tools like Google Docs or Canva, and fits within the time and budget constraints.",
+   "why_founder": "Writing and design skills match the creation of a polished guide. Formatting can be done with free tools, and the budget covers a cover design and minimal marketing. Production fits comfortably within the 80‑hour limit.",
    "assumptions": [
-    "There is interest in learning how to use AI for content creation.",
-    "The guide can be written in plain language and include real examples from the founder’s experience.",
-    "The audience values practical, no-jargon advice.",
+    "Assumes the target market prefers a downloadable guide",
+    "Assumes the founder can handle PDF distribution on a free platform",
     "ASSUMPTION: no pain quote cited for this idea"
    ]
   },
   {
    "id": "I3",
-   "title": "AI-Powered Browser Extension for Quick Prompts",
-   "description": "A browser extension that lets users insert AI-generated prompts into their web pages or social media posts with one click.",
-   "product_type": "browser_extension",
+   "title": "Simple Notion‑Powered CV Generator Web App",
+   "description": "A lightweight static web page where users select a template, fill in fields (name, skills, projects), and download a ready‑to‑use PDF CV in Arabic or English, with a link to a pre‑built Notion portfolio.",
+   "product_type": "web_app",
    "origin": "alternative",
-   "built_by": "qwen3:4b-instruct",
-   "pain": "People want to generate AI-powered content quickly while browsing the web, without switching apps or using complex tools.",
+   "built_by": "openai/gpt-oss-120b",
+   "pain": "Freelancers lose hours building CVs from scratch in Arabic and English",
    "pain_claim_ids": [],
-   "why_founder": "The founder posts on social media and uses the web daily, so they understand the flow of content creation. This product requires minimal development and can be built with free tools, fitting the 2-hour/week time and zero-budget constraints.",
+   "why_founder": "The founder can reuse existing Notion pages and Canva designs, and implement a basic form with JavaScript to populate a PDF template. Hosting on a free static site (e.g., GitHub Pages) keeps costs low, and development can be completed within the 80‑hour timeframe.",
    "assumptions": [
-    "The extension can be built using a simple no-code tool or basic JavaScript.",
-    "Users will find value in having AI prompts available at the moment of need.",
-    "The extension can be shared via social media, aligning with the founder’s existing habits.",
+    "Assumes the founder can learn a minimal amount of JavaScript for form handling",
+    "Assumes users are comfortable downloading a generated PDF",
     "ASSUMPTION: no pain quote cited for this idea"
    ]
   },
   {
    "id": "I4",
-   "title": "Community for AI Prompt Sharing",
-   "description": "A simple online community where users can share and discover AI prompts for social media, content creation, and daily tasks.",
+   "title": "Monthly Arabic Template Club (Community)",
+   "description": "A paid membership (e.g., via Telegram) that delivers new Arabic CV and Notion portfolio templates each month, plus a private Q&A channel for feedback and quick design tweaks.",
    "product_type": "community_or_membership",
    "origin": "alternative",
-   "built_by": "qwen3:4b-instruct",
-   "pain": "People want to find and share AI prompts without relying on large, complex platforms or subscriptions.",
+   "built_by": "openai/gpt-oss-120b",
+   "pain": "Freelancers repeatedly spend time creating or updating CVs and portfolios in Arabic and English",
    "pain_claim_ids": [],
-   "why_founder": "The founder already shares content on social media and can help build a community around prompt sharing. This idea requires no development, only moderation and curation, and fits within time and budget.",
+   "why_founder": "Community management aligns with the founder’s content‑creation skills. Ongoing template creation fits within the weekly 10‑hour schedule, and the modest membership fee can cover the 3000 EGP budget for tools and promotion.",
    "assumptions": [
-    "There is interest in a space where people can exchange AI prompts in a simple, non-competitive way.",
-    "The community can grow organically through social sharing.",
-    "The founder can manage a small group without technical tools or infrastructure.",
+    "Assumes there is enough recurring interest to sustain a small membership",
+    "Assumes the founder can maintain the community with the allocated weekly hours",
     "ASSUMPTION: no pain quote cited for this idea"
    ]
   }
@@ -92,43 +87,108 @@
    "id": "C1",
    "type": "fact",
    "topic": "pain",
-   "text": "Gemini is one of the alternatives compared in the evaluation.",
-   "quote": "I tried it and compared with all other alternatives: Gemini, Mistral, Grok, Claude, ChatGPT (mobile apps, no subscriptions, default models), same prompt (a problem required sophisticated thinking and web searches), and surprisingly it worked better than any other free app.",
-   "url": "https://news.ycombinator.com/item?id=50018181",
-   "title": "Aleph Alpha and Mistral launches fuel Europe's sovereign AI push",
-   "published_at": "2026-10-09",
-   "retrieved_at": "2026-11-17T01:04:41+00:00",
+   "text": "Please note that complaints can be submitted through the Customer Complaints Portal by clicking on the following link:",
+   "quote": "Please note that complaints can be submitted through the Customer Complaints Portal by clicking on the following link:",
+   "url": "https://fra.gov.eg/en/%D8%B4%D9%83%D8%A7%D9%88%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D9%8A%D9%86/",
+   "title": "Complaints – الهيئة العامة للرقابة المالية",
+   "published_at": null,
+   "retrieved_at": "2026-11-17T20:24:10+00:00",
    "source_id": null,
-   "source_kind": "api_ugc",
+   "source_kind": "web",
    "tier": null,
    "language": "en",
    "flags": [
+    "undated",
     "web_source"
    ],
-   "extracted_by": "qwen3:4b-instruct",
-   "document_id": "8dcbfdf1-b3d8-4ac1-a888-e15026956d25",
-   "chunk_id": "5dc63cf5-53a0-40c5-b7c3-56b0dfcffb0a"
+   "extracted_by": "rules",
+   "document_id": "e1b4b1e0-f429-4e3b-9458-fdab90e32610",
+   "chunk_id": "63ad0e5a-a303-49fd-a09d-a493457a6236"
   },
   {
    "id": "C2",
    "type": "fact",
    "topic": "pain",
-   "text": "Gemini - is one of the secessionists alternatives to the mainstream web.",
-   "quote": "There are some secessionists - Gopher is still alive, Gemini - but alternatives have a hard time to compete with the content companies can provide apparently for free.",
-   "url": "https://news.ycombinator.com/item?id=43960538",
-   "title": "Plain Vanilla Web",
-   "published_at": "2025-05-12",
-   "retrieved_at": "2026-11-17T01:04:42+00:00",
+   "text": "User Guide for the Customer Complaints Portal",
+   "quote": "User Guide for the Customer Complaints Portal",
+   "url": "https://fra.gov.eg/en/%D8%B4%D9%83%D8%A7%D9%88%D9%8A-%D8%A7%D9%84%D9%85%D8%AA%D8%B9%D8%A7%D9%85%D9%84%D9%8A%D9%86/",
+   "title": "Complaints – الهيئة العامة للرقابة المالية",
+   "published_at": null,
+   "retrieved_at": "2026-11-17T20:24:10+00:00",
    "source_id": null,
-   "source_kind": "api_ugc",
+   "source_kind": "web",
+   "tier": null,
+   "language": "en",
+   "flags": [
+    "undated",
+    "web_source"
+   ],
+   "extracted_by": "rules",
+   "document_id": "e1b4b1e0-f429-4e3b-9458-fdab90e32610",
+   "chunk_id": "63ad0e5a-a303-49fd-a09d-a493457a6236"
+  },
+  {
+   "id": "C3",
+   "type": "fact",
+   "topic": "pain",
+   "text": "House Bank deals with customer complaints fairly, transparently and effectively.",
+   "quote": "House Bank deals with customer complaints fairly, transparently and effectively.",
+   "url": "https://www.eg.kfh.com/wp-content/uploads/2025/01/Complaint-Form.pdf",
+   "title": "Complaint Form",
+   "published_at": "2025-06-19",
+   "retrieved_at": "2026-11-17T20:24:15+00:00",
+   "source_id": null,
+   "source_kind": "web",
    "tier": null,
    "language": "en",
    "flags": [
     "web_source"
    ],
-   "extracted_by": "qwen3:4b-instruct",
-   "document_id": "b48ddbbc-9262-49d3-8ccb-b2c4405bcfea",
-   "chunk_id": "e9460cab-ff53-46ca-8049-b0af446176d2"
+   "extracted_by": "rules",
+   "document_id": "5ceb06a9-b3b9-46a6-9a5a-4bc161bf2af2",
+   "chunk_id": "e86d0ff2-4b64-4ef3-a156-822b3b1a82b8"
+  },
+  {
+   "id": "C4",
+   "type": "fact",
+   "topic": "pain",
+   "text": "Customer has the right to escalate the complaint to the Central Bank of Egypt if they do",
+   "quote": "Customer has the right to escalate the complaint to the Central Bank of Egypt if they do",
+   "url": "https://www.eg.kfh.com/wp-content/uploads/2025/01/Complaint-Form.pdf",
+   "title": "Complaint Form",
+   "published_at": "2025-06-19",
+   "retrieved_at": "2026-11-17T20:24:15+00:00",
+   "source_id": null,
+   "source_kind": "web",
+   "tier": null,
+   "language": "en",
+   "flags": [
+    "web_source"
+   ],
+   "extracted_by": "rules",
+   "document_id": "5ceb06a9-b3b9-46a6-9a5a-4bc161bf2af2",
+   "chunk_id": "2b057916-3732-4789-9c97-685d50046c2b"
+  },
+  {
+   "id": "C5",
+   "type": "fact",
+   "topic": "pain",
+   "text": "Customer may not submit the complaint directly to the Central Bank of Egypt directly",
+   "quote": "Customer may not submit the complaint directly to the Central Bank of Egypt directly",
+   "url": "https://www.eg.kfh.com/wp-content/uploads/2025/01/Complaint-Form.pdf",
+   "title": "Complaint Form",
+   "published_at": "2025-06-19",
+   "retrieved_at": "2026-11-17T20:24:15+00:00",
+   "source_id": null,
+   "source_kind": "web",
+   "tier": null,
+   "language": "en",
+   "flags": [
+    "web_source"
+   ],
+   "extracted_by": "rules",
+   "document_id": "5ceb06a9-b3b9-46a6-9a5a-4bc161bf2af2",
+   "chunk_id": "2b057916-3732-4789-9c97-685d50046c2b"
   }
  ]
 }

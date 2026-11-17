@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from test_mvp_builder import setup
 
-from venture_os.agents import mvp_builder, mvp_tester
+from venture_os.agents import mvp_builder, mvp_tester, product_spec
 from venture_os.agents.mvp_planner import Field
 from venture_os.decision_log import read_log
 
@@ -15,7 +15,8 @@ def built(name="pharmastock_v1.json", template=None, help_lines=None, plan_updat
     inp, reqs, plan = setup(name, template)
     if plan_update:
         plan = plan.model_copy(update=plan_update)
-    return inp, reqs, plan, mvp_builder.render(mvp_builder.config(plan, help_lines or {}, inp.brief_version))
+    spec = product_spec.from_rules(inp)
+    return inp, reqs, plan, mvp_builder.render(mvp_builder.config(plan, help_lines or {}, inp.brief_version, spec))
 
 
 def failed(checks):
