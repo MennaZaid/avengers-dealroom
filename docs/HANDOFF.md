@@ -31,9 +31,10 @@ Background and decisions D1-D20: [planning/00-planning-report.md](planning/00-pl
 | Brief hand-off to the pipeline | Complete | `onboarding/briefs.py`, fixtures in `tests/fixtures/briefs/` |
 | Source registry, tech catalog, source validator, registry API | Complete (seed rows unverified) | `config/`, `db/`, `registry/`, `api/registry.py` |
 | Gates: product, evidence, demand (go / repeat / pivot / stop; thresholds fixed before the result) | Complete, on `main` | `src/venture_os/gates.py`, `tests/unit/test_gates.py` |
-| Phase 2 Validate (Lean Canvas, landing page, demand test) | In progress (Menna) | `agents/business_designer.py`, `agents/landing_page.py` |
+| Phase 3 Build stage (entry check, requirements mapper, MVP planner, validator, builder, tester, docs writer, build gate) | In progress (Menna) | `evidence.py`, `build_stage.py`, `agents/build_inputs.py`, `agents/mvp_*.py`, `templates/mvp/` |
+| Phase 2 Validate (Lean Canvas, landing page, demand test) | Proposed: Abdelrahman | `agents/business_designer.py`, `agents/landing_page.py` |
 | Orchestrator, approval, Phase 1 Discover | In progress (Roufayda) | `orchestrator.py`, `approval.py`, `agents/researcher.py`, `agents/interviewer.py` |
-| Docker one-command setup, local model, ARCHITECTURE.md, phases 3-6 stubs | In progress (C) | `Dockerfile`, `docker-compose.yml`, `llm/`, `ARCHITECTURE.md` |
+| Docker one-command setup (done), local model, ARCHITECTURE.md, phases 4-6 stubs | Abdelrahman | `Dockerfile`, `docker-compose.yml`, `llm/`, `ARCHITECTURE.md` |
 | README (8 headings) | Headings and honest status in place; updated as parts land | `README.md` |
 
 **Tests:** 211 passing (`pytest -q`); lint clean (`ruff check .`). Tests never write to the real
@@ -88,10 +89,11 @@ Arabic, rejecting a guess, `.md` after confirming), 5 guardrails (excluded produ
 |---|---|---|
 | 1 | `docker compose up` starts db, API, UI and a local open-weight model (Ollama); copy `prompts/` into the image or set `PROMPTS_DIR` | Abdelrahman |
 | 2 | Keep `ARCHITECTURE.md` and the README status table in step with `main` | Abdelrahman |
-| 3a | Phase 2 agents (Lean Canvas, landing page, demand test -> `gates.demand_gate`); demo briefs and script | Menna |
+| 3a | Phase 3 Build stage, agent by agent; demo briefs and script | Menna |
+| 3c | Phase 2 agents (Lean Canvas, landing page, demand test -> `gates.demand_gate`, the **stop** example) | Abdelrahman (proposed) |
 | 3b | Orchestrator + approval; Phase 1 agents with `evidence_gate`; `check_output()` on all generated text | Roufayda |
 | 4 | Stage runs store the `brief_version` they used and show Stale via `is_stale()` | Roufayda |
-| 5 | Phases 3-6 as STUBBED agents with labelled outputs | Abdelrahman |
+| 5 | Phases 4-6 as STUBBED agents with labelled outputs | Abdelrahman |
 | 6 | Record tokens per model call so cost per run is measured | Abdelrahman |
 | 7 | Demo run: empty the log, delete `outputs/`, run two briefs (one stop), commit both | All, after 18:00 |
 | 8 | Registry seed rows are unverified (`UNVERIFIED`); verify the Egypt pack used in the demo | Roufayda |

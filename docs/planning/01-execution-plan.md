@@ -40,8 +40,8 @@ reproducibility 10. Breaking a must-never rule or hiding a mock means disqualifi
 |---|---|---|---|---|
 | 0. Onboarding (before Discover) | Founder brief | Chat in Arabic/English, documents, guardrails, versioned brief, product check | **Working** | A |
 | 1. Discover | Find opportunities (+ Mom Test interviews) | Sourced opportunities, interview script, gate with go/repeat/pivot/stop | **Working** (target) | B |
-| 2. Validate | Design the business | Lean Canvas, landing-page draft, waitlist target; sign-ups entered by the founder or MOCKED | Working (thin) | B |
-| 3. Build | Build the product | PRD + MVP template | STUBBED | C |
+| 2. Validate | Design the business | Lean Canvas, landing-page draft, waitlist target; sign-ups entered by the founder or MOCKED | Working (thin) | Abdelrahman (proposed) |
+| 3. Build | Build the product | Multi-agent stage: evidence -> requirements -> MVP plan -> validation -> single-file HTML MVP -> tests -> user guide; one founder approval at the end | **Working** (target) | Menna |
 | 4. Commercial setup | Set the price and policies | Price hypotheses, draft terms/privacy/refunds; no payments | STUBBED | C |
 | 5. Launch | Open the store; deliver automatically | Store page and launch posts as drafts; delivery MOCKED with idempotency | STUBBED | C |
 | 6. Operate and learn | (none) | Persevere-or-pivot memo | STUBBED | C |
@@ -72,7 +72,7 @@ the gate recommends pivot or stop instead of spinning the result.
 |---|---|---|---|
 | Done | Onboarding complete; `gates.py` on `main` | | |
 | 12:00 | Help B wire the brief into the orchestrator; review guardrail use in agents | Orchestrator + Phase 1 with its gate, incl. STOP | `docker compose up` works from a clean clone |
-| 16:00 | README/ARCHITECTURE review; demo script | Phase 2 + gate; pipeline page | ARCHITECTURE.md; phases 3-6 STUBBED |
+| 16:00 | Phase 3 Build stage complete; demo script | Orchestrator runs Phases 1-3; pipeline page | Phase 2 + demand gate; phases 4-6 STUBBED |
 | **18:00** | **Feature freeze** | | |
 | 18:00-21:00 | All: empty `decision_log.json`, delete `outputs/`, run the demo with two briefs (one passes, one gets **stop**), commit both | | |
 | 21:00-23:00 | All: fresh clone -> `docker compose up` -> checklist at the end of `CLAUDE.md`; fixes only | | |
