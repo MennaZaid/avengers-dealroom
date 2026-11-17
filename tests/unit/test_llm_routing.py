@@ -101,3 +101,18 @@ def test_wait_header_formats():
     assert client.retry_wait({"x-ratelimit-reset-tokens": "1m2s"}) == 62
     assert abs(client.retry_wait({"x-ratelimit-reset-requests": "450ms"}) - 0.45) < 1e-9
     assert client.retry_wait({}) is None
+
+
+
+def test_a_missing_key_degrades_to_the_next_provider_not_a_crash(env):
+    env.setenv("LLM_VALIDATE_API_KEY", "")                      # the free API's key is missing
+    calls = _fake(env, failing={"https://validate.example"})    # so that provider refuses the call
+    assert client.chat_json([{"role": "user", "content": "x"}], profile="validate") == '{"ok": true}'
+    hosts = [c[0].split("/v1")[0] for c in calls]
+    assert hosts[0] == "https://validate.example" and hosts[-1] in ("https://base.example", "http://local")
+
+
+def test_mode_none_is_rule_based(monkeypatch):
+    monkeypatch.setenv("LLM_MODE", "none")
+    from venture_os.config import Settings
+    assert Settings().llm_mode == "none" and not client.live_enabled()
