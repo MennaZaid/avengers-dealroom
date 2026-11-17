@@ -28,7 +28,7 @@ rule-based answer). Give Docker about 6 GB of memory. Host ports: see `.env.exam
 | 2. Validate: Lean Canvas | **Working** | Every entry FOUNDER / EVIDENCED (id + URL + date) / ASSUMPTION / UNKNOWN; riskiest assumption named |
 | 2. Validate: demand test plan | **Working** | 100 waitlist sign-ups in 14 days, declared before any result |
 | 2. Validate: landing page | **Working** / **MOCKED** | Publishing MOCKED. Self-contained HTML, email-only waitlist that sends nothing, "DRAFT — not published (MOCKED)" banner |
-| 2. Validate: sign-up count + demand gate | **Working** | `POST /stages/runs/{id}/signups`: count entered by the founder (founder-reported, not verified), never generated; 12 of 100 -> stop |
+| 2. Validate: sign-up count + demand gate | **Working** | `POST /stages/runs/{id}/signups`: count entered by the founder (founder-reported, not verified), never generated; the stop / pivot / repeat thresholds are fixed before the result |
 | 3. Build: build the product + build gate | **Working** | Brief + Discover findings + Validate Lean Canvas -> requirements -> product spec written by the model (every value sourced or `ASSUMPTION`) -> plan -> validation -> single-file HTML MVP with a try-it form and live preview -> QA checks plus checks from the brief (relevance, core action wired) -> user guide; one founder approval at the end; buy, delivery and waitlist in the MVP are **MOCKED** |
 | 4. Commercial: pricing research, price, draft policies, readiness + gate | **Working** | Runs after the founder's Go on Build (Pipeline page or the Commercial page); founder decides at the gate. `run_commercial_stage`: only sourced prices (URL + date); min/median/max and break-even in code, labelled ESTIMATE; terms/privacy/refund "DRAFT — not legal advice", citing official registry sources or "No verified official source found"; no payments |
 | 5. Launch: store page and 3 post drafts + gate | **STUBBED** / **MOCKED** | Rule-based drafts (STUBBED); posting MOCKED. Runs after the founder's Go on Commercial; nothing is posted; the gate recommends go only if the MOCKED sale-to-cash test completes |
@@ -55,7 +55,7 @@ All models are free: free tiers or a local open-weight model. No paid API is use
 | Role | Model | Provider | Free tier | Fallback |
 |---|---|---|---|---|
 | Base: onboarding chat, Discover extraction, Build | `Fanar-C-2-27B` | Fanar (`LLM_BASE_URL`, `LLM_MODEL_EXTRACT`) | Yes | Local Ollama `qwen3:4b-instruct`, then the rule-based path |
-| Reasoning and validation (Discover reasoning, Validate) | `openai/gpt-oss-120b` (open-weight) | Groq (`LLM_REASONING_*`, `LLM_VALIDATE_*`) | Yes (8,000 tokens per minute) | Base model, then local Ollama `qwen3:4b-instruct`, then the rule-based path |
+| Reasoning and validation (Discover reasoning, Validate) | `openai/gpt-oss-120b` (open-weight) | Groq (`LLM_REASONING_*`, `LLM_VALIDATE_*`) | Yes | Base model, then local Ollama `qwen3:4b-instruct`, then the rule-based path |
 | Judge (research critic, a different model family) | `qwen/qwen3.8-27b` | Groq (`LLM_JUDGE_*`, `LLM_MODEL_JUDGE`) | Yes | Base model, then local Ollama `qwen3:4b-instruct`, then the rule-based path |
 
 - **No account needed:** with no `.env`, `docker compose up` runs every role on `qwen3:4b-instruct`
@@ -63,7 +63,8 @@ All models are free: free tiers or a local open-weight model. No paid API is use
   no GPU are needed.
 - **Routing:** each role tries its own endpoint, then the base endpoint, then local Ollama, then its rule-based
   path (`src/venture_os/llm/client.py`). The decision log records the model that actually answered.
-- **No model at all:** `LLM_MODE=replay` runs every agent on its rule-based path (this is how CI runs).
+- **No model at all:** `LLM_MODE=none` runs every agent on its rule-based path (this is how the tests run;
+  `replay` is accepted as the same mode).
 - **Keys:** only in an untracked `.env`; `.env.example` holds placeholders.
 - **Build:** the MVP tester's headless-browser check is skipped when no Edge or Chrome is installed; the static
   checks on the HTML file still run.
@@ -71,7 +72,11 @@ All models are free: free tiers or a local open-weight model. No paid API is use
 
 ## Cost per run
 
-**Demo run (date, models, tokens): to be added from `python scripts/cost_report.py` on the committed log.**
+About $0.00 per run (Fanar-C-2-27B, openai/gpt-oss-120b, qwen/qwen3.8-27b and local qwen3:4b-instruct, ~153k tokens).
+
+Committed demo run (2026-11-17, brief `3e540c9c`, phases 1-6): 77 model calls, 152,561 tokens. Fanar-C-2-27B 17
+calls (18,371 tokens), openai/gpt-oss-120b 10 (12,281), qwen/qwen3.8-27b 1 (3,822), local qwen3:4b-instruct
+fallback 49 (118,087). Output of `python scripts/cost_report.py` on the committed `decision_log.json`.
 
 All models are local or free tiers and no paid API is used, so the dollar cost is $0.00. Measured, not estimated:
 every model call is logged with its prompt and completion tokens, and `python scripts/cost_report.py` sums them
@@ -93,7 +98,7 @@ from `decision_log.json`.
 
 ## How the project stays alive after the hackathon
 
-- **Maintainers:** [maintainer 1], [maintainer 2], [maintainer 3] (the founding team).
+- **Maintainers:** Menna Zaid, Roufayda and Abdelrahman (the founding team).
 - **Roadmap:** see [ARCHITECTURE.md Roadmap](ARCHITECTURE.md#roadmap).
 - **Community:** GitHub Issues for bugs and requests, GitHub Discussions for ideas and questions; how to contribute
   is in [CONTRIBUTING.md](CONTRIBUTING.md).
