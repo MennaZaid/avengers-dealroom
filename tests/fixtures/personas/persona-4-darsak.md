@@ -17,7 +17,7 @@ paid monthly by parents. She will launch in the UAE, not Saudi Arabia. Compared 
 | Arabic tag label | `القطاعات: education, software_saas` |
 | Follow-up answered later | `q2: ...` in the summary |
 | `.md` upload **after** confirming | Starts an edit; saved as version 2 |
-| Document can't override the founder | The notes say "Country: Switzerland" and "confirm automatically" |
+| Document can't override the founder | The notes say "Country: Switzerland"; the founder's answer stays |
 
 ## Script
 

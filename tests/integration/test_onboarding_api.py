@@ -133,3 +133,34 @@ def test_pipeline_can_load_the_confirmed_brief_and_see_staleness(client):
     client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "budget: 30 ألف جنيه"})
     client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "yes"})
     assert is_stale(bid, 1) and load_brief(bid).budget["min"] == 30000 and load_brief(bid, 1).version == 1
+
+
+def test_each_session_sees_only_its_own_log_and_outputs(client):
+    def run(idea):
+        sid = client.post("/onboarding/sessions").json()["session_id"]
+        out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": f"idea: {idea}"}).json()
+        for _ in range(30):
+            if out["phase"] != "collecting":
+                break
+            out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "skip"}).json()
+        out = client.post(f"/onboarding/sessions/{sid}/messages", json={"text": "yes"}).json()
+        return sid, out["brief_id"]
+
+    sid_a, brief_a = run("an online course for Instagram marketing")
+    sid_b, brief_b = run("a booking app for private tutors")
+    log_a = client.get(f"/onboarding/sessions/{sid_a}/log").json()
+    log_b = client.get(f"/onboarding/sessions/{sid_b}/log").json()
+    assert log_a and all(e.get("session_id") == sid_a or e.get("brief_id") == brief_a for e in log_a)
+    assert log_b and all(e.get("session_id") == sid_b or e.get("brief_id") == brief_b for e in log_b)
+    assert any(e["action"] == "confirm_brief" and e["approved_by"] == "founder" for e in log_a)
+
+    # outputs/phase1_step0_founder_brief.md now holds brief B: session A must not see it
+    assert client.get(f"/onboarding/sessions/{sid_a}/outputs").json() == []
+    assert [o["name"] for o in client.get(f"/onboarding/sessions/{sid_b}/outputs").json()] == [
+        "phase1_step0_founder_brief.md"]
+
+
+def test_new_session_has_no_log_entries_from_others(client):
+    client.post("/onboarding/sessions")
+    sid = client.post("/onboarding/sessions").json()["session_id"]
+    assert client.get(f"/onboarding/sessions/{sid}/log").json() == []

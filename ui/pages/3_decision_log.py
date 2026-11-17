@@ -1,21 +1,31 @@
-"""Decision log (decision_log.json) and the files in outputs/, as written by the pipeline."""
+"""Decision log and outputs for THIS conversation only, as recorded by the pipeline.
+
+Entries come from the API (GET /onboarding/sessions/{id}/log), filtered by this session's id and, once the
+brief is confirmed, its brief id (later stages log under it). Other sessions and test runs are never shown.
+"""
 
 import json
-import os
-from pathlib import Path
 
 import streamlit as st
-from common import setup
+from common import api, setup
 
-ROOT = Path(__file__).resolve().parents[2]
-LOG = Path(os.environ.get("DECISION_LOG_PATH", ROOT / "decision_log.json"))
-OUT = Path(os.environ.get("OUTPUTS_DIR", ROOT / "outputs"))
+setup("Decision log & outputs", "Every agent action and founder approval in this session, as recorded by the pipeline.")
 
-setup("Decision log & outputs", "Every agent action and every founder approval, as recorded by the pipeline.")
+sid = st.session_state.get("sid")
+if not sid:
+    st.info("No session yet. Start a founder brief on the onboarding page; this page then shows only that "
+            "session's actions.")
+    st.stop()
 
-entries = []
-if LOG.exists() and LOG.read_text(encoding="utf-8").strip():
-    entries = json.loads(LOG.read_text(encoding="utf-8"))
+try:
+    entries = api("GET", f"/onboarding/sessions/{sid}/log")
+    outputs = api("GET", f"/onboarding/sessions/{sid}/outputs")
+except RuntimeError as e:
+    st.error(f"Decision log unavailable: {e}")
+    st.stop()
+
+st.caption(f"Session `{sid}`" + (f" · brief `{st.session_state.last['brief_id']}`"
+                                 if st.session_state.get("last", {}).get("brief_id") else ""))
 
 m1, m2, m3, m4 = st.columns(4)
 m1.metric("Actions logged", len(entries))
@@ -26,7 +36,7 @@ m4.metric("Cost (USD)", f"${sum(float(e.get('cost') or 0) for e in entries):.2f}
 tab_log, tab_out = st.tabs(["Decision log", "Outputs"])
 with tab_log:
     if not entries:
-        st.info("No entries yet. Confirm a founder brief to create the first ones.")
+        st.info("No actions logged in this session yet.")
     else:
         agents = sorted({e["agent"] for e in entries})
         pick = st.multiselect("Agent", agents, default=agents)
@@ -38,12 +48,12 @@ with tab_log:
             st.json(entries[-20:])
 
 with tab_out:
-    files = sorted(OUT.glob("*")) if OUT.exists() else []
-    if not files:
-        st.info("No outputs yet.")
+    if not outputs:
+        st.info("No outputs for this session yet. Confirming the brief writes the first one.")
     else:
-        name = st.selectbox("File", [f.name for f in files])
-        text = (OUT / name).read_text(encoding="utf-8")
+        names = [o["name"] for o in outputs]
+        name = st.selectbox("File", names)
+        text = outputs[names.index(name)]["text"]
         if name.endswith(".md"):
             st.markdown(text)
         elif name.endswith(".json"):

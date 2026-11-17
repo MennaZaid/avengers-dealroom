@@ -15,6 +15,7 @@ specific to the idea -> summary with tags -> founder confirms -> brief version 1
 
 from __future__ import annotations
 
+import contextvars
 import logging
 import re
 
@@ -216,6 +217,7 @@ def _say(state: OnboardingState, text: str) -> str:
 
 
 def start(state: OnboardingState, analyst: Analyst | None = None) -> str:
+    _bind(state)
     q = _next_question(state, analyst or RuleAnalyst())
     return _say(state, _t("greet", state.lang) + "\n\n" + (q or ""))
 
@@ -250,10 +252,19 @@ def _mark_changed(state: OnboardingState, name: str) -> None:
         state.changed.append(name)
 
 
+_log_ids: contextvars.ContextVar[dict | None] = contextvars.ContextVar("log_ids", default=None)
+
+
+def _bind(state: OnboardingState) -> None:
+    """Every log entry written while handling this state carries its session_id (and brief_id once confirmed),
+    so the UI can show one conversation's actions only."""
+    _log_ids.set({k: v for k, v in (("session_id", state.session_id), ("brief_id", state.brief_id)) if v})
+
+
 def _log(agent: str, action: str, **kw) -> None:
     """Write a decision_log.json entry; logging problems never break the chat."""
     try:
-        log_action(agent, action, **kw)
+        log_action(agent, action, **{**(_log_ids.get() or {}), **kw})
     except Exception as e:  # noqa: BLE001
         _logger.warning("decision log write failed: %s", e)
 
@@ -563,6 +574,7 @@ def is_skip(text: str) -> bool:
 
 
 def handle_message(state: OnboardingState, text: str, extractor: Extractor, analyst: Analyst | None = None) -> str:
+    _bind(state)
     analyst = analyst or RuleAnalyst()
     text = re.sub(r"(?m)^\s*>\s?", "", text).strip()  # quote markers left over from copy-pasting
     first_answer = all(m.role != "founder" for m in state.messages)
@@ -690,6 +702,7 @@ def _pending(state: OnboardingState, analyst: Analyst) -> str:
 
 def already_read(state: OnboardingState, filename: str, analyst: Analyst | None = None) -> str:
     """The same file was uploaded again: say so, don't read it twice, and repeat the pending question."""
+    _bind(state)
     nxt = summary(state, analyst) if state.phase != "collecting" else (
         _repeat_question(state) or (BY_NAME[state.asking].ask(state.lang) if state.asking in BY_NAME else "")
         or _advance(state, analyst or RuleAnalyst()))
@@ -801,6 +814,7 @@ def _restore(state: OnboardingState, saved: dict) -> None:
 
 def handle_document(state: OnboardingState, filename: str, text: str, extractor: Extractor,
                     analyst: Analyst | None = None) -> str:
+    _bind(state)
     analyst = analyst or RuleAnalyst()
     was_confirmed = state.phase == "confirmed"
     if was_confirmed:  # a new document after confirming starts an edit (if it changes anything)

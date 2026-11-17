@@ -116,7 +116,10 @@ def card(label: str, value: str | None, chip_html: str = "", lang: str = "en") -
 
 
 def api(method: str, path: str, **kw) -> dict | list:
-    r = httpx.request(method, f"{API}{path}", timeout=180, **kw)
+    try:
+        r = httpx.request(method, f"{API}{path}", timeout=180, **kw)
+    except httpx.HTTPError as e:  # API not running or unreachable: a message, not a traceback
+        raise RuntimeError(f"Cannot reach the API at {API} ({type(e).__name__}). Is it running?") from e
     if r.status_code >= 400:
         detail = r.json().get("detail", r.text) if "json" in r.headers.get("content-type", "") else r.text
         raise RuntimeError(detail)

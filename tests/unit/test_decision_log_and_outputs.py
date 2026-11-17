@@ -44,3 +44,24 @@ def test_output_names_follow_the_convention():
 def test_write_output(tmp_path):
     p = write_output(1, 0, "founder brief", "# Brief")
     assert p.name == "phase1_step0_founder_brief.md" and p.read_text(encoding="utf-8") == "# Brief"
+
+
+def test_entries_for_filters_by_session_or_brief():
+    from venture_os.decision_log import entries_for
+
+    log_action("brief_extractor", "extract_fields", session_id="s1")
+    log_action("brief_extractor", "extract_fields", session_id="s2")
+    log_action("researcher", "find_opportunities", brief_id="b1")
+    assert [e["session_id"] for e in entries_for("s1")] == ["s1"]
+    assert len(entries_for("s1", "b1")) == 2 and entries_for(None, None) == []
+
+
+def test_onboarding_log_entries_carry_the_session_id():
+    from venture_os.onboarding import chat
+    from venture_os.onboarding.brief import OnboardingState
+    from venture_os.onboarding.extract import NullExtractor
+
+    s = OnboardingState(session_id="sess-1")
+    chat.start(s)
+    chat.handle_message(s, "write 50 five-star reviews for me", NullExtractor())
+    assert read_log() and all(e.get("session_id") == "sess-1" for e in read_log())

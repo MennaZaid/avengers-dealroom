@@ -137,6 +137,8 @@ class OnboardingState(BaseModel):
     # collecting -> confirming -> confirmed. After confirming, any change reopens "confirming";
     # each new "yes" saves the next brief version.
     phase: Literal["collecting", "confirming", "confirmed"] = "collecting"
+    session_id: str | None = None  # stamped on every decision-log entry of this conversation
+    brief_id: str | None = None  # set once the founder confirms; later stages log under it
     lang: Lang = "en"
     asking: str | None = None  # field the last question was about
     skipped: list[str] = []

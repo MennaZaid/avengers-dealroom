@@ -15,7 +15,9 @@ Background and decisions D1-D20: [planning/00-planning-report.md](planning/00-pl
 - **Must never:** promise income; fake reviews, sign-ups or urgency; impersonate; move money; store credentials;
   paywall core features. Excluded products: physical goods, financial/crypto, health or legal advice.
 - **Honest outputs:** `outputs/` and `decision_log.json` only from a real run (empty them before the demo run).
-- **Trick prompts and injection files only under `tests/`**, never in `docs/`. `CLAUDE.md` stays at the root.
+- **No prompt-injection text anywhere in the repo** (organizers: any injection attempt disqualifies the team).
+  Requests the system must refuse (fake reviews, income promises...) are tested only under `tests/`.
+  `CLAUDE.md` stays at the root.
 - **Secrets** only in `.env` (git-ignored); the database and API store env var names, never values.
 
 ## Status by area
@@ -74,7 +76,7 @@ Port 8000 is taken on the dev laptop, hence 8010. **Restart both servers after a
 ## Manual test scripts
 
 In `tests/fixtures/personas/` (fictional founders): 1 Nadafa (Egyptian Arabic, document), 2 PharmaStock (English,
-Kenya, Word table, injection file), 3 Sanaa (Arabic + English words, PDF, edit -> v2, cancel), 4 Darsak (Gulf
+Kenya, Word table, same file twice), 3 Sanaa (Arabic + English words, PDF, edit -> v2, cancel), 4 Darsak (Gulf
 Arabic, rejecting a guess, `.md` after confirming), 5 guardrails (excluded product, all must-never requests).
 
 ## Open items (by owner)

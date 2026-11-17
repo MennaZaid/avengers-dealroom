@@ -60,6 +60,12 @@ def read_log() -> list[dict]:
     return _read(log_path())
 
 
+def entries_for(session_id: str | None = None, brief_id: str | None = None) -> list[dict]:
+    """Entries of one conversation: its session_id, or its brief_id (stages after onboarding log under it)."""
+    ids = {("session_id", session_id), ("brief_id", brief_id)} - {("session_id", None), ("brief_id", None)}
+    return [e for e in read_log() if any(e.get(k) == v for k, v in ids)]
+
+
 def reset_log() -> None:
     """Start a fresh log (before the demo run whose log will be committed)."""
     with _lock:

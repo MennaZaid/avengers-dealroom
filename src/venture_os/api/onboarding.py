@@ -3,13 +3,14 @@ loads and saves state. Runs under the vos_app database role."""
 
 import hashlib
 import json
-from uuid import UUID
+from uuid import UUID, uuid4
 
 from fastapi import APIRouter, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 
 from venture_os.api.db import connect
 from venture_os.config import Settings
+from venture_os.decision_log import entries_for
 from venture_os.guardrails import redact
 from venture_os.llm.client import chat_json, live_enabled
 from venture_os.onboarding import chat
@@ -17,7 +18,7 @@ from venture_os.onboarding.analyst import LLMAnalyst, RuleAnalyst
 from venture_os.onboarding.brief import OnboardingState
 from venture_os.onboarding.documents import MAX_BYTES, DocumentError, extract_text
 from venture_os.onboarding.extract import LLMExtractor, NullExtractor
-from venture_os.outputs import write_output
+from venture_os.outputs import outputs_dir, write_output
 
 router = APIRouter(prefix="/onboarding", tags=["onboarding"])
 
@@ -58,7 +59,11 @@ def _load(conn, session_id: UUID) -> tuple[OnboardingState, UUID | None]:
     row = conn.execute("SELECT state, brief_id FROM onboarding_sessions WHERE id = %s", (session_id,)).fetchone()
     if not row:
         raise HTTPException(404, "session not found")
-    return OnboardingState.model_validate(row["state"]), row["brief_id"]
+    state = OnboardingState.model_validate(row["state"])
+    state.session_id = state.session_id or str(session_id)  # sessions created before ids were stored
+    if row["brief_id"] and not state.brief_id:
+        state.brief_id = str(row["brief_id"])
+    return state, row["brief_id"]
 
 
 def _save(conn, session_id: UUID, state: OnboardingState, brief_id=None) -> None:
@@ -70,12 +75,11 @@ def _save(conn, session_id: UUID, state: OnboardingState, brief_id=None) -> None
 
 @router.post("/sessions", status_code=201)
 def new_session():
-    state = OnboardingState()
+    sid = uuid4()
+    state = OnboardingState(session_id=str(sid))
     reply = chat.start(state)
     with connect("vos_app") as conn:
-        sid = conn.execute(
-            "INSERT INTO onboarding_sessions (state) VALUES (%s) RETURNING id", (state.model_dump_json(),)
-        ).fetchone()["id"]
+        conn.execute("INSERT INTO onboarding_sessions (id, state) VALUES (%s, %s)", (sid, state.model_dump_json()))
     return _out(sid, state, reply)
 
 
@@ -97,6 +101,7 @@ def post_message(session_id: UUID, body: MessageIn):
         if state.version > version_before:  # the founder said "yes": save the next brief version
             if brief_id is None:
                 brief_id = conn.execute("INSERT INTO briefs DEFAULT VALUES RETURNING id").fetchone()["id"]
+                state.brief_id = str(brief_id)
             note = ("Confirmed by founder in onboarding chat" if state.version == 1
                     else "Edited by founder: " + ", ".join(state.last_changes))
             snap = state.snapshot()
@@ -138,6 +143,30 @@ async def upload_document(session_id: UUID, file: UploadFile):
         reply = chat.handle_document(state, name, text, extractor(), analyst())
         _save(conn, session_id, state)
     return _out(session_id, state, reply, brief_id)
+
+
+@router.get("/sessions/{session_id}/log")
+def session_log(session_id: UUID):
+    """Decision-log entries of this conversation only (its session id, or its brief id for later stages)."""
+    with connect("vos_app") as conn:
+        _state, brief_id = _load(conn, session_id)
+    return entries_for(str(session_id), str(brief_id) if brief_id else None)
+
+
+@router.get("/sessions/{session_id}/outputs")
+def session_outputs(session_id: UUID):
+    """Files in outputs/ that belong to this conversation's confirmed brief (they contain its brief id)."""
+    with connect("vos_app") as conn:
+        _, brief_id = _load(conn, session_id)
+    folder = outputs_dir()
+    if not brief_id or not folder.exists():
+        return []
+    files = []
+    for f in sorted(folder.glob("*")):
+        text = f.read_text(encoding="utf-8", errors="replace")
+        if str(brief_id) in text:
+            files.append({"name": f.name, "text": text})
+    return files
 
 
 @router.get("/briefs/{brief_id}")
