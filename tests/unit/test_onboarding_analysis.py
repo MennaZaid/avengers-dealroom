@@ -681,3 +681,21 @@ def test_a_later_message_does_not_change_the_language():
     chat.handle_message(s, "An app to book home cleaners", NULL)
     chat.handle_message(s, "مشكلة الثقة في العمال", NULL)
     assert s.lang == "en"
+
+
+def test_plain_values_from_small_models_are_kept_only_if_word_for_word_in_the_text():
+    """qwen3:4b answers {"city": "Cairo"} instead of {value, quote}; nothing may be invented from that."""
+    out = LLMExtractor(lambda m: json.dumps({
+        "city": "Cairo", "target_customer": "Working families", "country": "Egypt",
+        "business_model": "B2C", "budget": None,
+    })).extract("An app to book cleaners in Cairo, because working families cannot find reliable cleaners.", "msg")
+    assert out["city"]["value"] == "Cairo" and out["target_customer"]["value"] == "Working families"
+    assert "business_model" not in out and "budget" not in out
+    assert "country" not in out  # "Egypt" is not in the text, and a plain value carries no quote to check
+
+
+def test_extractor_prompt_shows_the_exact_format():
+    from venture_os.onboarding.extract import system_prompt
+
+    p = system_prompt()
+    assert '"quote"' in p and '"inferred": true' in p and "never write null" in p
