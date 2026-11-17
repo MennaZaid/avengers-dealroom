@@ -406,6 +406,27 @@ def check_approval(brief_id: UUID, action: str, content_hash: str):
             "decision": approval.founder_decision(brief_id, action, content_hash)}
 
 
+@router.get("/launch/approvals")
+def launch_approvals(brief_id: UUID):
+    """The exact payloads Phase 5's MOCKED sale-to-cash test needs the founder to approve first (test order and its
+    refund), with their SHA-256 and whether the founder already approved them. Read-only: the founder approves each
+    one through POST /stages/approvals; the stage itself never approves."""
+    from venture_os import payments
+    from venture_os.launch_stage import _scenario
+
+    sc, bid = _scenario(), str(brief_id)
+    items = [("create_order", "Test order (MOCKED: no money moves)",
+              payments.order_payload(bid, sc.PRODUCT, sc.PRICE, sc.CURRENCY)),
+             ("refund_order", "Refund of that test order (MOCKED: revokes access)",
+              {"order_id": f"ord_A_{bid[:8]}", "amount": sc.PRICE, "currency": sc.CURRENCY})]
+    out = []
+    for action, label, payload in items:
+        digest = payments.content_hash(payload)
+        out.append({"action": action, "label": label, "payload": payload, "content_hash": digest,
+                    "approved": approval.has_founder_approval(bid, action, digest)})
+    return out
+
+
 @router.post("/runs/{run_id}/signups")
 def enter_signups(run_id: UUID, body: SignupsIn, x_founder_session: str | None = Header(None)):
     """The founder's waitlist sign-up count for a Validate run. Runs the demand gate against the test declared
