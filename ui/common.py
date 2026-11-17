@@ -110,7 +110,10 @@ def esc(text) -> str:
     return html.escape(str(text or ""))
 
 
-def setup(title: str, subtitle: str = "", active_phase: int | None = None, lang: str = "en") -> None:
+def setup(title: str, subtitle: str = "", active_phase: int | None = None, lang: str | None = None) -> None:
+    """lang=None: follow the sidebar language switch (Auto follows the conversation), so every page flips to
+    right-to-left for Arabic without each page having to ask for it."""
+    lang = lang or ui_lang()
     st.markdown(CSS, unsafe_allow_html=True)
     if lang == "ar":
         st.markdown(RTL_CSS, unsafe_allow_html=True)
@@ -123,8 +126,9 @@ def setup(title: str, subtitle: str = "", active_phase: int | None = None, lang:
         phase_bar(active_phase, lang)
 
 
-def phase_bar(active: int, lang: str = "en", status: dict[int, str] | None = None) -> None:
+def phase_bar(active: int, lang: str | None = None, status: dict[int, str] | None = None) -> None:
     """Six phases plus the brief. `status` maps phase number to a short label (e.g. 'STUBBED')."""
+    lang = lang or ui_lang()
     status = status or {}
     cells = []
     for num, en, ar in PHASES:
