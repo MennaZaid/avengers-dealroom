@@ -1,45 +1,45 @@
 # Founder brief (version 1)
 
-Brief id: `bed7528c-63a2-4a2a-a7b3-594a0b04005b`
+Brief id: `3e540c9c-0f6b-43ed-b4f6-aabf69c1c037`
 
 Values are the founder's own statements, not verified market facts. Unknown fields stay unknown.
 
 | Field | Value | Source |
 |---|---|---|
-| idea * | تطبيق حجز عمال نظافة للمنازل | founder |
-| problem * | صعوبة العثور على عمال نظافة موثوق بهم | founder |
-| target customer * | الأسر العاملة في القاهرة الجديدة والشيخ زايد | founder |
-| country * | مصر | founder |
-| city | القاهرة الجديدة والشيخ زايد | founder |
-| budget * | معايا حوالي ٥٠ ألف جنيه | founder |
-| time available * | ١٥ ساعة في الأسبوع لمدة ٤ شهور | founder |
-| founder skills * | أنا شاطرة في التصميم والتسويق على السوشيال ميديا، ومعايا صاحبتي مبرمجة بدوام جزئي | founder |
-| business model | commission of 15% on every booking, paid by the household | founder document (document:nadafa-plan.txt) |
-| values | fair pay for cleaners, no hidden fees for customers | founder document (document:nadafa-plan.txt) |
-| technical preferences | mobile-first web app, no native app at the start | founder document (document:nadafa-plan.txt) |
-| known competitors | Ezhalha, Filkhedma, informal WhatsApp groups of cleaners | founder document (document:nadafa-plan.txt) |
-| supply side | العمال هيكونوا فريلانسرز، وهنعمل لهم مقابلة وفحص فيش وتشبيه قبل ما يشتغلوا | founder |
+| idea * | Create a bundle of CV and Notion templates in Arabic for Egyptian freelancers. | founder |
+| problem * | Egyptian freelancers waste a lot of time making a professional CV and portfolio in Arabic and English | founder |
+| target customer * | Egyptian freelancers in design, writing and programming, in Cairo | founder |
+| country * | Egypt | inferred from "Egyptian freelancers", confirmed by founder |
+| city | unknown | unknown |
+| budget * | 3000egp | founder |
+| time available * | 10 hours a week for two month | founder |
+| founder skills * | design on Canva and Notion, and content writing | founder |
+| business model | unknown | unknown |
+| values | unknown | unknown |
+| technical preferences | unknown | unknown |
+| known competitors | unknown | unknown |
+| supply side | unknown | unknown |
 
-**Budget (parsed from the founder's words):** 50,000 EGP
+**Budget (parsed from the founder's words):** 300 EGP
 
 **Product check:** allowed
 
 ## Tags
 
-- languages: ar, en (rules)
-- industries: home_services (model)
+- languages: en, ar (rules)
+- industries: professional_services, education (model)
 - country code: EG (rules)
 - customer type: b2c (model)
-- revenue model: commission (model)
+- revenue model: unknown (rules)
 
 ## Follow-up answers
 
-- هل لديكم خطط لتوسيع نطاق الخدمة إلى مدن أخرى بعد القاهرة الجديدة والشيخ زايد؟ -> unknown
-- كيف ستتعاملون مع الشكاوى أو المشكلات التي قد تنشأ بين العملاء والعاملين؟ -> unknown
-- ما هي الخطوات المحددة التي اتخذتموها حتى الآن لضمان جودة الخدمات المقدمة من خلال التطبيق؟ -> unknown
+- What specific features are included in your current CV and Notion templates? -> unknown
+- How much feedback have you received from potential users about the necessity of having both Arabic and English versions? -> unknown
+- Are there any particular challenges you faced while designing these templates? -> unknown
 
 ## Open questions for Discover (not answered yet)
 
-- ما هو متوسط سعر خدمات التنظيف المنزلية في المناطق المستهدفة؟
-- ما حجم السوق المحتمل لهذه الخدمة في القاهرة الجديدة والشيخ زايد؟
-- ما هي القوانين واللوائح المحلية المتعلقة بتوظيف العمال المنزليين في مصر؟
+- What is the average price range for similar template bundles targeting Egyptian freelancers?
+- What is the estimated number of active freelance designers, writers, and programmers currently based in Cairo?
+- Are there any legal requirements or licenses needed when selling digital products like this within Egypt?
