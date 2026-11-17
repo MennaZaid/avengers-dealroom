@@ -27,7 +27,15 @@ POLL = 5
 
 
 def _get(api: str, path: str, **params):
-    return httpx.get(f"{api}{path}", params=params, timeout=60).json()
+    """GET with retries, so a restart or a slow moment of the API does not end a long demo run."""
+    for attempt in range(60):
+        try:
+            return httpx.get(f"{api}{path}", params=params, timeout=60).json()
+        except httpx.HTTPError as e:
+            if attempt == 0:
+                print(f"  API not answering ({type(e).__name__}); retrying for up to 5 minutes...")
+            time.sleep(POLL)
+    raise SystemExit(f"the API at {api} did not answer for 5 minutes")
 
 
 def _latest(api: str, brief_id: str, stage: str) -> dict | None:
