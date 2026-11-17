@@ -3,6 +3,7 @@ Discover is approved. Arabic or English (sidebar language; the layout flips righ
 
 import time
 
+import discover_view as dv
 import streamlit as st
 from common import API, api, phase_bar, setup, ui_lang
 
@@ -83,7 +84,6 @@ STATUS = {"running": ("⏳ researching", "⏳ جارٍ البحث"),
           "awaiting_approval": ("🟡 waiting for your decision", "🟡 بانتظار قرارك"), "approved": ("✅ go", "✅ متابعة"),
           "revision_requested": ("🔁 repeat", "🔁 إعادة"), "pivoted": ("↩️ pivot", "↩️ تحويل"),
           "rejected": ("⛔ stop", "⛔ إيقاف"), "failed": ("❌ failed", "❌ فشل")}
-REC = {"go": "success", "repeat": "warning", "pivot": "warning", "stop": "error"}
 PHASE_STATUS = {0: "Working", 1: "Working", 2: "Working", 3: "Working", 4: "STUBBED", 5: "MOCKED", 6: "STUBBED"}
 i = 1 if L == "ar" else 0
 
@@ -134,7 +134,11 @@ run = runs[0] if len(runs) == 1 else next(r for r in runs if r["id"] == st.selec
     t("run"), [r["id"] for r in runs], format_func=lambda rid: next(
         f"{r['created_at'][:19]} · v{r['brief_version']} · {status(r['status'])}" for r in runs if r["id"] == rid)))
 research = (run["output"] or {}).get("research") or {}
-st.markdown(t("status", s=status(run["status"]), v=run["brief_version"]))
+gate = research.get("gate") or {}
+if gate:  # the gate's recommendation is the most visible line, coloured by outcome
+    _el, _md = dv.gate_banner(gate, L)
+    getattr(st, _el)(_md)
+st.markdown(f"**{dv.run_label(run['status'], L)}** · v{run['brief_version']}")
 if run["stale"]:
     st.warning(t("stale", v=run["latest_brief_version"]))
 if run["status"] == "running":
@@ -149,11 +153,7 @@ if run["status"] == "failed":
     st.error(research.get("error") or t("failed"))
     st.stop()
 
-gate = research.get("gate") or {}
 if gate:
-    getattr(st, REC.get(gate["recommendation"], "info"))(
-        t("rec", o=gate["recommendation"].upper()) + (f" → {gate['pivot_to']}" if gate.get("pivot_to") else "")
-        + " — " + " ".join(gate.get("reasons", [])))
     c1, c2 = st.columns([3, 2])
     c1.dataframe([{t("check"): c["check"], t("target"): c["target"], t("actual"): str(c["actual"]),
                    t("passed"): "✅" if c["passed"] else "❌"} for c in gate.get("checks", [])],
@@ -171,6 +171,14 @@ def quote(c):
     st.markdown(f"> {c['quote']}\n\n[{(c.get('title') or c['url'])[:80]}]({c['url']}) · {t('published')} "
                 f"{c.get('published_at') or t('undated')} · {t('retrieved')} {(c.get('retrieved_at') or '')[:10]}"
                 + (f" · ⚠️ {', '.join(c['flags'])}" if c.get("flags") else ""))
+
+
+def table(rows: list, **kw) -> None:
+    """A table with its CSV download only when it has rows; never an empty, zero-byte export."""
+    if dv.exportable(rows):
+        st.dataframe(rows, hide_index=True, width="stretch", **kw)
+    else:
+        st.caption(dv.nothing_to_export(L))
 
 
 def rng(m, x):
@@ -209,20 +217,23 @@ with tabs[2]:
         row.update({c["criterion"]: f"{c['score']:g}" + (" (A)" if c["basis"] == "ASSUMPTION" else "")
                     for c in s["criteria"]})
         rows.append(row)
-    st.dataframe(rows, hide_index=True, width="stretch")
+    table(rows)
     st.caption(t("scores_note"))
 with tabs[3]:
     m = research.get("market") or {}
     if m:
         st.markdown(t("segment", s=m["segment"], g=m["geography"], b=m["beachhead"]))
-        st.dataframe([{t("name"): c["name"], t("kind"): c["kind"], t("price"): c.get("price") or t("no_price"),
-                       t("signal"): c.get("signal"), t("link"): c["url"]} for c in m["competitors"]], hide_index=True,
-                     width="stretch", column_config={t("link"): st.column_config.LinkColumn()})
+        table([{t("name"): c["name"], t("kind"): c["kind"], t("price"): dv.price_cell(c, L),
+                t("signal"): c.get("signal"), t("link"): c["url"]} for c in m["competitors"]],
+              column_config={t("link"): st.column_config.LinkColumn()})
         st.code(m["formula"])
-        st.dataframe([{t("input"): x["name"], t("low"): x["low"], t("high"): x["high"], t("unit"): x["unit"],
-                       t("basis"): x["basis"], t("note"): x["note"]} for x in m["inputs"]], hide_index=True,
-                     width="stretch")
-        st.markdown(f"**TAM** {rng(m, m['tam'])} · **SAM** {rng(m, m['sam'])} · **SOM** {rng(m, m['som'])}")
+        table([{t("input"): x["name"], t("low"): x["low"], t("high"): x["high"], t("unit"): x["unit"],
+                t("basis"): x["basis"], t("note"): x["note"]} for x in m["inputs"]])
+        unknown = dv.market_size_line(m, L)
+        if unknown:
+            st.warning(unknown)
+        else:
+            st.markdown(f"**TAM** {rng(m, m['tam'])} · **SAM** {rng(m, m['sam'])} · **SOM** {rng(m, m['som'])}")
 with tabs[4]:
     ip = research.get("interview_plan") or {}
     if ip:
@@ -260,9 +271,12 @@ with tabs[5]:
                 (t("judge", j=cr["judge_model"]) if cr.get("judge_model") else ""))
     for f in cr.get("findings") or []:
         st.markdown(f"- **{f['kind']}**: {f['detail']}")
+    for d in cr.get("dropped") or []:  # shown, not hidden: the judge called a past date "in the future"
+        st.caption(("Dropped (calls a past date 'in the future'): " if L != "ar" else
+                    "استُبعد (يصف تاريخاً مضى بأنه في المستقبل): ") + d)
 with tabs[6]:
-    st.dataframe([{k: e.get(k) for k in ("at", "agent", "action", "api", "query", "url", "results", "reason", "error")}
-                  for e in research.get("trace", [])], hide_index=True, width="stretch")
+    table([{k: e.get(k) for k in ("at", "agent", "action", "api", "query", "url", "results", "reason", "error")}
+           for e in research.get("trace", [])])
 
 st.divider()
 st.subheader(t("your_decision"))
