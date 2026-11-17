@@ -265,15 +265,15 @@ flowchart TD
 | Phase 6 persevere-or-pivot memo | STUBBED (not run by the pipeline yet; support, analytics: no data yet) |
 | Payments, delivery, refunds, reconciliation | MOCKED |
 | `approval.py`: founder decisions at stage gates | Working |
-| Founder approval of exact content: landing page, order, refund (`POST /stages/approvals`, CLI) | Working |
-| Founder approval of launch posts and of passing the Phase 4-6 gates | STUBBED: `approval.py` does not accept these actions yet, so they are always refused |
+| Founder approval of exact content: landing page, launch posts, order, refund (`POST /stages/approvals`, CLI) | Working |
+| Founder decision to pass a phase gate (go / repeat / pivot / stop; only "go" passes) | Working |
 
 The README table is the per-step status.
 
 ## Roadmap
 
 1. Wire the Lean Canvas and landing page into the stage API and pipeline page (Phase 2 end to end).
-2. Accept launch posts and Phase 4-6 gate passes in `approval.py`; then the orchestrator runs Phases 4-6.
+2. The orchestrator runs Phases 4-6 (their approvals already exist in `approval.py`).
 3. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
 4. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
 5. More country source packs as reviewed YAML (`config/sources/`).

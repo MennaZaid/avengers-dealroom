@@ -35,8 +35,8 @@ rule-based answer). Give Docker about 6 GB of memory. Host ports: see `.env.exam
 | 5. Launch: payments, delivery, refunds, reconciliation | **MOCKED** | Delivery once per order; a refund revokes access; reconciliation flags missing payments; no money moves |
 | 6. Operate: persevere-or-pivot memo + gate | **STUBBED** | Not run by the pipeline yet. Built only from logged results; support and analytics "no data yet" |
 | Founder decisions at stage gates (`approval.py`) | **Working** | Approve / repeat / pivot / stop / waive, logged with `approved_by: "founder"` |
-| Founder approval of exact content (landing page, order, refund) | **Working** | `POST /stages/approvals` (UI) or `python -m venture_os.approval` (CLI); the action is refused unless this exact content was approved |
-| Founder approval of launch posts and of passing the Phase 4-6 gates | **STUBBED** | `approval.py` does not accept these actions yet, so they are always refused |
+| Founder approval of exact content (landing page, launch posts, order, refund) | **Working** | `POST /stages/approvals` (UI) or `python -m venture_os.approval` (CLI); the action is refused unless this exact content was approved |
+| Founder decision to pass a phase gate (`pass_phase<N>_gate`: go / repeat / pivot / stop) | **Working** | Only the founder's latest decision "go" passes a gate; the Phase 4-6 agents are still STUBBED and not run by the pipeline |
 | Decision log, outputs, cost per run | **Working** | `decision_log.json` (tokens per model call), `outputs/phase<N>_step<M>_*`, `scripts/cost_report.py` |
 
 ## Architecture
