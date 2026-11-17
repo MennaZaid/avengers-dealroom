@@ -44,3 +44,39 @@ def test_price_setting_gives_a_cost():
     entry = client.record_usage("extract", "m", {"prompt_tokens": 500_000, "completion_tokens": 500_000}, 1.0,
                                 _settings(llm_price_per_1m_tokens=0.2))
     assert entry.cost_usd == 0.2
+
+
+def test_ollama_native_counts_and_log_entry(monkeypatch):
+    from venture_os.decision_log import read_log
+
+    monkeypatch.setattr(client, "Settings", lambda: _settings())
+
+    def fake_post(url, headers, json, timeout):
+        body = {"choices": [{"message": {"content": "{}"}}], "prompt_eval_count": 40, "eval_count": 7}
+        return httpx.Response(200, json=body, request=httpx.Request("POST", url))
+
+    monkeypatch.setattr(client.httpx, "post", fake_post)
+    client.chat_json([{"role": "user", "content": "secret prompt text"}])
+    entry = read_log()[-1]
+    assert {k: entry[k] for k in ("agent", "action", "model", "cost", "approved_by", "sources")} == {
+        "agent": "llm_client", "action": "model_call", "model": "qwen3:4b", "cost": 0, "approved_by": None,
+        "sources": []}
+    assert entry["prompt_tokens"] == 40 and entry["completion_tokens"] == 7 and "timestamp" in entry
+    assert "secret prompt text" not in str(entry)
+
+
+def test_cost_report_sums_one_run():
+    import importlib.util
+    from pathlib import Path
+
+    spec = importlib.util.spec_from_file_location(
+        "cost_report", Path(__file__).resolve().parents[2] / "scripts" / "cost_report.py")
+    report = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(report)
+    log = [{"action": "model_call", "model": "qwen3:4b-instruct", "cost": 0, "prompt_tokens": 1000,
+            "completion_tokens": 234},
+           {"action": "model_call", "model": "qwen3:4b-instruct", "cost": 0, "prompt_tokens": 500,
+            "completion_tokens": 66},
+           {"action": "design_lean_canvas", "model": "qwen3:4b-instruct", "cost": 0}]
+    assert report.line(report.summarize(log)) == "About $0.00 per run (local qwen3:4b-instruct, ~1,800 tokens)"
+    assert "rule-based" in report.line(report.summarize([]))

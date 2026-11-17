@@ -86,8 +86,24 @@ def chat_json(
     )
     r.raise_for_status()
     body = r.json()
-    record_usage(profile, model, body.get("usage") or {}, time.monotonic() - started, s)
+    entry = record_usage(profile, model, token_usage(body), time.monotonic() - started, s)
+    log_model_call(entry)
     return clean_json_text(body["choices"][0]["message"]["content"] or "")
+
+
+def token_usage(body: dict) -> dict:
+    """Token counts from an OpenAI-compatible "usage" block, or Ollama's native prompt_eval_count/eval_count."""
+    usage = body.get("usage") or {}
+    return {"prompt_tokens": int(usage.get("prompt_tokens") or body.get("prompt_eval_count") or 0),
+            "completion_tokens": int(usage.get("completion_tokens") or body.get("eval_count") or 0)}
+
+
+def log_model_call(entry: CallUsage) -> None:
+    """One decision_log.json entry per model call: the 7 required keys plus token counts (never the prompt)."""
+    from venture_os.decision_log import log_action
+    log_action("llm_client", "model_call", sources=[], model=entry.model, cost=entry.cost_usd, approved_by=None,
+               profile=entry.profile, prompt_tokens=entry.prompt_tokens, completion_tokens=entry.completion_tokens,
+               seconds=entry.seconds)
 
 
 def record_usage(profile: str, model: str, usage: dict, seconds: float, s: Settings | None = None) -> CallUsage:
