@@ -136,7 +136,7 @@ collected at the start and the founder approves once, at the build gate.
 - **Output:** `phase3_step1_build_inputs.md` … `phase3_step5_mvp.html` … `phase3_step8_evidence_summary.md`,
   `phase3_gate_build.md`. Live on CPU with `qwen3:4b-instruct`: about 6 minutes per run.
 
-### Phase 4: Commercial setup (core step: Set the price and policies) — Working (stage logic); pipeline wiring in progress
+### Phase 4: Commercial setup (core step: Set the price and policies) — Working
 
 - **Entry point:** `commercial_stage.run_commercial_stage(brief_id, brief_version) -> CommercialResult` (gate
   decision, files, stubbed steps). No approval inside; the stage API starts it only after the founder's Go on Build
@@ -269,7 +269,7 @@ flowchart TD
 | Phase 2 sign-up count + demand gate (`POST /stages/runs/{id}/signups`) | Working |
 | Phase 2 landing page | Working; publishing MOCKED |
 | Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
-| Phase 4 Commercial (pricing research, price, policies, readiness, gate) | Working (stage logic); pipeline wiring in progress |
+| Phase 4 Commercial (pricing research, price, policies, readiness, gate) | Working |
 | Phase 5 store page and launch posts | STUBBED (not run by the pipeline yet); posting MOCKED |
 | Phase 6 persevere-or-pivot memo | STUBBED (not run by the pipeline yet; support, analytics: no data yet) |
 | Payments, delivery, refunds, reconciliation | MOCKED |
@@ -282,7 +282,7 @@ The README table is the per-step status.
 ## Roadmap
 
 1. Real waitlist traffic: publish the approved landing page for real (today publishing is MOCKED) so the demand test measures actual sign-ups.
-2. The orchestrator runs Phases 4-6 (their approvals already exist in `approval.py`).
+2. The pipeline runs Phases 5-6 after Commercial (their approvals already exist in `approval.py`).
 3. Phases 4-6 beyond stubs: sourced pricing per market, legal sources per country, metrics from the MVP's own events.
 4. Recorded model responses in CI for deterministic end-to-end runs; grounding and safety scores per commit.
 5. More country source packs as reviewed YAML (`config/sources/`).
