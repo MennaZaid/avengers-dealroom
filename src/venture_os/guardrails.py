@@ -139,6 +139,9 @@ _RULES: dict[str, list[str]] = {
         r"\bguarantee[ds]?\b.{0,40}\b(income|profit|success|money|sales|revenue)\b",
         r"\b(promise|tell|assure)\b.{0,15}\b(me|us)\b.{0,25}\b(make|earn|succeed|be rich|profit)\b",
         r"\b(guarantee|promise)\b.{0,10}\b(i|we|me|us)\b.{0,15}\b(make|earn|succeed|profit|get rich)\b",
+        r"\b(earn|make)\b.{0,40}\bguarantee[ds]?\b",
+        (r"\b(tell|promise|assure)\b.{0,10}\b(customers|buyers|users|clients|people|them)\b.{0,25}"
+         r"\b(will|they'?ll)\b.{0,10}\b(earn|make|profit|get rich)\b"),
         r"(ربح|أرباح|ارباح|دخل|مكسب|نجاح) (مضمون|مضمونة|أكيد|اكيد)",
         _A + r"(اضمن|اضمنلي|تضمن|تضمنلي|أكدلي|اكدلي|وعدني|اوعدني).{0,25}"
         r"(ربح|أرباح|ارباح|دخل|مكسب|نجاح|فلوس|هكسب|هاكسب|أكسب|اكسب|هربح|أربح|اربح|هنجح|أنجح|انجح)",
@@ -146,6 +149,7 @@ _RULES: dict[str, list[str]] = {
     "impersonation": [
         r"\b(pretend|pose)\b.{0,15}\b(to be|as)\b", r"\bimpersonat",
         r"\b(reply|write|post|answer)\b.{0,20}\bas (if you were|if you are|the founder|me|a customer)\b",
+        r"\bas if (it'?s|it is|it were|it came|it was|they are) (from|by|written by|posted by)\b",
         _A + r"(انتحل|اتقمص|تقمص|كأنك|كانك).{0,20}(عميل|زبون|المؤسس|شركة|براند|أنا|انا)",
     ],
     "move_money": [
