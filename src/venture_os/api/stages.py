@@ -51,6 +51,10 @@ class ApprovalIn(BaseModel):
     brief_id: UUID
     action: approval.Action
     content_hash: str = Field(pattern=r"^[0-9a-f]{64}$")   # SHA-256 of the exact draft or payload
+    decision: str = "approve"     # approve | reject; gates (pass_phase<N>_gate): go | repeat | pivot | stop
+    note: str | None = Field(None, max_length=2000)
+    pivot_to: str | None = Field(None, max_length=60)
+    brief_version: int | None = None
 
 
 class DemandIn(BaseModel):
@@ -293,15 +297,20 @@ def approve_content(body: ApprovalIn, x_founder_session: str | None = Header(Non
     """The founder approves exactly this content for one outward action (UI channel)."""
     with connect("vos_app") as conn:
         try:
-            return approval.record_founder_approval(body.brief_id, body.action, body.content_hash,
-                                                    session_id=x_founder_session or "", channel="ui", conn=conn)
+            return approval.record_founder_approval(body.brief_id, body.action, body.content_hash, body.decision,
+                                                    body.note, session_id=x_founder_session or "", channel="ui",
+                                                    pivot_to=body.pivot_to, brief_version=body.brief_version,
+                                                    conn=conn)
         except PermissionError as e:
             raise HTTPException(401, str(e)) from e
+        except ValueError as e:
+            raise HTTPException(422, str(e)) from e
 
 
 @router.get("/approvals/check")
 def check_approval(brief_id: UUID, action: str, content_hash: str):
-    return {"approved": approval.has_founder_approval(brief_id, action, content_hash)}
+    return {"approved": approval.has_founder_approval(brief_id, action, content_hash),
+            "decision": approval.founder_decision(brief_id, action, content_hash)}
 
 
 @router.post("/validate/demand")

@@ -407,3 +407,18 @@ CREATE TRIGGER founder_approvals_owner BEFORE INSERT ON founder_approvals
 GRANT SELECT, INSERT ON founder_approvals TO vos_app;   -- append-only: no UPDATE or DELETE for anyone but the owner
 GRANT USAGE ON SEQUENCE founder_approvals_id_seq TO vos_app;
 GRANT SELECT ON founder_approvals TO vos_agent;          -- agents may check an approval, never write one
+
+-- v2: launch posts and phase gates; the founder's decision (gates: go/repeat/pivot/stop), note, brief version.
+ALTER TABLE founder_approvals ADD COLUMN IF NOT EXISTS decision TEXT NOT NULL DEFAULT 'approve';
+ALTER TABLE founder_approvals ADD COLUMN IF NOT EXISTS note TEXT;
+ALTER TABLE founder_approvals ADD COLUMN IF NOT EXISTS pivot_to TEXT;
+ALTER TABLE founder_approvals ADD COLUMN IF NOT EXISTS brief_version INT;
+ALTER TABLE founder_approvals DROP CONSTRAINT IF EXISTS founder_approvals_action_check;
+ALTER TABLE founder_approvals ADD CONSTRAINT founder_approvals_action_check CHECK (action IN
+  ('publish_landing_page', 'publish_launch_post', 'create_order', 'refund_order', 'pass_phase1_gate',
+   'pass_phase2_gate', 'pass_phase3_gate', 'pass_phase4_gate', 'pass_phase5_gate', 'pass_phase6_gate'));
+ALTER TABLE founder_approvals DROP CONSTRAINT IF EXISTS founder_approvals_decision_check;
+ALTER TABLE founder_approvals ADD CONSTRAINT founder_approvals_decision_check CHECK (
+  CASE WHEN action LIKE 'pass_phase%' THEN decision IN ('go', 'repeat', 'pivot', 'stop')
+       ELSE decision IN ('approve', 'reject') END
+  AND (decision <> 'pivot' OR coalesce(pivot_to, '') <> ''));
