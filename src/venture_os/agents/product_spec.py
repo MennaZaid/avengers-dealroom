@@ -85,11 +85,9 @@ class ProductSpec(BaseModel):
     model: str | None = None
 
     def visible_text(self) -> str:
-        """Title, offers and core action: the text the relevance check reads."""
-        parts = [self.sample_title.value, self.core_verb, self.core_object.value, self.core_result]
-        for o in self.offers:
-            parts += [o.name.value, o.contents.value, o.for_whom.value]
-        return " ".join(parts)
+        """Title, offer names and what the core action works on: the text the relevance check reads.
+        (Not the filled-in defaults: a spec whose own names are off-brief must fail.)"""
+        return " ".join([self.sample_title.value, self.core_object.value] + [o.name.value for o in self.offers])
 
 
 # ---------------------------------------------------------------- key terms and relevance (also used by the tester)
@@ -139,10 +137,8 @@ def choose_kind(v: dict[str, str]) -> str:
 def _price(inputs: BuildInputs, v: dict[str, str]) -> Sourced:
     for i in inputs.items:  # a sourced price from Validate / Commercial first
         if i.phase in (2, 4) and i.kind == "price" and (m := _PRICE.search(i.text)):
-            return Sourced(value=m.group(0), source=f"item:{i.id or i.kind}")
-    if m := _PRICE.search(v.get("business_model", "")):
-        return Sourced(value=m.group(0), source="brief:business_model")
-    if v.get("business_model"):
+            return Sourced(value=m.group(0).rstrip(",. "), source=f"item:{i.id or i.kind}")
+    if v.get("business_model"):  # the founder's own pricing words, whole (one or several prices)
         return Sourced(value=v["business_model"][:120], source="brief:business_model")
     return Sourced(value="to be set by the founder", source=ASSUMPTION)
 

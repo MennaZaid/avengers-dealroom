@@ -150,10 +150,8 @@ def product_checks(inputs: BuildInputs, cfg: dict, page: str, terms: list[str] |
     out = []
     spec = cfg.get("spec") or {}
     core = spec.get("core") or {}
-    visible = " ".join([cfg.get("title", ""), cfg.get("tagline", "")] +
-                       [" ".join((o.get("name", ""), o.get("contents", ""), o.get("for", "")))
-                        for o in spec.get("offers", [])] +
-                       [core.get("verb", ""), core.get("object", ""), core.get("result", "")])
+    visible = " ".join([cfg.get("title", ""), core.get("object", "")] +
+                       [o.get("name", "") for o in spec.get("offers", [])])  # title, offer names, core action
     terms = terms if terms is not None else key_terms(brief_values(inputs))
     ok, hits = relevance(terms, visible)
     out.append(Check(name="about this brief (key terms in title, offers and core action)", passed=ok,
