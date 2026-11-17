@@ -63,6 +63,24 @@ def test_generated_plan_passes_its_own_linter():
         assert g["questions"] and all(lint_question(q).ok for q in g["questions"])
 
 
+
+@pytest.mark.parametrize("with_problem", [True, False])
+def test_both_languages_get_the_same_full_script_with_no_placeholder_or_duplicate(with_problem):
+    brief = json.loads((FIX / "pharmastock_v1.json").read_text(encoding="utf-8"))
+    db = analyze(brief)
+    db.tags["languages"] = {"value": ["en", "ar"]}
+    if not with_problem:
+        db.optional.pop("problem", None)
+    p = plan(db, [], "PharmaStock stock-tracking app")
+    en, ar = p.guides["en"]["questions"], p.guides["ar"]["questions"]
+    assert len(en) == len(ar) == 8                                 # the same question set in both languages
+    for qs in (en, ar):
+        assert len(set(qs)) == len(qs)                             # no duplicates
+        assert not any("{problem}" in q or "بنسأل عنها" in q or "we're asking about" in q for q in qs)
+    if with_problem:                                               # the founder's own problem wording, both languages
+        problem = db.optional["problem"].strip().rstrip(". ")
+        assert problem in en[0] and problem in ar[0]
+
 # ---------- 2. notes tagging ----------
 
 @pytest.mark.parametrize("note,tag", [

@@ -11,10 +11,12 @@ from __future__ import annotations
 import json
 import re
 from collections.abc import Callable
+from datetime import date
 
 from pydantic import BaseModel
 
 from venture_os.agents.schemas import Claim, Idea
+from venture_os.decision_log import log_action
 from venture_os.guardrails import check_output
 from venture_os.prompts import load_prompt
 
@@ -32,6 +34,29 @@ class CriticReport(BaseModel):
     findings: list[Finding]
     model_review: str     # what the judge model said, or why it did not run (STUBBED)
     judge_model: str | None = None
+    dropped: list[str] = []   # model findings dropped as factually wrong (e.g. a past date called "future")
+
+
+FUTURE = re.compile(r"\b(in the future|future[- ]dated|has not happened yet|not yet happened|upcoming)\b|"
+                    r"في المستقبل|لم يحدث بعد", re.IGNORECASE)
+DATE = re.compile(r"\b(\d{4})-(\d{2})-(\d{2})\b|\b(19|20)\d{2}\b")
+
+
+def calls_past_date_future(detail: str, today: date) -> bool:
+    """True when a model finding calls a date that is not after `today` "in the future" (a judge error)."""
+    if not FUTURE.search(detail):
+        return False
+    for m in DATE.finditer(detail):
+        if m.group(1):
+            try:
+                d = date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+            except ValueError:
+                continue
+        else:
+            d = date(int(m.group(0)), 1, 1)
+        if d <= today:
+            return True
+    return False
 
 
 def _numbers(text: str) -> list[float]:
@@ -76,7 +101,8 @@ def rule_findings(claims: list[Claim], ideas: list[Idea], brief_text: str = "") 
 
 
 def review(claims: list[Claim], ideas: list[Idea], judge: Callable | None, judge_id: str | None,
-           judge_family: str | None, generator_family: str | None, brief_text: str = "") -> CriticReport:
+           judge_family: str | None, generator_family: str | None, brief_text: str = "",
+           today: date | None = None) -> CriticReport:
     findings = rule_findings(claims, ideas, brief_text)
     if judge is None:
         return CriticReport(findings=findings, model_review="STUBBED: no judge model configured (LLM_MODE is "
@@ -84,18 +110,27 @@ def review(claims: list[Claim], ideas: list[Idea], judge: Callable | None, judge
     if generator_family and judge_family == generator_family:
         return CriticReport(findings=findings, judge_model=judge_id,
                             model_review=f"skipped: judge family '{judge_family}' is the same as the generator's")
-    payload = {"claims": {c.id: f"{c.quote or c.text} ({c.url}, {c.published_at or 'undated'})" for c in claims[:40]},
+    today = today or date.today()
+    payload = {"today": today.isoformat(), "claims": {c.id: f"{c.quote or c.text} ({c.url}, {c.published_at or 'undated'})" for c in claims[:40]},
                "ideas": [i.model_dump(include={"id", "title", "pain", "pain_claim_ids"}) for i in ideas]}
     try:
         data = json.loads(judge([{"role": "system", "content": load_prompt("research_critic")},
                                  {"role": "user", "content": f"<untrusted>{json.dumps(payload, ensure_ascii=False)}"
                                                              "</untrusted>"}]))
-        known = {c.id for c in claims}
+        known, dropped = {c.id for c in claims}, []
         for f in (data.get("findings") or [])[:10]:
             if isinstance(f, dict) and f.get("detail"):
-                findings.append(Finding(kind="model", detail=str(f["detail"])[:300],
+                detail = str(f["detail"])[:300]
+                if calls_past_date_future(detail, today):   # factually wrong: dropped, and logged, never hidden
+                    dropped.append(detail)
+                    log_action("research_critic", "drop_model_finding", sources=[], model=judge_id, cost=0,
+                               approved_by=None, reason=f"calls a date on or before {today.isoformat()} 'in the "
+                                                        "future'", finding=detail)
+                    continue
+                findings.append(Finding(kind="model", detail=detail,
                                         claim_ids=[i for i in f.get("claim_ids") or [] if i in known]))
         summary = str(data.get("summary") or "")[:600]
     except Exception as e:  # noqa: BLE001
-        summary = f"judge model call failed: {type(e).__name__}"
-    return CriticReport(findings=findings, model_review=summary or "no issues raised", judge_model=judge_id)
+        summary, dropped = f"judge model call failed: {type(e).__name__}", []
+    return CriticReport(findings=findings, model_review=summary or "no issues raised", judge_model=judge_id,
+                        dropped=dropped)
