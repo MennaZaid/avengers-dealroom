@@ -203,3 +203,5 @@ if run["status"] in ("awaiting_approval", "revision_requested"):
         send("waive", waiver_reason=reason)
 else:
     st.caption("This run is closed.")
+if run["status"] == "approved":
+    st.page_link("pages/5_build.py", label="Discover is approved: go to Phase 3 Build →")

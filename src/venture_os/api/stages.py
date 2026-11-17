@@ -4,6 +4,9 @@
   and runs the agents in the background (orchestrator.py); poll GET /stages/runs/{id}.
 - POST /stages/runs/{id}/decision: the ONLY way past a gate (approval.py). Founder-authenticated: the header
   X-Founder-Session must be the onboarding session that confirmed this brief. A model has no such session.
+- Build (Phase 3) starts after an approved Discover while Validate is not built (unbuilt stages are skipped by
+  the entry check). It runs build_stage.run_build_stage in the background with the Discover claims as evidence,
+  stores the gate and every phase3_* file in the run, and waits for the founder's one decision.
 - POST /stages/discover/interviews: the founder's Mom Test notes (stored as written, tagged by rules); the gate
   is re-evaluated with them.
 """
@@ -26,7 +29,7 @@ from venture_os.evidence.store import EvidenceStore
 router = APIRouter(prefix="/stages", tags=["stages"])
 
 RUN_COLS = "id, brief_id, brief_version, stage, status, output, created_at, updated_at"
-IMPLEMENTED = {"discover"}
+IMPLEMENTED = {"discover", "build"}
 
 
 class RunIn(BaseModel):
@@ -93,6 +96,37 @@ def _research(run_id: str, plan: research_planner.ResearchPlan, brief: dict) -> 
     orchestrator.run_discover(run_id, plan, brief, toolbox, store)
 
 
+BUILD_FILES = ["phase3_step1_build_inputs.md", "phase3_step2_requirements.md", "phase3_step3_mvp_plan.md",
+               "phase3_step4_validation.md", "phase3_step5_mvp.html", "phase3_step6_test_report.md",
+               "phase3_step7_user_guide.md", "phase3_step8_evidence_summary.md", "phase3_gate_build.md"]
+
+
+def _build(run_id: str, brief_id: str, version: int) -> None:
+    """Phase 3 in the background: no founder approval inside the stage; the run then waits for one decision.
+    The files are copied into the run, so each run keeps its own MVP even when outputs/ is overwritten."""
+    from venture_os.build_stage import discover_items, run_build_stage
+    from venture_os.onboarding.briefs import load_brief
+    from venture_os.outputs import outputs_dir
+
+    store = EvidenceStore()
+    try:
+        brief = load_brief(brief_id, version)
+        result = run_build_stage(brief, extra_items=discover_items(brief_id, version))
+        files = {}
+        for name in BUILD_FILES:
+            f = outputs_dir() / name
+            if f.exists():
+                files[name] = f.read_text(encoding="utf-8")
+        store.update_run(run_id, {"build": {"status": "done", "gate": result.decision.model_dump(),
+                                            "template": result.template, "plan_rounds": result.plan_rounds,
+                                            "test_attempts": result.test_attempts,
+                                            "seconds": round(result.seconds, 1), "files": files}},
+                         status="awaiting_approval")
+    except Exception as e:  # noqa: BLE001 - a failed run is recorded, not hidden
+        store.update_run(run_id, {"build": {"status": "failed", "error": f"{type(e).__name__}: {e}"}},
+                         status="failed")
+
+
 @router.get("/briefs")
 def list_briefs():
     """Confirmed briefs (latest version of each), newest first, for picking one in the UI."""
@@ -111,7 +145,8 @@ def start_run(stage: gates.Stage, body: RunIn, background: BackgroundTasks):
         runs = conn.execute("SELECT stage, brief_version, status FROM stage_runs WHERE brief_id = %s",
                             (body.brief_id,)).fetchall()
         try:
-            gates.entry_check(stage, latest, [gates.RunView(**r) for r in runs])
+            gates.entry_check(stage, latest, [gates.RunView(**r) for r in runs],
+                              skip=[s for s in gates.STAGES if s not in IMPLEMENTED])
         except gates.GateRefused as e:
             raise HTTPException(403, str(e)) from e
     if stage not in IMPLEMENTED:
@@ -120,6 +155,15 @@ def start_run(stage: gates.Stage, body: RunIn, background: BackgroundTasks):
     if (brief.get("product_check") or {}).get("status") == "excluded":
         raise HTTPException(403, "excluded product (not a digital product the system may build): the pipeline "
                                  "stops here; reshape the idea in onboarding")
+    if stage == "build":
+        with connect("vos_app") as conn:
+            run = conn.execute(
+                f"INSERT INTO stage_runs (brief_id, brief_version, stage, status, output) VALUES (%s,%s,%s,%s,%s) "
+                f"RETURNING {RUN_COLS}", (body.brief_id, brief["version"], stage, "running",
+                                          Jsonb({"build": {"status": "queued"}}))).fetchone()
+            out = _with_state(conn, [run])[0]
+        background.add_task(_build, str(run["id"]), str(body.brief_id), brief["version"])
+        return out
     try:
         plan = plan_for(brief)
         output, status = {"plan": plan.model_dump(), "research": {"status": "queued", "trace": []}}, "running"
