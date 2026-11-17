@@ -23,7 +23,8 @@ AGENT = "build_inputs"
 # Brief field -> evidence kind. What the founder said becomes a founder-stated item (or inferred, if deduced).
 _FIELD_KIND = {"idea": "idea", "problem": "pain", "target_customer": "customer", "supply_side": "supply",
                "business_model": "revenue", "known_competitors": "competitor", "city": "market",
-               "country": "market"}
+               "country": "market", "values": "constraint", "technical_preferences": "constraint",
+               "budget": "constraint", "time_available": "constraint", "founder_skills": "constraint"}
 _CONSTRAINTS = ("budget", "time_available", "founder_skills", "values", "technical_preferences")
 
 
