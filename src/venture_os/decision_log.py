@@ -56,6 +56,37 @@ def log_action(agent: str, action: str, *, sources: list[str] | None = None, mod
     return entry
 
 
+def log_actions(calls: list[dict]) -> list[dict]:
+    """Append many entries with one file write (a pipeline run logs ~100 actions). Each item holds the same
+    arguments as log_action: agent, action, and optional sources/model/cost/approved_by/extra keys."""
+    entries = []
+    for c in calls:
+        c = dict(c)
+        approved_by = c.pop("approved_by", None)
+        if approved_by not in (None, "founder"):
+            raise ValueError('approved_by must be "founder" or None')
+        entries.append({
+            "timestamp": c.pop("timestamp", None) or datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "agent": c.pop("agent"),
+            "action": c.pop("action"),
+            "sources": list(c.pop("sources", None) or []),
+            "model": c.pop("model", None),
+            "cost": float(c.pop("cost", 0.0)),
+            "approved_by": approved_by,
+            **c,
+        })
+    if not entries:
+        return entries
+    path = log_path()
+    with _lock:
+        current = _read(path)
+        current.extend(entries)
+        tmp = path.with_suffix(path.suffix + ".tmp")
+        tmp.write_text(json.dumps(current, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
+        tmp.replace(path)
+    return entries
+
+
 def read_log() -> list[dict]:
     return _read(log_path())
 

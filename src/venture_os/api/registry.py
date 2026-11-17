@@ -6,6 +6,7 @@ with the admin's id and a reason. Nothing is ever deleted: "remove" deactivates.
 
 import hmac
 import json
+from datetime import date
 from typing import Literal
 
 from fastapi import APIRouter, Depends, Header, HTTPException, Query
@@ -26,10 +27,14 @@ def list_sources(
     tier: Literal["A", "B", "C"] | None = None,
     use: str | None = None,
     include_inactive: bool = False,
+    product_scope: str | None = Query(None, description="comma list, e.g. 'digital,any' (the Discover planner)"),
 ):
     where, args = [], {}
     if not include_inactive:
         where.append("active")
+    if product_scope:
+        where.append("product_scope = ANY(%(ps)s)")
+        args["ps"] = [x.strip() for x in product_scope.split(",") if x.strip()]
     if country:
         where.append("(country_codes = '{}' OR %(cc)s = ANY(country_codes))")
         args["cc"] = country.upper()
@@ -155,6 +160,42 @@ class Reason(BaseModel):
     reason: str = Field(min_length=5)
 
 
+class SourcePatch(BaseModel):
+    """Metadata an admin may change on a source. Tier, active and verified have their own logged routes."""
+    product_scope: Literal["digital", "physical", "any"] | None = None
+    access_type: str | None = None
+    limitations: str | None = None
+    license: str | None = None
+    notes: str | None = None
+    industries: list[str] | None = None
+    test_url: str | None = Field(None, pattern=r"^https://")
+    url_status: str | None = None
+    http_status: int | None = None
+    tested_on: date | None = None
+    reason: str = Field(min_length=5)
+
+
+def update_source(source_id: str, changes: dict, admin_id: str, reason: str) -> dict:
+    """The one way to change a source's metadata: before/after go to source_changes with the reason."""
+    allowed = set(SourcePatch.model_fields) - {"reason"}
+    changes = {k: v for k, v in changes.items() if k in allowed}
+    if not changes:
+        raise HTTPException(400, "nothing to change")
+    with connect("vos_admin") as conn:
+        before = conn.execute("SELECT * FROM sources WHERE id = %s", (source_id,)).fetchone()
+        if not before:
+            raise HTTPException(404, f"{source_id} not found")
+        sets = ", ".join(f"{k} = %({k})s" for k in changes)
+        after = conn.execute(f"UPDATE sources SET {sets}, updated_at = now() WHERE id = %(id)s RETURNING *",
+                             {**changes, "id": source_id}).fetchone()
+        conn.execute(
+            "INSERT INTO source_changes (source_id, action, admin_id, reason, before, after)"
+            " VALUES (%s,'update',%s,%s,%s,%s)",
+            (source_id, admin_id, reason, json.dumps(before, default=str), json.dumps(after, default=str)),
+        )
+    return after
+
+
 def _insert(conn, table: str, row: dict) -> dict:
     cols = ", ".join(row)
     vals = ", ".join(f"%({k})s" for k in row)
@@ -201,6 +242,11 @@ def _set_active(table: str, log: str, row_id: str, active: bool, admin_id: str, 
                  json.dumps(before, default=str), json.dumps(after, default=str)),
             )
     return after
+
+
+@admin.patch("/sources/{source_id}")
+def patch_source(source_id: str, body: SourcePatch, admin_id: str = Depends(require_admin)):
+    return update_source(source_id, body.model_dump(exclude={"reason"}, exclude_unset=True), admin_id, body.reason)
 
 
 @admin.post("/sources/{source_id}/deactivate")

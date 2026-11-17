@@ -1,0 +1,134 @@
+{
+ "ideas": [
+  {
+   "id": "I0",
+   "title": "A generic AI chatbot app for everyone",
+   "description": "A simple, no-subscription AI chat app that lets users chat with AI using everyday prompts, designed for people who want quick, free access to AI without complexity or cost.",
+   "product_type": "mobile_app",
+   "origin": "starting_idea",
+   "built_by": "qwen3:4b-instruct",
+   "pain": "People want to chat with AI without needing to install multiple apps or pay for subscriptions.",
+   "pain_claim_ids": [
+    "C1"
+   ],
+   "why_founder": "The founder posts on social media, so they understand how to share simple, engaging content. They have zero budget and only 2 hours a week, so this idea requires minimal development and relies on existing AI APIs. It aligns with the goal of offering accessible AI to everyone.",
+   "assumptions": [
+    "The founder can use a free AI API (like OpenAI's free tier or Hugging Face) to power the chatbot without cost.",
+    "The core functionality (chatting with AI) can be built in a simple mobile app using no-code tools or basic coding (e.g., React Native or Flutter) within 2 hours/week over 2 months.",
+    "The target market of 'everyone' includes users who are new to AI and want a simple, free entry point."
+   ]
+  },
+  {
+   "id": "I1",
+   "title": "AI Prompt Templates for Social Media Posts",
+   "description": "A collection of ready-to-use AI prompt templates designed for people who post on social media, helping them generate engaging content quickly.",
+   "product_type": "template_or_asset",
+   "origin": "alternative",
+   "built_by": "qwen3:4b-instruct",
+   "pain": "People want to create social media content without spending time crafting prompts or learning AI tools.",
+   "pain_claim_ids": [],
+   "why_founder": "The founder already posts on social media, so they understand content creation pain points. This product requires no development, only content curation, and fits within 2 hours/week and zero budget.",
+   "assumptions": [
+    "The founder can gather and organize real-world prompt examples from their own experience.",
+    "The templates will be useful to people who want to generate content without AI expertise.",
+    "There is demand for simple, actionable AI tools for everyday creators.",
+    "ASSUMPTION: no pain quote cited for this idea"
+   ]
+  },
+  {
+   "id": "I2",
+   "title": "A Simple AI-Powered Social Media Content Guide",
+   "description": "An ebook or guide that teaches users how to use AI to create social media content, with practical examples and prompts.",
+   "product_type": "other_digital",
+   "origin": "alternative",
+   "built_by": "qwen3:4b-instruct",
+   "pain": "People want to learn how to use AI for social media content without needing technical skills or expensive tools.",
+   "pain_claim_ids": [],
+   "why_founder": "The founder has experience posting on social media and can write in a relatable tone. This ebook can be built with minimal effort using free tools like Google Docs or Canva, and fits within the time and budget constraints.",
+   "assumptions": [
+    "There is interest in learning how to use AI for content creation.",
+    "The guide can be written in plain language and include real examples from the founder’s experience.",
+    "The audience values practical, no-jargon advice.",
+    "ASSUMPTION: no pain quote cited for this idea"
+   ]
+  },
+  {
+   "id": "I3",
+   "title": "AI-Powered Browser Extension for Quick Prompts",
+   "description": "A browser extension that lets users insert AI-generated prompts into their web pages or social media posts with one click.",
+   "product_type": "browser_extension",
+   "origin": "alternative",
+   "built_by": "qwen3:4b-instruct",
+   "pain": "People want to generate AI-powered content quickly while browsing the web, without switching apps or using complex tools.",
+   "pain_claim_ids": [],
+   "why_founder": "The founder posts on social media and uses the web daily, so they understand the flow of content creation. This product requires minimal development and can be built with free tools, fitting the 2-hour/week time and zero-budget constraints.",
+   "assumptions": [
+    "The extension can be built using a simple no-code tool or basic JavaScript.",
+    "Users will find value in having AI prompts available at the moment of need.",
+    "The extension can be shared via social media, aligning with the founder’s existing habits.",
+    "ASSUMPTION: no pain quote cited for this idea"
+   ]
+  },
+  {
+   "id": "I4",
+   "title": "Community for AI Prompt Sharing",
+   "description": "A simple online community where users can share and discover AI prompts for social media, content creation, and daily tasks.",
+   "product_type": "community_or_membership",
+   "origin": "alternative",
+   "built_by": "qwen3:4b-instruct",
+   "pain": "People want to find and share AI prompts without relying on large, complex platforms or subscriptions.",
+   "pain_claim_ids": [],
+   "why_founder": "The founder already shares content on social media and can help build a community around prompt sharing. This idea requires no development, only moderation and curation, and fits within time and budget.",
+   "assumptions": [
+    "There is interest in a space where people can exchange AI prompts in a simple, non-competitive way.",
+    "The community can grow organically through social sharing.",
+    "The founder can manage a small group without technical tools or infrastructure.",
+    "ASSUMPTION: no pain quote cited for this idea"
+   ]
+  }
+ ],
+ "pain_claims": [
+  {
+   "id": "C1",
+   "type": "fact",
+   "topic": "pain",
+   "text": "Gemini is one of the alternatives compared in the evaluation.",
+   "quote": "I tried it and compared with all other alternatives: Gemini, Mistral, Grok, Claude, ChatGPT (mobile apps, no subscriptions, default models), same prompt (a problem required sophisticated thinking and web searches), and surprisingly it worked better than any other free app.",
+   "url": "https://news.ycombinator.com/item?id=50018181",
+   "title": "Aleph Alpha and Mistral launches fuel Europe's sovereign AI push",
+   "published_at": "2026-10-09",
+   "retrieved_at": "2026-11-17T01:04:41+00:00",
+   "source_id": null,
+   "source_kind": "api_ugc",
+   "tier": null,
+   "language": "en",
+   "flags": [
+    "web_source"
+   ],
+   "extracted_by": "qwen3:4b-instruct",
+   "document_id": "8dcbfdf1-b3d8-4ac1-a888-e15026956d25",
+   "chunk_id": "5dc63cf5-53a0-40c5-b7c3-56b0dfcffb0a"
+  },
+  {
+   "id": "C2",
+   "type": "fact",
+   "topic": "pain",
+   "text": "Gemini - is one of the secessionists alternatives to the mainstream web.",
+   "quote": "There are some secessionists - Gopher is still alive, Gemini - but alternatives have a hard time to compete with the content companies can provide apparently for free.",
+   "url": "https://news.ycombinator.com/item?id=43960538",
+   "title": "Plain Vanilla Web",
+   "published_at": "2025-05-12",
+   "retrieved_at": "2026-11-17T01:04:42+00:00",
+   "source_id": null,
+   "source_kind": "api_ugc",
+   "tier": null,
+   "language": "en",
+   "flags": [
+    "web_source"
+   ],
+   "extracted_by": "qwen3:4b-instruct",
+   "document_id": "b48ddbbc-9262-49d3-8ccb-b2c4405bcfea",
+   "chunk_id": "e9460cab-ff53-46ca-8049-b0af446176d2"
+  }
+ ]
+}

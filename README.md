@@ -25,9 +25,9 @@ of memory.
 | Guardrails (excluded products, must-never requests) | **Working** | Refuses fake reviews, income promises, impersonation, moving money, credentials |
 | Decision log and outputs | **Working** | `decision_log.json`, `outputs/phase<N>_step<M>_*` written by the code |
 | Gates (product, evidence, demand) | **Working** | go / repeat / pivot / stop from thresholds fixed before the result; 12 of 100 sign-ups -> stop |
-| 1. Discover: find opportunities + gate | In progress | Sourced claims or `ASSUMPTION`; gate go / repeat / pivot / stop |
+| 1. Discover: find opportunities + gate | **Working** | Live web + free APIs; verbatim-quoted claims or `ASSUMPTION`; ideas scored, market sized bottom-up, Mom Test script; gate go / repeat / pivot / stop, decided by the founder. Critic's judge model **STUBBED** unless a different-family model is set |
 | 2. Validate: design the business + gate | In progress | Lean Canvas, landing-page draft; sign-up counts entered by the founder or **MOCKED** |
-| 3. Build: build the product | **STUBBED** | PRD and MVP template |
+| 3. Build: build the product | **Working** | Evidence -> requirements -> plan -> validation -> single-file HTML MVP -> 15 QA checks -> user guide; one founder approval at the end; payments in the MVP are **MOCKED** |
 | 4. Commercial setup: price and policies | **STUBBED** | Draft terms, privacy and refund policies; no payments |
 | 5. Launch: store and automatic delivery | **MOCKED** | Drafts only; delivery and payments mocked, nothing is published or charged |
 | 6. Operate and learn | **STUBBED** | Persevere-or-pivot memo |

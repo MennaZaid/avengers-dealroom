@@ -1,0 +1,122 @@
+{
+  "fields": {
+    "idea": {
+      "value": "A generic AI chatbot app for everyone",
+      "status": "answered",
+      "source": "chat",
+      "quote": "A generic AI chatbot app for everyone"
+    },
+    "problem": {
+      "value": "People want to chat with AI",
+      "status": "answered",
+      "source": "chat",
+      "quote": "People want to chat with AI"
+    },
+    "target_customer": {
+      "value": "Everyone",
+      "status": "answered",
+      "source": "chat",
+      "quote": "Everyone"
+    },
+    "country": {
+      "value": null,
+      "status": "unknown",
+      "source": null,
+      "quote": null
+    },
+    "city": {
+      "value": null,
+      "status": "unknown",
+      "source": null,
+      "quote": null
+    },
+    "budget": {
+      "value": "0 USD",
+      "status": "answered",
+      "source": "chat",
+      "quote": "0 USD"
+    },
+    "time_available": {
+      "value": "2 hours a week for 2 months",
+      "status": "answered",
+      "source": "chat",
+      "quote": "2 hours a week for 2 months"
+    },
+    "founder_skills": {
+      "value": "I post on social media sometimes",
+      "status": "answered",
+      "source": "chat",
+      "quote": "I post on social media sometimes"
+    },
+    "values": {
+      "value": null,
+      "status": "unknown",
+      "source": null,
+      "quote": null
+    },
+    "business_model": {
+      "value": "monthly subscription",
+      "status": "answered",
+      "source": "chat",
+      "quote": "monthly subscription"
+    },
+    "known_competitors": {
+      "value": "ChatGPT, Gemini, Claude, Copilot, Meta AI",
+      "status": "answered",
+      "source": "chat",
+      "quote": "ChatGPT, Gemini, Claude, Copilot, Meta AI"
+    },
+    "technical_preferences": {
+      "value": "mobile app",
+      "status": "answered",
+      "source": "chat",
+      "quote": "mobile app"
+    },
+    "supply_side": {
+      "value": null,
+      "status": "unknown",
+      "source": null,
+      "quote": null
+    }
+  },
+  "tags": {
+    "industries": {
+      "value": [
+        "software_saas"
+      ],
+      "basis": "rules"
+    },
+    "customer_type": {
+      "value": "b2c",
+      "basis": "rules"
+    },
+    "revenue_model": {
+      "value": "subscription",
+      "basis": "rules"
+    },
+    "country_code": {
+      "value": "unknown",
+      "basis": "rules"
+    },
+    "languages": {
+      "value": [
+        "en"
+      ],
+      "basis": "rules"
+    }
+  },
+  "followups": [],
+  "open_questions": [],
+  "product_check": {
+    "status": "allowed",
+    "categories": [],
+    "matched": []
+  },
+  "budget": {
+    "min": 0,
+    "max": 0,
+    "currency": "USD",
+    "currency_source": "stated"
+  },
+  "_note": "Rehearsal brief 3 (fictional persona): deliberately weak idea. Expected: stop."
+}

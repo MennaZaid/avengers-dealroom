@@ -3,13 +3,14 @@
 from fastapi import FastAPI
 
 from venture_os import __version__
-from venture_os.api import onboarding
+from venture_os.api import onboarding, stages
 from venture_os.api.registry import admin, router
 
 app = FastAPI(title="Venture OS API", version=__version__)
 app.include_router(router)
 app.include_router(admin)
 app.include_router(onboarding.router)
+app.include_router(stages.router)
 
 
 @app.get("/health")

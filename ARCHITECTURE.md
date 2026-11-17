@@ -9,7 +9,7 @@ is published, sent or spent without the founder's explicit approval in the UI. E
 is labelled `ASSUMPTION`, and every agent action is appended to `decision_log.json`.
 
 Status today: onboarding (the founder brief), guardrails, the source registry, the decision log and the outputs
-writer are **built and tested**. Phases 1-2 and the gates are being built; phases 3-6 will ship as labelled
+writer, the gates and phase 1 Discover are **built and tested**. Phase 2 is being built; phases 3-6 will ship as labelled
 `STUBBED` agents; all payments and delivery are `MOCKED`. See [Built vs. stubbed](#built-vs-stubbed).
 
 ```mermaid
@@ -53,15 +53,55 @@ Phase 0 is onboarding: it produces the brief every phase reads. Outputs follow t
 - **Output:** a versioned brief (`brief_versions` table), tags used to choose sources (country code,
   industries, customer type, revenue model), and `outputs/phase1_step0_founder_brief.md` on confirmation.
 
-### Phase 1: Discover — in progress (core step: find opportunities)
+### Phase 1: Discover — Working (core step: find opportunities)
 
-- **Agents:** researcher (`agents/researcher.py`), interviewer (`agents/interviewer.py`).
-- **Tools:** SearXNG search, page fetcher and text extraction, the source registry (121 sources tiered A/B/C with
-  a maximum age; country packs such as Egypt), the source validator for newly found official sites.
-- **Method:** search only allowlisted domains for market size, trends, competitors and pain points; store each
-  claim with its source URL, retrieval date and exact quote; anything unsourced is labelled `ASSUMPTION`; stale
-  figures are flagged. Draft a Mom-Test interview script.
-- **Output:** `phase1_step1_opportunities.md`, `phase1_step2_interview_script.md`, `phase1_gate_decision.md`.
+Starts when the founder confirms the brief (that confirmation is the approval to research); `orchestrator.py`
+runs the steps below and ends at the founder's gate. Gate thresholds are read from `config/gates/discover.yaml`
+and logged (`set_gate_thresholds`) **before** any research.
+
+```mermaid
+flowchart LR
+  B[Confirmed brief] --> S1[1 brief_analyzer<br/>6 fields, product type]
+  S1 --> R[research_planner<br/>registry + discovery rules]
+  R --> P[opportunity_finder: pain]
+  R --> M[market_research]
+  R --> C[competitor_intelligence]
+  P & M & C --> X[evidence store<br/>pages, chunks, embeddings]
+  X --> E[claims: verbatim quote + URL + dates]
+  E --> S2[2 ideas: sharpened idea + alternatives]
+  S2 --> S3[3 idea_scorer]
+  S3 --> S4[4 market_definer<br/>competitors, bottom-up TAM/SAM/SOM]
+  S4 --> S5[5 interview_designer<br/>Mom Test script + linter]
+  S5 --> K[research_critic] --> G{{Discover gate}}
+  G -->|go / repeat / pivot / stop| F[Founder decides]
+```
+
+- **Agents (`agents/`):** `brief_analyzer`, `research_planner`, `market_research` and `competitor_intelligence`
+  (tool-using `ResearchAgent`s), `opportunity_finder`, `idea_scorer`, `market_definer`, `interview_designer`,
+  `research_critic`. Prompts: one file each in `prompts/`.
+- **Tools:** SearXNG (spaced queries), page fetcher, free APIs with no key (HN Algolia, Stack Exchange, GitHub,
+  iTunes Search and App Store reviews, WordPress plugins, npm, World Bank), the source registry filtered by
+  `product_scope` (digital/any; goods-trade sources excluded), and hybrid search (keyword + `bge-m3` vectors) over
+  the evidence store and the method corpus (team-written summaries with links, never book text).
+- **Method:**
+  1. Brief: the six required fields; unknown stays unknown. The product type is decided by rules and must be
+     digital; excluded products are refused before any research.
+  2. Opportunities: find people describing the pain. A claim is kept only with a verbatim quote found in the
+     stored page, its URL and dates. Page text is data: instructions inside pages are ignored and logged. Then the
+     founder's idea is sharpened and alternatives are proposed for the same pain.
+  3. Scoring: 1–5 per criterion against the founder's skills, hours and budget. A score without evidence is
+     capped at 3 and labelled `ASSUMPTION`, and totals are computed in code.
+  4. Market: competitors and substitutes with sourced prices, and a bottom-up TAM/SAM/SOM where every input is
+     either sourced or labelled `ASSUMPTION`.
+  5. Interviews (The Mom Test):
+     - a script linter rejects hypothetical, pitching and compliment-seeking questions (EN + AR) and rewrites
+       them about past behaviour;
+     - the founder's notes are tagged, and only past behaviour, current workarounds, money or time already spent
+       and commitments count as evidence.
+  6. Critic: rule checks, plus a judge model of a **different family** when one is configured (otherwise the
+     critic says the model review was skipped).
+- **Output:** `phase1_step1_brief`, `phase1_step2_opportunities`, `phase1_step3_idea_scores`, `phase1_step4_market`,
+  `phase1_step5_interview_plan` and `phase1_gate_decision` (`.md` + `.json` each).
 
 ### Phase 2: Validate — in progress (core step: design the business)
 
@@ -71,12 +111,21 @@ Phase 0 is onboarding: it produces the brief every phase reads. Outputs follow t
   (e.g. 100 sign-ups in 14 days). Sign-up counts are entered by the founder or `MOCKED`, never invented.
 - **Output:** `phase2_step1_lean_canvas.md`, `phase2_step2_landing_page.html`, `phase2_gate_decision.md`.
 
-### Phase 3: Build — STUBBED
+### Phase 3: Build — Working (core step: build the product)
 
-- **Agents:** product requirements, MVP builder (`agents/` for phases 3-6).
-- **Method:** PRD and user stories tied to validated pains; the MVP builder fills a fixed landing-page and core-flow
-  template instead of writing free-form code.
-- **Output:** `phase3_step1_prd.md`, `phase3_step2_mvp_template.md` (labelled `STUBBED`).
+One multi-agent stage, `build_stage.run_build_stage(brief)`, with **no founder approval inside it**: everything is
+collected at the start and the founder approves once, at the build gate.
+
+- **Agents:** `build_inputs` (entry check, code), `requirements_mapper`, `mvp_planner`, `mvp_validator`,
+  `mvp_builder`, `mvp_tester` (code + headless browser), `docs_writer` (code).
+- **Method:** confirmed brief + Phase 1-2 evidence items, each labelled EVIDENCED / FOUNDER-STATED / INFERRED /
+  ASSUMPTION -> requirements that cite their inputs (code sets each label and caps priority by evidence strength)
+  -> a plan on one of five fixed templates (booking, directory, tracker, library, calculator) chosen by rules ->
+  fixed-rule validation (coverage, traceability, unchecked claims, forbidden fields; up to 2 automatic re-plans) ->
+  a single self-contained HTML MVP (the model writes copy only, never code; no sample data; data stays on the
+  device; payments MOCKED; Arabic right-to-left) -> 15 QA and safety checks -> user guide and evidence summary.
+- **Output:** `phase3_step1_build_inputs.md` … `phase3_step5_mvp.html` … `phase3_step8_evidence_summary.md`,
+  `phase3_gate_build.md`. Live on CPU with `qwen3:4b-instruct`: about 6 minutes per run.
 
 ### Phase 4: Commercial setup — STUBBED
 
@@ -110,6 +159,7 @@ starts only if the previous gate passed **for the same brief version**; editing 
 | Brief (built) | All required fields answered or explicitly unknown; product is digital and allowed; founder typed "yes" | confirm, or keep editing |
 | 1 Product (built) | The confirmed brief's product check: excluded product (physical goods, financial/crypto, health or legal advice) | excluded -> stop; otherwise go |
 | 1 Evidence (built) | Claims with a real source URL after research | 0 sourced -> stop; fewer than 5 -> repeat; otherwise go |
+| 1 Discover (built) | Thresholds from `config/gates/discover.yaml`, logged before research: ≥ 5 pain claims with quotes from ≥ 3 domains, ≥ 2 competitors with sourced prices, a top idea scoring ≥ 3.0 with every fit criterion ≥ 2, ≥ 5 founder interviews with ≥ 3 showing past behaviour | stop if: excluded product, zero sourced pain, no idea fits the founder's budget and time, or ≥ 8 free alternatives with nothing that differentiates. Pivot if the starting idea fails but an alternative passes. Go if every check passes; otherwise repeat, listing what to collect. The founder may waive only the interview checks, with a written reason |
 | 2 Demand (built) | Waitlist sign-ups against a target **declared before the test** (e.g. 100 in 14 days); count entered by the founder or labelled MOCKED, never generated | target reached -> go; >= 50% -> repeat; >= 25% -> pivot; below 25% -> stop |
 | 3 Build | Core flow works; tests pass | go / repeat / stop |
 | 4 Commercial | Price and policies drafted; legal items sourced or marked "no verified source" | go / repeat |
@@ -184,9 +234,11 @@ flowchart TD
 | Source registry, catalog, source validator, registry API | Working |
 | Decision log and outputs writer | Working |
 | Gates (product, evidence, demand; thresholds fixed before the result) | Working |
-| Orchestrator, founder approval | In progress |
-| Phase 1 Discover, phase 2 Validate agents | In progress |
-| Phases 3, 4, 6 agents | STUBBED (planned) |
+| Orchestrator, founder approval (decisions need the founder's session; the database accepts only actor `founder`) | Working |
+| Phase 1 Discover agents and gate | Working |
+| Phase 2 Validate agents | In progress |
+| Phase 3 Build stage (7 agents, build gate, single-file HTML MVP) | Working |
+| Phases 4, 6 agents | STUBBED (planned) |
 | Phase 5 payments, delivery, refunds, reconciliation | MOCKED (planned) |
 | One-command setup with a local open-weight model (Ollama) | In progress |
 
