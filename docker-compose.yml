@@ -1,3 +1,24 @@
+# One-command setup: `docker compose up`, then open http://localhost:8501
+# No keys needed: the default model is open-weight and runs locally in the `ollama` service ($0 per run).
+# Optional: put a free hosted OpenAI-compatible endpoint in .env (LLM_BASE_URL, LLM_API_KEY, LLM_MODEL_*).
+name: venture-os
+
+x-app: &app
+  build: .
+  image: venture-os:local
+  environment: &app-env
+    DATABASE_URL: postgresql://venture:venture@db:5432/venture_os
+    SEARXNG_URL: http://searxng:8080
+    LLM_MODE: ${LLM_MODE:-live}
+    LLM_BASE_URL: ${LLM_BASE_URL:-http://ollama:11434/v1}
+    LLM_API_KEY: ${LLM_API_KEY:-ollama}
+    LLM_MODEL_EXTRACT: ${LLM_MODEL_EXTRACT:-${OLLAMA_MODEL:-qwen3:4b}}
+    LLM_MODEL_REASONING: ${LLM_MODEL_REASONING:-${OLLAMA_MODEL:-qwen3:4b}}
+    LLM_REASONING_EFFORT: ${LLM_REASONING_EFFORT-none}
+    LLM_MODEL_CODE: ${LLM_MODEL_CODE:-}
+    LLM_MODEL_JUDGE: ${LLM_MODEL_JUDGE:-}
+    ADMIN_TOKEN: ${ADMIN_TOKEN:-}
+
 services:
   db:
     image: pgvector/pgvector:pg16
@@ -7,9 +28,76 @@ services:
       POSTGRES_DB: venture_os
     ports: ["5432:5432"]
     volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U venture -d venture_os"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+
+  # One-off: create the schema and load the source registry + tech catalog (safe to re-run).
+  seed:
+    <<: *app
+    command: ["python", "db/seed.py"]
+    restart: "no"
+    depends_on:
+      db: {condition: service_healthy}
+
+  ollama:
+    image: ollama/ollama:0.40.16
+    ports: ["11434:11434"]
+    volumes: [ollama:/root/.ollama]
+    healthcheck:
+      test: ["CMD", "ollama", "list"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  # One-off: download the open-weight model once (cached in the `ollama` volume afterwards).
+  ollama-pull:
+    image: ollama/ollama:0.40.16
+    environment:
+      OLLAMA_HOST: http://ollama:11434
+    entrypoint: ["ollama", "pull", "${OLLAMA_MODEL:-qwen3:4b}"]
+    restart: "no"
+    depends_on:
+      ollama: {condition: service_healthy}
+
   searxng:
-    image: searxng/searxng:latest
+    image: searxng/searxng:2026.11.13-219b63b20
     ports: ["8080:8080"]
     volumes: ["./config/searxng:/etc/searxng"]
+
+  api:
+    <<: *app
+    command: ["uvicorn", "venture_os.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports: ["8010:8000"]
+    # The demo run's decision_log.json and outputs/ land in the repo (they are committed).
+    volumes: [".:/workspace"]
+    environment:
+      <<: *app-env
+      DECISION_LOG_PATH: /workspace/decision_log.json
+      OUTPUTS_DIR: /workspace/outputs
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+    depends_on:
+      seed: {condition: service_completed_successfully}
+      ollama-pull: {condition: service_completed_successfully}
+      searxng: {condition: service_started}
+
+  ui:
+    <<: *app
+    command: ["streamlit", "run", "ui/app.py", "--server.port", "8501", "--server.address", "0.0.0.0",
+              "--server.headless", "true", "--browser.gatherUsageStats", "false"]
+    environment:
+      <<: *app-env
+      API_URL: http://api:8000
+    ports: ["8501:8501"]
+    depends_on:
+      api: {condition: service_healthy}
+
 volumes:
   pgdata:
+  ollama:

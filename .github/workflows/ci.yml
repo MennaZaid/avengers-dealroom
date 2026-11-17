@@ -7,17 +7,33 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
+    services:
+      db:
+        image: pgvector/pgvector:pg16
+        env:
+          POSTGRES_USER: venture
+          POSTGRES_PASSWORD: venture
+          POSTGRES_DB: venture_os
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U venture -d venture_os"
+          --health-interval 3s --health-timeout 3s --health-retries 30
     env:
       LLM_MODE: replay   # CI never calls live models or the web, and gets no secrets
+      DATABASE_URL: postgresql://venture:venture@localhost:5432/venture_os
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Compose file is valid
+        run: docker compose config --quiet
       - run: python scripts/dev.py setup
       - run: python scripts/dev.py lint
-      - name: Tests
-        run: python -m pytest -q --junitxml=results/junit.xml
+      - name: Seed database (schema + registry)
+        run: python db/seed.py
+      - name: Tests (unit, smoke, integration)
+        run: python -m pytest -q -rs --junitxml=results/junit.xml
       - uses: actions/upload-artifact@v4
         if: always()
         with:

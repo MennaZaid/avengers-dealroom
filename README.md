@@ -12,8 +12,10 @@ docker compose up
 
 Then open http://localhost:8501 (founder onboarding chat). The API docs are at http://localhost:8010/docs.
 
-> In progress: `docker-compose.yml` currently starts the database and search only; the API, UI and a local
-> open-weight model are being added. Until then, run the app as in [docs/HANDOFF.md](docs/HANDOFF.md#how-to-run).
+No keys or `.env` needed. `docker compose up` starts Postgres + pgvector (seeded with the source registry),
+SearXNG search, a local open-weight model in Ollama, the API and the app. The first start downloads the model
+(about 2.5 GB) into a Docker volume, so it takes a few minutes; later starts are fast. Give Docker about 6 GB
+of memory.
 
 ## What works and what is mocked
 
@@ -47,7 +49,9 @@ Runs on free open-weight models only, with no paid APIs. The default is a local 
 ## Cost per run
 
 About $0.00 per run (free open-weight models; local model or free tier). Every model call is listed in
-`decision_log.json` with its cost (0 for free models); token counts per run are being added.
+`decision_log.json` with its cost (0 for free models). The model client meters prompt and completion tokens
+for every call (`venture_os.llm.client.usage_summary`); the measured count of the committed demo run is added
+here after that run.
 
 ## Demo video
 
