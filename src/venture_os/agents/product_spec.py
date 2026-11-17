@@ -37,7 +37,7 @@ ASSUMPTION = "ASSUMPTION"
 _KIND_WORDS: dict[str, tuple[str, ...]] = {
     "digital_download": ("template", "download", "pack", "ebook", "e-book", "printable", "toolkit", "bundle",
                          "قالب", "قوالب", "تحميل", "حزمة", "ملف"),
-    "content_course": ("course", "lesson", "tutor", "class", "teach", "training", "curriculum", "كورس", "دورة",
+    "content_course": ("course", "lesson", "class", "teach", "training", "curriculum", "كورس", "دورة",
                        "دروس", "درس", "تعليم", "منصة دروس", "تدريس"),
     "booking_service": ("booking", "book a", "appointment", "schedul", "reserv", "حجز", "موعد", "مواعيد"),
     "marketplace": ("marketplace", "connect", "match", "platform for", "سوق", "يربط", "تربط", "وسيط"),
