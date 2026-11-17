@@ -76,7 +76,7 @@ About $0.00 per run (Fanar-C-2-27B, openai/gpt-oss-120b, qwen/qwen3.8-27b, qwen3
 
 ## Demo video
 
-- Video (3 minutes at most): [link to be added](#demo-video)
+- Demo run (Google Drive): https://drive.google.com/file/d/15HerhGCQzNLc9jWj8_Oq12mDXwqN0pA2/view?usp=sharing
 
 ## What our system will NOT do
 
