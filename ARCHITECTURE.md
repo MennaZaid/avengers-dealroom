@@ -213,12 +213,19 @@ sequenceDiagram
   C->>C: match orders, payments, fees (0), payouts (0); report each mismatch
 ```
 
-- **Payment triggers delivery:** delivery requires a succeeded payment for that order.
-- **A refund revokes access:** `has_access()` is false afterwards. Refunds are never automatic.
-- **Idempotency:** a repeated payment event id and a repeated delivery are logged no-ops.
-- **Reconciliation:** flags orders without a payment, payments without an order, delivery without payment, access
-  still active after a refund, amount mismatches and any non-zero fee or payout.
-- `scripts/payment_test.py` runs the scenario (incl. one missing payment) and writes `outputs/payment_test_log.md`.
+- **Payment triggers delivery:** only a confirmed payment event grants access.
+- **Refund revokes access:** a refund event removes it.
+- **Idempotency:** each event id is processed once, so a repeated webhook never delivers twice.
+- **Reconciliation:** orders, payments, fees and payouts are matched; mismatches are listed in
+  `outputs/payment_test_log.md`.
+- The founder approves the price and turning on checkout; going live is outside the hackathon scope.
+- **Approval of the exact content (`approval.py`):**
+  - Publishing the landing page, creating an order and refunding an order each check
+    `has_founder_approval(brief_id, action, sha256)` first.
+  - The approval covers that exact draft or payload: changing one character needs a new approval.
+  - Only the founder records an approval: in the UI (founder session) or in the CLI by typing `approve`
+    (`python -m venture_os.approval`).
+  - The `founder_approvals` table refuses any other actor, channel or session, and agents can only read it.
 
 ## Data flow
 

@@ -203,3 +203,22 @@ if run["status"] in ("awaiting_approval", "revision_requested"):
         send("waive", waiver_reason=reason)
 else:
     st.caption("This run is closed.")
+
+st.divider()
+st.subheader("Phase 2 · Demand test (waitlist)")
+st.caption("Enter the real number of waitlist sign-ups from your landing page. The target was fixed before the "
+           "test started; the system never fills in or estimates this number.")
+not_run = st.checkbox("I haven't run the test yet", key=f"notrun-{brief_id}")
+dcols = st.columns(2)
+signups = dcols[0].number_input("Sign-ups so far", min_value=0, step=1, disabled=not_run, key=f"signups-{brief_id}")
+days = dcols[1].number_input("Days since the test started", min_value=0, step=1, key=f"days-{brief_id}")
+if st.button("Send to the demand gate", disabled=not sid):
+    try:
+        out = api("POST", "/stages/validate/demand", headers=headers,
+                  json={"brief_id": brief_id, "count": None if not_run else int(signups), "days_elapsed": int(days)})
+        getattr(st, REC.get(out["outcome"], "info"))(f"**{out['outcome'].upper()}**: {out['reason']}")
+        st.caption("Written to outputs/phase2_gate_demand.md. This is a recommendation; you decide.")
+    except RuntimeError as e:
+        st.error(str(e))
+if not sid:
+    st.caption("Enter your founder session above to send the count.")
