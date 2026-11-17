@@ -48,7 +48,8 @@ def test_no_sample_data_is_shipped():
     _inp, _reqs, plan = setup("nadafa_v1.json", "booking")
     cfg = config_of(mvp_builder.render(mvp_builder.config(plan, {}, 1)))
     assert set(cfg) == {"brief_id", "brief_version", "lang", "template", "title", "tagline", "screens", "fields",
-                        "screen_requirements", "texts"}  # no items, providers or reviews
+                        "screen_requirements", "texts", "spec"}  # no items, providers or reviews
+    assert cfg["spec"] is None  # no spec given: no product blocks
 
 
 def test_hostile_text_cannot_escape_the_page():

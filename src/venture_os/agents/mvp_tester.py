@@ -21,6 +21,7 @@ from pydantic import BaseModel
 
 from venture_os.agents.build_inputs import BuildInputs
 from venture_os.agents.mvp_planner import _FORBIDDEN_FIELD, MvpPlan
+from venture_os.agents.product_spec import brief_values, key_terms, relevance
 from venture_os.agents.requirements_mapper import Requirements
 from venture_os.decision_log import log_action
 from venture_os.guardrails import check_output
@@ -131,6 +132,7 @@ def check(inputs: BuildInputs, reqs: Requirements, plan: MvpPlan, page: str, use
     add("file size is reasonable", size < MAX_BYTES, f"{size:,} bytes")
     add("right-to-left for an Arabic brief", inputs.lang != "ar" or 'dir="rtl"' in page)
 
+    checks.extend(product_checks(inputs, cfg, page))
     used = None
     if use_browser:
         bc = browser_check(page, cfg)
@@ -138,6 +140,46 @@ def check(inputs: BuildInputs, reqs: Requirements, plan: MvpPlan, page: str, use
             checks.append(bc)
             used = _browser()
     return checks, used
+
+
+_BUTTON = re.compile(r'el\("button", \{[^\n]*')
+
+
+def product_checks(inputs: BuildInputs, cfg: dict, page: str, terms: list[str] | None = None) -> list[Check]:
+    """Checks computed from THIS brief at run time: is the page about the founder's product, and does it work."""
+    out = []
+    spec = cfg.get("spec") or {}
+    core = spec.get("core") or {}
+    visible = " ".join([cfg.get("title", ""), cfg.get("tagline", "")] +
+                       [" ".join((o.get("name", ""), o.get("contents", ""), o.get("for", "")))
+                        for o in spec.get("offers", [])] +
+                       [core.get("verb", ""), core.get("object", ""), core.get("result", "")])
+    terms = terms if terms is not None else key_terms(brief_values(inputs))
+    ok, hits = relevance(terms, visible)
+    out.append(Check(name="about this brief (key terms in title, offers and core action)", passed=ok,
+                     detail=f"{len(hits)} of {len(terms)} key terms: {', '.join(hits) or '-'}"))
+    wired = bool(core.get("fields")) and "data-core-output" in page and 'addEventListener("input", draw)' in page \
+        and "product" in cfg.get("screens", {})
+    out.append(Check(name="core action is wired (input changes the page)", passed=wired,
+                     detail=f"{len(core.get('fields', []))} input(s) -> live preview" if wired else "no core action"))
+    buttons = _BUTTON.findall(page)
+    loose = [b[:50] for b in buttons if "on: {" not in b and 'type: "submit"' not in b]
+    out.append(Check(name="every button has a handler", passed=bool(buttons) and not loose,
+                     detail=f"{len(buttons)} button(s)" + (f"; no handler: {loose}" if loose else "")))
+    t = cfg.get("texts", {})
+    unlabelled = [k for k in ("buy", "deliver", "waitlist", "bought", "joined") if "MOCKED" not in t.get(k, "")]
+    out.append(Check(name="buy, delivery and waitlist labelled MOCKED", passed=not unlabelled,
+                     detail=", ".join(unlabelled)))
+    node = shutil.which("node")
+    if node:
+        m = re.search(r"<script>(.*?)</script>", page, re.DOTALL)
+        with tempfile.TemporaryDirectory() as d:
+            f = Path(d) / "page.js"
+            f.write_text(m.group(1) if m else "", encoding="utf-8")
+            r = subprocess.run([node, "--check", str(f)], check=False, capture_output=True, timeout=30)
+        out.append(Check(name="no JavaScript syntax error", passed=r.returncode == 0,
+                         detail=r.stderr.decode("utf-8", "replace")[:120]))
+    return out
 
 
 def to_markdown(rep: TestReport) -> str:

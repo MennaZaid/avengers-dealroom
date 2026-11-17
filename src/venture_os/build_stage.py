@@ -24,6 +24,7 @@ from venture_os.agents import (
     mvp_planner,
     mvp_tester,
     mvp_validator,
+    product_spec,
     requirements_mapper,
 )
 from venture_os.decision_log import log_action
@@ -56,7 +57,8 @@ def run_build_stage(brief, chat_json: Callable[[list[dict]], str] | None = None,
         return BuildResult(brief_id=inputs.brief_id, decision=d, seconds=time.monotonic() - t0)
 
     reqs = requirements_mapper.run(inputs, **kw)
-    plan = mvp_planner.run(inputs, reqs, **kw)
+    spec = product_spec.run(inputs, **kw)  # what is sold, the core action, delivery (validated in code)
+    plan =mvp_planner.run(inputs, reqs, **kw)
     rounds = 1
     validation = mvp_validator.run(inputs, reqs, plan, round_no=rounds, **kw)
     while not validation.passed and rounds <= MAX_REPLANS:
@@ -68,13 +70,20 @@ def run_build_stage(brief, chat_json: Callable[[list[dict]], str] | None = None,
         rounds += 1
         validation = mvp_validator.run(inputs, reqs, plan, round_no=rounds, chat_json=_no_model)
 
-    page = mvp_builder.run(inputs, reqs, plan, **kw)
+    page = mvp_builder.run(inputs, reqs, plan, spec=spec, **kw)
     tests = mvp_tester.run(inputs, reqs, plan, page, attempt=1, use_browser=use_browser)
     attempts = 1
-    if not tests.passed:
-        page = mvp_builder.run(inputs, reqs, plan, chat_json=_no_model)
+    if not tests.passed:  # 1 repair pass: the failures go back to the spec, copy is fixed
+        failed = [f"{c.name}: {c.detail}" for c in tests.checks if not c.passed]
+        spec = product_spec.run(inputs, feedback=failed, **kw)
+        page = mvp_builder.run(inputs, reqs, plan, chat_json=_no_model, spec=spec)
         attempts = 2
         tests = mvp_tester.run(inputs, reqs, plan, page, attempt=2, use_browser=use_browser)
+    if not tests.passed and spec.source == "model":  # then rules only; a failure after that is reported as is
+        spec = product_spec.run(inputs, chat_json=_no_model, feedback=["rules only"])
+        page = mvp_builder.run(inputs, reqs, plan, chat_json=_no_model, spec=spec)
+        attempts = 3
+        tests = mvp_tester.run(inputs, reqs, plan, page, attempt=3, use_browser=use_browser)
 
     docs_writer.run(inputs, reqs, plan, validation, tests)
     d = gates.record(gates.build_gate(True, None, validation.passed, validation.issues,
@@ -83,7 +92,7 @@ def run_build_stage(brief, chat_json: Callable[[list[dict]], str] | None = None,
     secs = time.monotonic() - t0
     log_action("build_stage", "run_build_stage", sources=[], model=None, cost=0, approved_by=None,
                outcome=d.outcome, brief_id=inputs.brief_id, brief_version=inputs.brief_version,
-               template=plan.template, plan_rounds=rounds, test_attempts=attempts, seconds=round(secs, 1))
+               template=plan.template, offer_kind=spec.offer_kind, plan_rounds=rounds, test_attempts=attempts, seconds=round(secs, 1))
     return BuildResult(brief_id=inputs.brief_id, decision=d, template=plan.template, plan_rounds=rounds,
                        test_attempts=attempts, seconds=secs)
 

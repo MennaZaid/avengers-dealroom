@@ -30,7 +30,7 @@ def test_full_stage_without_a_model_ends_in_go():
     for f in STAGE_FILES:
         assert b.brief_id in (OUT() / f).read_text(encoding="utf-8"), f
     actions = [e["action"] for e in read_log()]
-    assert actions == ["collect_build_inputs", "map_evidence_to_requirements", "plan_mvp", "validate_mvp_plan",
+    assert actions == ["collect_build_inputs", "map_evidence_to_requirements", "spec_product", "plan_mvp", "validate_mvp_plan",
                        "build_mvp", "test_mvp", "write_mvp_docs", "build_gate", "run_build_stage"]
     assert all(e["approved_by"] is None for e in read_log())  # nobody approves inside the stage
 
