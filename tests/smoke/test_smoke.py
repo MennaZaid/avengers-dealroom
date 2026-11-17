@@ -51,7 +51,8 @@ def test_compose_runs_app_and_local_model_without_keys():
 
     services = yaml.safe_load((ROOT / "docker-compose.yml").read_text(encoding="utf-8"))["services"]
     assert {"db", "seed", "ollama", "ollama-pull", "api", "ui"} <= set(services)
-    assert "8501:8501" in services["ui"]["ports"]
+    assert services["ui"]["ports"][0].endswith(":8501")
+    assert "ollama-pull" not in services["api"]["depends_on"]  # the app never waits for the model download
     for name, svc in services.items():
         image = svc.get("image", "")
         assert not image.endswith(":latest") and (":" in image or "build" in svc), f"{name} image not pinned"
