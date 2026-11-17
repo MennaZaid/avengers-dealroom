@@ -30,7 +30,7 @@ rule-based answer). Give Docker about 6 GB of memory. Host ports: see `.env.exam
 | 2. Validate: landing page | **Working**; publishing **MOCKED** | Self-contained HTML, email-only waitlist that sends nothing, "DRAFT — not published (MOCKED)" banner |
 | 2. Validate: sign-up count + demand gate | **Working** | `POST /stages/runs/{id}/signups`: count entered by the founder (founder-reported, not verified), never generated; 12 of 100 -> stop |
 | 3. Build: build the product + build gate | **Working** | Evidence -> requirements -> plan -> validation -> single-file HTML MVP -> QA checks -> user guide; one founder approval at the end; payments in the MVP are **MOCKED** |
-| 4. Commercial: price hypotheses, draft policies + gates | **STUBBED** | Not run by the pipeline yet. Prices from the founder or sourced, else ASSUMPTION; terms/privacy/refund drafts "not legal advice" |
+| 4. Commercial: pricing research, price, draft policies, readiness + gate | **Working** (stage logic); pipeline wiring in progress | `run_commercial_stage`: only sourced prices (URL + date); min/median/max and break-even in code, labelled ESTIMATE; terms/privacy/refund "DRAFT — not legal advice", citing official registry sources or "No verified official source found"; no payments |
 | 5. Launch: store page and 3 post drafts + gate | **STUBBED**; posting **MOCKED** | Not run by the pipeline yet; nothing is posted |
 | 5. Launch: payments, delivery, refunds, reconciliation | **MOCKED** | Delivery once per order; a refund revokes access; reconciliation flags missing payments; no money moves |
 | 6. Operate: persevere-or-pivot memo + gate | **STUBBED** | Not run by the pipeline yet. Built only from logged results; support and analytics "no data yet" |
