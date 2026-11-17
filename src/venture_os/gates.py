@@ -163,3 +163,26 @@ def record(d: GateDecision, brief_id: str | None = None, brief_version: int | No
                outcome=d.outcome, phase=d.phase, metric=d.metric, target=d.target, actual=d.actual,
                mocked=d.mocked, **extra)
     return d
+
+
+def build_gate(can_start: bool, stop_reason: str | None, plan_passed: bool, plan_issues: list[str],
+               checks_passed: int, checks_total: int) -> GateDecision:
+    """End of Phase 3: the plan must pass validation and the built MVP must pass every test.
+    Can't start (excluded product, Phase 2 stop) -> stop; plan or tests still failing after the automatic fix
+    rounds -> repeat; everything passes -> go. The founder then approves once for the whole stage."""
+    rule = "stage could not start -> stop; plan invalid or any MVP test failing -> repeat; all pass -> go"
+    common = {"phase": 3, "gate": "build", "rule": rule, "metric": "MVP tests passed", "target": checks_total,
+              "actual": checks_passed, "decided_at": _now()}
+    if not can_start:
+        return GateDecision(outcome="stop", reason=stop_reason or "The Build stage could not start.", **common)
+    if not plan_passed:
+        return GateDecision(outcome="repeat", **common,
+                            reason="The MVP plan still has problems after the automatic re-plans: "
+                                   + "; ".join(plan_issues[:3]))
+    if checks_total == 0 or checks_passed < checks_total:
+        return GateDecision(outcome="repeat", **common,
+                            reason=f"{checks_passed} of {checks_total} MVP tests passed. Fix the failing ones and "
+                                   "build again.")
+    return GateDecision(outcome="go", **common,
+                        reason=f"The plan holds and all {checks_total} MVP tests passed. The founder decides whether "
+                               "to move on to Phase 4.")
