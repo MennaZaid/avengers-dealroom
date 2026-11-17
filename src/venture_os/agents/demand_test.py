@@ -71,7 +71,7 @@ def enter_signups(brief_id: str, count: int | None, days_elapsed: int, *, test: 
             decided_at=datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"))
     else:
         log_action("founder", "enter_signup_count", sources=[], model=None, cost=0, approved_by="founder",
-                   brief_id=brief_id, metric=test.metric, actual=count, days_elapsed=days_elapsed,
+                   brief_id=brief_id, metric=test.metric, target=test.target, actual=count, days_elapsed=days_elapsed,
                    source="founder", label=FOUNDER_LABEL)
         decision = gates.demand_gate(test, count, days_elapsed, source="founder")
         decision = decision.model_copy(update={"reason": f"{decision.reason} The count ({count}) is "
