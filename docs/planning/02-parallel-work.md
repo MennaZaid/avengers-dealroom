@@ -42,7 +42,7 @@ budget parsing, supply side for marketplaces), guardrails (excluded products, mu
      sign-ups in 14 days). Publishing is **MOCKED** and needs the founder's approval; `check_output()` on all
      text (no countdowns, no fake testimonials). Output `phase2_step2_landing_page.html`.
    - Sign-up count: entered by the founder (or labelled MOCKED in the demo), never generated. Then
-     `demand_gate` -> `phase2_gate_decision.md`.
+     `demand_gate` -> `phase2_gate_demand.md`.
 3. **Demo briefs:** one that passes and one weak idea that ends in **stop**; the demo script for 3 minutes.
 
 ### B: Roufayda
@@ -78,7 +78,7 @@ Input: the confirmed brief (`load_brief(brief_id)`; fixtures in `tests/fixtures/
 | What | How |
 |---|---|
 | Brief | `from venture_os.onboarding.briefs import load_brief, is_stale` -> `brief = load_brief(brief_id)`: `brief.known("budget")` (founder's words or `None`; never fill unknowns), `brief.budget` (`{min, max, currency, currency_source}` or `None`), `brief.tag("country_code")`, `brief.allowed` (False = excluded product: stop), `brief.open_questions` (research questions for Discover), `brief.followups`, `is_stale(brief_id, version_used)`. HTTP: `GET /onboarding/briefs/{id}`. Without a database: `ConfirmedBrief.from_file("tests/fixtures/briefs/nadafa_v1.json")` or `pharmastock_v1.json`. |
-| Gates | `from venture_os.gates import product_gate, evidence_gate, demand_gate, record` (Menna, first thing on Tuesday). Every gate decision goes through `record()` so it lands in `outputs/` and the log. |
+| Gates (**ready**, `src/venture_os/gates.py`) | `gates.record(gates.product_gate(brief), brief_id)` before Discover; `gates.record(gates.evidence_gate(1, sources=[url per sourced claim], assumptions=n), brief_id)` after research; `test = gates.plan_demand_test(target=100, days=14)` **before** measuring, then `gates.record(gates.demand_gate(test, actual, days_elapsed, source="founder"), brief_id)`. Outcomes `go` / `repeat` / `pivot` / `stop`; `record()` writes `outputs/phase<N>_gate_<product|evidence|demand>.md` and a log entry. Gates only recommend: the founder's decision goes through `approval.py`. |
 | Guardrails | `from venture_os.guardrails import check_output, check_product, redact`. Run `check_output(text)` on every generated text before showing it; block if it returns rules. |
 | Prompts | `load_prompt("researcher", query=...)` reads `prompts/researcher.md` (`## System prompt` section, `$placeholders`). |
 | Decision log | `log_action("researcher", "find_opportunities", sources=[...], model="qwen3:8b", cost=0, approved_by=None, outcome=..., brief_id=str(brief_id))`. **Always pass `brief_id`**: the UI shows only the current session's entries. |
