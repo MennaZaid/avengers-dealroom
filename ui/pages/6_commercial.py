@@ -177,8 +177,11 @@ if __name__ == "__main__":  # opened as its own page
         st.info(t("no_brief"))
         st.stop()
     labels = {b["brief_id"]: f"{(b['idea'] or 'untitled')[:70]} · v{b['version']}" for b in briefs}
-    keys = list(labels)
-    confirmed = (st.session_state.get("brief") or {}).get("id")
-    bid = st.selectbox(t("brief"), keys, format_func=labels.get, index=keys.index(confirmed) if confirmed in keys else 0)
+    bid = (st.session_state.get("brief") or {}).get("id")
+    if bid not in labels:  # only the brief the founder confirmed in this session; never a stored or sample brief
+        st.info(t("no_brief"))
+        st.page_link("pages/1_onboarding.py", label="→ " + t("brief"))
+        st.stop()
+    st.markdown(f"**{t('brief')}:** {labels[bid]}")
     sid = st.text_input(t("session"), value=st.session_state.get("sid", ""), type="password")
     render(bid, sid)
