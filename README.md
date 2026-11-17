@@ -41,8 +41,10 @@ Details: [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Models and free resources
 
-Runs on free open-weight models only, with no paid APIs. The default is a local model through Ollama, started by
-`docker compose up` (no key needed). Optional free hosted route: any OpenAI-compatible endpoint set in `.env`
+Runs on free open-weight models only, with no paid APIs. The default is **`qwen3:4b-instruct`**
+(Qwen3-4B-Instruct-2507, Apache-2.0) running locally in Ollama, started by `docker compose up` (no key needed;
+about 2.5 GB, CPU is enough). For better quality set `OLLAMA_MODEL` and `LLM_MODEL_EXTRACT` to a larger model
+such as `qwen3:8b` in `.env`. Optional free hosted route: any OpenAI-compatible endpoint set in `.env`
 (we tested onboarding with Fanar-C-2-27B on its free tier). Onboarding also works with no model at all
 (rule-based), so the demo never depends on a paid service.
 
