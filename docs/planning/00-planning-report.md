@@ -523,7 +523,7 @@ Have a **recorded replay** of the demo ready in case Wi-Fi/Colab fails (replay l
 | D17 | No payments of any kind, not even sandbox; delivery MOCKED | Sale to cash shown in ARCHITECTURE.md only, with idempotency and refunds designed but mocked |
 | D18 | Guardrails in plain code: excluded products and must-never requests (EN + AR), `check_output()` on generated text | Excluded briefs cannot be confirmed; refusals logged |
 | D19 | Onboarding confirmation is the first gate (`approved_by: "founder"`), versioned brief is the hand-off | Pipeline reads `load_brief()`; a newer brief version makes later stage runs stale |
-| D20 | No prompt-injection text in the repo (organizers' rule: it disqualifies); must-never test requests only under `tests/`; `outputs/` and `decision_log.json` only from a real run | Moved `docs/demo/` to `tests/fixtures/personas/`; tests write to a temp folder |
+| D20 | Trick prompts and injection tests for our own guardrails only under `tests/` (organizers confirmed 2026-11-17; injection aimed at their grading disqualifies, so nothing addresses graders); `outputs/` and `decision_log.json` only from a real run | Moved `docs/demo/` to `tests/fixtures/personas/`; tests write to a temp folder |
 
 **30-hour scope cut** *(superseded by D12 and [01-execution-plan.md](01-execution-plan.md); kept for history)*. Build: brief + questions, Discover DAG, validator rules, 2 gates, approvals/audit log,
 Stage 2 *lite* (competitor matrix, review quotes, evidence ladder, Go/Revise/Stop), Streamlit UI, CI with replay

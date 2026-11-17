@@ -21,10 +21,10 @@
 **Done (on `main`):** founder onboarding (Arabic/English chat, documents, versioned brief, product check,
 budget parsing, supply side for marketplaces), guardrails (excluded products, must-never requests, redaction,
 `check_output()`), decision log (per-session in the UI), outputs naming, prompts loader, brief hand-off
-(`load_brief`, `is_stale`). 174 tests.
+(`load_brief`, `is_stale`), **`gates.py`** (product, evidence and demand gates). 211 tests.
 
 **Now:**
-1. **`gates.py` (start here, first)**: the shared gate contract everyone uses. A gate returns a `GateDecision`:
+1. ✅ **`gates.py` (done, on `main`)**: the shared gate contract everyone uses. A gate returns a `GateDecision`:
    phase, gate name, outcome (`go` / `repeat` / `pivot` / `stop`), the metric, the **pre-set** target, the
    actual value, the reason, and the evidence used. Helpers:
    - `product_gate(brief)`: excluded product -> `stop`.
@@ -90,7 +90,7 @@ Input: the confirmed brief (`load_brief(brief_id)`; fixtures in `tests/fixtures/
 
 | When | A: Menna | B: Roufayda | C: Abdelrahman |
 |---|---|---|---|
-| Now | `gates.py` + tests, pushed early so B can use it | Orchestrator + approval skeleton on the brief fixtures | Dockerfile + compose with Ollama |
+| Now | ✅ `gates.py` on `main`; next: Lean Canvas agent | Orchestrator + approval skeleton on the brief fixtures | Dockerfile + compose with Ollama |
 | 12:00 checkpoint | Phase 2 agents produce their outputs; `demand_gate` -> **stop** example | Phase 1 end to end with `evidence_gate` | `docker compose up` works on a clean clone |
 | 16:00 checkpoint | Pipeline page shows Phase 2 + gate; demo briefs ready | Approvals wired in the pipeline page | Phases 3-6 stubs; README/ARCHITECTURE in step |
 | **18:00 feature freeze** | | | |
@@ -103,5 +103,6 @@ Input: the confirmed brief (`load_brief(brief_id)`; fixtures in `tests/fixtures/
 - `main` is the submission. Each person works on a branch (`gates/...`, `pipeline/...`, `repo/...`), pulls
   `main` often, and merges small pieces early; tests and lint must pass.
 - Never commit `.env`. Never hand-write `outputs/` or `decision_log.json`.
-- No prompt-injection text anywhere in the repo (it disqualifies the team). Requests the system must refuse
-  are tested only under `tests/` (see `tests/fixtures/personas/`).
+- Injection test cases for **our own** guardrails are allowed, under `tests/` only (`CLAUDE.md`; confirmed by the organizers on 2026-11-17).
+  They target Venture OS's onboarding chat (the brief, budget, confirmation), never the organizers' grading: no text anywhere addresses
+  graders, reviewers or scores (that disqualifies the team).
