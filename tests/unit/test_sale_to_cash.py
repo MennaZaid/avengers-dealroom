@@ -117,4 +117,4 @@ def test_payment_test_script_writes_log_from_a_real_run(founder):
     assert md.startswith(f"Brief id: {BRIEF}") and "MOCKED" in md
     assert "| 4. deliveries for order A | 1 (expected 1) |" in md
     assert "| 5b. access after refund | False |" in md
-    assert "ord_B: missing payment" in md
+    assert "ord_B_dae357fc: missing payment" in md
