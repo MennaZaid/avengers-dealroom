@@ -1,7 +1,7 @@
 """Founder onboarding: chat on the left, the brief as cards on the right."""
 
 import streamlit as st
-from common import api, card, chip, esc, setup
+from common import api, card, chip, esc, setup, ui_lang
 
 from venture_os.onboarding.brief import FIELDS, label
 
@@ -25,8 +25,17 @@ T = {
     "docs": {"en": "Documents read", "ar": "المستندات المقروءة"},
     "confirm": {"en": "✅ Confirm brief", "ar": "✅ تأكيد الموجز"},
     "keep": {"en": "Keep editing", "ar": "متابعة التعديل"},
-    "review": {"en": "Review the brief on the right, then confirm or type a correction.",
-               "ar": "راجع الموجز على اليمين، ثم أكّده أو اكتب تصحيحاً."},
+    "review": {"en": "Review the brief panel, then confirm or type a correction.",
+               "ar": "راجع لوحة الموجز، ثم أكّده أو اكتب تصحيحاً."},
+    "excluded": {"en": "Product check: not allowed ({cats}). Only digital products; no physical goods, "
+                       "financial/crypto, or health/legal advice. The brief can't be confirmed until the idea changes.",
+                 "ar": "فحص المنتج: غير مسموح ({cats}). المنتجات الرقمية فقط؛ لا سلع مادية ولا منتجات مالية أو "
+                       "عملات رقمية ولا نصائح صحية أو قانونية. لا يمكن تأكيد الموجز حتى تتغير الفكرة."},
+    "review_product": {"en": "Product check: allowed only if the product is digital and gives no medical, legal or "
+                             "financial advice.",
+                       "ar": "فحص المنتج: مسموح فقط إذا كان المنتج رقمياً ولا يقدم نصائح طبية أو قانونية أو مالية."},
+    "allowed": {"en": "Product check: ✅ digital product, allowed", "ar": "فحص المنتج: ✅ منتج رقمي، مسموح"},
+    "api_down": {"en": "Cannot reach the API: {e}", "ar": "تعذّر الوصول إلى الخادم: {e}"},
     "confirmed": {"en": "Brief confirmed · version {v}", "ar": "تم تأكيد الموجز · النسخة {v}"},
     "edit": {"en": "✏️ Edit brief", "ar": "✏️ تعديل الموجز"},
     "to_pipeline": {"en": "Go to the pipeline →", "ar": "← الانتقال إلى المراحل"},
@@ -34,6 +43,12 @@ T = {
                 "ar": "تعديل: لن تُحفظ التغييرات إلا بعد التأكيد ('إلغاء' يبقي النسخة {v})."},
     "restart": {"en": "↺ Start over", "ar": "↺ البدء من جديد"},
     "not_answered": {"en": "not answered", "ar": "لم تتم الإجابة"},
+}
+CATEGORIES = {
+    "physical_goods": {"en": "physical goods", "ar": "سلع مادية"},
+    "financial": {"en": "financial/crypto", "ar": "منتج مالي أو عملات رقمية"},
+    "health_advice": {"en": "health advice", "ar": "نصائح صحية"},
+    "legal_advice": {"en": "legal advice", "ar": "نصائح قانونية"},
 }
 STATUS = {
     "answered": {"en": "answered", "ar": "تمت الإجابة"},
@@ -68,11 +83,12 @@ if "sid" not in st.session_state:
     try:
         start_session()
     except Exception as e:  # noqa: BLE001
-        st.error(f"Cannot reach the API: {e}")
+        st.error(t("api_down", ui_lang(), e=e))
         st.stop()
 
 last = st.session_state.last
-lang = last.get("lang", "en")
+lang = ui_lang()  # interface language: sidebar choice, else the conversation's language
+talk = last.get("lang", "en")  # the conversation's language (words sent to the bot)
 st.session_state.model_label = "Model: " + str(last.get("model", ""))
 st.session_state.brief = {"id": last.get("brief_id"), "version": last.get("version"), "phase": last["phase"]}
 setup(t("title", lang), t("sub", lang), active_phase=0, lang=lang)
@@ -96,13 +112,13 @@ with chat_col:
         st.info(t("review", lang))
         c1, c2 = st.columns(2)
         if c1.button(t("confirm", lang), type="primary", use_container_width=True):
-            send("نعم" if lang == "ar" else "yes")
+            send("نعم" if talk == "ar" else "yes")
     elif phase == "confirmed":
         st.success(t("confirmed", lang, v=last.get("version", 1)))
         c1, c2 = st.columns(2)
         c1.page_link("pages/2_pipeline.py", label=t("to_pipeline", lang))
         if c2.button(t("edit", lang), use_container_width=True):
-            send("تعديل" if lang == "ar" else "edit")
+            send("تعديل" if talk == "ar" else "edit")
     if last.get("unsaved_changes"):
         st.warning(t("unsaved", lang, v=last.get("version", 0)))
 
@@ -132,11 +148,12 @@ with brief_col:
 
     check = last.get("product_check") or {}
     if check.get("status") == "excluded":
-        st.error("Product check: not allowed (" + ", ".join(check.get("categories", [])) + "). Only digital "
-                 "products; no physical goods, financial/crypto, or health/legal advice.")
+        cats = "، ".join(CATEGORIES.get(c, {}).get(lang, c) for c in check.get("categories", []))
+        st.error(t("excluded", lang, cats=cats))
     elif check.get("status") == "review":
-        st.warning("Product check: allowed only if the product is digital and gives no medical, legal or "
-                   "financial advice.")
+        st.warning(t("review_product", lang))
+    elif check.get("status") == "allowed":
+        st.caption(t("allowed", lang))
 
     def render(group: list) -> None:
         html_cards = []
