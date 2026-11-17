@@ -52,7 +52,7 @@ const el = (tag, attrs, ...kids) => {
     if (k === "on") for (const [ev, fn] of Object.entries(v)) n.addEventListener(ev, fn);
     else if (v !== null && v !== undefined) n.setAttribute(k, v);
   }
-  for (const k of kids.flat()) n.append(k instanceof Node ? k : document.createTextNode(String(k ?? "")));
+  for (const k of kids.flat(Infinity)) n.append(k instanceof Node ? k : document.createTextNode(String(k ?? "")));
   return n;
 };
 const nums = C.fields.filter(f => f.type === "number");
