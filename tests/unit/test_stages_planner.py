@@ -50,9 +50,14 @@ def test_egypt_plan_arabic_and_english_with_egypt_sources():
     assert {s.id for s in plan.global_sources} == {"R-001", "R-002"}  # analogy sources left out
     langs = {q.language for q in queries(plan)}
     assert langs == {"ar", "en"}
-    for key in ("market_size", "competitors", "customer_pain", "pricing", "regulation"):
+    for key in ("market_size", "competitors", "pricing", "regulation"):
         topic = next(t for t in plan.topics if t.key == key)
         assert {q.language for q in topic.queries} == {"ar", "en"}, key
+    # pain queries are built from the founder's customer + pain, in the language they were written (here Arabic);
+    # no product-category query is added to fill the other language
+    pain = next(t for t in plan.topics if t.key == "customer_pain")
+    assert pain.queries and {q.language for q in pain.queries} == {"ar"}
+    assert not any("tags.industries" in q.built_from for q in pain.queries)
     reg = next(t for t in plan.topics if t.key == "regulation")
     assert reg.source_ids == ["EG-003", "R-002"]  # legal sources only
     assert any("none verified" in n for n in plan.notes)

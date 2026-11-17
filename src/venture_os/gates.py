@@ -288,8 +288,10 @@ def _idea_passes(score: IdeaScore, cfg: dict) -> tuple[bool, list[str]]:
 
 
 def evaluate_discover(product_group: str, product_label: str, claims: list[Claim], competitors: list[Competitor],
-                      scores: list[IdeaScore], interviews: list[dict], cfg: dict | None = None) -> GateResult:
-    """interviews: [{"counts": bool, "past_behaviour": bool, "describes_problem": bool}] from founder notes."""
+                      scores: list[IdeaScore], interviews: list[dict], cfg: dict | None = None,
+                      relevance: dict | None = None) -> GateResult:
+    """interviews: [{"counts": bool, "past_behaviour": bool, "describes_problem": bool}] from founder notes.
+    relevance: {"ran": bool, "kept": int, "dropped": int} from the pain-page relevance filter (None = not run)."""
     cfg = cfg or load_config()
     t, stop = cfg["thresholds"], cfg["stop_rules"]
     pain = [c for c in claims if c.type == "fact" and c.topic in ("pain", "customer_pain") and "stale" not in c.flags
@@ -318,6 +320,11 @@ def evaluate_discover(product_group: str, product_label: str, claims: list[Claim
         {"check": "interviews_past_behaviour", "target": f">= {t['interviews_past_behaviour']} past behaviour",
          "actual": n_past, "passed": n_past >= t["interviews_past_behaviour"]},
     ]
+    ran = bool(relevance and relevance.get("ran"))
+    if ran:
+        need = t.get("relevant_pages", 3)
+        checks.insert(1, {"check": "relevant_pages", "target": f">= {need} pages about the pain",
+                          "actual": relevance.get("kept", 0), "passed": relevance.get("kept", 0) >= need})
     reasons, collect, pivot_to = [], [], None
     if not competitors:
         reasons.append("warning: 0 competitors or substitutes found - not a pass (people may not pay for this, "
@@ -332,6 +339,10 @@ def evaluate_discover(product_group: str, product_label: str, claims: list[Claim
     if product_group == "excluded":
         outcome = "stop"
         reasons.insert(0, f"excluded product ({product_label}): this system only builds digital products")
+    elif ran and relevance.get("kept", 0) == 0:
+        outcome = "stop"
+        reasons.insert(0, f"none of the {relevance.get('dropped', 0)} pages found is about the customer's pain "
+                          "(relevance filter): don't build on unrelated pages")
     elif len(pain) < stop["min_problem_claims_to_continue"]:
         outcome = "stop"
         reasons.insert(0, "no sourced evidence that anyone has this problem: don't build on assumptions")
@@ -357,6 +368,7 @@ def evaluate_discover(product_group: str, product_label: str, claims: list[Claim
             outcome = "repeat"
     failed = [c for c in checks if not c["passed"]]
     hints = {"product_type": "answer the clarifying question about the product type",
+             "relevant_pages": "pages where the target customers describe this pain (forums, reviews, Q&A)",
              "problem_fact_claims": "more quotes from people describing the problem (forums, reviews, Q&A)",
              "problem_source_domains": "quotes from more different sites",
              "priced_competitors": "competitors' published prices (pricing pages, store listings)",
