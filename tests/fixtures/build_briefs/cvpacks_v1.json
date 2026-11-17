@@ -1,0 +1,119 @@
+{
+  "brief_id": "c7a3e5b0-6d2f-4c1e-9a8b-2f4d6e8a0c11",
+  "version": 1,
+  "fields": {
+    "idea": {
+      "quote": "Arabic CV templates and Notion job-search template packs sold as instant downloads",
+      "value": "Arabic CV templates and Notion job-search template packs sold as instant downloads",
+      "source": "chat",
+      "status": "answered"
+    },
+    "problem": {
+      "quote": "Arabic-speaking job seekers waste hours formatting a CV in Arabic and tracking job applications",
+      "value": "Arabic-speaking job seekers waste hours formatting a CV in Arabic and tracking job applications",
+      "source": "chat",
+      "status": "answered"
+    },
+    "target_customer": {
+      "quote": "Arabic-speaking fresh graduates and job seekers in Egypt and the Gulf",
+      "value": "Arabic-speaking fresh graduates and job seekers in Egypt and the Gulf",
+      "source": "chat",
+      "status": "answered"
+    },
+    "business_model": {
+      "quote": "one-time purchase: CV pack $9, Notion job tracker pack $7, bundle $14",
+      "value": "one-time purchase: CV pack $9, Notion job tracker pack $7, bundle $14",
+      "source": "chat",
+      "status": "answered"
+    },
+    "country": {
+      "quote": "Egypt",
+      "value": "Egypt",
+      "source": "chat",
+      "status": "answered"
+    },
+    "city": {
+      "quote": "Cairo",
+      "value": "Cairo",
+      "source": "chat",
+      "status": "answered"
+    },
+    "budget": {
+      "quote": "500 USD",
+      "value": "500 USD",
+      "source": "chat",
+      "status": "answered"
+    },
+    "time_available": {
+      "quote": "10 hours a week for 3 months",
+      "value": "10 hours a week for 3 months",
+      "source": "chat",
+      "status": "answered"
+    },
+    "founder_skills": {
+      "quote": "graphic design and Notion; no programming",
+      "value": "graphic design and Notion; no programming",
+      "source": "chat",
+      "status": "answered"
+    },
+    "values": {
+      "quote": "no fake reviews, honest descriptions",
+      "value": "no fake reviews, honest descriptions",
+      "source": "chat",
+      "status": "answered"
+    },
+    "technical_preferences": {
+      "quote": "a simple web page, no app",
+      "value": "a simple web page, no app",
+      "source": "chat",
+      "status": "answered"
+    }
+  },
+  "tags": {
+    "languages": {
+      "basis": "rules",
+      "value": [
+        "en"
+      ]
+    },
+    "industries": {
+      "basis": "model",
+      "value": [
+        "digital_products"
+      ]
+    },
+    "country_code": {
+      "basis": "rules",
+      "value": "EG"
+    },
+    "customer_type": {
+      "basis": "model",
+      "value": "b2c"
+    },
+    "revenue_model": {
+      "basis": "model",
+      "value": "one_time"
+    }
+  },
+  "followups": [],
+  "open_questions": [],
+  "product_check": {
+    "status": "allowed",
+    "matched": [],
+    "categories": []
+  },
+  "budget": {
+    "max": 500,
+    "min": 500,
+    "currency": "USD",
+    "currency_source": "stated"
+  },
+  "history": [
+    {
+      "version": 1,
+      "change_note": "Confirmed by founder in onboarding chat",
+      "created_at": "2026-11-16T22:24:26.625653+00:00"
+    }
+  ],
+  "_note": "Fictional test persona (CV and Notion template packs, English). Fixture, not real data."
+}
