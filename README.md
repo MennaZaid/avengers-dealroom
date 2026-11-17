@@ -25,10 +25,10 @@ rule-based answer). Give Docker about 6 GB of memory. Host ports: see `.env.exam
 | Guardrails (excluded products, must-never requests) | **Working** | Refuses fake reviews, income promises, impersonation, moving money, credentials |
 | Product gate | **Working** | Excluded products (physical, financial/crypto, health or legal advice) stop |
 | 1. Discover: find opportunities + evidence gate | **Working** | Live web + free APIs; verbatim-quoted claims or `ASSUMPTION`; ideas scored, market sized bottom-up, Mom Test script; founder decides. Critic's judge model **STUBBED** unless a different-family model is set |
-| 2. Validate: Lean Canvas | Agents built; pipeline wiring in progress | Every entry FOUNDER / EVIDENCED (id + URL + date) / ASSUMPTION / UNKNOWN; riskiest assumption named |
-| 2. Validate: demand test plan | Agents built; pipeline wiring in progress | 100 waitlist sign-ups in 14 days, declared before any result |
-| 2. Validate: landing page | Agents built; pipeline wiring in progress; publishing **MOCKED** | Self-contained HTML, email-only waitlist that sends nothing, "DRAFT — not published (MOCKED)" banner |
-| 2. Validate: sign-up count + demand gate | **Working** | `POST /stages/validate/demand`: count entered by the founder (founder-reported, not verified), never generated; 12 of 100 -> stop |
+| 2. Validate: Lean Canvas | **Working** | Every entry FOUNDER / EVIDENCED (id + URL + date) / ASSUMPTION / UNKNOWN; riskiest assumption named |
+| 2. Validate: demand test plan | **Working** | 100 waitlist sign-ups in 14 days, declared before any result |
+| 2. Validate: landing page | **Working**; publishing **MOCKED** | Self-contained HTML, email-only waitlist that sends nothing, "DRAFT — not published (MOCKED)" banner |
+| 2. Validate: sign-up count + demand gate | **Working** | `POST /stages/runs/{id}/signups`: count entered by the founder (founder-reported, not verified), never generated; 12 of 100 -> stop |
 | 3. Build: build the product + build gate | **Working** | Evidence -> requirements -> plan -> validation -> single-file HTML MVP -> QA checks -> user guide; one founder approval at the end; payments in the MVP are **MOCKED** |
 | 4. Commercial: price hypotheses, draft policies + gates | **STUBBED** | Not run by the pipeline yet. Prices from the founder or sourced, else ASSUMPTION; terms/privacy/refund drafts "not legal advice" |
 | 5. Launch: store page and 3 post drafts + gate | **STUBBED**; posting **MOCKED** | Not run by the pipeline yet; nothing is posted |
