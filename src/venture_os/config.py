@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     llm_reasoning_effort: str = ""
     # USD per 1M tokens for cost-per-run reporting. 0 for local models and free tiers (zero spend, D9).
     llm_price_per_1m_tokens: float = 0.0
+    # Seconds before a chat_json call gives up and the caller uses its rule-based fallback (LLM_CHAT_TIMEOUT).
+    # Keeps the first founder message from waiting minutes while the local model is still loading.
+    llm_chat_timeout: float = 120.0
     colab_llm_base_url: str = ""
     colab_llm_api_key: str = ""
     database_url: str = "postgresql://venture:venture@localhost:5432/venture_os"

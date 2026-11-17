@@ -63,7 +63,7 @@ def model_for(profile: Profile = "extract", s: Settings | None = None) -> str:
 def chat_json(
     messages: list[dict],
     model: str | None = None,
-    timeout: float = 300.0,
+    timeout: float | None = None,
     profile: Profile = "extract",
 ) -> str:
     """Send a chat request in JSON mode and return the cleaned JSON text. Records usage."""
@@ -82,7 +82,7 @@ def chat_json(
         s.llm_base_url.rstrip("/") + "/chat/completions",
         headers={"Authorization": f"Bearer {s.llm_api_key}"},
         json=payload,
-        timeout=timeout,
+        timeout=timeout or s.llm_chat_timeout,
     )
     r.raise_for_status()
     body = r.json()

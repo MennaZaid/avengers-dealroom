@@ -80,3 +80,18 @@ def test_cost_report_sums_one_run():
            {"action": "design_lean_canvas", "model": "qwen3:4b-instruct", "cost": 0}]
     assert report.line(report.summarize(log)) == "About $0.00 per run (local qwen3:4b-instruct, ~1,800 tokens)"
     assert "rule-based" in report.line(report.summarize([]))
+
+
+def test_chat_timeout_defaults_to_setting_so_a_loading_model_falls_back_fast(monkeypatch):
+    seen = []
+    monkeypatch.setattr(client, "Settings", lambda: _settings(llm_chat_timeout=120))
+
+    def fake_post(url, headers, json, timeout):
+        seen.append(timeout)
+        return httpx.Response(200, json={"choices": [{"message": {"content": "{}"}}]},
+                              request=httpx.Request("POST", url))
+
+    monkeypatch.setattr(client.httpx, "post", fake_post)
+    client.chat_json([{"role": "user", "content": "x"}])
+    client.chat_json([{"role": "user", "content": "x"}], timeout=30)
+    assert seen == [120, 30]
