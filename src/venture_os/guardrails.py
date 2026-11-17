@@ -231,8 +231,14 @@ _OUTPUT_RULES = {
         r"\byou (will|'ll) (make|earn)\b", r"\b(risk[- ]free|can't lose|cannot lose)\b",
         r"(دخل|ربح|أرباح|نجاح) مضمون", r"(ستربح|هتكسب|ستكسب) .{0,20}(مضمون|أكيد|بالتأكيد)",
     ],
-    "false_urgency": [r"\bonly \d+ left\b", r"\boffer ends (today|tonight|soon)\b", r"عداد تنازلي"],
-    "fake_reviews": [r"★★★★★", r"\"[^\"]{5,200}\"\s*[-–—]\s*(happy|satisfied|verified) (customer|buyer)"],
+    "false_urgency": [r"\bonly \d+ left\b", r"\boffer ends (today|tonight|soon)\b", r"عداد تنازلي",
+                      r"\bcountdown( timer)?\b", r"\b(ends|expires) in \d+ (hours?|minutes?|days?)\b",
+                      r"(ينتهي|ينتهى|هينتهي) (العرض )?(خلال|بعد) \d+"],
+    "fake_reviews": [r"★★★★★", r"\"[^\"]{5,200}\"\s*[-–—]\s*(happy|satisfied|verified) (customer|buyer)",
+                     r"\b(five|5)[- ]star reviews?\b", r"\btestimonials? from (a |our )?(happy|satisfied)\b",
+                     r"(تقييمات|تقييم|مراجعات) (خمس|٥|5) نجوم"],
+    "impersonation": [r"\bas if (it'?s|it is|it were) (from|by)\b", r"\b(posted|written|signed) (by|as) the founder\b",
+                      r"\bon behalf of (the founder|a customer)\b", r"(بالنيابة عن|باسم) (المؤسس|عميل)"],
 }
 _OUTPUT_COMPILED = {r: [re.compile(p, re.IGNORECASE) for p in ps] for r, ps in _OUTPUT_RULES.items()}
 
@@ -240,6 +246,19 @@ _OUTPUT_COMPILED = {r: [re.compile(p, re.IGNORECASE) for p in ps] for r, ps in _
 def check_output(text: str) -> list[str]:
     """Must-never rules broken by generated text (empty list = OK). Agents must not show text that fails."""
     return [rule for rule, pats in _OUTPUT_COMPILED.items() if any(p.search(text) for p in pats)]
+
+
+def scrub_output(text: str) -> tuple[str, list[str]]:
+    """Remove every span that breaks a must-never rule; return (clean text, rules that fired). Used by
+    outputs.write_output, so no file in outputs/ ever carries an income promise, fake review or testimonial,
+    false urgency or countdown, or impersonation."""
+    fired = []
+    for rule, pats in _OUTPUT_COMPILED.items():
+        for p in pats:
+            text, n = p.subn(f"[REMOVED by guardrails: {rule}]", text)
+            if n and rule not in fired:
+                fired.append(rule)
+    return text, fired
 
 
 def redact(text: str) -> str:
