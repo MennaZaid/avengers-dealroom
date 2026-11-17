@@ -1,0 +1,433 @@
+{
+ "scores": [
+  {
+   "idea_id": "I0",
+   "criteria": [
+    {
+     "criterion": "pain_evidence",
+     "score": 5.0,
+     "evidence_ids": [
+      "C1"
+     ],
+     "basis": "evidenced",
+     "note": "The founder directly tested the app against others and found it worked better than free alternatives, showing real user pain and a gap in performance."
+    },
+    {
+     "criterion": "people_pay",
+     "score": 4.0,
+     "evidence_ids": [
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
+     ],
+     "basis": "evidenced",
+     "note": "Multiple free AI chat apps exist, and many are rated highly, indicating that users are willing to pay for AI chat, even if currently using free options."
+    },
+    {
+     "criterion": "competition",
+     "score": 2.0,
+     "evidence_ids": [
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
+     ],
+     "basis": "evidenced",
+     "note": "Many free AI chat apps are already available, and the market is saturated with strong free alternatives, especially from major players like ChatGPT and Replika."
+    },
+    {
+     "criterion": "skill_fit",
+     "score": 2.0,
+     "evidence_ids": [
+      "brief:skills"
+     ],
+     "basis": "evidenced",
+     "note": "no matching skill stated"
+    },
+    {
+     "criterion": "budget_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$300 cash needed (ASSUMPTION) vs $0"
+    },
+    {
+     "criterion": "time_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:time_available"
+     ],
+     "basis": "evidenced",
+     "note": "~300 h needed (ASSUMPTION) vs ~17 h available"
+    },
+    {
+     "criterion": "values_fit",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The founder's stated values are missing, so alignment with values cannot be assessed. The idea promotes accessibility, but no values are provided."
+    },
+    {
+     "criterion": "digital_deliverability",
+     "score": 5.0,
+     "evidence_ids": [
+      "brief:product_type"
+     ],
+     "basis": "evidenced",
+     "note": "product type mobile_app"
+    },
+    {
+     "criterion": "reachable_market",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
+    }
+   ],
+   "total": 3.0,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
+  },
+  {
+   "idea_id": "I4",
+   "criteria": [
+    {
+     "criterion": "pain_evidence",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence directly addresses the pain of finding and sharing AI prompts in a simple, non-competitive way."
+    },
+    {
+     "criterion": "people_pay",
+     "score": 2.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence shows that anyone pays for a solution to the prompt-sharing pain; all listed alternatives are free."
+    },
+    {
+     "criterion": "competition",
+     "score": 1.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The evidence shows many free AI chatbot apps exist, but none are focused on prompt sharing; the market is saturated with free tools, and no differentiation is evident."
+    },
+    {
+     "criterion": "skill_fit",
+     "score": 4.0,
+     "evidence_ids": [
+      "brief:skills"
+     ],
+     "basis": "evidenced",
+     "note": "skills match: social media"
+    },
+    {
+     "criterion": "budget_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$30 cash needed (ASSUMPTION) vs $0"
+    },
+    {
+     "criterion": "time_fit",
+     "score": 1.89,
+     "evidence_ids": [
+      "brief:time_available"
+     ],
+     "basis": "evidenced",
+     "note": "~30 h needed (ASSUMPTION) vs ~17 h available"
+    },
+    {
+     "criterion": "values_fit",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The founder's stated values are missing; no alignment with values can be assessed."
+    },
+    {
+     "criterion": "digital_deliverability",
+     "score": 5.0,
+     "evidence_ids": [
+      "brief:product_type"
+     ],
+     "basis": "evidenced",
+     "note": "product type community_or_membership"
+    },
+    {
+     "criterion": "reachable_market",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
+    }
+   ],
+   "total": 2.59,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
+  },
+  {
+   "idea_id": "I1",
+   "criteria": [
+    {
+     "criterion": "pain_evidence",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence cites real people describing pain related to social media content creation or AI prompt crafting."
+    },
+    {
+     "criterion": "people_pay",
+     "score": 2.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence shows that competitors charge for solving social media content creation with AI prompts; all listed apps are free."
+    },
+    {
+     "criterion": "competition",
+     "score": 1.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The evidence lists many free AI chatbot apps, but none are focused on social media content or prompt templates, indicating no differentiation potential."
+    },
+    {
+     "criterion": "skill_fit",
+     "score": 2.0,
+     "evidence_ids": [
+      "brief:skills"
+     ],
+     "basis": "evidenced",
+     "note": "no matching skill stated"
+    },
+    {
+     "criterion": "budget_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$50 cash needed (ASSUMPTION) vs $0"
+    },
+    {
+     "criterion": "time_fit",
+     "score": 1.89,
+     "evidence_ids": [
+      "brief:time_available"
+     ],
+     "basis": "evidenced",
+     "note": "~30 h needed (ASSUMPTION) vs ~17 h available"
+    },
+    {
+     "criterion": "values_fit",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The founder's values are not stated, and the idea does not explicitly align with any stated values."
+    },
+    {
+     "criterion": "digital_deliverability",
+     "score": 5.0,
+     "evidence_ids": [
+      "brief:product_type"
+     ],
+     "basis": "evidenced",
+     "note": "product type template_or_asset"
+    },
+    {
+     "criterion": "reachable_market",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
+    }
+   ],
+   "total": 2.29,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
+  },
+  {
+   "idea_id": "I3",
+   "criteria": [
+    {
+     "criterion": "pain_evidence",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No real people describe pain in the provided evidence; the founder's own experience is not cited as a pain point."
+    },
+    {
+     "criterion": "people_pay",
+     "score": 2.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence shows that anyone pays for AI-powered content generation tools; all listed alternatives are free, but no one pays for solving this specific pain."
+    },
+    {
+     "criterion": "competition",
+     "score": 1.0,
+     "evidence_ids": [
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7",
+      "C8",
+      "C9",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
+     ],
+     "basis": "evidenced",
+     "note": "Multiple free AI chatbot apps exist, indicating a saturated market with strong free alternatives."
+    },
+    {
+     "criterion": "skill_fit",
+     "score": 2.0,
+     "evidence_ids": [
+      "brief:skills"
+     ],
+     "basis": "evidenced",
+     "note": "no matching skill stated"
+    },
+    {
+     "criterion": "budget_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$50 cash needed (ASSUMPTION) vs $0"
+    },
+    {
+     "criterion": "time_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:time_available"
+     ],
+     "basis": "evidenced",
+     "note": "~80 h needed (ASSUMPTION) vs ~17 h available"
+    },
+    {
+     "criterion": "values_fit",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "The founder values social media posting and daily web use, but no explicit values are stated; alignment is inferred but not clearly demonstrated."
+    },
+    {
+     "criterion": "digital_deliverability",
+     "score": 5.0,
+     "evidence_ids": [
+      "brief:product_type"
+     ],
+     "basis": "evidenced",
+     "note": "product type browser_extension"
+    },
+    {
+     "criterion": "reachable_market",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
+    }
+   ],
+   "total": 2.2,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
+  },
+  {
+   "idea_id": "I2",
+   "criteria": [
+    {
+     "criterion": "pain_evidence",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence cites user pain related to AI for social media content creation."
+    },
+    {
+     "criterion": "people_pay",
+     "score": 2.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "No evidence shows competitors charging for solving social media content creation with AI."
+    },
+    {
+     "criterion": "competition",
+     "score": 1.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "Evidence lists many free AI chatbot apps, but none relate to social media content creation; competition is not relevant to the idea's domain."
+    },
+    {
+     "criterion": "skill_fit",
+     "score": 2.0,
+     "evidence_ids": [
+      "brief:skills"
+     ],
+     "basis": "evidenced",
+     "note": "no matching skill stated"
+    },
+    {
+     "criterion": "budget_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:budget"
+     ],
+     "basis": "evidenced",
+     "note": "~$100 cash needed (ASSUMPTION) vs $0"
+    },
+    {
+     "criterion": "time_fit",
+     "score": 1.0,
+     "evidence_ids": [
+      "brief:time_available"
+     ],
+     "basis": "evidenced",
+     "note": "~100 h needed (ASSUMPTION) vs ~17 h available"
+    },
+    {
+     "criterion": "values_fit",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "Founder's values are not explicitly stated, and no evidence confirms alignment with stated values."
+    },
+    {
+     "criterion": "digital_deliverability",
+     "score": 3.0,
+     "evidence_ids": [
+      "brief:product_type"
+     ],
+     "basis": "evidenced",
+     "note": "product type other_digital"
+    },
+    {
+     "criterion": "reachable_market",
+     "score": 3.0,
+     "evidence_ids": [],
+     "basis": "ASSUMPTION",
+     "note": "no internet-use figure for the country"
+    }
+   ],
+   "total": 2.1,
+   "proposed_by": "qwen3:4b-instruct (proposed) + rules"
+  }
+ ]
+}
