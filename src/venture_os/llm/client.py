@@ -22,6 +22,7 @@ can report its own cost:  mark = usage_mark(); ...run...; usage_summary(since=ma
 from __future__ import annotations
 
 import os
+import re
 import threading
 import time
 from dataclasses import asdict, dataclass
@@ -123,8 +124,40 @@ def _post(e: Endpoint, messages: list[dict], timeout: float) -> httpx.Response:
     if r.status_code == 400 and "reasoning_effort" in payload:  # some providers reject the parameter
         payload.pop("reasoning_effort")
         r = httpx.post(url, headers=headers, json=payload, timeout=timeout)
+    if r.status_code == 429:  # free-tier rate limit: wait the few seconds asked for, retry once, else fall back
+        wait = retry_wait(r.headers)
+        if wait is not None and wait <= MAX_RATE_LIMIT_WAIT:
+            time.sleep(wait)
+            r = httpx.post(url, headers=headers, json=payload, timeout=timeout)
     r.raise_for_status()
     return r
+
+
+MAX_RATE_LIMIT_WAIT = 20.0
+
+
+def _duration(text: str) -> float | None:
+    """'7.66s', '1m2s', '450ms', '12' -> seconds."""
+    text = (text or "").strip()
+    if not text:
+        return None
+    try:
+        return float(text)
+    except ValueError:
+        pass
+    parts = re.findall(r"([\d.]+)(ms|h|m|s)", text)
+    if not parts or "".join(n + u for n, u in parts) != text:
+        return None
+    return sum(float(n) * {"ms": 0.001, "s": 1, "m": 60, "h": 3600}[u] for n, u in parts)
+
+
+def retry_wait(headers) -> float | None:
+    """Seconds a 429 asks us to wait: `retry-after`, else Groq's `x-ratelimit-reset-tokens` / `-requests`."""
+    for name in ("retry-after", "x-ratelimit-reset-tokens", "x-ratelimit-reset-requests"):
+        wait = _duration(headers.get(name, ""))
+        if wait is not None:
+            return wait
+    return None
 
 
 def chat_json(
