@@ -106,7 +106,8 @@ def spec_config(spec: ProductSpec | None) -> dict | None:
             "core": {"verb": spec.core_verb, "object": spec.core_object.value, "result": spec.core_result,
                      "fields": [f.model_dump() for f in spec.fields]},
             "sample_title": spec.sample_title.value, "sample_lines": spec.sample_lines, "delivery": spec.delivery,
-            "faq": [list(x) for x in spec.faq]}
+            "faq": [list(x) for x in spec.faq], "blocks": spec.blocks,
+            "source": spec.source, "facts": spec.facts}
 
 
 def config(plan: MvpPlan, help_lines: dict[str, str], brief_version: int, spec: ProductSpec | None = None) -> dict:

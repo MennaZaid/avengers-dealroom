@@ -21,7 +21,7 @@ def setup(name="pharmastock_v1.json", template=None):
     inp = build_inputs.collect(ConfirmedBrief.from_file(FIX / name))
     reqs = requirements_mapper.Requirements(brief_id=inp.brief_id, source="rules",
                                             items=requirements_mapper._number(requirements_mapper.from_rules(inp)))
-    plan = mvp_planner.from_rules(inp, reqs, template or mvp_planner.choose_template(inp, reqs))
+    plan = mvp_planner.from_rules(inp, reqs, template or mvp_planner.choose_template())
     return inp, reqs, plan
 
 

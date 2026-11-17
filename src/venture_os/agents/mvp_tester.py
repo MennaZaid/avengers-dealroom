@@ -190,10 +190,16 @@ def to_markdown(rep: TestReport) -> str:
 
 
 def run(inputs: BuildInputs, reqs: Requirements, plan: MvpPlan, page: str, attempt: int = 1,
-        use_browser: bool | None = None) -> TestReport:
+        use_browser: bool | None = None, require_model: bool = False) -> TestReport:
     if use_browser is None:
         use_browser = os.environ.get("MVP_BROWSER_CHECK", "1") != "0"
     checks, used = check(inputs, reqs, plan, page, use_browser)
+    if require_model:  # a model is configured: a page built from the brief's words alone is not the product
+        spec = (_config(page) or {}).get("spec") or {}
+        by_model = spec.get("source") == "model"
+        checks.append(Check(name="product written by the model from the Discover and Validate data", passed=by_model,
+                            detail=f"{spec.get('facts', 0)} facts given to the model" if by_model
+                            else "the model's spec was unusable or off-brief; only the brief's own words were used"))
     rep = TestReport(brief_id=inputs.brief_id, passed=all(c.passed for c in checks), checks=checks, browser=used,
                      attempt=attempt)
     write_output(3, 6, "test_report", to_markdown(rep))

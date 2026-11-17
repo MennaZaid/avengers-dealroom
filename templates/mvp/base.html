@@ -165,15 +165,12 @@ const BLOCKS = {
     S.faq.forEach(([q, a]) => sec.append(el("details", {class: "card", "data-block": "faq"}, el("summary", {}, q), el("p", {}, a))));
   },
 };
-// Block order per offer kind: the interactive core first, then what is sold.
-const ORDER = {marketplace: ["hero", "offers", "core", "delivery", "waitlist", "faq"],
-               booking_service: ["hero", "offers", "core", "delivery", "waitlist", "faq"]};
 let lastVals = {};
 
 const SCREENS = {
-  product(sec) {
+  product(sec) {  // block order comes from the product spec
     const S = C.spec;
-    (ORDER[S.kind] || ["hero", "core", "offers", "delivery", "waitlist", "faq"]).forEach(b => BLOCKS[b](sec, S));
+    S.blocks.filter(b => BLOCKS[b]).forEach(b => BLOCKS[b](sec, S));
   },
   add(sec) {
     const fields = C.fields.slice();

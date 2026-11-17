@@ -12,7 +12,6 @@ from __future__ import annotations
 
 import json
 import re
-from collections import Counter
 from collections.abc import Callable
 from typing import Literal
 
@@ -32,22 +31,10 @@ KINDS = ("digital_download", "interactive_tool", "content_course", "marketplace"
 BRIEF_FIELDS = ("idea", "problem", "target_customer", "supply_side", "business_model", "known_competitors", "city",
                 "country", "values", "technical_preferences", "budget")
 ASSUMPTION = "ASSUMPTION"
-
-# Generic category words (any language the onboarding supports) -> offer kind. Category words, not businesses.
-_KIND_WORDS: dict[str, tuple[str, ...]] = {
-    "digital_download": ("template", "download", "pack", "ebook", "e-book", "printable", "toolkit", "bundle",
-                         "قالب", "قوالب", "تحميل", "حزمة", "ملف"),
-    "content_course": ("course", "lesson", "class", "teach", "training", "curriculum", "كورس", "دورة",
-                       "دروس", "درس", "تعليم", "منصة دروس", "تدريس"),
-    "booking_service": ("booking", "book a", "appointment", "schedul", "reserv", "حجز", "موعد", "مواعيد"),
-    "marketplace": ("marketplace", "connect", "match", "platform for", "سوق", "يربط", "تربط", "وسيط"),
-    "tracker_dashboard": ("track", "stock", "inventory", "monitor", "dashboard", "تتبع", "مخزون", "متابعة", "جرد"),
-    "interactive_tool": ("calculat", "estimat", "quote", "generator", "planner", "حاسبة", "حساب", "تقدير"),
-}
-_STOP = {"about", "after", "also", "and", "any", "are", "because", "been", "but", "can", "could", "each", "for", "from", "have", "into", "just", "like", "more", "most", "need", "needs", "only", "other", "over", "same", "some", "such", "than", "that", "the", "their", "them", "then", "there", "these", "they", "this", "those", "through", "using", "very", "want", "wants", "what", "when", "where", "which", "while", "who", "will", "with", "without", "would", "your", "you", "our", "people", "online", "simple", "product", "products", "service", "services", "app", "application", "website", "platform", "customers", "customer", "users", "user", "make", "makes", "small", "medium", "business", "businesses"} | {"عايز", "عايزة", "أبي", "اللي", "عشان", "على", "إلى", "الى", "من",
-                                                 "في", "مع", "هذا", "هذه", "التي", "الذي", "لكن", "تطبيق", "منصة"}
-_PRICE = re.compile(r"(\d[\d,.]*)\s*(usd|egp|sar|aed|kes|eur|gbp|\$|جنيه|ريال|درهم)|(\$|usd|egp)\s*(\d[\d,.]*)",
-                    re.IGNORECASE)
+MAX_FACTS = 60
+_PHASE = {1: "Discover", 2: "Validate", 4: "Commercial"}
+_LABEL_ORDER = {"evidenced": 0, "founder_stated": 1, "inferred": 2, "assumption": 3}
+BLOCKS = ("hero", "core", "offers", "delivery", "waitlist", "faq")  # the page's fixed, tested blocks
 
 
 class Sourced(BaseModel):
@@ -80,7 +67,9 @@ class ProductSpec(BaseModel):
     sample_title: Sourced
     sample_lines: list[str]  # may contain {f1}-style slots filled live by the customer's input
     faq: list[tuple[str, str]] = []
+    blocks: list[str] = list(BLOCKS)  # block order on the page, chosen by the model
     key_terms: list[str] = []
+    facts: int = 0  # brief fields + Discover / Validate / Commercial items given to the model
     source: Literal["model", "rules"] = "rules"
     model: str | None = None
 
@@ -91,18 +80,22 @@ class ProductSpec(BaseModel):
 
 
 # ---------------------------------------------------------------- key terms and relevance (also used by the tester)
+# No word lists: the terms are the brief's own longest words (long words are the distinctive ones in any language).
 
 def _tokens(text: str) -> list[str]:
-    return [t for t in re.findall(r"[^\W\d_]{4,}", text.lower()) if t not in _STOP]
+    return re.findall(r"[^\W\d_]{4,}", text.lower())
 
 
 def key_terms(brief_values: dict[str, str], n: int = 8) -> list[str]:
-    """Distinctive words of THIS brief (idea weighs most), computed at run time."""
-    c: Counter = Counter()
-    for name, weight in (("idea", 3), ("target_customer", 2), ("problem", 1), ("business_model", 1)):
-        for t in _tokens(brief_values.get(name) or ""):
-            c[t] += weight
-    return [t for t, _ in c.most_common(n)]
+    """Distinctive words of THIS brief, computed at run time: the idea's longest words first, then the customer's."""
+    out: list[str] = []
+    for name in ("idea", "target_customer"):
+        for t in sorted(dict.fromkeys(_tokens(brief_values.get(name) or "")), key=len, reverse=True):
+            if t not in out:
+                out.append(t)
+            if len(out) == n:
+                return out
+    return out
 
 
 def relevance(terms: list[str], text: str) -> tuple[bool, list[str]]:
@@ -112,7 +105,7 @@ def relevance(terms: list[str], text: str) -> tuple[bool, list[str]]:
     return (bool(terms) and len(hits) >= min(2, len(terms))), hits
 
 
-# ---------------------------------------------------------------- rules path
+# ---------------------------------------------------------------- rules path: the founder's own words, nothing guessed
 
 def brief_values(inputs: BuildInputs) -> dict[str, str]:
     out = {}
@@ -125,56 +118,23 @@ def brief_values(inputs: BuildInputs) -> dict[str, str]:
     return out
 
 
-def choose_kind(v: dict[str, str]) -> str:
-    text = " ".join([v.get("idea", ""), v.get("business_model", ""), v.get("problem", "")]).lower()
-    scores = {k: sum(text.count(w) for w in words) for k, words in _KIND_WORDS.items()}
-    if v.get("supply_side"):
-        scores["booking_service" if scores["booking_service"] else "marketplace"] += 1
-    best = max(scores, key=lambda k: scores[k])
-    return best if scores[best] else "other"
-
-
 def _price(inputs: BuildInputs, v: dict[str, str]) -> Sourced:
-    for i in inputs.items:  # a sourced price from Validate / Commercial first
-        if i.phase in (2, 4) and i.kind == "price" and (m := _PRICE.search(i.text)):
-            return Sourced(value=m.group(0).rstrip(",. "), source=f"item:{i.id or i.kind}")
-    if v.get("business_model"):  # the founder's own pricing words, whole (one or several prices)
+    for i in inputs.items:  # a price item from Validate / Commercial first, in its own words
+        if i.phase in (2, 4) and i.kind == "price":
+            return Sourced(value=i.text[:120], source=f"item:{i.id or i.kind}")
+    if v.get("business_model"):  # the founder's own pricing words
         return Sourced(value=v["business_model"][:120], source="brief:business_model")
-    return Sourced(value="to be set by the founder", source=ASSUMPTION)
+    return Sourced(value="-", source=ASSUMPTION)
 
 
-_T = {  # fixed copy per language; {x} is filled from the brief
-    "en": {"verbs": {"digital_download": "Fill in", "interactive_tool": "Enter", "content_course": "Tell us",
-                     "marketplace": "Describe", "booking_service": "Choose", "tracker_dashboard": "Add",
-                     "other": "Try"},
-           "object": "your details in a sample of {idea}",
-           "result": "and see your own version build live, ready to print or download",
-           "fields": ["Your name", "What you need", "Details"],
-           "delivery": {"digital_download": "An instant file download after purchase (MOCKED).",
-                        "content_course": "An access link to the material after purchase (MOCKED).",
-                        "booking_service": "A booking confirmation on screen (MOCKED: nothing is sent).",
-                        "marketplace": "A request saved for providers to answer (MOCKED: nothing is sent).",
-                        "tracker_dashboard": "Works in the browser; data stays on this device.",
-                        "interactive_tool": "Works in the browser; results can be downloaded.",
-                        "other": "A file download after purchase (MOCKED)."},
-           "for": "For: {x}", "solves": "Solves: {x}", "faq": [("Who is it for?", "{target}"),
-                                                               ("How do I receive it?", "{delivery}"),
-                                                               ("What does it cost?", "{price}")]},
-    "ar": {"verbs": {"digital_download": "املأ", "interactive_tool": "أدخل", "content_course": "أخبرنا",
-                     "marketplace": "صِف", "booking_service": "اختر", "tracker_dashboard": "أضف", "other": "جرّب"},
-           "object": "بياناتك في نموذج من {idea}",
-           "result": "وشاهد نسختك تُبنى أمامك، جاهزة للطباعة أو التحميل",
-           "fields": ["اسمك", "ما تحتاجه", "التفاصيل"],
-           "delivery": {"digital_download": "تحميل فوري للملف بعد الشراء (MOCKED).",
-                        "content_course": "رابط وصول للمحتوى بعد الشراء (MOCKED).",
-                        "booking_service": "تأكيد الحجز على الشاشة (MOCKED: لا يُرسل شيء).",
-                        "marketplace": "طلب محفوظ ليرد عليه مقدمو الخدمة (MOCKED: لا يُرسل شيء).",
-                        "tracker_dashboard": "يعمل في المتصفح؛ البيانات تبقى على هذا الجهاز.",
-                        "interactive_tool": "يعمل في المتصفح؛ يمكن تحميل النتائج.",
-                        "other": "تحميل ملف بعد الشراء (MOCKED)."},
-           "for": "لمن: {x}", "solves": "يحل: {x}", "faq": [("لمن هذا المنتج؟", "{target}"),
-                                                          ("كيف أستلمه؟", "{delivery}"),
-                                                          ("كم السعر؟", "{price}")]},
+# Page chrome only (labels of the fixed blocks, per page language). No product words: those come from the brief.
+_CHROME = {
+    "en": {"verb": "Try", "result": "and see a live preview", "field": "Your input", "for": "For", "solves": "Solves",
+           "delivery": "Delivery is MOCKED in this prototype: nothing is sent or charged.",
+           "who": "Who is it for?", "cost": "What does it cost?"},
+    "ar": {"verb": "جرّب", "result": "وشاهد معاينة مباشرة", "field": "مدخلاتك", "for": "لمن", "solves": "يحل",
+           "delivery": "التسليم MOCKED في هذا النموذج: لا يُرسل شيء ولا يُخصم شيء.",
+           "who": "لمن هذا المنتج؟", "cost": "كم السعر؟"},
 }
 
 
@@ -184,29 +144,21 @@ def _src(v: dict[str, str], name: str, fallback: str) -> Sourced:
 
 
 def from_rules(inputs: BuildInputs) -> ProductSpec:
+    """No model: no category guess (offer_kind 'other'); every product word is the founder's own."""
     v = brief_values(inputs)
-    lang = "ar" if inputs.lang == "ar" else "en"
-    t = _T[lang]
-    kind = choose_kind(v)
-    idea = _src(v, "idea", "the product")
+    t = _CHROME["ar" if inputs.lang == "ar" else "en"]
+    idea = _src(v, "idea", "-")
     price = _price(inputs, v)
-    target = _src(v, "target_customer", "early customers")
-    fields = [SpecField(id=f"f{n + 1}", label=lab) for n, lab in enumerate(t["fields"])]
-    delivery = t["delivery"][kind]
-    lines = [t["for"].format(x=target.value)]
-    if v.get("problem"):
-        lines.append(t["solves"].format(x=v["problem"][:160]))
-    lines += ["{f1}", "{f2}", "{f3}"]
-    price_text = price.value + (f" ({ASSUMPTION})" if price.source == ASSUMPTION else "")
-    faq = [(q, a.format(target=target.value, delivery=delivery, price=price_text)) for q, a in t["faq"]]
-    spec = ProductSpec(brief_id=inputs.brief_id, lang=lang, offer_kind=kind,
-                       offers=[Offer(name=idea, contents=_src(v, "business_model", idea.value), for_whom=target,
+    target = _src(v, "target_customer", "-")
+    lines = [f"{t['for']}: {target.value}"] + ([f"{t['solves']}: {v['problem'][:160]}"] if v.get("problem") else [])
+    faq = [(t["who"], target.value)] + ([(t["cost"], price.value)] if price.source != ASSUMPTION else [])
+    return ProductSpec(brief_id=inputs.brief_id, lang="ar" if inputs.lang == "ar" else "en", offer_kind="other",
+                       offers=[Offer(name=idea, contents=_src(v, "problem", idea.value), for_whom=target,
                                      price=price)],
-                       core_verb=t["verbs"][kind], core_object=Sourced(value=t["object"].format(idea=idea.value),
-                                                                       source=idea.source),
-                       core_result=t["result"], fields=fields, delivery=delivery, sample_title=idea,
-                       sample_lines=lines, faq=faq, key_terms=key_terms(v), source="rules")
-    return spec
+                       core_verb=t["verb"], core_object=idea, core_result=t["result"],
+                       fields=[SpecField(id="f1", label=t["field"])], delivery=t["delivery"], sample_title=idea,
+                       sample_lines=lines + ["{f1}"], faq=faq, key_terms=key_terms(v), source="rules")
+
 
 
 # ---------------------------------------------------------------- model path (validated in code)
@@ -232,17 +184,23 @@ def from_model(inputs: BuildInputs, chat_json: Callable[[list[dict]], str],
     v = brief_values(inputs)
     valid = {f"brief:{k}" for k in v} | {f"item:{i.id}" for i in inputs.items if i.id and i.phase in (1, 2, 4)}
     facts = [f"brief:{k} = {val}" for k, val in v.items()]
-    facts += [f"item:{i.id} = {i.text[:200]}" for i in inputs.items if i.id and i.phase in (1, 2, 4)][:20]
+    phase_items = sorted((i for i in inputs.items if i.id and i.phase in (1, 2, 4)),
+                         key=lambda i: (_LABEL_ORDER.get(i.label, 9), i.phase))  # sourced evidence first
+    facts += [f"item:{i.id} ({_PHASE[i.phase]}, {i.kind}, {i.label}) = {i.text[:240]}"
+              + (f" [{i.sources[0]}]" if i.sources else "") for i in phase_items][:MAX_FACTS]
+    n_facts = len(facts)
     if feedback:
         facts += ["", "The previous spec failed these checks; fix them:"] + [f"- {f}" for f in feedback]
     raw = json.loads(chat_json([
-        {"role": "system", "content": load_prompt("product_spec", kinds=", ".join(KINDS),
+        {"role": "system", "content": load_prompt("product_spec", kinds=", ".join(KINDS), blocks=", ".join(BLOCKS),
                                                   lang="Arabic" if inputs.lang == "ar" else "English")},
         {"role": "user", "content": "<untrusted>\n" + "\n".join(facts) + "\n</untrusted>"},
     ]))
     if not isinstance(raw, dict):
         return None
     kind = raw.get("offer_kind") if raw.get("offer_kind") in KINDS else base.offer_kind
+    order = [b for b in dict.fromkeys(raw.get("blocks") or []) if b in BLOCKS]
+    blocks = order + [b for b in BLOCKS if b not in order]  # every block once; the model picks the order
     offers = []
     for o in raw.get("offers") or []:
         if not isinstance(o, dict):
@@ -262,11 +220,14 @@ def from_model(inputs: BuildInputs, chat_json: Callable[[list[dict]], str],
     title = _sourced(raw.get("sample_title"), valid)
     faq = [(q, a) for q, a in ((_clean(f.get("q")), _clean(f.get("a"), 240)) for f in (raw.get("faq") or [])
                                if isinstance(f, dict)) if q and a][:5]
+    if not offers or obj is None or not fields:  # the model must write the offer and the core action itself
+        return None
     return ProductSpec(brief_id=inputs.brief_id, lang=base.lang, offer_kind=kind, offers=offers or base.offers,
                        core_verb=_clean(core.get("verb"), 30) or base.core_verb, core_object=obj or base.core_object,
                        core_result=_clean(core.get("result")) or base.core_result, fields=fields or base.fields,
                        delivery=_clean(raw.get("delivery")) or base.delivery, sample_title=title or base.sample_title,
-                       sample_lines=lines or base.sample_lines, faq=faq or base.faq, key_terms=base.key_terms,
+                       sample_lines=lines or base.sample_lines, faq=faq or base.faq, blocks=blocks,
+                       key_terms=base.key_terms, facts=n_facts,
                        source="model")
 
 
