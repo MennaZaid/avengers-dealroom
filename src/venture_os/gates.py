@@ -225,16 +225,21 @@ class RunView:
     status: str
 
 
-def previous_stage(stage: str) -> str | None:
+def previous_stage(stage: str, skip: Iterable[str] = ()) -> str | None:
+    """The stage whose approval `stage` needs. Stages in `skip` (not built yet) are passed over, so Build can
+    follow an approved Discover while Validate does not exist; the Build report says Phase 2 has not run."""
     if stage not in STAGES:
         raise GateRefused(f"unknown stage {stage!r}")
-    i = STAGES.index(stage)
-    return STAGES[i - 1] if i else None
+    skip = set(skip)
+    i = STAGES.index(stage) - 1
+    while i >= 0 and STAGES[i] in skip:
+        i -= 1
+    return STAGES[i] if i >= 0 else None
 
 
-def entry_check(stage: str, latest_version: int | None, runs: Iterable[RunView]) -> None:
+def entry_check(stage: str, latest_version: int | None, runs: Iterable[RunView], skip: Iterable[str] = ()) -> None:
     """Raise GateRefused unless `stage` may start on the brief's latest version."""
-    prev = previous_stage(stage)
+    prev = previous_stage(stage, skip)
     if not latest_version:
         raise GateRefused("the brief has no confirmed version yet: confirm it in onboarding first")
     if prev is None:

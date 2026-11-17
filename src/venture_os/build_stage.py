@@ -45,10 +45,11 @@ def _no_model(messages):  # forces the builder's fixed copy on a rebuild
 
 
 def run_build_stage(brief, chat_json: Callable[[list[dict]], str] | None = None, model: str | None = None,
-                    use_browser: bool | None = None) -> BuildResult:
+                    use_browser: bool | None = None, extra_items: list | None = None) -> BuildResult:
+    """`extra_items`: Phase 1-2 findings handed over directly (see discover_items)."""
     t0 = time.monotonic()
     kw = {"chat_json": chat_json, "model": model}
-    inputs = build_inputs.run(brief)
+    inputs = build_inputs.run(brief, extra_items)
     if not inputs.can_start:
         d = gates.record(gates.build_gate(False, inputs.stop_reason, False, [], 0, 0),
                          inputs.brief_id, inputs.brief_version)
@@ -85,6 +86,51 @@ def run_build_stage(brief, chat_json: Callable[[list[dict]], str] | None = None,
                template=plan.template, plan_rounds=rounds, test_attempts=attempts, seconds=round(secs, 1))
     return BuildResult(brief_id=inputs.brief_id, decision=d, template=plan.template, plan_rounds=rounds,
                        test_attempts=attempts, seconds=secs)
+
+
+# Discover claim topic -> evidence kind
+_TOPIC_KIND = {"pain": "pain", "customer_pain": "pain", "competitors": "competitor", "pricing": "price",
+               "market_size": "market", "demand": "demand", "customers": "customer"}
+
+
+def claims_to_items(claims: list[dict]) -> list:
+    """Discover claims (rows of the `claims` table joined to their document) -> evidence items.
+    A sourced fact whose quote was found and is not stale is EVIDENCED; other facts and inferences are INFERRED;
+    assumptions stay ASSUMPTION. Nothing is upgraded."""
+    from venture_os.evidence import Item
+
+    items = []
+    for c in claims:
+        flags = set(c.get("flags") or [])
+        if c.get("type") == "fact" and c.get("url") and not flags & {"quote_not_found", "stale"}:
+            label = "evidenced"
+        elif c.get("type") in ("fact", "inference"):
+            label = "inferred"
+        else:
+            label = "assumption"
+        topic = str(c.get("topic") or "")
+        items.append(Item(phase=1, kind=_TOPIC_KIND.get(topic, "claim"), text=f"{topic}: {c.get('text', '')}"[:400],
+                          label=label, sources=[c["url"]] if c.get("url") else [],
+                          date=str(c.get("published_at") or c.get("retrieved_at") or "")[:10] or None,
+                          quote=(c.get("quote") or None)))
+    return items
+
+
+def discover_items(brief_id: str, brief_version: int) -> list:
+    """Claims of the latest approved Discover run for this brief version, as evidence items."""
+    from venture_os.api.db import connect
+
+    with connect("vos_app") as conn:
+        run = conn.execute("SELECT id FROM stage_runs WHERE brief_id = %s AND brief_version = %s AND stage = "
+                           "'discover' AND status = 'approved' ORDER BY created_at DESC LIMIT 1",
+                           (brief_id, brief_version)).fetchone()
+        if not run:
+            return []
+        rows = conn.execute(
+            "SELECT c.topic, c.text, c.type, c.quote, c.flags, d.url, d.published_at, d.retrieved_at FROM claims c "
+            "LEFT JOIN documents d ON d.id = c.document_id WHERE c.stage_run_id = %s ORDER BY c.created_at",
+            (run["id"],)).fetchall()
+    return claims_to_items(rows)
 
 
 def run_build_stage_for(brief_id: str, **kw) -> BuildResult:

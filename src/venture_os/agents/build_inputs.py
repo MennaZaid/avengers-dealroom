@@ -67,9 +67,11 @@ def _phase2_outcome(brief_id: str) -> str | None:
     return gates[-1].get("outcome") if gates else None
 
 
-def collect(brief) -> BuildInputs:
-    """Gather the inputs; no files written."""
+def collect(brief, extra_items: list[Item] | None = None) -> BuildInputs:
+    """Gather the inputs; no files written. `extra_items`: findings handed over directly (e.g. the approved
+    Discover run's claims), numbered D1, D2, ..."""
     found = evidence.load(brief.brief_id)
+    found += [it.model_copy(update={"id": f"D{i + 1}"}) for i, it in enumerate(extra_items or [])]
     brief_items = _brief_items(brief)
     items = [it.model_copy(update={"id": f"B{i + 1}"}) for i, it in enumerate(brief_items)] + found
     constraints = {c: brief.known(c) for c in _CONSTRAINTS}
@@ -121,8 +123,8 @@ def to_markdown(inp: BuildInputs) -> str:
     return "\n".join(lines)
 
 
-def run(brief) -> BuildInputs:
-    inp = collect(brief)
+def run(brief, extra_items: list[Item] | None = None) -> BuildInputs:
+    inp = collect(brief, extra_items)
     write_output(3, 1, "build_inputs", to_markdown(inp))
     sources = sorted({u for i in inp.items for u in i.sources})
     log_action(AGENT, "collect_build_inputs", sources=sources, model=None, cost=0, approved_by=None,
