@@ -32,8 +32,13 @@ from venture_os.decision_log import log_action
 from venture_os.gates import OUTCOME, GateRefused, apply_decision, can_waive
 
 FOUNDER = "founder"
-ACTIONS = ("publish_landing_page", "create_order", "refund_order")
-Action = Literal["publish_landing_page", "create_order", "refund_order"]
+GATE_ACTIONS = tuple(f"pass_phase{n}_gate" for n in range(1, 7))
+ACTIONS = ("publish_landing_page", "publish_launch_post", "create_order", "refund_order", *GATE_ACTIONS)
+Action = Literal["publish_landing_page", "publish_launch_post", "create_order", "refund_order", "pass_phase1_gate",
+                 "pass_phase2_gate", "pass_phase3_gate", "pass_phase4_gate", "pass_phase5_gate", "pass_phase6_gate"]
+GATE_DECISIONS = ("go", "repeat", "pivot", "stop")
+ACTION_DECISIONS = ("approve", "reject")
+PASSING = ("approve", "go")  # the only decisions that let something happen
 Channel = Literal["ui", "cli"]
 _HASH = re.compile(r"^[0-9a-f]{64}$")
 
@@ -91,46 +96,82 @@ def _check(action: str, content_hash: str) -> None:
         raise ValueError("content_hash must be the SHA-256 hex digest (64 lowercase hex characters)")
 
 
-def record_founder_approval(brief_id: UUID | str, action: Action, content_hash: str, *, session_id: str,
-                            channel: Channel, conn=None) -> dict:
-    """Store the founder's approval of one exact draft/payload. Only the UI and the CLI call this, with the
-    founder's onboarding session; anything else raises PermissionError. Returns the stored row."""
+def _check_decision(action: str, decision: str, pivot_to: str | None) -> None:
+    allowed = GATE_DECISIONS if action in GATE_ACTIONS else ACTION_DECISIONS
+    if decision not in allowed:
+        raise ValueError(f"decision {decision!r} is not valid for {action}; expected one of {', '.join(allowed)}")
+    if decision == "pivot" and not (pivot_to or "").strip():
+        raise ValueError("pivot needs a target: the phase or idea to go back to")
+
+
+def record_founder_approval(brief_id: UUID | str, action: Action, content_hash: str, decision: str = "approve",
+                            note: str | None = None, *, session_id: str, channel: Channel,
+                            pivot_to: str | None = None, brief_version: int | None = None, conn=None) -> dict:
+    """Store the founder's decision on one exact draft/payload/gate decision.
+
+    Gates (pass_phase<N>_gate): decision is go / repeat / pivot (needs pivot_to) / stop, default "go" when
+    "approve" is passed. Other actions: approve / reject. Only the UI (POST /stages/approvals) and the CLI call
+    this, with the founder's onboarding session; any other caller raises PermissionError. The brief version is
+    stored (latest version when not given). Returns the stored row."""
     _check(action, content_hash)
+    if action in GATE_ACTIONS and decision == "approve":
+        decision = "go"
+    _check_decision(action, decision, pivot_to)
     if channel not in ("ui", "cli"):
         raise PermissionError("approvals are made by the founder in the UI or the CLI only")
     if conn is None:
         from venture_os.api.db import connect
 
         with connect("vos_app") as c:
-            return record_founder_approval(brief_id, action, content_hash, session_id=session_id,
-                                           channel=channel, conn=c)
+            return record_founder_approval(brief_id, action, content_hash, decision, note, session_id=session_id,
+                                           channel=channel, pivot_to=pivot_to, brief_version=brief_version, conn=c)
     if not founder_owns_brief(conn, brief_id, session_id):
         raise PermissionError("only the founder can approve: the session must be the one that confirmed this brief")
-    row = conn.execute("INSERT INTO founder_approvals (brief_id, action, content_hash, actor, channel, session_id) "
-                       "VALUES (%s,%s,%s,%s,%s,%s) RETURNING id, created_at",
-                       (str(brief_id), action, content_hash, FOUNDER, channel, session_id)).fetchone()
+    if brief_version is None:
+        v = conn.execute("SELECT max(version) AS v FROM brief_versions WHERE brief_id = %s", (str(brief_id),)).fetchone()
+        brief_version = (v["v"] if isinstance(v, dict) else v[0]) if v else None
+    row = conn.execute(
+        "INSERT INTO founder_approvals (brief_id, action, content_hash, actor, channel, session_id, decision, note, "
+        "pivot_to, brief_version) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id, created_at",
+        (str(brief_id), action, content_hash, FOUNDER, channel, session_id, decision, note, pivot_to,
+         brief_version)).fetchone()
     rid, created = (row["id"], row["created_at"]) if isinstance(row, dict) else row
-    log_action("founder", f"approve_{action}", sources=[], model=None, cost=0.0, approved_by=FOUNDER,
-               brief_id=str(brief_id), content_hash=content_hash, channel=channel)
+    log_action("founder", action, sources=[], model=None, cost=0, approved_by=FOUNDER, outcome=decision,
+               brief_id=str(brief_id), brief_version=brief_version, content_hash=content_hash, channel=channel,
+               pivot_to=pivot_to, note=note)
     return {"id": rid, "brief_id": str(brief_id), "action": action, "content_hash": content_hash,
+            "decision": decision, "note": note, "pivot_to": pivot_to, "brief_version": brief_version,
             "channel": channel, "created_at": str(created)}
 
 
-def has_founder_approval(brief_id: UUID | str, action: str, content_hash: str, conn=None) -> bool:
-    """True only if the founder approved exactly this content for this action and brief. Never raises on bad
-    input: anything malformed is simply not approved."""
+def founder_decision(brief_id: UUID | str, action: str, content_hash: str, conn=None) -> dict | None:
+    """The founder's latest decision on exactly this content (or gate decision), or None. Never raises on bad
+    input."""
     try:
         _check(action, content_hash)
         UUID(str(brief_id))
     except ValueError:
-        return False
+        return None
     if conn is None:
         from venture_os.api.db import connect
 
         with connect("vos_app") as c:
-            return has_founder_approval(brief_id, action, content_hash, conn=c)
-    return conn.execute("SELECT 1 FROM founder_approvals WHERE brief_id = %s AND action = %s AND content_hash = %s "
-                        "AND actor = %s LIMIT 1", (str(brief_id), action, content_hash, FOUNDER)).fetchone() is not None
+            return founder_decision(brief_id, action, content_hash, conn=c)
+    row = conn.execute("SELECT decision, note, pivot_to, brief_version, channel, created_at FROM founder_approvals "
+                       "WHERE brief_id = %s AND action = %s AND content_hash = %s AND actor = %s "
+                       "ORDER BY created_at DESC, id DESC LIMIT 1",
+                       (str(brief_id), action, content_hash, FOUNDER)).fetchone()
+    if row is None:
+        return None
+    keys = ("decision", "note", "pivot_to", "brief_version", "channel", "created_at")
+    return dict(row) if isinstance(row, dict) else dict(zip(keys, row, strict=True))
+
+
+def has_founder_approval(brief_id: UUID | str, action: str, content_hash: str, conn=None) -> bool:
+    """True only if the founder's LATEST decision on exactly this content, action and brief is approve (or go,
+    for a gate). A changed hash, an unknown action, a reject/repeat/pivot/stop, or bad input gives False."""
+    d = founder_decision(brief_id, action, content_hash, conn=conn)
+    return bool(d) and d["decision"] in PASSING
 
 
 def main(argv: list[str] | None = None, stdin=None, stdout=None) -> int:
@@ -142,6 +183,10 @@ def main(argv: list[str] | None = None, stdin=None, stdout=None) -> int:
     p.add_argument("--action", required=True, choices=ACTIONS)
     p.add_argument("--file", required=True, help="the exact draft or payload file to approve")
     p.add_argument("--session", required=True, help="your founder session id (from onboarding)")
+    p.add_argument("--decision", default="approve",
+                   help="approve | reject; for pass_phase<N>_gate: go | repeat | pivot | stop")
+    p.add_argument("--pivot-to", default=None, help="for pivot: the phase or idea to go back to")
+    p.add_argument("--note", default=None)
     a = p.parse_args(argv)
     if not stdin.isatty():
         print("Refused: approve at an interactive terminal (input cannot be piped).", file=stdout)
@@ -152,17 +197,19 @@ def main(argv: list[str] | None = None, stdin=None, stdout=None) -> int:
     preview = data[:600].decode("utf-8", errors="replace")
     print(f"Action: {a.action}", f"Brief: {a.brief}", f"SHA-256: {h}", "--- start of content ---", preview, "---",
           sep="\n", file=stdout)
-    print('Type "approve" to approve exactly this content (anything else cancels): ', end="", file=stdout,
-          flush=True)
+    print(f"Decision: {a.decision}" + (f" -> {a.pivot_to}" if a.pivot_to else ""), file=stdout)
+    print('Type "approve" to record this decision on exactly this content (anything else cancels): ', end="",
+          file=stdout, flush=True)
     if stdin.readline().strip() != "approve":
         print("Cancelled: nothing approved.", file=stdout)
         return 1
     try:
-        rec = record_founder_approval(a.brief, a.action, h, session_id=a.session, channel="cli")
-    except PermissionError as e:
+        rec = record_founder_approval(a.brief, a.action, h, a.decision, a.note, session_id=a.session, channel="cli",
+                                      pivot_to=a.pivot_to)
+    except (PermissionError, ValueError) as e:
         print(f"Refused: {e}", file=stdout)
         return 3
-    print(f"Approved ({rec['action']}, {h[:12]}...) at {rec['created_at']}.", file=stdout)
+    print(f"Recorded: {rec['decision']} ({rec['action']}, {h[:12]}...) at {rec['created_at']}.", file=stdout)
     return 0
 
 
