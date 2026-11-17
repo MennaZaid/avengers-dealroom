@@ -89,7 +89,7 @@ Phase 0 is onboarding: it produces the brief every phase reads. Outputs follow t
 ### Phase 5: Sell, deliver, get paid — MOCKED
 
 - **Agents:** launch planner, delivery (`delivery.py`).
-- **Method:** a store page draft and launch posts as drafts only; checkout runs in test mode or is mocked; see
+- **Method:** a store page draft and launch posts as drafts only; checkout is mocked (no payments of any kind); see
   [Sale to cash](#sale-to-cash).
 - **Output:** `phase5_step1_store_page.md`, `outputs/payment_test_log.md` (labelled `MOCKED`).
 
@@ -108,14 +108,18 @@ starts only if the previous gate passed **for the same brief version**; editing 
 | Gate | Checks | Outcomes |
 |---|---|---|
 | Brief (built) | All required fields answered or explicitly unknown; product is digital and allowed; founder typed "yes" | confirm, or keep editing |
-| 1 Discover | Enough sourced, in-date claims per question; competitors found; no excluded product | go / repeat / pivot / stop |
-| 2 Validate | Pains backed by evidence; waitlist result against its pre-set target | go / repeat / pivot / stop |
+| 1 Product (built) | The confirmed brief's product check: excluded product (physical goods, financial/crypto, health or legal advice) | excluded -> stop; otherwise go |
+| 1 Evidence (built) | Claims with a real source URL after research | 0 sourced -> stop; fewer than 5 -> repeat; otherwise go |
+| 2 Demand (built) | Waitlist sign-ups against a target **declared before the test** (e.g. 100 in 14 days); count entered by the founder or labelled MOCKED, never generated | target reached -> go; >= 50% -> repeat; >= 25% -> pivot; below 25% -> stop |
 | 3 Build | Core flow works; tests pass | go / repeat / stop |
 | 4 Commercial | Price and policies drafted; legal items sourced or marked "no verified source" | go / repeat |
-| 5 Sell | Test payment, delivery and refund all pass | go / repeat |
+| 5 Sell | Mocked purchase, delivery and refund flows all pass | go / repeat |
 
-Every gate decision is written to `outputs/phase<N>_gate_decision.md` and logged with its `outcome` and the
-threshold used. The founder approves, rejects or asks for a revision; only approval moves on.
+Every gate decision is written to `outputs/phase<N>_gate_<name>.md` (`phase1_gate_product.md`,
+`phase1_gate_evidence.md`, `phase2_gate_demand.md`) and logged with its `outcome`, the target and the actual value.
+Thresholds are fixed in code; a demand target is frozen when the test is declared, so it cannot be lowered after a
+weak result (example: 12 of 100 sign-ups in 14 days -> **stop**). A gate only recommends: the founder approves,
+rejects or asks for a revision, and only approval moves on.
 
 **When the system recommends STOP:** the product is excluded (physical goods; financial, investment or crypto;
 health or legal advice); too few sourced claims support the problem; most key claims are stale or only
@@ -124,12 +128,13 @@ reasons; the founder can pivot (edit the brief) or stop.
 
 ## Sale to cash
 
-All of this runs in test mode or is `MOCKED`; the system never holds, moves or refunds money by itself.
+All of this is `MOCKED`: no payments of any kind, not even a sandbox. The system never holds, moves or refunds
+money by itself.
 
 ```mermaid
 sequenceDiagram
   participant C as Customer (test)
-  participant P as Payment provider (test mode / MOCKED)
+  participant P as Payment provider (MOCKED)
   participant W as Webhook handler
   participant D as Delivery
   participant R as Reconciliation
@@ -178,7 +183,8 @@ flowchart TD
 | Guardrails (excluded products, refusals, output checks, redaction) | Working |
 | Source registry, catalog, source validator, registry API | Working |
 | Decision log and outputs writer | Working |
-| Orchestrator, gates, founder approval | In progress |
+| Gates (product, evidence, demand; thresholds fixed before the result) | Working |
+| Orchestrator, founder approval | In progress |
 | Phase 1 Discover, phase 2 Validate agents | In progress |
 | Phases 3, 4, 6 agents | STUBBED (planned) |
 | Phase 5 payments, delivery, refunds, reconciliation | MOCKED (planned) |

@@ -22,6 +22,7 @@ Then open http://localhost:8501 (founder onboarding chat). The API docs are at h
 | 0. Founder onboarding (brief) | **Working** | Arabic/English chat, PDF/Word/text upload, versioned brief, founder confirmation |
 | Guardrails (excluded products, must-never requests) | **Working** | Refuses fake reviews, income promises, impersonation, moving money, credentials |
 | Decision log and outputs | **Working** | `decision_log.json`, `outputs/phase<N>_step<M>_*` written by the code |
+| Gates (product, evidence, demand) | **Working** | go / repeat / pivot / stop from thresholds fixed before the result; 12 of 100 sign-ups -> stop |
 | 1. Discover: find opportunities + gate | In progress | Sourced claims or `ASSUMPTION`; gate go / repeat / pivot / stop |
 | 2. Validate: design the business + gate | In progress | Lean Canvas, landing-page draft; sign-up counts entered by the founder or **MOCKED** |
 | 3. Build: build the product | **STUBBED** | PRD and MVP template |

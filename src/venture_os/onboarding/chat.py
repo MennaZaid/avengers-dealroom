@@ -827,8 +827,9 @@ def handle_document(state: OnboardingState, filename: str, text: str, extractor:
         _log("guardrails", "ignore_document_instructions", document=filename, rule=injected.rule)
     state.messages.append(Message(role="system", text=f"Founder uploaded {filename}"))
     found = parse_labelled(text)  # works with no model: lines like "Budget: 40,000 EGP"
-    found.update({k: v for k, v in _extract(extractor, state, text, f"uploaded document {filename}").items()
-                  if k not in found})
+    if not injected:  # a document that gives the bot instructions: only its explicit "Label: value" lines count
+        found.update({k: v for k, v in _extract(extractor, state, text, f"uploaded document {filename}").items()
+                      if k not in found})
     names, inferred = _apply(state, found, "from_document", f"document:{filename}")
     head = (_t("doc_found", state.lang, doc=filename, names=", ".join(_label(n, state.lang) for n in names))
             if names else _t("doc_none", state.lang, doc=filename))

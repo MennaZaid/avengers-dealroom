@@ -15,8 +15,9 @@ Background and decisions D1-D20: [planning/00-planning-report.md](planning/00-pl
 - **Must never:** promise income; fake reviews, sign-ups or urgency; impersonate; move money; store credentials;
   paywall core features. Excluded products: physical goods, financial/crypto, health or legal advice.
 - **Honest outputs:** `outputs/` and `decision_log.json` only from a real run (empty them before the demo run).
-- **No prompt-injection text anywhere in the repo** (organizers: any injection attempt disqualifies the team).
-  Requests the system must refuse (fake reviews, income promises...) are tested only under `tests/`.
+- **Injection tests:** Injection test cases for **our own** guardrails are allowed, under `tests/` only (`CLAUDE.md`; confirmed by the organizers on 2026-11-17).
+  They target Venture OS's onboarding chat (the brief, budget, confirmation), never the organizers' grading: no text anywhere addresses
+  graders, reviewers or scores (that disqualifies the team).
   `CLAUDE.md` stays at the root.
 - **Secrets** only in `.env` (git-ignored); the database and API store env var names, never values.
 
@@ -29,12 +30,13 @@ Background and decisions D1-D20: [planning/00-planning-report.md](planning/00-pl
 | Decision log, outputs, prompts loader | Complete (shared by all agents) | `decision_log.py`, `outputs.py`, `prompts.py`, `prompts/` |
 | Brief hand-off to the pipeline | Complete | `onboarding/briefs.py`, fixtures in `tests/fixtures/briefs/` |
 | Source registry, tech catalog, source validator, registry API | Complete (seed rows unverified) | `config/`, `db/`, `registry/`, `api/registry.py` |
-| Gates and Phase 2 Validate (Lean Canvas, landing page, demand gate with STOP) | In progress (Menna) | `gates.py`, `agents/business_designer.py`, `agents/landing_page.py` |
+| Gates: product, evidence, demand (go / repeat / pivot / stop; thresholds fixed before the result) | Complete, on `main` | `src/venture_os/gates.py`, `tests/unit/test_gates.py` |
+| Phase 2 Validate (Lean Canvas, landing page, demand test) | In progress (Menna) | `agents/business_designer.py`, `agents/landing_page.py` |
 | Orchestrator, approval, Phase 1 Discover | In progress (Roufayda) | `orchestrator.py`, `approval.py`, `agents/researcher.py`, `agents/interviewer.py` |
 | Docker one-command setup, local model, ARCHITECTURE.md, phases 3-6 stubs | In progress (C) | `Dockerfile`, `docker-compose.yml`, `llm/`, `ARCHITECTURE.md` |
 | README (8 headings) | Headings and honest status in place; updated as parts land | `README.md` |
 
-**Tests:** 172 passing (`pytest -q`); lint clean (`ruff check .`). Tests never write to the real
+**Tests:** 211 passing (`pytest -q`); lint clean (`ruff check .`). Tests never write to the real
 `decision_log.json` or `outputs/` (`tests/conftest.py`).
 
 ## What onboarding does (for anyone integrating)
@@ -86,7 +88,7 @@ Arabic, rejecting a guess, `.md` after confirming), 5 guardrails (excluded produ
 |---|---|---|
 | 1 | `docker compose up` starts db, API, UI and a local open-weight model (Ollama); copy `prompts/` into the image or set `PROMPTS_DIR` | Abdelrahman |
 | 2 | Keep `ARCHITECTURE.md` and the README status table in step with `main` | Abdelrahman |
-| 3a | `gates.py` (shared), Phase 2 agents, demand gate with STOP; demo briefs and script | Menna |
+| 3a | Phase 2 agents (Lean Canvas, landing page, demand test -> `gates.demand_gate`); demo briefs and script | Menna |
 | 3b | Orchestrator + approval; Phase 1 agents with `evidence_gate`; `check_output()` on all generated text | Roufayda |
 | 4 | Stage runs store the `brief_version` they used and show Stale via `is_stale()` | Roufayda |
 | 5 | Phases 3-6 as STUBBED agents with labelled outputs | Abdelrahman |

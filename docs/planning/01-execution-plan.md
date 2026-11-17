@@ -59,18 +59,18 @@ the gate recommends pivot or stop instead of spinning the result.
 | `docker-compose.yml`: `docker compose up` starts everything | ❌ db + SearXNG only so far | C |
 | `decision_log.json` from the demo run | Code ready (`decision_log.py`); log written at the demo run | all |
 | `outputs/` named by phase and step, incl. a gate decision with **stop** | Code ready (`outputs.py`); onboarding writes `phase1_step0_founder_brief.md` | B, all |
-| `tests/` smoke tests (pipeline steps, gate, nothing goes out without approval) | 172 tests (onboarding, guardrails, log, outputs); gate tests to add | B |
+| `tests/` smoke tests (pipeline steps, gate, nothing goes out without approval) | 211 tests (onboarding, guardrails, injection cases, log, outputs, gates); approval tests to add | Roufayda |
 | `ARCHITECTURE.md` (7 sections, Mermaid) | ❌ | C |
 | `.env.example` placeholders only | ✅ | C keeps it complete |
 | `prompts/` one file per agent prompt | ✅ onboarding prompts; agents add theirs | all |
-| Code names: `orchestrator.py`, `agents/<role>.py`, `gates.py`, `approval.py`, `delivery.py` | ❌ | B, C |
+| Code names: `gates.py` ✅; `orchestrator.py`, `approval.py`, `agents/<role>.py`, `delivery.py` ❌ | Partly | Roufayda, Menna, Abdelrahman |
 | `CLAUDE.md` at root, not in `docs/`; trick prompts only under `tests/` | ✅ | - |
 
 ## 5. Timeline (Tuesday)
 
 | When | A | B | C |
 |---|---|---|---|
-| Done | Onboarding complete and on `main` | | |
+| Done | Onboarding complete; `gates.py` on `main` | | |
 | 12:00 | Help B wire the brief into the orchestrator; review guardrail use in agents | Orchestrator + Phase 1 with its gate, incl. STOP | `docker compose up` works from a clean clone |
 | 16:00 | README/ARCHITECTURE review; demo script | Phase 2 + gate; pipeline page | ARCHITECTURE.md; phases 3-6 STUBBED |
 | **18:00** | **Feature freeze** | | |
