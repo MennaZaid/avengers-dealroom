@@ -1,0 +1,236 @@
+--- slide 1 ---
+H Y L I X I N V E S T M E N T  O V E R V I E W
+THE DEALROOM 2026  |  COMPANY OVERVIEW 01
+HYLIX
+More work. Less AI spend.
+Helping businesses get better results from AI without paying for bigger models.
+The DealRoom  |  November 2026
+
+--- slide 2 ---
+H Y L I X T H E  P R O B L E M
+THE DEALROOM 2026  |  COMPANY OVERVIEW 02
+T H E  P R O B L E M
+Businesses pay for AI effort, not results.
+AI assistants are becoming part of daily work, but their mistakes and repeated attempts are expensive.
+PROBLEM 01
+Wasted time
+AI gets stuck, repeats steps, or takes 
+too long to finish a task.
+PROBLEM 02
+Rising costs
+More requests and longer tasks can 
+make AI spending unpredictable.
+PROBLEM 03
+Loss of control
+Businesses often depend on external 
+providers for cost, privacy, and 
+performance.
+
+--- slide 3 ---
+H Y L I X O U R  S O L U T I O N
+THE DEALROOM 2026  |  COMPANY OVERVIEW 03
+T H E  S O L U T I O N
+Hylix makes existing AI work smarter.
+Our product, EVE, improves how AI assistants make progress on complex jobs.
+01
+Keep your model
+Businesses can keep using supported 
+AI models and infrastructure.
+→
+02
+Add EVE
+EVE guides the assistant away from 
+unproductive work.
+→
+03
+Get more done
+The goal is more completed tasks 
+with less time and cost.
+We improve the performance of AI businesses already have, rather than asking them to start over.
+
+--- slide 4 ---
+H Y L I X P R O O F
+THE DEALROOM 2026  |  COMPANY OVERVIEW 04
+W H A T  W E  H A V E  D E M O N S T R A T E D
+More completed tasks at a lower cost.
+Internal software task evaluations. These are test results, not customer revenue.
+SMALLER MODEL
+20% → 40%
+Tasks completed successfully
+COST PER TASK
+$1.10 → $0.50
+About 50% less in this test
+Results depend on the model, task, and testing setup. Independent customer validation is still a priority.
+
+--- slide 5 ---
+H Y L I X C U S T O M E R S
+THE DEALROOM 2026  |  COMPANY OVERVIEW 05
+W H O  W E  S E R V E
+Start with AI-powered software teams.
+Our best early customers already use AI to build products and want better results without a major infrastructure change.
+FIRST CUSTOMER
+AI teams
+Developers and teams already running 
+their own AI models.
+NEXT CUSTOMER
+Businesses
+Companies seeking lower AI operating 
+costs and greater control over company 
+data.
+EXPANSION
+Other workflows
+The same approach may later improve 
+AI work beyond software development.
+
+--- slide 6 ---
+H Y L I X M A R K E T  S I Z E
+THE DEALROOM 2026  |  COMPANY OVERVIEW 06
+M A R K E T  O P P O R T U N I T Y
+A growing market with a focused entry point.
+We start with AI coding agents, then expand to other high-cost business AI workflows.
+$9.8B to $11.0B
+Estimated annualized enterprise AI coding agent market
+Gartner estimate, April 2026
+OUR INITIAL SLICE
+Teams using open AI 
+models on their own 
+infrastructure
+Market size is not Hylix revenue or an addressable-market forecast.
+
+--- slide 7 ---
+H Y L I X B U S I N E S S  M O D E L
+THE DEALROOM 2026  |  COMPANY OVERVIEW 07
+H O W  W E  M A K E  M O N E Y
+Free adoption. Paid business value.
+We aim to turn product proof into recurring business relationships.
+1 Free for developers Let individuals test EVE with supported models and share results.
+2 Paid enterprise deployments Charge businesses for deployment, integration, support, and ongoing access.
+3 Grow with usage Expand into more models, more teams, and additional business workflows.
+Pricing is still being tested. No recurring customer revenue is claimed in this deck.
+
+--- slide 8 ---
+H Y L I X C O M P E T I T I O N
+THE DEALROOM 2026  |  COMPANY OVERVIEW 08
+W H Y  H Y L I X
+We improve the tools companies already use.
+Instead of competing head-on with every AI assistant, we focus on making supported models more efficient.
+Typical approach
+Buy a more powerful model
+Pay more as usage rises
+Rely on an external provider
+Hylix approach
+Improve a model you already use
+Aim to reduce cost per finished job
+Support deployment under business control
+Alternatives include major AI providers, coding tools, and model-optimization companies.
+
+--- slide 9 ---
+H Y L I X F O U N D E R S
+THE DEALROOM 2026  |  COMPANY OVERVIEW 09
+O U R  F O U N D I N G  T E A M
+Research, business, and execution together.
+An AUC-based founding team combining technical development with customer relationships.
+AR
+Andrew Rufail
+Founder | Research lead
+AI researcher with multiple peer-reviewed 
+publications. Leads technology, product, and 
+US outreach.
+HW
+Hesham Waleed
+Co-founder | Business lead
+Leads commercial relationships, partnerships, 
+and local business development.
+AM
+Abdelrahman Montasser
+Co-founder | Operations
+Leads execution, delivery coordination, and 
+operational growth.
+
+--- slide 10 ---
+H Y L I X P R O G R E S S
+THE DEALROOM 2026  |  COMPANY OVERVIEW 10
+W H E R E  W E  A R E  T O D A Y
+Built and tested. Preparing to sell.
+Current results show technical promise. Customer adoption and repeatable sales are the next tests.
+BUILT
+Working EVE versions tested on multiple AI model 
+sizes
+VALIDATED IN TESTS
+Improved software task completion and cost in 
+internal evaluations
+GO-TO-MARKET
+Free developer product and direct business 
+conversations
+NEXT
+Convert pilots into paying customers and 
+independent proof
+
+--- slide 11 ---
+H Y L I X G R O W T H  P L A N
+THE DEALROOM 2026  |  COMPANY OVERVIEW 11
+W H A T  C O M E S  N E X T
+A practical path from tests to customers.
+We are prioritizing sales proof before aggressive expansion.
+01
+Prove
+Complete customer pilots 
+and measure impact on 
+real work.
+02
+Convert
+Sell to teams with clear 
+savings, deployment 
+needs, and repeat usage.
+03
+Expand
+Support more AI models 
+and customer use cases.
+04
+Scale
+Grow from Egypt into the 
+Gulf and the US.
+
+--- slide 12 ---
+H Y L I X F I N A N C I A L S
+THE DEALROOM 2026  |  COMPANY OVERVIEW 12
+F I N A N C I A L  M O D E L
+The economics we plan to prove.
+The DealRoom financial model is prepared separately with its organizers. This slide shows the business drivers, not invented 
+financial results.
+REVENUE
+Paid deployments, software access, integration, and 
+support
+DIRECT COSTS
+Engineering time, customer support, and any hosting 
+we provide
+KEY METRIC
+Customer work increase compared with the price of 
+Hylix
+GROWTH DRIVER
+Customers retained and expanded across teams and 
+models
+Revenue, margin, forecast, and valuation figures should be inserted only from the approved DealRoom model.
+
+--- slide 13 ---
+H Y L I X T H E  I N V E S T M E N T  C A S E
+THE DEALROOM 2026  |  COMPANY OVERVIEW 13
+T H E  I N V E S T M E N T  C A S E
+Better AI economics can become a big business.
+Hylix is early, but the market need, product direction, and measurable performance gains are clear.
+WHY IT MATTERS
+When businesses spend less on each completed AI task, they can 
+do more with the same budget.
+Our next milestone: repeatable customer results and paid deployments.
+
+--- slide 14 ---
+H Y L I X S O U R C E S  A N D  N O T E S
+THE DEALROOM 2026  |  COMPANY OVERVIEW 14
+S O U R C E S  A N D  I M P O R T A N T  N O T E S
+Clear proof. Clear assumptions.
+For DealRoom research and diligence.
+Internal Hylix EVE evaluations: 20% to 40% successful tasks and $1.1 to $0.5 per task on a tested setup.
+Gartner, Enterprise AI Coding Agent Market Guide, April 2026: approximately $9.8B to $11.0B annualized market.
+Stack Overflow 2025 Developer Survey: 51% of professional developers reported daily AI tool use.
+Market source: gartner.com/en/articles/enterprise-ai-coding-agent-market
+Developer source: survey.stackoverflow.co/2025/ai

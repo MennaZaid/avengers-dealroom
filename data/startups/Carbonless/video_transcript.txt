@@ -1,0 +1,46 @@
+# Carbonless — video transcript (Carbonless - Mohab Mohamed.mp4)
+# language: en (p=0.96), duration 7.9 min, model small
+# Machine transcript: names and numbers may be misheard; check against the video before quoting.
+
+[00:01] Hello, AFCs. This is Malam Khamad, founder and CEO of Carbonless.
+[00:06] It's a climate tech startup that develops onboard carbon capture and storage systems for the ship owners to enable them to decarbonize their vessels and comply with the EU-annoyed regulations.
+[00:21] The current team is working on developing the very first MVP and they are from multidisciplinary engineering backgrounds and we do have an experienced advisory board that can get this job done.
+[00:39] The problem we're solving is the compliance with the emissions regulations by the EU and the IEO.
+[00:50] So for ship owners to comply with these regulations, they have two options.
+[00:55] Either they still go with the fossil fuel and pay the penalties that can reach up to 70% of their annual fuel budget or they can go with the alternative fuels that are less available and way costly that can go up to like 5.5 times their original fuel budget.
+[01:16] So we help them decarbonize their vessels by integrating their vessels with the Sino system, an onboard carbon capture and storage system that is integrated with the ship, allows it to run on conventional fuel and we collect the carbon dioxide.
+[01:35] We do not let it to the air and we sell it to other industries as a raw gas so they can use it in carbon circular economy.
+[01:46] So why now?
+[01:49] If you see the market, we have like 34,000 ships that need to comply with these regulations and if you look at the bigger picture, we have 99% of the global fleet and 85% of the newly ordered vessels still run on conventional fuel.
+[02:11] So we need a fair transition towards this net zero transition.
+[02:18] The pressure is building up and these regulations as for the EU, they're enforced at the moment and the IEO, they're discussing it to be enforced in like 2028.
+[02:32] We don't have competitors here in Egypt, but we do have competitors in like all of the globe. We have mainly nine competitors.
+[02:39] Carbonless system or the Sino system is better with energy efficiency by like 35% to 60% energy consumption compared to the other system in the market and it's more like a sustainable investment because it's compatible with all the sea fuel types.
+[03:09] For example, the EMS method and the design system is LCA based or life cycle assist based design. So it makes the carbon accounting more of a straightforward process.
+[03:27] How do I acquire customers?
+[03:31] First we need to build our very first MVP and get it certified from the class society and go and like for a sea trial, which is pretty much what's everyone doing, speaking of our competitors.
+[03:46] So that's how you get your first customer. You land your MVP on a pilot on a vessel and you go for a sea trial and you prove that you are one of the best companies that can decarbonize these vessels.
+[04:04] Our relationship with the customer is more of an ongoing relationship more like forever.
+[04:13] So the Sino system is like the lifetime system is the same as the ship's system and it can be even retrofitted on other ships after the ship lifetime is over.
+[04:29] So we're looking on a long term relationship.
+[04:32] So our customer relationship is very long term and crucial for Carbons.
+[04:43] A single biggest risk to the business might be the underdeveloped value chain of the carbon capture utilization storage.
+[04:55] Because when we're looking at this solution, it's pretty much straightforward just pick the carbon or capture the carbon dioxide from the exhaust and don't let it to the atmosphere.
+[05:10] So you need some utilities at the ports to offload this captured CO2 in order to resell it to the end user.
+[05:21] And that's kind of like underdeveloped. So we're hoping for the alternative of the CO2 carrier.
+[05:31] So when the ship needs to offload the captured CO2, it will offload it to another CO2 carrier and then to the end user after that.
+[05:44] And hopefully this can maybe be like a midterm solution for the issue of the underdeveloped OCCUS.
+[05:57] Where will the company be in five years? Hopefully a unicorn.
+[06:02] That's what we're hoping for.
+[06:05] We'll take our shots to that.
+[06:09] And hopefully we can install like more than a thousand CINU systems on various vessels from those 34,000 vessels that needs to comply.
+[06:22] A successful exit looks like, I don't know, I'll be greedy.
+[06:29] The system, I think will revolutionize the OCCS industry.
+[06:37] So a successful business is like donating the market for quite a long time.
+[06:44] That's that would be like the successful exit scenario for someone like me.
+[06:50] We're currently raising a four million dollar ticket or multiple tickets.
+[06:56] Since we're addressing investors from NBC here in Egypt, 13% will go for the onboard MVP because we developed a prototype, but we need to upgrade that to an on land MVP to be tested on a generator.
+[07:14] And ultimately at this stage get the approval and principle for this MVP.
+[07:20] And then 25% goes for the certification of this CINU system by the classification society to allow us to go for a seat trial.
+[07:36] And 62% will go to the deployment of the CINU system onboard of one of the vessels as a pilot trial.
+[07:44] That's all. Thank you all for having me and I think you're building a great thing. So keep it up and thanks.

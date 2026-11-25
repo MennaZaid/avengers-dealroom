@@ -1,0 +1,605 @@
+--- slide 1 ---
+Agents that already 
+know the founder.
+We help solo founders hand off the work they keep putting off.
+Mohamed Fadel · BuildCamp Generation 0 · November 2026
+
+--- slide 2 ---
+The problem
+A solo founder is also the grant writer, the chief of 
+staff and the marketer.
+36%
+of new startups now have 
+one founder, up from 24% 
+in 2019
+15%
+of priced-round money went 
+to solo founders in 2024
+7
+BuildCamp founders joined 
+in the first week: 3 on Work, 
+4 on Zaat
+Carta, Solo Founders Report, H1 2025
+2
+
+--- slide 3 ---
+What we built
+Hire an agent. It already knows you.
+Chief of staff
+Meetings, follow-ups, the 
+investor update.
+Capital
+Grants and programs, 
+filled up to Submit.
+Content
+Your week, as posts, in 
+your voice.
+In the works · built by us, or plugged in from partners like Fuzzbucket and Rimplo
+Pipeline
+Warm intros
+Talent
+Hiring
+Books
+The monthly close
+Desk
+Support inbox
+Scout
+Competitors
+Counsel
+Contracts
+Reach them in the office, on WhatsApp, by email, or from Claude and ChatGPT through MCP. Launches, and charges, in December.
+3
+
+--- slide 4 ---
+The engine · personal Zaat, inside every agent
+Everything Zaat learns, every agent uses.
+Your calendar
+Your meetings
+What ChatGPT knows
+What you do, weekly
+day one
+every week
+every month
+Your Zaat
+Chief of staff
+Chases your real 
+promises
+Capital
+Through people 
+you know
+Content
+Writes in your voice
+Other tools start from zero every time.  
+Zaat starts with you, and keeps learning.
+4
+
+--- slide 5 ---
+How we make money
+A plan a month, and credits when the agents 
+do more.
+Founder · $49 3 agents, 2,000 credits, Zaat Plus. Costs us $23. $21 kept after fees.
+Startup · $149 6 agents, 7,500 credits, 5 teammates. Costs $40. $94 kept.
+Top-ups 1,000 credits for $12, 5,000 for $50. About $5 a company a month.
+Costed task by task from measured agent runs and vendor prices. One price everywhere. Personal Zaat Plus is $20.
+5
+
+--- slide 6 ---
+Traction
+Work is a week old. Zaat has been in a private 
+beta since September.
+51
+people in Zaat’s private beta, 
+free on purpose
+37
+active this month, 21 
+this week
+979
+beliefs about them, each 
+traced to evidence
+3
+companies on Work in its 
+first week
+Production, 22 Nov 2026, not counting Mohamed · payments switch on in December
+6
+
+--- slide 7 ---
+The market
+23,000 startups came through Stripe Atlas alone 
+last year.
+$588
+a year from one founder on 
+the Founder plan
+$52.6B
+AI agents market by 2030, 
+from $7.8B in 2025
+Three engines: programs that bring cohorts, content that brings everyone 
+else, and partners whose agents plug in.
+Stripe Atlas 2025 review · MarketsandMarkets, AI agents, 2025
+7
+
+--- slide 8 ---
+How we compare · checked on each product’s own site, 22 Nov 2026
+Only Zaat knows the founder.
+Zaat 
+$49
+Claude 
+$20
+ChatGPT 
+$20
+Cofounder 
+$40 + AI
+Lindy 
+$30
+Town 
+$15
+Sintra 
+$49
+Knows the founder, with evidence  × ×
+Predicts you, then gets scored  × × × × × ×
+One brain all agents share   
+Grants, investors, updates  × × × × ×
+Fills web forms on its own   ×  ? ×
+Sits in your meetings  ×  ×
+Each agent has its own email  × ×  
+WhatsApp  × × × × ?
+Use it from Claude or ChatGPT  — —  × × ×
+Slack and Teams Next  ×  ?
+Telegram, SMS, a phone number Next × ×  ?
+Check: yes · ring: partly · ×: no · ?: not documented · Next: on our plan 8
+
+--- slide 9 ---
+The team
+Mohamed built Zaat and Zaat Work in four 
+months.
+1,650
+commits since 27 July
+3
+ways in: web, iPhone, 
+WhatsApp
+$1,948
+spent to get here
+Mohamed Fadel builds and sells. Hiring once customers pay: an engineer, partnerships, content.
+9
+
+--- slide 10 ---
+What $100,000 does
+Twelve months to 456 paying companies, hiring 
+as they pay.
+$35.8K
+monthly revenue by 
+month 12
+Month 13
+the whole company is 
+profitable, March 2028
+$37K
+the lowest the bank 
+ever gets
+Hiring Only as customers pay: an engineer at 50 companies, partnerships at 100, content 
+at 150.
+More money $300K reaches $78K a month. $500K reaches $144K.
+Assumptions How many programs sign on, and how many of their founders pay.
+10
+
+--- slide 11 ---
+The next fifteen months · paying companies at the end of each step
+Four steps to 456 paying companies.
+Dec – Feb · 
+no funding
+Launch and charge
+Work live in December, 
+paid from day one. Two 
+more programs.
+14
+Mar – May
+First hire
+An engineer once 50 
+companies pay. Two 
+programs a month.
+75
+Jun – Aug
+More agents
+First partner agents plug 
+in. Partnerships and 
+content hires.
+172
+Sep – Feb 2028
+The Gulf
+Four programs a month. 
+$35.8K a month, near 
+break-even.
+456
+Monday, we switch on payments and call the seven BuildCamp founders.
+11
+
+--- slide 12 ---
+
+
+--- slide 13 ---
+Supporting 
+slides
+Personal Zaat What it is, the private beta in numbers, how Work sits on it
+Zaat Work Where agents reach you, what each plan costs us, credits, partners
+The money How founders arrive, before funding, $100K, $300K and $500K, spend so far
+Next What we’re working on, older people and families, and sources
+13
+
+--- slide 14 ---
+Personal Zaat · the name means “the self”
+A working model of one person, that gets better 
+over years.
+Memory
+What came in: conversations, 
+calendar, meetings, notes, health. 
+Dated, cited, searchable.
+Mind
+The people, projects and moments 
+of a life, drawn as a map.
+Model
+What it believes about you, how 
+sure it is, and what it predicts 
+you’ll do.
+What you do counts for more than what you say about yourself. So it won’t 
+flatter you.
+Supporting 14
+
+--- slide 15 ---
+Personal Zaat · the private beta
+Free on purpose, while we learn what people use.
+What we see Now
+Where people talk to it 45 on the web, 23 on iPhone, 17 on WhatsApp
+Messages from them 1,445, of which 709 in the last 30 days
+Daily check-ins kept 143
+Beliefs per person about 29, each with its evidence
+Decisions it predicted 12 sealed in advance, 7 already scored
+Coming back half the next day · 28 of 42 after a week · 14 of 37 after a month
+What an active person costs us about $2.50 a month today; about $0.47 for a free person once Free is paced
+Plus is ready at $20 a month, $12 for founding members. It goes on sale with Work’s payments in December.
+Supporting 15
+
+--- slide 16 ---
+Personal Zaat, since September
+Weekly active people went from 7 to 24.
+22,032
+things read: messages, 
+meetings, calendars, notes
+6,965
+pieces of evidence, weighed
+11,559
+people, places and 
+projects mapped
+Shipped Web, iPhone, WhatsApp, voice calls, a meeting notetaker, Apple Health, a daily 
+digest, a library
+Kept Half come back the next day; 28 of 42 came back after their first week
+Supporting 16
+
+--- slide 17 ---
+How the two fit
+One account. Your own Zaat, and a space for 
+each company.
+Your Zaat Knows how you decide, who matters to you, what you promised. Stays yours.
+The company Its own brain: docs, meetings, investors, decisions. Kept when people leave.
+The agents Read the company brain, and only what you choose to share from your own.
+Never Your check-ins, journal, health or a score of any employee reach a company.
+Supporting 17
+
+--- slide 18 ---
+Zaat Work · where your agents reach you
+Talk to your agents wherever you already are.
+The office · live Watch them work, hand them a task, approve what they draft.
+WhatsApp · built “Atlas, chase the term sheet.” Small approvals are one button.
+Email · built Each agent has its own address. Forward anything to it.
+MCP · built Connect Zaat to Claude or ChatGPT: ask the brain, hand an agent a task.
+Later iPhone and Mac apps, Slack and Teams, Telegram, voice notes.
+Supporting 18
+
+--- slide 19 ---
+Zaat Work · what a Founder plan costs us, a month
+$49 in, $23 to run, $21 kept.
+Line What’s in it A month
+Chief of staff 10 meetings prepped and attended (8 hours), 8 chases, an 
+update
+$10.34
+Capital 4 scans, 3 drafts, 2 forms filled ($0.65 each, measured), 
+investor research
+$4.73
+Content 4 weekly posts, a newsletter, 2 meetings turned into posts $1.57
+Company brain 40 docs read, nightly synthesis, what changed $1.74
+Zaat Plus, included the founder’s own Zaat (meetings counted above) $4.49
+Cost to run $22.87
+Price, after yearly discounts $49 a month, $490 a year; 30% assumed yearly $46.55
+Paddle’s fee 5% + $0.50 $2.83
+Kept 45% of the price $20.85
+Supporting 19
+
+--- slide 20 ---
+Zaat Work · what a Startup plan costs us, a month
+$149 in, $40 to run, $94 kept.
+Line What’s in it A month
+The three live agents chief of staff, Capital, Content, as on Founder $16.64
+Pipeline warm-intro paths to 8 customers, follow-ups $3.00
+Scout a weekly scan of competitors and the market $1.57
+Desk 200 support emails answered or routed $3.72
+Teammates’ meetings 4 teammates, 4 hours each $8.80
+Brain and Zaat Plus as on Founder $6.23
+Cost to run $39.96
+Price, after yearly discounts $149 a month, $1,490 a year $141.55
+Paddle’s fee, then kept $7.58 in fees; 66% of the price kept $94.02
+Supporting 20
+
+--- slide 21 ---
+Zaat Work · credits and top-ups
+A plan covers a normal month. Busy months 
+buy credits.
+A credit One cent of model work. A web search is 3, a form-filling step 5.
+Founder 2,000 credits a month. A typical month uses about 1,219.
+Top-ups 1,000 for $12, 5,000 for $50, kept for a year. Agents stop and ask at a cap.
+Expected 1 in 4 companies tops up in a month: about $4.90 each, costing us $3.60.
+Top-ups are priced close to cost today. At $15 for 1,000 they would keep a third: one of the changes we’re weighing.
+Supporting 21
+
+--- slide 22 ---
+Zaat Work · what one piece of work costs us
+Most tasks cost cents. Meetings cost the most.
+Agent Task Each
+Chief of staff A brief before a meeting $0.14
+Chief of staff Sitting in an hour’s meeting, notes and follow-ups $0.51
+Chief of staff The monthly investor update $0.39
+Capital A weekly scan for grants and programs $0.29
+Capital An application drafted in Docs $0.41
+Capital A form filled in a browser, up to Submit (measured) $0.65
+Content The week’s posts $0.20
+A step: $0.009 measured, $0.018 modelled (Claude Sonnet) · browser $0.12 an hour · meeting $0.55 an hour
+Supporting 22
+
+--- slide 23 ---
+Zaat Work · each competitor, and where they’re ahead today
+Where they win now, and why it doesn’t hold.
+Who Ahead of us today What they don’t have
+Claude In Slack on team plans; huge reach A model of you with evidence; founder jobs; agents that 
+share a brain
+ChatGPT Dots: an always-on agent, in Slack and Teams One agent per person; nothing for founders
+Cofounder Shared library, company inboxes, an MCP server No model of the founder, no fundraising, no browser or 
+notetaker; bring your own AI
+Lindy SMS, iMessage, its own phone number; a free plan One assistant, not a team; not built for founders
+Town Own address, WhatsApp, Telegram, Slack; well funded No model of the founder; no grants or fundraising
+Sintra 12 cheap helpers sharing one knowledge base No browsing, no email of its own, no MCP, no founder 
+jobs
+Slack, Teams, Telegram and phone numbers for agents are next on our plan.
+Supporting 23
+
+--- slide 24 ---
+Zaat Work · how we grow the team of agents
+Our agents and our partners’, on one brain.
+Built by us
+Chief of staff
+Capital
+Content
+One brain, one model of you
+Plugged in from partners
+Fuzzbucket · 
+marketing
+Rimplo · sales and 
+revenue
+Next: legal, 
+finance, hiring
+Faster
+A strong agent in weeks, not a year 
+of building.
+Better
+Each specialist builds the thing it’s 
+best at.
+More reach
+We launch to their users, they launch 
+to ours.
+Both are BuildCamp companies. No partner signed yet: the first conversations start here.
+Supporting 24
+
+--- slide 25 ---
+Zaat Work · integrations · every department is a door
+Tools that can plug into our agents.
+Content
+Posts, films, campaigns
+Fuzzbucket · Gamma 
+· Descript
+Pipeline
+Leads, intros, deals
+Rimplo · Apollo · Clay 
+· Attio
+Capital
+Raising and the cap table
+Carta · DocuSign
+Desk
+Support, answered
+Intercom · Zendesk
+Books
+Revenue and the close
+Stripe · QuickBooks
+Talent
+Sourcing and hiring
+Ashby · Juicebox
+Counsel
+Contracts, drafted 
+and signed
+Spellbook · DocuSign
+Scout
+Markets and competitors
+Perplexity · Crayon
+Examples of tools with an API or MCP server our agents can work through. Fuzzbucket and Rimplo are BuildCamp companies. None signed yet.
+Supporting 25
+
+--- slide 26 ---
+The money · how founders arrive
+Two engines: programs and content.
+Programs A cohort of about 40 gets a free month, as BuildCamp did. 1 in 4 pays after.
+Content Founder-led posts, UGC and AI-made films bring sign-ups. 4 in 100 pay.
+Staying 4% of paying companies leave each month; 6% of Plus members.
+Where Egypt and the Gulf first, then anywhere online. One price everywhere.
+By month 12 $100K $300K $500K
+Programs a month 4 8 15
+Sign-ups from content a month 660 1,800 4,200
+Supporting 26
+
+--- slide 27 ---
+The money · where 456 paying companies comes from, on $100K
+Where 456 comes from.
+14
++360
++167 −85
+456
+Paying by February, before 
+any money
+Programs: 36 cohorts × 40 
+founders × 1 in 4
+Content: 4,170 sign-ups × 4 
+in 100
+Leaving: 4% of paying 
+companies a month
+Paying in February 2028
+Supporting 27
+
+--- slide 28 ---
+The money · how month 12 adds up, on $100K
+456 companies and 315 Plus members make 
+$35.8K a month.
+Line How it’s worked out A month
+Plans 456 companies × $60.80, the average plan $27.7K
+Top-ups 456 companies × $4.90 of credits $2.2K
+Zaat Plus 315 members × $18.67 $5.9K
+Revenue $35.8K
+The average plan 85% Founder at $46.55, 15% Startup at $141.55 $60.80
+After yearly discounts 30% pay yearly and get two months free $49 → $46.55
+Plus members 1.2% of free active people subscribe a month; 6% leave 315
+Active people 9 in 10 stay each month, plus new ones from content and Work 6,084
+Supporting 28
+
+--- slide 29 ---
+The money · programs bring cohorts, content brings everyone else
+Content is the second engine.
+Founder-led Mohamed’s posts and podcast clips: what the agents did this week, in public.
+UGC Founders filming their own agents at work. About $150 a video.
+AI-made Films and images made in-house, for the cost of the generation.
+Our own agent Zaat’s Content agent drafts it all. We sell what we use.
+A month, from month 4 $100K $300K $500K
+UGC videos 4 · $600 15 · $2,250 30 · $4,500
+AI films, tools, boosting what works $910 $3,750 $7,500
+Sign-ups it brings, month 12 660 1,800 4,200
+Supporting 29
+
+--- slide 30 ---
+The money · December to February, with no funding
+Launch now, and charge from day one.
+December January February
+Paying companies on Work 3 8 14
+Paying people on Plus 6 14 22
+Active people 60 95 140
+Revenue $269 $694 $1,206
+Loss, paid by Mohamed −$825 −$1,991 −$414
+What Mohamed does:  launch Work in December with payments on, run Capital’s forms for the BuildCamp founders, sign two more programs, offer Plus to 
+the beta at $12, and make the content himself. January carries Google’s security review for Gmail and Drive.
+Supporting 30
+
+--- slide 31 ---
+The money · year one on $100,000, March 2027 to February 2028
+Revenue grows eightfold; the team grows only as 
+customers do.
+Q1 Q2 Q3 Q4 Year
+Revenue $11.7K $30.5K $58.9K $94.9K $195.9K
+Cost of serving −$7.1K −$18.8K −$35.9K −$57.4K −$119.2K
+Gross profit $4.6K $11.7K $22.9K $37.5K $76.7K
+Team −$11.0K −$20.4K −$23.2K −$23.3K −$77.9K
+Everything else −$10.5K −$11.9K −$17.7K −$21.3K −$61.5K
+Loss −$16.9K −$20.6K −$18.0K −$7.2K −$62.7K
+Cash at the end $83.1K $62.5K $44.5K $37.3K
+Team: Mohamed at $1,500 from March; an engineer ($2,500) at 50 paying companies, partnerships ($1,500) at 100, content ($1,100) at 150. Plus 12% 
+employer costs.
+Supporting 31
+
+--- slide 32 ---
+The money · why year one is a loss, and when it ends
+Every customer pays for itself. The $100K pays 
+for the team.
+Revenue $195.9K, most of it in the second half of the year.
+− Serving it $119.2K: agents, Plus, free people and payment fees.
+− The team $77.9K, each hire waiting for paying customers.
+− Everything else $61.5K: hosting, content, tools, legal, SOC 2.
+= Loss $62.7K, paid from the $100K. $37.3K is never touched.
+Then Profitable from month 13, March 2028.
+Supporting 32
+
+--- slide 33 ---
+The money · when we hire, on $100K
+Each hire waits for customers, unless it pays for 
+itself sooner.
+Who A month Starts when Lands in
+Mohamed, modest pay $1,500 the money arrives March
+Engineer $2,500 50 companies pay April
+Partnerships $1,500 100 companies pay June
+Content and marketing $1,100 150 companies pay August
+Content sooner? From March costs $6.5K more. Worth it if it adds ~35 paying companies: about 150 
+more sign-ups a month.
+Engineer sooner? A month early costs $2.9K. Only if a missing feature is losing sales.
+Supporting 33
+
+--- slide 34 ---
+The money · if we could raise what we need
+$100K proves it. $300K or $500K scales it.
+$100K $300K $500K
+Team by month 12, with Mohamed 4 7 8
+Reach, a month $1.5K $6K $12K
+Paying companies, Feb 2028 456 1,022 1,894
+Plus members 315 605 1,040
+Monthly revenue, month 12 $35.8K $78.4K $143.9K
+Revenue, year one $196K $416K $723K
+Loss, year one −$63K −$191K −$298K
+First profitable month Mar 2028 Apr 2028 Mar 2028
+Lowest the bank ever gets $37K $109K $202K
+Supporting 34
+
+--- slide 35 ---
+The money · what it has cost, 27 July to 22 November 2026
+Both products, built for $1,948.
+What Spent From
+Claude subscription and credits $900 estimate, four months
+AI models in the product (OpenAI, Anthropic, others) $374 bills and payments
+Hosting, database, background jobs $225 Vercel, Neon, Inngest
+Apple, Google Play, domains, Workspace $280 list prices, estimates
+Films and ads (Higgsfield) $125 Mohamed
+Voice (ElevenLabs) $44 two months
+Mohamed’s own time is not counted. Meetings, email, analytics and sign-in still run on free tiers.
+Supporting 35
+
+--- slide 36 ---
+Next · what we’re working on
+Before the money: get paid, prove the costs, 
+sign programs.
+December Payments live on the web and both stores. Each agent’s own email. MCP open to 
+Claude and ChatGPT.
+The product Teammates. Work on the phone. Pipeline and Scout. Slack and Telegram.
+The numbers Measure real agent costs. Raise top-ups, which barely cover cost. Make Plus earn.
+Trust Google’s review for Gmail and Drive. SOC 2 started before selling to teams.
+Growth Five more programs signed. First partner agents connected.
+Supporting 36
+
+--- slide 37 ---
+Later · not tested yet
+Zaat for older people, and for the family around 
+them.
+For them Someone to talk to every day, who remembers, and keeps them close to children 
+and grandchildren.
+For the family Stories, voice and advice kept while they’re here, in their own words.
+After Only if they chose it while alive: their family can still ask them things.
+First step Twenty conversations with families before we build anything for it.
+Supporting 37
+
+--- slide 38 ---
+Where the numbers come from
+Measured, listed, or a stated assumption.
+Measured Users, activity, model spend and agent steps from production; OpenAI’s bill.
+Listed Claude, Browserbase, Recall, Paddle, Apple, Google, RevenueCat, Inngest, 
+Clerk, Neon.
+Researched Cairo salaries (Levels.fyi, Paylab), Carta, Stripe Atlas, MarketsandMarkets, 
+ChartMogul.
+Assumed How many programs sign on, how many founders pay, and how much each 
+company uses.
+Month by month, all three plans: Zaat financial model.xlsx
+Supporting 38

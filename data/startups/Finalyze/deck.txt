@@ -1,0 +1,89 @@
+--- slide 1 ---
+PRE-SEED · OCTOBER 2026 fina-lyze.com
+
+--- slide 2 ---
+PROBLEM
+Capital markets
+65% 60–70%
+Banks and lenders
+Sources: KITAB-Bench (ACL 2025) · Egypt Law 151/2020 · SAMA rulebook · Finalyze analyst interviews, 2026 02
+
+--- slide 3 ---
+WHY NOW
+Sources: MSCI index factsheets, Sept 2026 · FTSE Russell · S&P Global Investor Day, Nov 2025 · OpenAI and
+Anthropic releases 03
+
+--- slide 4 ---
+SOLUTION
+01
+02
+03
+ACCURACY ON ARABIC FINANCIAL DOCUMENTS
+98.2%
+85.7%
+65%
+Sources: Finalyze internal test, 2026 · KITAB-Bench, ACL 2025 04
+
+--- slide 5 ---
+HOW WE MAKE MONEY
+01 02 03
+SO FAR NEXT
+Price uplift: Finalyze pricing model against regional comparables, October 2026 05
+
+--- slide 6 ---
+WHY THIS GETS BIG
+In discussion In discussion Running
+WHAT BUYERS PAY FOR DATA BUSINESSES, AS A MULTIPLE OF REVENUE
+9–14x
+2–7x
+Multiples: Finalyze analysis of 40+ data-company exits and valuations, October 2026 06
+
+--- slide 7 ---
+NEXT
+DATA RESIDENCY IS A GROWING
+CONCERN
+USE OF FUNDS
+40%
+Sources: ITIF, 2021 · Egypt Law 151/2020 and Decree 816/2025 · Saudi PDPL (SDAIA) 07
+
+--- slide 8 ---
+MARKET
+$13B $1.8B$0.15B
+WHAT ONE INSTITUTION PAYS A
+YEAR
+$17–25K
+About $20M revenue ÷ 913
+subscribing institutions (2020)
+$78K
+₹669.5 crore (about $78M) revenue
+÷ 1,000+ institutions (FY2025)
+AT MATURITY
+Finalyze market sizing and arithmetic, 2026 · Burton-Taylor, MSCI, IMF · Perfios via Inc42 · I-Score via Daily
+News Egypt 08
+
+--- slide 9 ---
+COMPETITIVE LANDSCAPE
+SCARCE DATA GRANULARITYVERTICAL DEPTHOWNED SCORES
+CAPITAL MARKETS DATA VENDORS
+EXISTING GENERAL EXTRACTION MODELS
+CONFIDENTIAL FINANCIAL DATA SOLUTIONS
+strongpartialabsent09
+
+--- slide 10 ---
+TRACTION
+Status as of 29 October 2026 10
+
+--- slide 11 ---
+TEAM
+CEO
+ CPO
+ CTO
+ADVISOR
+11
+
+--- slide 12 ---
+THE ASK
+USE OF FUNDS
+60% 40%
+WHAT THE ROUND BUYS
+fina-lyze.com12

@@ -1,0 +1,89 @@
+# Per-startup claims. quote must appear verbatim (case/space-insensitive) in data/startups/<name>/<source file>.
+# source: deck -> deck.txt, video -> video_transcript.txt, deck_image:<page> -> read from slide image (not auto-checkable).
+# ask_usd: the round size the startup is raising (null = not stated).
+Modeeri:
+  sector: B2B SaaS, frontline operations / inspections (Egypt, UAE, GCC)
+  stage: pre-seed, revenue
+  ask_usd: 400000
+  ask_note: video and deck body say $400K; $110K already secured from a Saudi-based VC
+  claims:
+    - {source: video, quote: "pre-seed round, which is $400,000 with $110,000 already secured from a Saudi based VC"}
+    - {source: video, quote: "$185,000 from angels to date"}
+    - {source: video, quote: "150 locations currently running on the platform across 12 brands"}
+    - {source: deck, quote: "Contracted ARR"}
+    - {source: deck, quote: "$45K+"}
+    - {source: deck, quote: "Active Pipeline ARR"}
+    - {source: deck, quote: "Churn since March 2026"}
+    - {source: deck, quote: "4 full-time  ·  8 part-time"}
+    - {source: video, quote: "in the Egypt, it's very, these businesses are very price sensitive"}
+Blaze:
+  sector: consumer fintech, education-first investing (Egypt)
+  stage: pre-seed, pre-launch (pilot users)
+  ask_usd: 500000
+  ask_note: $200K secured, $300K to go; launch depends on FRA approval targeted Q1 2027
+  claims:
+    - {source: deck, quote: "$200,000 SECURED  ·  40% OF THE ROUND"}
+    - {source: deck, quote: "Trade Commission - 0.15%/ TXN"}
+    - {source: deck, quote: "Freemium Model  -  $7/ month"}
+    - {source: video, quote: "We do not need to acquire our own brokerage license from the FRA"}
+    - {source: video, quote: "securing the approval of the FRA to launch the product by the Q1 of"}
+    - {source: video, quote: "EFG Hermes"}
+Zaat:
+  sector: AI agents for solo founders
+  stage: pre-seed, private beta, solo founder
+  ask_usd: 100000
+  ask_note: deck plan built on $100K; video asks "100 to 500k, ideally more in the higher end"
+  claims:
+    - {source: deck, quote: "people in Zaat’s private beta"}
+    - {source: deck, quote: "Founder · $49 3 agents, 2,000 credits, Zaat Plus. Costs us $23."}
+    - {source: deck, quote: "$1,948"}
+    - {source: deck, quote: "Launches, and charges, in December."}
+    - {source: video, quote: "raise between 100 to 500k, ideally more in the higher end"}
+    - {source: video, quote: "I'm currently solo founding"}
+Hylix:
+  sector: AI developer tooling (coding-agent efficiency)
+  stage: pre-revenue, internal tests only
+  ask_usd: null
+  ask_note: no ask stated in deck; no video
+  claims:
+    - {source: deck, quote: "These are test results, not customer revenue."}
+    - {source: deck, quote: "20% to 40% successful tasks and $1.1 to $0.5 per task on a tested setup"}
+    - {source: deck, quote: "No recurring customer revenue is claimed in this deck."}
+TRNR:
+  sector: sports coaching marketplace (Cairo)
+  stage: pre-revenue, app built
+  ask_usd: 80000
+  ask_note: ask only in the video (~$80K for 15 months); none in deck
+  claims:
+    - {source: deck, quote: "7 coaches and 3 venues committed across two areas."}
+    - {source: deck, quote: "SAM, OUR ASSUMPTION"}
+    - {source: deck, quote: "a WhatsApp message to a friend"}
+Finalyze:
+  sector: Arabic financial-data extraction (B2B data)
+  stage: pre-seed, live product
+  ask_usd: 140000
+  ask_note: $140K for 5% at $2.66M pre-money (read from slide images)
+  claims:
+    - {source: "deck_image:12", quote: "$140K for 5% at a $2.66M pre-money valuation"}
+    - {source: deck, quote: "ACCURACY ON ARABIC FINANCIAL DOCUMENTS"}
+    - {source: deck, quote: "$13B $1.8B$0.15B"}
+Byota:
+  sector: gut profiling + personalised nutrition (health-adjacent)
+  stage: pre-pilot, waitlist
+  ask_usd: 1100000
+  ask_note: ask exceeds the whole fund; $450K of it for an own lab
+  claims:
+    - {source: video, quote: "around 100 people in our rating list and three onboarded"}
+    - {source: video, quote: "approximately 1.1 million US dollars"}
+    - {source: video, quote: "450,000 for the lab infrastructure"}
+    - {source: video, quote: "we're taking an asset-light approach initially"}
+Carbonless:
+  sector: onboard ship carbon capture (climate hardware)
+  stage: prototype
+  ask_usd: 4000000
+  ask_note: ask is 4x the fund; needs class certification and a sea trial before revenue
+  claims:
+    - {source: video, quote: "We're currently raising a four million dollar ticket"}
+    - {source: video, quote: "we developed a prototype"}
+    - {source: video, quote: "Hopefully a unicorn."}
+    - {source: video, quote: "We have mainly nine competitors."}

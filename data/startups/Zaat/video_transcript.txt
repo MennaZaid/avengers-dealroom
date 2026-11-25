@@ -1,0 +1,63 @@
+# Zaat — video transcript (Zaat - Video.mp4)
+# language: en (p=0.98), duration 5.0 min, model small
+# Machine transcript: names and numbers may be misheard; check against the video before quoting.
+
+[00:00] Hi, I'm Hamat Fadil and I'm building Vet, which stands for self in Arabic.
+[00:05] Who am I? I'm currently an entrepreneur, but I used to be someone who
+[00:10] was very deep in leadership and self-development. I led ISIC itself like ISIC globally.
+[00:18] Back a couple of years ago having spent about eight years in it and at that point I was managing over 40,000 young people
+[00:25] spanning over 120 countries. I
+[00:28] also worked in product management, building product across multiple companies,
+[00:35] spanning from fintech to mobility to media and just trying a lot of different things out.
+[00:42] And I'm currently solo founding because honestly with everything and all the tools you have right now
+[00:48] it's quite feasible to be building on your own and something I'm enjoying doing to be honest.
+[00:55] I'm trying to solve multiple things, but the core of what Zed started with is that I wanted to build something that
+[01:03] can help me make decisions, can help me become better as a person. And
+[01:07] that started off as a personal model, trying to build a model that represents me, a model that grows with me because
+[01:13] whenever you talk to an existing personal assistant such as Claude or ChargerBT, the problem is that they're always designed to agree with you, to flatter you.
+[01:21] They don't have consistent memory and that was what I was trying to tackle with Vet.
+[01:25] And that's what has been built and that exists a model that understands you, that it's able to help you, that connects to everything in your life and is able to surface patterns and to find things and to join your meetings, just
+[01:36] becomes you, builds a brain of you,
+[01:39] it becomes everything that can map things, can speak like you, sound like you become you.
+[01:44] And that's something that exists. But then there's been sort of a pivot where this still exists, but I decided that
+[01:51] as a founder I need help. And also I wanted to approach the B2B market and that's when I started building Zed work,
+[01:57] which allows you to build a whole set of agents that are able to support you with doing work better.
+[02:02] And I think this is where the mode becomes different because
+[02:06] there are tools like this that exist. There's like ChargerBT, there's Claude, Claude co-work, there's things like town.com, there's
+[02:14] co-founder.co. There are a lot of things that do that. The one thing that they don't do though is that they don't connect the personal to the professional.
+[02:20] And they don't build the world where it's able to help you in all aspects of life.
+[02:24] So imagine that you're able to have an agent that helps you
+[02:28] with creating the pitch decks and agents that's helping you with the financial modeling agent that helps you with creating your content,
+[02:33] an agent that's helping you with essentially your day-to-day life.
+[02:36] And all of those connect together. They speak together. They work together ambiantly.
+[02:40] They get your things done, but they also connect to your personal Zed to yourself, to your personal model.
+[02:45] So that becomes a very different shape of how things are going.
+[02:50] There are constantly going to be risks and the risks are with the big players,
+[02:54] specifically when you're looking at the open AI, you're looking at the anthropic and the likes.
+[02:58] But the win there is that building that mode and building that loyalty within customers and also building it in terms of a community,
+[03:04] which is the direction I'm going in. I think that's the way to make this happen.
+[03:10] And I'll be acquiring customers primarily through
+[03:13] working with accelerators and working with a lot of founder programs because that's the target segment for Zed work
+[03:19] and from that I expanded to the personal Zed. But also I'll be working to acquire customers with a lot of organic content,
+[03:25] organic QGC content that's going to allow me to bring people in.
+[03:29] I think that's probably the biggest also lever or growth lever that I'm going to be
+[03:34] leveraging and using at the moment. I cannot tell you where I see the company is going to be in five years.
+[03:39] I'm optimistic, but you take it day by day as a founder.
+[03:43] And it's just about going regardless and while pushing through.
+[03:49] I'm hopeful. I'm aspiring for different things, but
+[03:55] let's see how it turns out because PIVOTS can happen every single day.
+[03:58] And right now I'm looking to raise between 100 to 500k, ideally more in the higher end.
+[04:04] And a lot of it goes into scale.
+[04:07] I need to be hiring people. I need to be hiring people that work in partnerships.
+[04:10] I need to be hiring people that work in GTM. I need to be hiring content.
+[04:13] I need to be hiring a couple of engineers to help me with scaling and pushing through faster.
+[04:17] So the more I can bring on right now, I have the capacity to grow with.
+[04:24] That's where we're looking at.
+[04:26] I cannot also tell you what an exit would look like at the moment.
+[04:30] I'm quite excited about the potential of this, but I don't know if I'd want to keep building it
+[04:35] forever or I'd look for an exit, but I'm building it for the sake of helping and making a
+[04:39] difference. And I believe that's something going to help me personally because that's
+[04:42] I'm using it. As a founder, I'm looking for something that sort of fixes my entire workflow,
+[04:47] but I'm also looking for something that helps me personally. And this is where Z comes in.
+[04:50] It becomes my second self, my digital brain, my digital twin, my digital clone.
+[04:54] That is the goal. Thank you very much.

@@ -1,0 +1,9 @@
+fund_usd: 1000000
+reserve_usd: 100000        # kept for follow-ons / judges' surprises
+max_ticket_usd: 300000
+min_ticket_usd: 50000
+min_weighted_score: 3.2    # below this: no investment (STOP)
+round_to_usd: 10000
+# ASSUMPTION: median pre-money for a MENA pre-seed startup, used as the Scorecard-method base.
+base_premoney_usd: 2000000
+weights: {team: 0.30, market: 0.25, product: 0.15, competition: 0.10, sales: 0.10, funding_need: 0.05, other: 0.05}

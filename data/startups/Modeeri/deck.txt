@@ -1,0 +1,258 @@
+--- slide 1 ---
+The operations platform for
+frontline teams across MENA.
+Pre-Seed   ·   September 2026
+
+--- slide 2 ---
+2M locations. 100M+ frontline workers. 
+Still running on paper and WhatsApp.
+Nobody built the platform for them.
+
+--- slide 3 ---
+THE CHALLENGE
+More locations,
+more gaps.
+As businesses scale, ﬁve operational gaps start 
+costing time and money.
+TIME
+300+ hrs
+per site, every year, lost to 
+manual admin
+RESOURCES
+Up to 5%
+of revenue lost every year to 
+waste, mistakes, equipment 
+failures, and ﬁnes.
+Consistency
+Standards vary from site to site 
+and shift to shift.
+Compliance
+Company and regulatory 
+standards are nearly impossible 
+to enforce.
+Transparency
+No real-time view of what’s 
+happening at each site.
+
+--- slide 4 ---
+Product
+One platform that standardizes the work, 
+proves it happened, and ﬁxes what failed.
+Evidence, not assurances
+Photos, timestamps and signatures, captured live.
+Failures become tasks
+Assigned, tracked and closed only with proof.
+Scored and comparable
+Every branch scored on the same criteria.
+Reports that write themselves
+Auto-generated PDF, emailed on submission.
+USED FOR
+HACCP ISO & compliance
+Opening & closing procedures
+Brand audits
+Health & safety
+
+--- slide 5 ---
+Modeeri AI
+From AI-checked inspections to operations that run themselves
+Roadmap · 2027 – 2028
+Q4 2026
+Agents + AI Approvals
+• AI approves every photo before 
+a manager sees it
+• Agents run the admin across 
+every branch
+WHO CHECKS   Team + AI
+Q2 2027
+Visual Intelligence
+• Turns existing CCTV into 24/7 
+audits of every branch
+• Links video to POS to catch 
+theft and slow service
+WHO CHECKS   Cameras + AI + Team
+2028
+Humanoids + Agents
+• Humanoids run audits where 
+cameras can’t reach
+• Every branch audit-ready, zero 
+human error
+WHO CHECKS   Robots + cameras + AI
+AI Approval
+Zamalek · Opening
+1 Restock pastries
+2 Clean counter
+Fix 2 issues
+Builds inspections
+Assigns corrective actions
+Automates notiﬁcations
+Surfaces insights
+Visualizes data
+Answers staff questions
+REC   CAM 03 · ZAMALEK 07:58:12
+Display stocked
+Napkins missing on counter
+! Corrective action sent Restock napkins · Zamalek · 10 min
+Stock counted nightly
+99.9% accuracy
+Planogram match
+100% of shelves
+Inspection-ready
+All 12 branches
+Deliveries veriﬁed
+0 short shipments
+
+--- slide 6 ---
+Who we serve
+Global brands and regional leaders
+are already running on Modeeri.
+Customers 150+ locations under contract
+In active discussion Commercial terms in progress 500+ locations)
+
+--- slide 7 ---
+In their words
+What operators say after
+the ﬁrst month.
+“Modeeri completely changed how 
+we run our store visits, and it 
+surfaces issues we would never 
+have caught.”
+Grant Shoeman
+Merchandise Director, adidas
+“We’ve saved hours every week 
+making sure tasks are done right, 
+and done the same way, across 
+every location.”
+Mohamed Anwar
+Head of IT, Willyʼs
+
+--- slide 8 ---
+Traction
+The demand question has been answered. 
+We are preparing for lift-off. 
+150+
+Locations under contract
+0
+Churn since March 2026
+$45K+
+Contracted ARR
+$400k+
+Active Pipeline ARR
+250k+
+Tasks completed on the platform
+#1
+Organic search rank in MENA for 
+category keywords
+
+--- slide 9 ---
+Per-location 
+subscription.
+Land one module,
+expand across
+locations, users
+and modules.
+Business model
+$50 /location /mo $10 /location /mo
+Modeeri AI · add-on
+Inspections (avg.) · 
+includes 10 users
+Coming next: Visual Intelligence (Priced monthly 
+per camera).
+✓  $5 /additional user /mo
+✓  Automate daily SOPs
+✓  Inspections & audits
+✓  Corrective actions
+✓  Automated reporting
+✓  Analytics & dashboards
+✓  Branch scoring
+✓  Answers from SOPs
+✓  Flags risks early
+✓  Writes reports for you
+✓  100 questions / location
+✓  Then $0.10 / question
+
+--- slide 10 ---
+Market
+100M+ frontline workers across MENA.
+Their tech market triples by 2031.
+2M Multi-location sites in our space
+100M+ Frontline workers — 60% of workforce
+$45B Global frontline-tech market by 2031
+25% MEA market CAGR, 20262031
+29% Safety & compliance CAGR (fastest)
+Global market: Mordor Intelligence, Frontline Worker Technology Market $19.2B in 2026  $45.1B in 
+2031. Market: Mordor Intelligence, MEA Frontline Worker Technology Market $0.84B in 2026  $2.57B 
+in 2031. Chain locations: Grand View Research, Mordor Intelligence, Credence Research, Alpen Capital.
+$300M+
+Serviceable ARR by 2031 across 420,000 chain 
+locations 10+ branches, our ICP) at $60/location/mo 
+avg.
+Egypt is the proving ground. The GCC is the margin — the 
+same operators, more locations per brand, materially higher 
+willingness to pay.
+
+--- slide 11 ---
+Competitive advantage
+Global platforms were not built for this region,
+or for the people actually doing the work.
+Built for the frontline
+Built for head office
+Global-first
+MENA-native
+Agentic, not just software
+AI that builds inspections, reviews photos and learns from every branch.
+Priced for the region
+Global tools cost 35x per location. Operators here simply will not sign.
+On-the-ground support
+We onboard teams with dedicated support. No overseas ticket queue.
+Simple enough to actually get used
+Arabic-first and designed for frontline staff, not compliance departments.
+
+--- slide 12 ---
+Team
+Operators who lived these problems
+before they built the platform for them.
+Ali Dajani
+Founder & CEO
+F&B director/owner and operations 
+consultant across the US, Bahrain 
+and Egypt.
+Khaled Mousa
+CTO
+Built and scaled logistics and retail 
+systems at MaxAB, one of the 
+regionʼs largest B2B platforms.
+Ra’ed Nemat
+Head of Sales & Partnerships
+Enterprise SaaS sales and 
+partnerships with consultancies and 
+franchisors across MENA.
+Mahmoud Huisseny
+Head of Customer Success
+Onboarding and retention for 
+multi-location accounts.
+4 full-time  ·  8 part-time across engineering, product and operations
+Alumni of
+Cairo Program
+Currently in
+Seed Accelerator
+
+--- slide 13 ---
+The ask
+Raising $500K to scale 
+our AI and take a 
+proven playbook into 
+the GCC.
+$185K previously raised from angel investors.
+$400K
+Round size
+$110K
+Raised
+USE OF FUNDS
+Product & engineering — AI modules, full-time team 60%
+Sales & marketing — enterprise focus, GCC expansion 30%
+Operating expenses 10%
+
+--- slide 14 ---
+Revolutionizing how a million
+frontline businesses run.
+Ali Dajani  ·  Founder & CEO ali@modeeri.com 20 111 994 4761 modeeri.com

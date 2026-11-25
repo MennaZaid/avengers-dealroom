@@ -1,0 +1,84 @@
+# Byota — video transcript (Byota - video.mp4)
+# language: en (p=0.59), duration 7.0 min, model small
+# Machine transcript: names and numbers may be misheard; check against the video before quoting.
+
+[00:00] Question one. Hi, I am Omar Ahmed, co-founder and CAO of Bioto.
+[00:05] I started making personalized nutrition more accessible through advanced gut
+[00:09] profiling and AI. Our team combines three complementary areas of expertise.
+[00:16] I come from a computational biology and AI background with experience in
+[00:21] genomics and health tech. My co-founder, AO brings extensive experience in
+[00:28] managing labs and molecular biology and quality control. Our third
+[00:33] co-founder, Srin Mahmood specializes in nutrient genomics and nutrition research.
+[00:39] Together we understand the science, the tech and how to translate that into
+[00:44] practical services. Question two. Today people spend years trying different
+[00:51] diets, eliminating foods and following usually generic nutrition advice.
+[00:56] Often without understanding what actually works for their bodies. We are changing
+[01:02] that by combining advanced gut profiling with personalized nutrition plans
+[01:08] developed by nutritionists and supported by an AI coach that helps clients make
+[01:14] better everyday food choices. And we are already seeing early demand. We
+[01:19] currently have around 100 people in our rating list and three onboarded
+[01:25] nutritionists and a fully developed and tested platform. We are now preparing for
+[01:30] our official service pilot where we will validate the initial interest through
+[01:34] real customer adoption. Question three. So three things have changed recently in
+[01:41] Egypt. First of all is the advanced biological testing becoming
+[01:46] increasingly accessible. Whether it's in Egypt or in international markets, the
+[01:53] price for getting those advanced tests are getting lower. Also the AI is making
+[01:59] it possible to turn complex information and big data into personalized and
+[02:03] actionable guidance. And third is that the customers are increasingly seeking
+[02:09] proactive and personalized approaches to their health and nutrition.
+[02:13] International companies have already demonstrated interest in the space
+[02:17] but the regional market remains underserved. I'm talking about Egypt
+[02:21] and the wider Middle East and we believe that this is the right time to step and
+[02:26] bring the scientifically grounded and as well culturally relevant personalized
+[02:33] nutrition to the region. Question four. So internationally our competitors are
+[02:39] Zoe and Viome which offer microbiome based nutrition services among a
+[02:46] wider portfolio. In Egypt our alternatives include diagnostic labs,
+[02:51] conventional nutrition services and wellness platforms. Our differentiation is
+[02:56] the complete experience. We don't simply provide a test result but we are
+[03:02] connecting the biological insights from a lab test, an advanced one, a
+[03:07] professional nutrition guidance from a nutritionist and a continuous AI
+[03:11] support in one platform. We are designing biota specifically for the
+[03:17] region with Arabic and English support, familiar local foods and a nutritionist
+[03:22] centered business model to reduce the friction of being introduced to a whole
+[03:27] new thing. Our goal is to make personalized nutrition more practical
+[03:31] and accessible not just scientifically sophisticated. Question five. Our
+[03:38] business model is B2B2C. Most of our customers come through partner
+[03:43] nutritionists and GIT experts who recommend biota as part of their
+[03:48] client's personalized nutrition journey. Customer's purchase either our
+[03:52] standard or advanced gut profiling packages which include six months of
+[03:57] access to the platform. After that we project around one third will continue
+[04:03] through a paid monthly subscription. Based on our first year financial
+[04:07] projections each customer represents approximately 9,200 Egyptian pounds in
+[04:14] lifetime revenue. As we scale we will expand our practitioner network and
+[04:19] introduce direct to consumer marketing while validating our customer
+[04:24] retention and lifetime value and optimizing that throughout the pilot.
+[04:28] Question six. Our biggest risk is converting scientific innovation
+[04:35] into a commercially scalable service. The advanced technology does not
+[04:40] necessarily mean that consumers will pay for it consistently. That's why
+[04:44] we're taking an asset-light approach initially. Working with external lab
+[04:49] partners rather than making a major infrastructure investment before
+[04:53] validating the demand. We're also entering the market through
+[04:56] nutritionists which helps us build credibility and reach customers
+[05:01] through a trusted professional instead of reaching out and being not really
+[05:06] trusted. Our pilot will focus on validating the conversion, the pricing
+[05:11] and the user engagement while also understanding the retention before we
+[05:15] scale. Question seven. In five years we envision biota as a leading
+[05:22] personalized gut health and nutrition platform across the Middle East. We
+[05:26] plan to establish a strong presence in Egypt and then expand to the Gulf
+[05:31] markets and develop regional lab capabilities as the demand grows. Our
+[05:36] long-term competitive advantage will come from integrating the biological
+[05:40] insights with the ongoing nutrition and lifestyle data to improve the
+[05:45] personalization. A successful exit could be a strategic acquisition by an
+[05:52] international diagnostics or healthcare or maybe a digital health tech
+[05:56] company that is looking to enter or expand within the region. Question eight. Our
+[06:04] proposed funding opportunity is approximately 1.1 million US dollars. Our
+[06:10] integrity allocation is 450,000 for the lab infrastructure establishing a lab,
+[06:17] 150,000 for regulatory readiness and quality systems, 200,000 for product
+[06:24] development and scientific validation, another 200,000 for practitioner
+[06:29] partnerships and market expansion and a final 100,000 for the working
+[06:35] capital. We would deploy that in, we would deploy the funding in stages
+[06:41] starting with the commercial validation in Egypt and progressing towards
+[06:45] regional expansion and lab capacity in Qatar. Ultimately we are building
+[06:51] more than a customer, than a gut testing service. We're building the
+[06:55] infrastructure for personalized nutrition in the Middle East. That's
+[06:59] Biota. Thank you.

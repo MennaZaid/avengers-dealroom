@@ -1,0 +1,18 @@
+# Team scorecard: 1 = far below a typical regional pre-seed, 3 = typical, 5 = far above.
+# These are STARTING suggestions; edit scores and reasons after your own discussion.
+Modeeri:   {team: 4, market: 4, product: 4, competition: 3, sales: 5, funding_need: 4, other: 4,
+            why: "Only startup with contracted ARR ($45K+) and named brands; lead VC already in ($110K); GCC pricing beats Egypt"}
+Finalyze:  {team: 4, market: 3, product: 4, competition: 4, sales: 3, funding_need: 4, other: 3,
+            why: "Live product, clear ask and valuation, data moat on Arabic filings; buyer talks not yet contracts"}
+Blaze:     {team: 4, market: 3, product: 3, competition: 2, sales: 3, funding_need: 3, other: 2,
+            why: "$200K angel-secured, strong founder; launch blocked on FRA approval (Q1 2027) and deck/video licence wording conflict"}
+Zaat:      {team: 3, market: 3, product: 3, competition: 1, sales: 3, funding_need: 3, other: 3,
+            why: "51-person beta, careful unit economics; solo founder, recent pivot, head-on with OpenAI/Anthropic"}
+Hylix:     {team: 3, market: 4, product: 3, competition: 2, sales: 1, funding_need: 3, other: 4,
+            why: "Honest deck, big market; internal tests only, no revenue, no stated ask"}
+TRNR:      {team: 2, market: 2, product: 3, competition: 2, sales: 2, funding_need: 4, other: 3,
+            why: "Small $80K ask, app built; pre-revenue, small SAM (assumption), WhatsApp leakage risk"}
+Byota:     {team: 4, market: 3, product: 2, competition: 3, sales: 2, funding_need: 1, other: 2,
+            why: "Strong science team; ask $1.1M > fund, own-lab plan contradicts asset-light, health-adjacent"}
+Carbonless: {team: 2, market: 4, product: 2, competition: 2, sales: 1, funding_need: 1, other: 2,
+            why: "Real regulatory pull; prototype only, $4M ask = 4x fund, certification + sea trial before revenue"}

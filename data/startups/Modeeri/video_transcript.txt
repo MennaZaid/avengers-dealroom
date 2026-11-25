@@ -1,0 +1,50 @@
+# Modeeri — video transcript (Modeeri Video.MOV)
+# language: en (p=0.97), duration 3.9 min, model small
+# Machine transcript: names and numbers may be misheard; check against the video before quoting.
+
+[00:00] Hi, my name is Ali Dajani. I'm the founder and CEO of Mudiri.
+[00:05] Mudiri is an inspections and compliance platform specifically for frontline teams.
+[00:10] So any business where their core workforce
+[00:13] are blue-collar workers who actually work on ground. So you can think of restaurants, hotels,
+[00:20] retail stores, manufacturing plants, and
+[00:23] essentially we allow them to make sure that all of their standards are properly enforced across their entire operations.
+[00:29] So they do that by creating digital checklists, audits, inspections directly from our platform.
+[00:36] Instead of it being a paper checklist
+[00:38] or just someone memorizing what to do, it's now an automated recurring
+[00:43] inspection form that their team uses to make sure that
+[00:47] everything gets done properly. So for example an opening, a store opening checklist for opening a retail store or a closing checklist,
+[00:55] an inventory receiving checklist, or for a more high level with things like audits,
+[01:00] something like a weekly audit where someone goes down every single week
+[01:04] to audit the entire branch or the entire operations to get a report that shows them what went wrong, what went right, and
+[01:13] where do we actually need to focus our time to improve. So it gives them compliance scores. It tells them where the areas that they really need to focus their time on and
+[01:21] another really cool thing is that say someone's running an audit and they find that there's an issue in one of the locations, they can automatically
+[01:30] set a corrective action.
+[01:33] So if there's a fridge that's broken, for example, they can assign that to the maintenance team to handle that and they get a notification
+[01:39] every single day until it's resolved with a photo. So the entire loop is closed. We also just introduced AI pre-checks.
+[01:46] So every photo that's taken during the audit automatically gets approved in real time by AI telling them
+[01:52] was this done to the company standards or not and if not a note on how they can change it before taking the next picture.
+[01:58] So essentially when someone finishes the entire audit, everything is done to the company standards.
+[02:04] Another use case for this would be for a manufacturing plant. They're a very highly regulated industry.
+[02:09] They need to make sure they're being safe, being compliant.
+[02:12] There's a bunch of quality checks that happen across the entire production line.
+[02:16] So this could be used for any industry, not just restaurants and retail stores, but for, you know, for
+[02:23] airlines, for construction companies, for facility management. And that's really what we've been seeing is
+[02:28] it being used across many different industries.
+[02:31] So we have around 150 locations currently running on the platform across 12 brands,
+[02:38] spanning between here and the UAE currently.
+[02:40] We're also heavily focusing our time on the GCC, making sure that we actually get some sort of expansion.
+[02:48] There's also another reason is that
+[02:51] in the in the Egypt, it's very, these businesses are very price sensitive to using a platform like this.
+[02:56] But in the GCC, we can charge without making discounts and it's been a lot more
+[03:00] rewarding for us financially. And there's a lot more room to grow. It's also a very highly regulated
+[03:07] area or region, I guess, the GCC. So Saudi, Kuwait, Qatar, the UAE, they have a lot of regulations on these types of businesses,
+[03:14] maybe a lot more than Egypt.
+[03:16] So they really do need to be implementing a system like ours.
+[03:19] In terms of fundraising, we've raised around
+[03:23] $185,000 from angels to date.
+[03:25] And we are currently raising
+[03:28] our pre-seed round, which is $400,000 with $110,000 already secured from a Saudi based VC.
+[03:37] Our team, we're around 12 people.
+[03:39] Four of us are full-time. The eight, the other eight are part-time,
+[03:43] spanning around, spanning across engineering, product, sales, customer success.
+[03:49] And yeah, that's just a bit about us.

@@ -1,0 +1,182 @@
+--- slide 1 ---
+Sports Discovery Reimagined.
+
+AG
+Ahmed           
+M. Gamal
+CO-FOUNDER
+
+
+Rawan Khashaba
+CO-FOUNDER
+
+--- slide 2 ---
+A QUESTION
+Ever tried picking up a new sport   in Cairo?
+Most people start the same way: a WhatsApp message to a friend.
+2
+
+--- slide 3 ---
+01 PROBLEM
+Today it takes five steps and a lot of luck.
+01
+Ask around
+A friend of a friend knows a coach.
+02
+Get a number
+No profile, no price, no reviews.
+03
+Go back and forth
+Days of messages to agree on a time.
+04
+Find a court
+Someone still has to book it.
+05
+Hope
+No deposit, so anyone can drop out.
+3
+
+--- slide 4 ---
+01 PROBLEM
+Coaches lose too.
+
+Empty slots
+New players only arrive by word of mouth.
+
+No-shows
+Nothing holds a player to a booking.
+
+Admin
+Schedules, court calls and payments all live in chat threads.
+4
+
+--- slide 5 ---
+The hardest part of picking up a sport in Egypt is getting to the first session.
+5
+
+--- slide 6 ---
+02 CUSTOMER SEGMENT
+Who we are building for.
+Source: CAPMAS youth statistics, August 2025.
+6
+
+--- slide 7 ---
+03 SOLUTION
+TRNR is one straight line from wanting to play a sport to playing.
+01
+Pick a sport
+Tennis and run clubs at launch.
+02
+Choose a coach
+Profiles, prices and open slots in one place.
+03
+Commit
+Chat with the coach, then lock the slot with a deposit.
+04
+Show up
+The coach books the venue in the app.
+7
+
+--- slide 8 ---
+03 SOLUTION, HOW IT WORKS
+Three sides, one flow.
+Player
+Browses coaches by sport and requests a slot.
+books a session
+
+Coach
+Builds a profile, answers requests, fills the week.
+books a court
+
+Venue
+Lists courts and open slots, fills quiet hours.
+8
+
+--- slide 9 ---
+04 MARKET SIZE
+Start small in a real market.
+USD 92M
+TAM, SOURCED
+Sports coaching in Egypt, 2025
+Forecast to reach USD 159M by 2034, growing about 6% a year.
+USD 19M
+SAM, OUR ASSUMPTION
+Greater Cairo
+Greater Cairo holds about 21% of Egypt’s population. We apply that share to the TAM.
+Sources: Deep Market Insights, Egypt Sports Coaching Market 2026 to 2034; CAPMAS population estimates.
+9
+
+--- slide 10 ---
+05 COMPETITION
+WhatsApp is the real competitor.
+10
+
+--- slide 11 ---
+06 GLOBAL BENCHMARK
+The model already works elsewhere.
+Sources: Business Wire, September 2025; CB Insights; Playtomic and GP Bullhound releases, 2025.
+11
+
+--- slide 12 ---
+07 VALIDATION
+What we know, and what we still have to prove.
+VALIDATED
+Interviews with tennis coaches, stakeholders, and customers.
+7 coaches and 3 venues committed across two areas.
+Working app with player, coach and venue roles.
+STILL AN ASSUMPTION
+Players will pay a deposit in the app before they meet the coach.
+Coaches keep bookings on TRNR after the first session.
+A flat percentage commission is acceptable after the founding period.
+12
+
+--- slide 13 ---
+08 BUSINESS MODEL
+We earn when a session happens.
+10%
+Flat commission on the full session price for every coach after that.
+0%
+Free
+For run clubs. They bring the community.
+Players pay the session price, starting with a deposit in the app. Commission is on the coach.
+13
+Commission for our first 20 founding coaches.
+
+--- slide 14 ---
+09 GO-TO-MARKET
+Supply first, two neighborhoods and two sports.
+01
+Sign supply first
+Direct outreach and meetings with coaches and run clubs in 5th Settlement and Sheikh Zayed.
+02
+Founding coaches
+The first 20 pay 0% commission and bring the players they already train.
+03
+Run clubs
+Free to join. Every run puts TRNR in front of active people.
+04
+Courts and social
+QR codes at partner venues and bilingual content where players already scroll.
+A player who opens the app on day one finds real coaches near them.
+14
+
+--- slide 15 ---
+10 TWO-YEAR ROADMAP
+24 months, four stages.
+MONTHS 1 TO 3
+Go to market
+Launch in two areas. Sign 20 founding coaches. 
+MONTHS 4 TO 6
+Prove it
+Repeat bookings from the same players. Commission live for new coaches.
+MONTHS 7 TO 18
+Grow
+Open more Greater Cairo areas. Add the next sport based on demand. 
+MONTHS 19 TO 24
+Scale
+Scheduling tools for coaches. Decide on a second city.
+15
+
+--- slide 16 ---
+Thank you
+trnr-mena.com

@@ -1,0 +1,55 @@
+# TRNR — video transcript (TRNR - video.mp4)
+# language: en (p=0.59), duration 4.7 min, model small
+# Machine transcript: names and numbers may be misheard; check against the video before quoting.
+
+[00:00] Hi, I'm Ahmed Gamal, the co-founder of Trainer with Rwankh Hashgah.
+[00:04] I'm studying MISAT at AUC and Rwankh studying mechanical engineering.
+[00:08] Rwankh has been playing tennis for more than 10 years and I have been building
+[00:11] so 12 for more than six years now. Why we felt our, the idea of people to build this,
+[00:17] because we fall in our customer base, we're building this for people aged 18 to 35,
+[00:23] and we know how hard it is to pick up a sport in Cairo now.
+[00:27] So let's talk about our problem and evidence for number two.
+[00:29] So the hardest part of picking up a sport in Egypt is getting to the first session.
+[00:33] You ask friends, scroll through Instagram, message coaches on WhatsApp, negotiate the booking.
+[00:40] Then you still have to book a court separately. So most people give up.
+[00:44] Coaches have empty slots, no shows, and hours of WhatsApp admins.
+[00:48] We've run interviews with coaches and academies and we have committed coaches and venues
+[00:52] before our launch. What we still need to prove is that players will pay a deposit up front and how much
+[00:58] would coaches actually be willing to pay as our platform fees and our pilot exactly tests that.
+[01:04] So let's talk about our building that now.
+[01:08] Ceasing change. Now the payments are very much day-to-day experience for Egyptians.
+[01:13] Anista Pay has been thriving and has more than 22 million registered users.
+[01:18] So an app deposit seems realistic now. It will fit into the capture of Egyptians now.
+[01:24] Also, sports are changing. They're moving from private clubs in older areas to smaller independent
+[01:28] venues and fifth settlement on Shale Zahid. All these venues have no booking systems
+[01:34] and they need help. Also, similar models have been thriving globally, which proves
+[01:39] that they're bound for this problem, but nobody has built this in Egypt yet.
+[01:42] So for our competitors and question number four, so our real competitor is WhatsApp because that's
+[01:49] how almost every session is booked away. Quote apps like Lollahag's book the quote but not the coach.
+[01:56] A broad play atomic is a club focused app and teachme.o isn't even active in the region.
+[02:01] So people choose trainer because it's not only a place that books the coach and the quote
+[02:06] together, but it's also customized to our market and with a deposit that protects coaches
+[02:11] from no shows. So for question number five, our acquisition channels were planning to go after
+[02:18] the our supply first. We're planning to get our first 20 founding coaches and they will
+[02:26] have zero commission promotion for them so they can bring their existing players onto the app so
+[02:31] we can test more thoroughly with them. Also, our club joined for free and we don't charge
+[02:35] our venues because they support us and we find the coaches finding venues for our coaches.
+[02:40] We plan to charge a 10% commission on each session. So for our biggest risk and question number six,
+[02:48] we have our biggest risk is leakage because a player and a coach can meet on trainer and
+[02:53] then move to WhatsApp. So we want to handle it by making trainer more useful so that it's
+[02:59] actually more useful for the player and the coach to use the app than just leaving.
+[03:03] We're going to do this by deposits because they stop no shows, convenient court booking
+[03:07] because it's a built-in function and payouts that arrive every Sunday. We also provide progress tracking
+[03:13] and other features to come that will actually make the player want to stay into or book the
+[03:19] session through trainer. So the commission now is low enough that going around us isn't even worth
+[03:24] it at our coaches agreement ban circumvention. We also plan to track track bookings repeat
+[03:33] bookings from week one. So we immediately know if we have a leakage problem.
+[03:38] So let's talk about our five-year plan. In the five years, we plan trainer to be a platform for
+[03:44] sports discovery across Cairo, Alexandria and North Coast. We're even planning for trainer to
+[03:49] expand into at least one golf market like Saudi Arabia. We're planning to get acquired
+[03:56] by another sports tech platform that once expand into the coaching area that would be
+[04:01] the most perfect scenario for us. So for question number eight, we'd like to raise about 80,000
+[04:11] US dollars for about 15 months, 35% on market and product and payments, 30% on a person to sign
+[04:21] and support coaches and venues, 20% on player acquisition and 15% on company registration,
+[04:28] legal and other support functions. So by the end, we want to have expanded to other
+[04:31] sports with a model that is proven and scalable ready to expand across the region. Thank you.
