@@ -14,3 +14,5 @@ runs/
 # Internal team planning notes (kept locally, not part of the product documentation)
 docs/planning/
 docs/HANDOFF.md
+
+.streamlit/secrets.toml

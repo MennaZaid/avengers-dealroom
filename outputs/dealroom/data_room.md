@@ -37,7 +37,7 @@ Labels: DECK/VIDEO = founder claim; web findings cite URLs; base pre-money in ru
 - [DECK, VERIFIED] "Contracted ARR"
 - [DECK, VERIFIED] "$45K+"
 - [DECK, VERIFIED] "Active Pipeline ARR"
-- [DECK, VERIFIED] "Churn since March 2026"
+- [DECK, VERIFIED] "0 Churn since March 2026"
 - [DECK, VERIFIED] "4 full-time  ·  8 part-time"
 - [VIDEO, VERIFIED] "in the Egypt, it's very, these businesses are very price sensitive"
 
