@@ -1,6 +1,6 @@
 # DealRoom portfolio proposal
 
-Fund $1,000,000; reserve $100,000; max ticket $300,000; invest only if weighted score >= 3.2.
+Fund $1,000,000; reserve $100,000; max ticket $300,000; invest only if weighted score >= 3.0.
 Status: **PROPOSAL - not yet approved** (run with `--approve`)
 
 ## Allocation
@@ -9,14 +9,14 @@ Status: **PROPOSAL - not yet approved** (run with `--approve`)
 |---|---|---|---|---|---|
 | Modeeri | 4.0 | $2,380,000 | $400,000 | $300,000 | 11.2% |
 | Finalyze | 3.6 | $2,050,000 | $140,000 | $140,000 | 6.4% |
-| Blaze | 3.15 | $1,800,000 | $500,000 | STOP / pass | - |
-| Hylix | 3.0 | $1,750,000 | not stated | STOP / pass | - |
+| Blaze | 3.15 | $1,800,000 | $500,000 | $300,000 | 14.3% |
+| Hylix | 3.0 | $1,750,000 | not stated | $160,000 | 8.4% |
 | Byota | 2.9 | $1,620,000 | $1,100,000 | STOP / pass | - |
 | Zaat | 2.8 | $1,680,000 | $100,000 | STOP / pass | - |
 | Carbonless | 2.35 | $1,330,000 | $4,000,000 | STOP / pass | - |
 | TRNR | 2.3 | $1,370,000 | $80,000 | STOP / pass | - |
 
-Deployed $440,000 of $1,000,000.
+Deployed $900,000 of $1,000,000.
 
 Valuation: Scorecard method (base pre-money is an ASSUMPTION in data/rules.yaml) averaged with Berkus. Founders' own valuation, where stated, is in the evidence notes.
 
