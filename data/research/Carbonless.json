@@ -1,0 +1,91 @@
+{
+ "startup": "Carbonless",
+ "generated": "2026-11-25T20:41:08+00:00",
+ "findings": [
+  {
+   "topic": "market",
+   "claim": "",
+   "query": "global ship carbon capture market size 2024 report",
+   "verdict": "context",
+   "finding": "Shipping contributes roughly 2.9% of global anthropogenic CO2 emissions, highlighting a niche but sizable source for decarbonization. The broader carbon capture, utilization, and storage (CCUS) market is projected to expand from $0.57 B in 2024 to $44.46 B by 2033 (≈29.2% CAGR), while the overall CCS market grew to $3.6 B in 2025 and is expected to reach $6.35 B in 2026. Industry reports describe onboard ship carbon capture as a practical pathway for reducing emissions across the global fleet.",
+   "sources": [
+    "https://www.lr.org/en/knowledge/press-room/press-listing/press-release/2026/onboard-carbon-capture-offers-a-practical-co2-emissions-reduction-pathway-for-shippings-global-fleet/",
+    "https://store.frost.com/growth-opportunities-in-carbon-capture-utilization-storage-global-2024-2040.html",
+    "https://www.globalccsinstitute.com/global-status-of-ccs/",
+    "https://straitsresearch.com/report/carbon-capture-and-storage-market",
+    "https://www.maritime.dot.gov/sites/marad.dot.gov/files/2024-11/LCE%20MARAD%20CCS%20TEA%20Final%20Report%20-%2031%20May%202024%20%283%29.pdf",
+    "https://www.nature.com/articles/s41467-026-74909-w"
+   ],
+   "risk_flag": "High capital expenditure and uncertain regulatory incentives for onboard carbon capture"
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "Carbon Clean Solutions funding round maritime carbon capture",
+   "verdict": "context",
+   "finding": "Carbon Clean has raised $150 million in a Series C round in mid‑2022, secured a $475 million contract for low‑carbon ammonia, partnered with Samsung Engineering on marine carbon capture, won Ørsted’s FlagshipONE equipment supply contract, and earned a 2024 Tech Tour Growth50 Sustainability Award, indicating strong funding, strategic partnerships and market traction.",
+   "sources": [
+    "https://www.carbonclean.com/en/press-releases/raises-150m-in-record-carbon-capture-funding-round",
+    "https://www.carbonclean.com/en/press-releases/samsung-engineering-pr",
+    "https://www.carbonclean.com/en/press-releases/orsted-flagship-one",
+    "https://www.carbonclean.com/en/press-releases/tech-tour-growth50"
+   ],
+   "risk_flag": ""
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "Wärtsilä ship emissions capture technology funding",
+   "verdict": "context",
+   "finding": "Wärtsilä, a leading marine technology group, has completed the conversion of one engine on three LNG carriers for Chevron Transport and unveiled a commercial onboard carbon capture system in May 2025. The company claims its new technology can cut a vessel's emissions by up to 70% and reports capture rates of up to an unspecified level. Wärtsilä is also part of an EU‑funded consortium accelerating zero‑carbon shipping and has a roadmap targeting zero‑emission marine solutions by 2030 and 2050.",
+   "sources": [
+    "https://dredgewire.com/wartsila-completes-milestone-marine-sector-project-to-reduce-methane-emissions-on-vessels/",
+    "https://www.wartsila.com/insights/article/carbon-capture-how-much-could-it-help-shipowners-meet-their-co2-targets",
+    "https://www.facebook.com/CyprusShippingNews/posts/w%C3%A4rtsil%C3%A4-joins-eu-funded-consortium-to-further-accelerate-zero-carbon-shipping-f/1934869540778958/",
+    "https://carbonherald.com/wartsila-unveils-commercial-carbon-capture-system-for-ships/",
+    "https://www.businessfinland.fi/494cf9/globalassets/finnish-customers/01-funding/06-ecosystems/wartsila-zem-leading-company-ecosystem-roadmap.pdf",
+    "https://www.imd.org/ibyimd/best-practice-in-sustainable-business-transformation/navigating-uncharted-waters-wartsilas-journey-to-decarbonize-global-shipping-and-energy/"
+   ],
+   "risk_flag": "Technology adoption risk"
+  },
+  {
+   "topic": "regulation",
+   "claim": "",
+   "query": "Egypt Ministry of Environment maritime CO2 emission regulations 2023",
+   "verdict": "context",
+   "finding": "Egypt is taking steps towards reducing its carbon footprint through various initiatives such as investing in green hydrogen and addressing greenhouse gas emissions from ships and ports. These efforts align with global trends aiming to reduce carbon emissions from maritime transport.",
+   "sources": [
+    "https://climateactiontracker.org/countries/egypt/policies-action/",
+    "https://www.state.gov/reports/2024-investment-climate-statements/egypt",
+    "https://greenvoyage2050.imo.org/setting-the-course-for-egypts-green-shipping-future/"
+   ],
+   "risk_flag": ""
+  },
+  {
+   "topic": "claim",
+   "claim": "partnership with Maersk",
+   "query": "Maersk carbon capture partnership ship emissions 2024",
+   "verdict": "unverified",
+   "finding": "The provided sources describe Maersk’s initiatives such as securing green methanol for a maiden voyage, its 2040 net‑zero target, low‑carbon methanol fuel trials, and sustainability reporting, but none mention a partnership with Carbonless or any onboard ship carbon‑capture hardware.",
+   "sources": [
+    "https://www.maersk.com/news/articles/2023/06/13/maersk-secures-green-methanol",
+    "https://www.maersk.com/~/media_sc9/maersk/corporate/sustainability/files/resources/2024/maersk-annual-report-2024.pdf",
+    "https://www.reuters.com/business/environment/maersk-says-ocean-shippings-zero-emissions-push-needs-government-support-2024-08-28/",
+    "https://www.maersk.com/insights/sustainability/2024/04/02/road-to-net-zero-in-shipping"
+   ],
+   "risk_flag": "unverified partnership claim"
+  },
+  {
+   "topic": "claim",
+   "claim": "market forecast cited from BloombergNEF",
+   "query": "BloombergNEF ship carbon capture market forecast 2030",
+   "verdict": "context",
+   "finding": "BloombergNEF projects global carbon capture capacity to increase more than fourfold by 2030, exceeding 200 million metric tons per annum. The firm also tracks growing investment in carbon capture across clean shipping, power grids and the broader clean‑energy supply chain.",
+   "sources": [
+    "https://about.bnef.com/insights/clean-energy/progress-despite-fragmentation-the-energy-transition-to-2030/",
+    "https://about.bnef.com/insights/finance/energy-transition-investment-trends/"
+   ],
+   "risk_flag": "technology adoption risk"
+  }
+ ]
+}

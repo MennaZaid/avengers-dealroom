@@ -1,0 +1,35 @@
+## Finalyze
+
+**Sector:** Arabic financial-data extraction (B2B data)  
+**Stage:** pre-seed, live product  
+**Their ask:** $140,000 ($140K for 5% at $2.66M pre-money (read from slide images))  
+**Our proposed ticket:** $140,000 (~6.4% stake)
+
+**Score:** 3.6 / 5 - Scorecard pre-money $2,400,000, Berkus $1,700,000, blended $2,050,000
+
+| team | market | product | competition | sales | funding_need | other |
+|---|---|---|---|---|---|---|
+| 4 | 3 | 4 | 4 | 3 | 4 | 3 |
+
+**Team's reasoning:** Live product, clear ask and valuation, data moat on Arabic filings; buyer talks not yet contracts
+
+### Founder claims (verified against deck/video text)
+
+- [DECK_IMAGE:12, MANUAL (image/URL)] "$140K for 5% at a $2.66M pre-money valuation"
+- [DECK, VERIFIED] "ACCURACY ON ARABIC FINANCIAL DOCUMENTS"
+- [DECK, VERIFIED] "$13B $1.8B$0.15B"
+
+### Independent research (web, cited)
+
+- **MARKET - SUPPORTED** (query: _Arabic financial document processing market size_): Multiple sources confirm a growing market for Arabic financial document automation: the UAE IT services market notes Arabic document‑processing via large‑scale AI; fintech and non‑bank financial institutions are adopting AI‑driven Arabic document automation for credit decisioning and compliance; Saudi Arabia’s asset‑management industry exceeds SAR 1 trillion, indicating a large pool of financial data; and both academic benchmarks and commercial solutions (e.g., Constient) demonstrate active development in Arabic financial NLP. Sources: https://www.mordorintelligence.com/industry-reports/uae-it-services-market, https://www.mozn.ai/industries/nbfis-and-fintechs, https://www.fitchratings.com/research/non-bank-financial-institutions/saudi-arabian-asset-management-industry-exceeds-sar1-trillion-16-04-2025, https://www.constient.com/agentic-ai/document-processing/, https://arxiv.org/html/2604.19098v2, https://arxiv.org/pdf/2610.25854
+  - Risk: Competitive landscape with established AI document‑processing providers
+- **MARKET - UNVERIFIED** (query: _Growth of AI in finance industry Middle East North Africa_): The potential impact of AI on unlocking significant economic value in the MENA region is highlighted in multiple sources. For instance, one report indicates that AI could potentially unlock over $1 trillion in value across MENA by 2030, while another mentions a possible $200 billion in sustainable finance by the same year. Additionally, the Middle East & Africa Artificial Intelligence market size was valued at USD 27.39 billion in 2024 and is expected to grow significantly. Sources: no source
+  - Risk: Infrastructure limitations and execution gaps pose risks to realizing the full potential of AI investments.
+- **COMPETITION - CONTEXT** (query: _Leading providers of Arabic OCR technology_): Several players offer Arabic OCR capabilities, including YaiGlobal’s AI‑driven document processing, Mistral’s OCR API launched in 2025, SimpleOCR’s support for Arabic and Farsi scripts, Falcon‑OCR’s 270M‑parameter Arabic model (2026), Smartcat’s translation service that extracts Arabic text, and Providus’s guide to Arabic invoice extraction tools. Sources: https://yaiglobal.ai/en/about/, https://mistral.ai/news/mistral-ocr/, https://www.simpleocr.com/arabic_ocr/, https://huggingface.co/blog/tiiuae/falcon-ocr-arabic, https://www.smartcat.com/image-translator/translate-scanned-arabic-document/, https://providus.io/blog/best-arabic-invoice-extraction
+  - Risk: Strong competition from multiple established OCR providers
+- **COMPETITION - CONTEXT** (query: _Funding rounds for Rosette by Basis Technology_): Basis Technology, an established language‑processing company, offers Rosette software that can process foreign‑language text, including Arabic, indicating direct competition for Finalyze’s B2B data extraction. The Business Insider snippet notes Rosette’s capability with foreign language, and Crunchbase shows former Basis Technology executives now at Babel Street, highlighting talent overlap in the space. No specific funding amounts or claim verification are provided in the snippets. Sources: https://tracxn.com/d/companies/basis-technology/__w3Ywgm3pFdg6BJ9JODdZhBNvk6OzjjW3z2xfc5gpd80, https://www.businessinsider.com/companies-funded-by-cia-2016-9, https://www.crunchbase.com/organization/babel-street
+  - Risk: Strong competition from established language‑tech firms
+- **REGULATION - CONTEXT** (query: _Financial data privacy laws in Egypt_): Egypt’s Personal Data Protection Law (PDPL) No. 151 of 2020 was published in July 2020 and took effect in October 2020, with executive regulations issued on 1 Nov 2025 establishing a Personal Data Protection Centre that oversees data collection. Controllers handling sensitive data—including financial data—must obtain a licence from the Centre and face financial penalties for non‑compliance. The law defines sensitive data broadly (psychological, biometric, financial, etc.) and requires legitimate electronic processing of personal data. Sources: https://www.dlapiperdataprotection.com/?t=law&c=EG, https://www.pwc.com/m1/en/services/consulting/technology/cyber-security/navigating-data-privacy-regulations/egypt-data-protection-law.html, https://chambers.com/practice-guides/guides/fintech-2026/egypt/trends-and-developments, https://www.thesedonaconference.org/sites/default/files/meeting_paper/7.4%20Egypt%20Personal%20Data%20Protection%20Law%20-%20Executive%20Regulations.pdf, https://trustarc.com/regulations/egypt-pdpl/
+  - Risk: license required to process financial data
+- **CLAIM - CONTEXT** (query: _Partnerships between Finalyze and major banks in Egypt_): The cited sources highlight a growing ecosystem for cross‑border and instant payments in Egypt and the broader Arab region: the Central Bank of Egypt runs an Instant Payment Network (IPN) for domestic transfers, while PAPSS and BUNA are building a payment gateway linking African and Arab banks. Additionally, major banks such as Suez Canal Bank are partnering with technology firms like Temenos to modernise digital banking, indicating strong institutional demand for data‑driven financial services. Sources: https://www.cbe.org.eg/en/payment-systems-and-services/instant-payment-network, https://www.afreximbank.com/papss-announces-collaboration-with-buna-to-build-a-payment-gateway-between-africa-and-the-arab-region/, https://www.temenos.com/press_release/top-egyptian-bank-selects-temenos-to-transform-digital-banking-in-egypt/
+  - Risk: Regulatory and integration challenges in a fragmented payment landscape

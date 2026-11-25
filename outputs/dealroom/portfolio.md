@@ -41,7 +41,7 @@ Valuation: Scorecard method (base pre-money is an ASSUMPTION in data/rules.yaml)
 | Modeeri | DECK | Contracted ARR | VERIFIED |
 | Modeeri | DECK | $45K+ | VERIFIED |
 | Modeeri | DECK | Active Pipeline ARR | VERIFIED |
-| Modeeri | DECK | Churn since March 2026 | VERIFIED |
+| Modeeri | DECK | 0 Churn since March 2026 | VERIFIED |
 | Modeeri | DECK | 4 full-time  ·  8 part-time | VERIFIED |
 | Modeeri | VIDEO | in the Egypt, it's very, these businesses are very price sensitive | VERIFIED |
 | Blaze | DECK | $200,000 SECURED  ·  40% OF THE ROUND | VERIFIED |

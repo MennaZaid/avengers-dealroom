@@ -1,0 +1,80 @@
+{
+ "startup": "TRNR",
+ "generated": "2026-11-25T20:38:25+00:00",
+ "findings": [
+  {
+   "topic": "market",
+   "claim": "",
+   "query": "Statista sports coaching market size Egypt 2023",
+   "verdict": "supported",
+   "finding": "The sports market in Egypt is experiencing moderate growth due to increasing participation rates and investments in infrastructure. Additionally, the gym and training sector within the Egyptian footwear market indicates potential demand for related services like sports coaching.",
+   "sources": [
+    "https://www.statista.com/outlook/amo/sports/egypt/",
+    "https://www.statista.com/outlook/cmo/footwear/egypt/"
+   ],
+   "risk_flag": ""
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "Fittr funding round 2023",
+   "verdict": "context",
+   "finding": "Fittr is valued at roughly $250 million after its 2023 Series B round, and has raised a total of $19.9 million across six funding rounds since its first round in May 2019. Its largest round to date was a Series B, and it has attracted multiple investors per IPO Platform and PitchBook data. The company also announced a high‑profile endorsement by Indian cricketer Rohit Sharma in June 2026.",
+   "sources": [
+    "https://old.bahraintrust.org/articles/how-much-is-fittr-worth-the-hidden-wealth-behind-indias-fitness-revolution-netwo-09nncnu7.html",
+    "https://tracxn.com/d/companies/fittr/__7Ejt9CbI4QZWwb-UN1Og6jgxefYsIsBQhm8jb3fdLqI",
+    "https://tracxn.com/d/companies/fittr/__7Ejt9CbI4QZWwb-UN1Og6jgxefYsIsBQhm8jb3fdLqI/funding-and-investors",
+    "https://www.facebook.com/Inc42/posts/pune-based-fitness-startup-fittr-has-onboarded-indian-cricketer-rohit-sharma-as-/1571685427888907/"
+   ],
+   "risk_flag": "valuation may be based on limited revenue"
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "CoachUp Series B funding",
+   "verdict": "context",
+   "finding": "The search results provide information about CoachUp, which appears to be a competitor for TRNR in the sports coaching marketplace sector. According to Crunchbase, CoachUp has raised a significant amount of funding ($49.8 billion) through various rounds including Series A. Additionally, Jordan Fliegel, who was involved in raising $1.5 million for CoachUp, serves as its chairman.",
+   "sources": [
+    "https://www.crunchbase.com/organization/coachup",
+    "https://en.wikipedia.org/wiki/Jordan_Fliegel"
+   ],
+   "risk_flag": "Competition from established players like CoachUp could pose challenges for TRNR."
+  },
+  {
+   "topic": "regulation",
+   "claim": "",
+   "query": "Egypt Ministry of Youth and Sports private coaching licensing regulations",
+   "verdict": "context",
+   "finding": "Egypt’s Sports Law No 71 of 2017 lets the minister set registration fees up to 1 million EGP, while Law No 171 of 2025 bans matches with foreign teams without permission. A recent cooperation protocol between the Ministry of Youth and Sports and the NTRA highlights joint initiatives on football pitches and combined education‑sports training. Regulations also require coaches not be alone with participants in private settings and set rules for private youth lessons.",
+   "sources": [
+    "https://www.eastlaws.com/legislation-full-text/en/egypt/law/20-08-2025/no-171?type=1&id=2190656",
+    "https://www.facebook.com/EgyptTodayMag/posts/the-egyptian-government-has-signed-a-cooperation-protocol-with-the-international/1604844291657887/",
+    "https://eg.andersen.com/wp-content/uploads/2026/03/Sports-Law-No-71-of-2017.pdf",
+    "https://www.sport-for-development.com/imglib/downloads/Country%20Collection/Steinbach_Ferataj_Empowering%20Youth%20through%20Sports%20for%20Development%20A%20Strategic%20and%20Practical%20Handbook_EN_10Sep%202025.pdf",
+    "https://www.salto-youth.net/download/1864"
+   ],
+   "risk_flag": "Regulatory compliance requirements for licensing and coach‑participant safety"
+  },
+  {
+   "topic": "claim",
+   "claim": "7 coaches and 3 venues committed across two areas",
+   "query": "Cairo sports venues partnership with sports coaching platforms 2024",
+   "verdict": "unverified",
+   "finding": "The available snippets do not mention any coaches or venues committed to TRNR, so the claim cannot be confirmed or refuted from these sources.",
+   "sources": [],
+   "risk_flag": "lack of verifiable commitments"
+  },
+  {
+   "topic": "claim",
+   "claim": "WhatsApp message to a friend used as validation",
+   "query": "WhatsApp testimonial startup validation sports coaching Egypt",
+   "verdict": "unverified",
+   "finding": "None of the available snippets confirm that the founder used a WhatsApp message to a friend as validation. While WhatsApp is mentioned as a communication channel in the Egyptian Coach platform (source [1]) and as a tool for gathering customer reviews (source [4]), there is no evidence that a personal WhatsApp message to a friend was used to validate the market need.",
+   "sources": [
+    "https://www.wijhan.com/work/egyptian-coach",
+    "https://www.reddit.com/r/startups/comments/1c1k7f1/share_your_startup_quarterly_post/"
+   ],
+   "risk_flag": "validation methodology may be too informal"
+  }
+ ]
+}

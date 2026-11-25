@@ -13,7 +13,7 @@ Modeeri:
     - {source: deck, quote: "Contracted ARR"}
     - {source: deck, quote: "$45K+"}
     - {source: deck, quote: "Active Pipeline ARR"}
-    - {source: deck, quote: "Churn since March 2026"}
+    - {source: deck, quote: "0 Churn since March 2026", note: "zero churn (slide shows 0 above the label)"}
     - {source: deck, quote: "4 full-time  ·  8 part-time"}
     - {source: video, quote: "in the Egypt, it's very, these businesses are very price sensitive"}
 Blaze:

@@ -1,0 +1,87 @@
+{
+ "startup": "Blaze",
+ "generated": "2026-11-25T20:35:13+00:00",
+ "findings": [
+  {
+   "topic": "market",
+   "claim": "",
+   "query": "Egypt fintech market size 2024 report Central Bank of Egypt",
+   "verdict": "context",
+   "finding": "Egypt’s fintech market was valued at $886.4 million in 2025 and is projected to reach $3.125 billion at a 14.58% CAGR, while other estimates put the 2024 market at about $765 million. By 2024 the ecosystem included over 1.3 million financial access points (23,800 ATMs and >1.3 million POS terminals) and more than 13 million mobile‑banking users (≈10% penetration).",
+   "sources": [
+    "https://www.imarcgroup.com/egypt-fintech-market",
+    "https://thefintechtimes.com/overview-of-the-fintech-ecosystem-in-2026-in-egypt/",
+    "https://www.kenresearch.com/egypt-fintech-and-digital-payments-market",
+    "https://www.facebook.com/ForbesMENA.English/posts/egyptian-fintech-valu-reported-a-35-rise-in-net-profit-to-137-million-in-the-fir/1734685362000683/"
+   ],
+   "risk_flag": "High competition"
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "Egypt consumer investing platforms robo‑advisor competitors funding round 2023 e.g. MoneyFellows, Fawry, ValU",
+   "verdict": "context",
+   "finding": "Blaze operates within a growing Egyptian fintech ecosystem where startups like Hafiz have already aggregated various financial products for consumers since 2023. Additionally, there is significant activity in the African fintech sector, including Cairo-based INVIA raising $1.2 million through angel investments and support.",
+   "sources": [
+    "https://itida.gov.eg/English/MediaCenter/Announcements/Documents/egypt-startup-ecosystem-report-2026.pdf",
+    "https://www.dealmakerssouthafrica.com/who-s-doing-what-in-the-africa-m-a-space"
+   ],
+   "risk_flag": "Competition from established players and new entrants could impact Blaze's growth trajectory."
+  },
+  {
+   "topic": "regulation",
+   "claim": "",
+   "query": "Egypt Financial Regulatory Authority (FRA) licensing requirements for digital brokerage and investment platforms",
+   "verdict": "context",
+   "finding": "Egypt’s Financial Regulatory Authority (FRA) has issued a comprehensive framework for brokerage firms that receive client orders via digital platforms (Mar 5 2026) and requires a current FRA licence that covers digital‑channel brokerage activities. Licensing is mandatory for any banking or non‑banking financial services (Baker McKenzie) and recent amendments (Amendment No. 2 to Decree No. 49 of 2019) tighten conditions for brokerage and clearing‑settlement. Resolution No. 125 of 2025 further sets rules for digital investment platforms.",
+   "sources": [
+    "https://adsero.me/fra-establishes-comprehensive-regulatory-framework-for-brokerage-firms-receiving-client-orders-for-trading-securities-via-digital-platforms/",
+    "https://resourcehub.bakermckenzie.com/en/resources/global-financial-services-regulatory-guide/europe-middle-east-and-africa/egypt/topics/what-types-of-activities-require-a-license-in-your-jurisdiction",
+    "https://globallawexperts.com/news/capital-markets-lawyers-egypt",
+    "https://www.legal500.com/intelligence/egypt/finance-and-banking/new-fra-decrees-on-licensing-brokerage-activity-and-clearing-and-settlement-of-future-contracts",
+    "https://mnasserlaw.com/digital-platforms-for-investment/"
+   ],
+   "risk_flag": "Regulatory licensing compliance risk"
+  },
+  {
+   "topic": "claim",
+   "claim": "EFG Hermes partnership",
+   "query": "EFG Hermes partnership with fintech startup Egypt 2023",
+   "verdict": "unverified",
+   "finding": "The available search results do not mention Blaze or any partnership between Blaze and EFG Hermes. They discuss other Egyptian fintechs (Kiwe, MNT‑Halan, valU) and EFG Hermes‑related initiatives, but no reference to Blaze’s claimed partnership.",
+   "sources": [
+    "https://thepaypers.com/fintech/news/kiwe-launches-social-money-app-and-payment-card-in-egypt",
+    "https://www.facebook.com/EFGHolding/posts/from-testing-investment-ideas-to-automating-rule-based-trading-strategies-younit/1595654605934310/",
+    "https://techpoint.africa/insight/techpoint-digest-1458/",
+    "https://worldef.com/2026/07/03/egypt-fintech-unicorn-mnt-halan-ipo/",
+    "https://jawlah.co/en/59231",
+    "https://efgholding.com/media/news/valuxazimut"
+   ],
+   "risk_flag": "Unverified partnership claim may increase execution risk"
+  },
+  {
+   "topic": "claim",
+   "claim": "Trade commission 0.15% per transaction",
+   "query": "Egypt fintech transaction fee 0.15% regulatory limit Central Bank of Egypt fee guidelines",
+   "verdict": "unverified",
+   "finding": "None of the provided sources mention a trade commission rate of 0.15% per transaction for Blaze or any comparable investing service in Egypt; the documents focus on central bank reports, financial assistance, innovation policy, and banking guidelines without specifying fintech fee structures.",
+   "sources": [],
+   "risk_flag": "Regulatory uncertainty about fee structures"
+  },
+  {
+   "topic": "claim",
+   "claim": "Freemium model $7/month",
+   "query": "Egypt consumer investing app subscription price $7 per month robo‑advisor pricing",
+   "verdict": "unverified",
+   "finding": "None of the provided snippets mention a $7/month freemium pricing model for Blaze or comparable fintech services; they discuss subscription fees in general, investment residency programs, AI robo‑advisors, banking accounts, and pricing structures without specifying $7/month.",
+   "sources": [
+    "https://apps.apple.com/us/app/alinea-automated-investing/id1554623825",
+    "https://www.state.gov/reports/2025-investment-climate-statements/egypt",
+    "https://www.emerald.com/md/article/doi/10.1108/MD-01-2025-0093/1298970/Bridging-technology-and-trust-the-role-of-AI",
+    "https://privatebank.barclays.com/international-banking/products-services/banking/",
+    "https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Guidance-Financial-Inclusion%20-Anti-Money-Laundering-Terrorist-Financing-Measures.pdf.coredownload.pdf"
+   ],
+   "risk_flag": "pricing model not substantiated"
+  }
+ ]
+}
