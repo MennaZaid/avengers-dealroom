@@ -3,7 +3,7 @@
 **Sector:** B2B SaaS, frontline operations / inspections (Egypt, UAE, GCC)  
 **Stage:** pre-seed, revenue  
 **Their ask:** $400,000 (video and deck body say $400K; $110K already secured from a Saudi-based VC)  
-**Our proposed ticket:** $300,000 (~11.2% stake)
+**Our proposed ticket:** $300,000 (~10.8% stake = cheque / post-money)
 
 **Score:** 4.0 / 5 - Scorecard pre-money $2,670,000, Berkus $2,100,000, blended $2,380,000
 

@@ -3,7 +3,7 @@
 **Sector:** AI developer tooling (coding-agent efficiency)  
 **Stage:** pre-revenue, internal tests only  
 **Their ask:** not stated (no ask stated in deck; no video)  
-**Our proposed ticket:** $160,000 (~8.4% stake)
+**Our proposed ticket:** $160,000 (~8.4% stake = cheque / post-money)
 
 **Score:** 3.0 / 5 - Scorecard pre-money $2,000,000, Berkus $1,500,000, blended $1,750,000
 

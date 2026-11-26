@@ -14,12 +14,27 @@ Labels: DECK/VIDEO = founder claim; web findings cite URLs; base pre-money in ru
 | Carbonless | 2.35 | $1,330,000 | $4,000,000 | PASS |
 | TRNR | 2.3 | $1,370,000 | $80,000 | PASS |
 
+## Year-5 forecast (base case and downside)
+
+Dilution ASSUMPTION: we keep 64% of our stake in the base case, 50% in the downside. Company values at year 5 are ASSUMPTIONS in data/forecast.yaml.
+
+| Startup | Cheque | Post-money | Stake now | Runway (whole round) | Milestone it funds | Y5 value base | Y5 value downside |
+|---|---|---|---|---|---|---|---|
+| Modeeri | $300,000 | $2,780,000 | 10.8% | 16 months | GCC expansion and AI modules (DECK use of funds: 60% product, 30% sales, 10% opex); aim ~$300K ARR for a seed round | $1,726,619 | $161,871 |
+| Finalyze | $140,000 | $2,190,000 | 6.4% | 14 months | Close first paid data contracts (talks with LSEG, Thndr, Azimut, Beltone, Mubasher per DECK); build bank/lender model | $818,265 | $31,963 |
+| Blaze | $300,000 | $2,300,000 | 13.0% | 25 months | FRA approval and public launch, targeted Q1 2027 (VIDEO); then paying users | $1,669,565 | $0 |
+| Hylix | $160,000 | $1,910,000 | 8.4% | 13 months | Repeatable customer results and paid deployments (DECK: next milestone) | $804,188 | $0 |
+
+Reserve (cash): $100,000.
+**Fund at year 5: base $5,118,637 (5.1x), downside $293,834 (0.29x).**
+Best pick in base case: Modeeri - returns the whole fund on its own.
+
 ## Modeeri
 
 **Sector:** B2B SaaS, frontline operations / inspections (Egypt, UAE, GCC)  
 **Stage:** pre-seed, revenue  
 **Their ask:** $400,000 (video and deck body say $400K; $110K already secured from a Saudi-based VC)  
-**Our proposed ticket:** $300,000 (~11.2% stake)
+**Our proposed ticket:** $300,000 (~10.8% stake = cheque / post-money)
 
 **Score:** 4.0 / 5 - Scorecard pre-money $2,670,000, Berkus $2,100,000, blended $2,380,000
 
@@ -59,7 +74,7 @@ Labels: DECK/VIDEO = founder claim; web findings cite URLs; base pre-money in ru
 **Sector:** Arabic financial-data extraction (B2B data)  
 **Stage:** pre-seed, live product  
 **Their ask:** $140,000 ($140K for 5% at $2.66M pre-money (read from slide images))  
-**Our proposed ticket:** $140,000 (~6.4% stake)
+**Our proposed ticket:** $140,000 (~6.4% stake = cheque / post-money)
 
 **Score:** 3.6 / 5 - Scorecard pre-money $2,400,000, Berkus $1,700,000, blended $2,050,000
 
@@ -95,7 +110,7 @@ Labels: DECK/VIDEO = founder claim; web findings cite URLs; base pre-money in ru
 **Sector:** consumer fintech, education-first investing (Egypt)  
 **Stage:** pre-seed, pre-launch (pilot users)  
 **Their ask:** $500,000 ($200K secured, $300K to go; launch depends on FRA approval targeted Q1 2027)  
-**Our proposed ticket:** $300,000 (~14.3% stake)
+**Our proposed ticket:** $300,000 (~13.0% stake = cheque / post-money)
 
 **Score:** 3.15 / 5 - Scorecard pre-money $2,100,000, Berkus $1,500,000, blended $1,800,000
 
@@ -134,7 +149,7 @@ Labels: DECK/VIDEO = founder claim; web findings cite URLs; base pre-money in ru
 **Sector:** AI developer tooling (coding-agent efficiency)  
 **Stage:** pre-revenue, internal tests only  
 **Their ask:** not stated (no ask stated in deck; no video)  
-**Our proposed ticket:** $160,000 (~8.4% stake)
+**Our proposed ticket:** $160,000 (~8.4% stake = cheque / post-money)
 
 **Score:** 3.0 / 5 - Scorecard pre-money $2,000,000, Berkus $1,500,000, blended $1,750,000
 

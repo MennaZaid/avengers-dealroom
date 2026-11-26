@@ -3,7 +3,7 @@
 **Sector:** consumer fintech, education-first investing (Egypt)  
 **Stage:** pre-seed, pre-launch (pilot users)  
 **Their ask:** $500,000 ($200K secured, $300K to go; launch depends on FRA approval targeted Q1 2027)  
-**Our proposed ticket:** $300,000 (~14.3% stake)
+**Our proposed ticket:** $300,000 (~13.0% stake = cheque / post-money)
 
 **Score:** 3.15 / 5 - Scorecard pre-money $2,100,000, Berkus $1,500,000, blended $1,800,000
 

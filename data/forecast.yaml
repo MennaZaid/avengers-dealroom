@@ -1,0 +1,54 @@
+# Year-5 forecast inputs. Everything marked ASSUMPTION is the team's estimate: change it after discussion.
+# round_usd: total the startup is raising now. monthly_burn_usd: what the company spends per month.
+# y5_base / y5_downside: what the whole company is worth in 5 years (USD) in each case. 0 = the company fails.
+dilution:
+  base_keep: 0.64      # ASSUMPTION: two later rounds (seed, Series A) each sell ~20% -> we keep 0.8 x 0.8
+  downside_keep: 0.50  # ASSUMPTION: three rounds or a down-round -> we keep about half
+Modeeri:
+  round_usd: 400000            # DECK: "$400K Round size"
+  monthly_burn_usd: 25000      # ASSUMPTION: 4 full-time + 8 part-time, Cairo salaries, GCC sales travel
+  milestone: "GCC expansion and AI modules (DECK use of funds: 60% product, 30% sales, 10% opex); aim ~$300K ARR for a seed round"
+  y5_base: 25000000            # ASSUMPTION: ~$3M ARR x ~8x revenue multiple for B2B SaaS
+  y5_downside: 3000000         # ASSUMPTION: stalls near $0.5M ARR x 6x
+Finalyze:
+  round_usd: 140000            # DECK image: $140K for 5%
+  monthly_burn_usd: 10000      # ASSUMPTION: 3 founders, lean data team
+  milestone: "Close first paid data contracts (talks with LSEG, Thndr, Azimut, Beltone, Mubasher per DECK); build bank/lender model"
+  y5_base: 20000000            # ASSUMPTION: ~$3M revenue x ~7x data-business multiple
+  y5_downside: 1000000         # ASSUMPTION: stays a small Egypt-only data vendor
+Blaze:
+  round_usd: 500000            # DECK: "$500,000" pre-seed, $200K secured
+  monthly_burn_usd: 20000      # ASSUMPTION
+  milestone: "FRA approval and public launch, targeted Q1 2027 (VIDEO); then paying users"
+  y5_base: 20000000            # ASSUMPTION: licensed investing app with a sizeable young user base
+  y5_downside: 0               # ASSUMPTION: FRA approval fails or is too slow -> company fails
+Hylix:
+  round_usd: 160000            # ASSUMPTION: no ask stated; equals our cheque
+  monthly_burn_usd: 12000      # ASSUMPTION
+  milestone: "Repeatable customer results and paid deployments (DECK: next milestone)"
+  y5_base: 15000000            # ASSUMPTION: niche dev-tool with enterprise customers or acqui-hire
+  y5_downside: 0               # ASSUMPTION: big AI labs build the same efficiency in
+Zaat:
+  round_usd: 100000            # DECK plan built on $100K
+  monthly_burn_usd: 6000       # ASSUMPTION: solo founder, low build cost (DECK: built for $1,948)
+  milestone: "Paid launch of Zaat Work in December (DECK); first paying founders"
+  y5_base: 8000000             # ASSUMPTION
+  y5_downside: 0
+TRNR:
+  round_usd: 80000             # VIDEO: about $80K for 15 months
+  monthly_burn_usd: 5300       # from VIDEO: $80K / 15 months
+  milestone: "Launch in two areas, 20 founding coaches, repeat bookings (DECK roadmap)"
+  y5_base: 4000000             # ASSUMPTION: small local marketplace
+  y5_downside: 0
+Byota:
+  round_usd: 1100000           # VIDEO
+  monthly_burn_usd: 40000      # ASSUMPTION: lab build-out
+  milestone: "Paid pilot in Egypt, then own lab (VIDEO)"
+  y5_base: 15000000            # ASSUMPTION
+  y5_downside: 0
+Carbonless:
+  round_usd: 4000000           # VIDEO
+  monthly_burn_usd: 150000     # ASSUMPTION: hardware, certification, sea trial
+  milestone: "Onshore MVP, class certification, sea-trial pilot (VIDEO)"
+  y5_base: 40000000            # ASSUMPTION
+  y5_downside: 0

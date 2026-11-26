@@ -27,7 +27,7 @@ def dossier(name, e, s, v, a, research, ver):
     L = [f"## {name}", "",
          f"**Sector:** {e['sector']}  ", f"**Stage:** {e['stage']}  ",
          f"**Their ask:** {money(e.get('ask_usd'))} ({e['ask_note']})  ",
-         f"**Our proposed ticket:** {money(a) if a else 'PASS'}" + (f" (~{a / (v['blended_premoney'] + a):.1%} stake)" if a else ""), "",
+         f"**Our proposed ticket:** {money(a) if a else 'PASS'}" + (f" (~{a / (v['blended_premoney'] + max(e.get('ask_usd') or 0, a)):.1%} stake = cheque / post-money)" if a else ""), "",
          f"**Score:** {v['weighted']} / 5 - Scorecard pre-money {money(v['scorecard_premoney'])}, Berkus {money(v['berkus_premoney'])}, "
          f"blended {money(v['blended_premoney'])}", "",
          "| " + " | ".join(CRITERIA) + " |", "|" + "---|" * len(CRITERIA), "| " + " | ".join(str(s[c]) for c in CRITERIA) + " |", "",
@@ -63,7 +63,9 @@ def build():
         d = dossier(n, evidence[n], scores[n], vals[n], alloc.get(n, 0), research, ver)
         (OUT / f"dossier_{n}.md").write_text(d, encoding="utf-8")
         parts.append(d)
-    text = "\n".join(head) + "\n\n" + "\n".join(parts)
+    from dealroom import forecast
+    fc_md = forecast.markdown(forecast.forecast(vals, alloc, rules))
+    text = "\n".join(head) + "\n\n" + fc_md + "\n" + "\n".join(parts)
     (OUT / "data_room.md").write_text(text, encoding="utf-8")
     return text
 

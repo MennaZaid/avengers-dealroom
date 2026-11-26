@@ -3,7 +3,7 @@
 **Sector:** Arabic financial-data extraction (B2B data)  
 **Stage:** pre-seed, live product  
 **Their ask:** $140,000 ($140K for 5% at $2.66M pre-money (read from slide images))  
-**Our proposed ticket:** $140,000 (~6.4% stake)
+**Our proposed ticket:** $140,000 (~6.4% stake = cheque / post-money)
 
 **Score:** 3.6 / 5 - Scorecard pre-money $2,400,000, Berkus $1,700,000, blended $2,050,000
 

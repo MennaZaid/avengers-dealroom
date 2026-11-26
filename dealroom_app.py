@@ -18,7 +18,7 @@ except Exception:
 
 import yaml
 import dealroom  # loads a local .env when present
-from dealroom import dossier, analyst, research
+from dealroom import dossier, analyst, research, forecast
 
 DATA, OUT = ROOT / "data", ROOT / "outputs" / "dealroom"
 APPROVALS = OUT / "approvals.json"
@@ -83,7 +83,9 @@ st.markdown(f"""<div class="hero"><div class="kicker">Avengers Capital · The De
 every ticket signed off by a human.</p>
 <div class="team">TEAM AVENGERS · ASSEMBLE</div></div>""", unsafe_allow_html=True)
 
-tabs = st.tabs(["Portfolio", "Startups", "Research", "Analyst", "Approve", "Rules"])
+fc = forecast.forecast(vals, alloc, rules)
+post = lambda n, a: vals[n]["blended_premoney"] + max(evidence[n].get("ask_usd") or 0, a)
+tabs = st.tabs(["Portfolio", "Year 5", "Startups", "Research", "Analyst", "Approve", "Glossary", "Rules"])
 
 with tabs[0]:
     researched = sum(1 for n in order if res.get(n))
@@ -95,7 +97,7 @@ with tabs[0]:
     cards = []
     for n in order:
         v, a, e = vals[n], alloc.get(n, 0), evidence[n]
-        stake = f"{a / (v['blended_premoney'] + a):.1%}" if a else "—"
+        stake = f"{a / post(n, a):.1%}" if a else "—"
         tag = '<span class="tag in">INVEST</span>' if a else '<span class="tag out">PASS</span>'
         cards.append(f"""<div class="deal {'' if a else 'pass'}">
 <div class="head"><div class="n">{esc(n)} {tag}</div><div class="s">{esc(e['sector'])}</div></div>
@@ -106,7 +108,7 @@ with tabs[0]:
     st.markdown("".join(cards), unsafe_allow_html=True)
     st.download_button("Download the full data room", room, "data_room.md", use_container_width=True)
 
-with tabs[1]:
+with tabs[2]:
     name = st.selectbox("Startup", order)
     st.markdown(f"#### Scorecard · {name}")
     st.caption("1 = far below a typical pre-seed startup · 3 = typical · 5 = far above")
@@ -123,7 +125,7 @@ with tabs[1]:
     with st.expander("Full dossier: claims and research", expanded=True):
         st.markdown((OUT / f"dossier_{name}.md").read_text(encoding="utf-8"))
 
-with tabs[2]:
+with tabs[3]:
     st.markdown("#### Independent research")
     st.caption("For each startup, 6 targeted web searches (market, competitors, regulation, checkable claims). "
                "Every finding cites only links the search returned.")
@@ -149,7 +151,7 @@ with tabs[2]:
                 (DATA / "research" / f"{n}.json").write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
         st.rerun()
 
-with tabs[3]:
+with tabs[4]:
     st.markdown("#### Ask the analyst")
     st.caption("Answers come only from our data room. Name a startup to load its full deck and transcript. "
                "Check facts before using them on a slide.")
@@ -175,7 +177,7 @@ with tabs[3]:
         st.chat_message("assistant", avatar="🛡️").markdown(a)
         st.session_state.chat += [{"role": "user", "content": q}, {"role": "assistant", "content": a}]
 
-with tabs[4]:
+with tabs[5]:
     approvals = json.loads(APPROVALS.read_text(encoding="utf-8")) if APPROVALS.exists() else {}
     st.markdown("#### Investment committee sign-off")
     st.caption("Nothing is final until approved here. On the hosted app, approvals can reset when it restarts, so keep a record.")
@@ -198,7 +200,19 @@ with tabs[4]:
     total = sum(a["amount"] for a in approvals.values())
     st.metric("Approved so far", money(total) if total else "$0", delta=f"{money(rules['fund_usd'] - total)} left")
 
-with tabs[5]:
+with tabs[1]:
+    st.markdown(f"""<div class="kpis">
+<div class="kpi"><div class="l">Y5 base case</div><div class="v">${fc['base']/1e6:.1f}M</div></div>
+<div class="kpi"><div class="l">Base multiple</div><div class="v">{fc['moic_base']:.1f}x</div></div>
+<div class="kpi"><div class="l">Y5 downside</div><div class="v">${fc['down']/1e6:.2f}M</div></div>
+<div class="kpi"><div class="l">Downside multiple</div><div class="v">{fc['moic_down']:.2f}x</div></div></div>""", unsafe_allow_html=True)
+    st.markdown(forecast.markdown(fc))
+    st.caption("Edit year-5 company values, burn rates and dilution in data/forecast.yaml. Words unclear? See the Glossary tab.")
+
+with tabs[6]:
+    st.markdown((ROOT / "for-the-team" / "GLOSSARY.md").read_text(encoding="utf-8"))
+
+with tabs[7]:
     st.markdown("#### Fund rules")
     st.code((DATA / "rules.yaml").read_text(encoding="utf-8"), language="yaml")
 

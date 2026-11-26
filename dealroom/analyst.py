@@ -37,6 +37,8 @@ def compact_room(focus: str = "") -> str:
         for f in research.get(n, {}).get("findings", []):
             L.append(f"- WEB {f.get('topic')} {str(f.get('verdict')).upper()}: {str(f.get('finding'))[:220]} "
                      f"({(f.get('sources') or ['no source'])[0]})")
+    from dealroom import forecast
+    L.append(forecast.markdown(forecast.forecast(vals, alloc, rules)))
     return chr(10).join(L)
 
 
