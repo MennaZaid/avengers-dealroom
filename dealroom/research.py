@@ -100,7 +100,7 @@ def research(name: str, e: dict) -> dict:
 
 def main():
     evidence = yaml.safe_load((DATA / "evidence.yaml").read_text(encoding="utf-8"))
-    names = sys.argv[1:] or list(evidence)
+    names = [a for a in sys.argv[1:] if not a.startswith("--")] or list(evidence)
     RES.mkdir(parents=True, exist_ok=True)
     mark = usage_mark()
     for n in names:
@@ -109,7 +109,14 @@ def main():
             out = research(n, evidence[n])
         except Exception as exc:  # keep going; one failure shouldn't lose the others
             print("  FAILED", n, exc); continue
-        (RES / f"{n}.json").write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
+        f = RES / f"{n}.json"
+        sourced = lambda d: sum(1 for x in d["findings"] if x.get("sources"))
+        if f.exists() and "--force" not in sys.argv:
+            old = json.loads(f.read_text(encoding="utf-8"))
+            if sourced(out) < sourced(old):  # e.g. search engines blocked mid-run: keep the better earlier research
+                print(f"  kept earlier research for {n} ({sourced(old)} sourced findings vs {sourced(out)} now)")
+                continue
+        f.write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
     print("usage:", usage_summary(mark))
 
 if __name__ == "__main__":

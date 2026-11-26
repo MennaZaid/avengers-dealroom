@@ -6,3 +6,4 @@ __pycache__/
 .claude/
 data/research_run*.log
 outputs/dealroom/approvals.json
+data/research_rerun.log
