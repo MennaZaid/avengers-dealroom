@@ -8,13 +8,13 @@ Where the team disagrees with the tool, write **why**. That reason becomes a pit
 **DATA:** score 4.0/5 · our pre-money $2,380,000 · ask $400,000 · runway 21 months
 Y5 company value: base $25,000,000, downside $3,000,000. Milestone: GCC expansion and AI modules (DECK use of funds: 60% product, 30% sales, 10% opex); aim ~$300K ARR for a seed round
 
-**AGENTS:** 11/11 founder quotes verified · web findings: context 3, unverified 3 · top risks: high competition in the regional operations‑maintenance SaaS market; strong competition from a well‑funded incumbent; potential delays due to evolving digital licensing requirements
+**AGENTS:** 11/11 founder quotes verified · web findings: context 2, unverified 8 · top risks: high competition among SaaS vendors in the industrial operations segment; Potential compliance risk from Egypt's prior‑authorization data‑protection regime; customer validation risk
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -31,9 +31,9 @@ Y5 company value: base $60,000,000, downside -. Milestone: Fintech + REIT licenc
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -50,9 +50,9 @@ Y5 company value: base $20,000,000, downside $1,000,000. Milestone: Close first 
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -69,9 +69,9 @@ Y5 company value: base $12,000,000, downside $1,000,000. Milestone: Iraq to 30 c
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -88,9 +88,9 @@ Y5 company value: base $20,000,000, downside -. Milestone: FRA approval and publ
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -107,9 +107,9 @@ Y5 company value: base $15,000,000, downside -. Milestone: Repeatable customer r
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -126,9 +126,9 @@ Y5 company value: base $15,000,000, downside -. Milestone: Paid pilot in Egypt, 
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -145,9 +145,9 @@ Y5 company value: base $8,000,000, downside -. Milestone: Paid launch of Zaat Wo
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -164,9 +164,9 @@ Y5 company value: base $700,000, downside $200,000. Milestone: Own force plates,
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -183,9 +183,9 @@ Y5 company value: base $3,000,000, downside -. Milestone: 40 paying branches by 
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -202,9 +202,9 @@ Y5 company value: base $40,000,000, downside -. Milestone: Onshore MVP, class ce
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -221,9 +221,9 @@ Y5 company value: base $4,000,000, downside -. Milestone: Launch in two areas, 2
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
@@ -240,9 +240,9 @@ Y5 company value: base $1,000,000, downside -. Milestone: Four units serving New
 
 **HUMAN:**
 
-| Menna | Roufayda | Abdelrahman | Average |
-|---|---|---|---|
-|   /5 |   /5 |   /5 |  |
+| Menna | Kirollos | Omar | Hana | Average |
+|---|---|---|---|---|
+|   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
 - Gut feeling about the founder(s): __________________________________________
