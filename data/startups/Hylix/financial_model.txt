@@ -1,0 +1,115 @@
+# Hylix Financial Model.xlsx
+
+## sheet: Summary
+ | Hylix
+ | More work. Less AI spend.
+ | Sector | AI infrastructure / Agent efficiency software
+ | Headquarters | Cairo, Egypt (US outreach)
+ | Founded / started operating | 2026
+ | Current stage | Pre-revenue; pre-seed
+ | Business model | Free developer tier; paid enterprise deployments (deployment, integration, support and ongoing access)
+ | Company overview
+ | Hylix's product EVE improves how AI coding assistants make progress on complex jobs, steering them away from unproductive
+ | loops so that smaller, cheaper models complete more tasks. Businesses keep their existing models and infrastructure and add
+ | EVE. The first customers are AI software teams running their own (open) models; later, companies seeking lower AI operating
+ | costs and more control over data, and workflows beyond software development.
+ | Operating highlights (as of November 2026)
+ | Product | Working EVE versions tested on multiple model sizes
+ | Internal evaluation: task success | 20% → 40% on a smaller model
+ | Internal evaluation: cost per task | USD 1.10 → USD 0.50 (~50% lower)
+ | Go-to-market | Free developer product; direct business conversations in Egypt and the US
+ | Market | USD 9.8–11.0B annualised enterprise AI coding agent market (Gartner, April 2026)
+ | Funding history
+ | Date | Round / source |  | Amount (USD) | Investors / notes
+ | 2026 | Founders' capital |  | 10000 | Co-founders
+ | 2027 (planned) | Pre-seed |  | 350000 | Customer pilots, first paid deployments
+ | 2028 (planned) | Seed |  | 2500000 | US go-to-market and engineering
+ | Financial summary (USD)
+ |  | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ | Total revenue | 0 | 42000 | 300000 | 1056000 | 2520000 | 4824000
+ | Revenue growth | n/m | n/m | 6.14 | 2.52 | 1.39 | 0.91
+ | Gross profit | 0 | 29400 | 210000 | 760320 | 1864800 | 3666240
+ | Gross margin | 0 | 0.70 | 0.70 | 0.72 | 0.74 | 0.76
+ | EBITDA | -9300 | -135600 | -340000 | -629680 | -625200 | -35760
+ | EBITDA margin | 0 | -3.23 | -1.13 | -0.60 | -0.25 | -0.01
+ | Net income | -9300 | -138,266.67 | -351000 | -654,013.33 | -663,533.33 | -85760
+ | Free cash flow (pre-financing) | -9300 | -148640 | -395960 | -760400 | -850880 | -372240
+ | Equity raised | 10000 | 350000 | 2500000 | 0 | 0 | 0
+ | Closing cash | 700 | 202060 | 2306100 | 1545700 | 694820 | 322580
+ | Paying customers (avg.) | 0 | 1 | 6 | 16 | 32 | 52
+ | Headcount (FTE) | 3 | 5 | 12 | 22 | 34 | 46
+
+## sheet: Assumptions
+Hylix | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions |  | Value |  |  |  |  |  | Basis
+Corporate income tax rate |  | 0.23 |  |  |  |  |  | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) |  | 3 |  |  |  |  |  | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) |  | 0.12 |  |  |  |  |  | Cash tied up in receivables net of payables as revenue grows.
+Driver assumptions | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Customers & pricing
+Paying enterprise customers (avg.) | # | 0 | 1 | 6 | 16 | 32 | 52 | Pilots convert from H2 2027; expansion into Gulf and US teams from 2028.
+Annual contract value per customer | USD |  | 18000 | 40000 | 60000 | 75000 | 90000 | Priced against savings on AI spend; grows as customers add teams, models and workflows.
+Paid pilots & integration projects | # |  | 3 | 6 | 8 | 10 | 12
+Fee per pilot / integration | USD |  | 8000 | 10000 | 12000 | 12000 | 12000
+Cost structure
+Hosting & inference for managed deployments | % of revenue |  | 0.12 | 0.12 | 0.11 | 0.10 | 0.10
+Deployment engineering & support | % of revenue |  | 0.18 | 0.18 | 0.17 | 0.16 | 0.14
+Headcount (avg. FTE) | FTE | 3 | 5 | 12 | 22 | 34 | 46 | Research-heavy team; US sales from 2028.
+Cost per FTE | USD / year |  | 20000 | 30000 | 45000 | 55000 | 62000 | Rising US and senior research mix.
+R&D compute (training & evaluations) | USD / year | 8400 | 40000 | 90000 | 160000 | 220000 | 280000
+Sales & marketing | USD / year |  | 15000 | 60000 | 150000 | 260000 | 380000
+G&A | USD / year |  | 10000 | 40000 | 90000 | 140000 | 190000
+Capex | USD / year |  | 8000 | 25000 | 40000 | 50000 | 60000
+Funding
+Equity raised | USD | 10000 | 350000 | 2500000 | 0 | 0 | 0
+
+## sheet: Model
+Hylix | Financial Model
+USD, fiscal year ending 31 December. 2026–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+ | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ |  | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Paying enterprise customers (avg.) | # | 0 | 1 | 6 | 16 | 32 | 52
+Paid pilots & integrations | # | 0 | 3 | 6 | 8 | 10 | 12
+Annualised contract revenue | USD | 0 | 18000 | 240000 | 960000 | 2400000 | 4680000
+Headcount (avg. FTE) | FTE | 3 | 5 | 12 | 22 | 34 | 46
+Income statement (USD)
+Enterprise deployments & access | USD | 0 | 18000 | 240000 | 960000 | 2400000 | 4680000
+Pilots & integration services | USD | 0 | 24000 | 60000 | 96000 | 120000 | 144000
+Total revenue | USD | 0 | 42000 | 300000 | 1056000 | 2520000 | 4824000
+  Revenue growth (YoY) | % | n/m | n/m | 6.14 | 2.52 | 1.39 | 0.91
+Hosting & inference | USD | 0 | -5040 | -36000 | -116160 | -252000 | -482400
+Deployment engineering & support | USD | 0 | -7560 | -54000 | -179520 | -403200 | -675360
+Total cost of revenue | USD | 0 | -12600 | -90000 | -295680 | -655200 | -1157760
+Gross profit | USD | 0 | 29400 | 210000 | 760320 | 1864800 | 3666240
+  Gross margin | % | 0 | 0.70 | 0.70 | 0.72 | 0.74 | 0.76
+Salaries & benefits | USD | 0 | -100000 | -360000 | -990000 | -1870000 | -2852000
+R&D compute | USD | -8400 | -40000 | -90000 | -160000 | -220000 | -280000
+Sales & marketing | USD | 0 | -15000 | -60000 | -150000 | -260000 | -380000
+G&A | USD | -900 | -10000 | -40000 | -90000 | -140000 | -190000
+Total operating expenses | USD | -9300 | -165000 | -550000 | -1390000 | -2490000 | -3702000
+EBITDA | USD | -9300 | -135600 | -340000 | -629680 | -625200 | -35760
+  EBITDA margin | % | 0 | -3.23 | -1.13 | -0.60 | -0.25 | -0.01
+Depreciation & amortisation | USD | 0 | -2,666.67 | -11000 | -24,333.33 | -38,333.33 | -50000
+EBIT | USD | -9300 | -138,266.67 | -351000 | -654,013.33 | -663,533.33 | -85760
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -9300 | -138,266.67 | -351000 | -654,013.33 | -663,533.33 | -85760
+Income tax | USD | 0 | 0 | 0 | 0 | 0 | 0
+Net income | USD | -9300 | -138,266.67 | -351000 | -654,013.33 | -663,533.33 | -85760
+  Net margin | % | 0 | -3.29 | -1.17 | -0.62 | -0.26 | -0.02
+  Memo: tax losses carried forward (closing) | USD | 9300 | 147,566.67 | 498,566.67 | 1152580 | 1,816,113.33 | 1,901,873.33
+Cash flow & runway (USD)
+Net income | USD | -9300 | -138,266.67 | -351000 | -654,013.33 | -663,533.33 | -85760
+Add back: D&A | USD | 0 | 2,666.67 | 11000 | 24,333.33 | 38,333.33 | 50000
+Change in working capital | USD | 0 | -5040 | -30960 | -90720 | -175680 | -276480
+Cash flow from operations | USD | -9300 | -140640 | -370960 | -720400 | -800880 | -312240
+Capital expenditure | USD | 0 | -8000 | -25000 | -40000 | -50000 | -60000
+Free cash flow (pre-financing) | USD | -9300 | -148640 | -395960 | -760400 | -850880 | -372240
+Equity & SAFE funding raised | USD | 10000 | 350000 | 2500000 | 0 | 0 | 0
+Net change in cash | USD | 700 | 201360 | 2104040 | -760400 | -850880 | -372240
+Opening cash | USD | 0 | 700 | 202060 | 2306100 | 1545700 | 694820
+Closing cash | USD | 700 | 202060 | 2306100 | 1545700 | 694820 | 322580
+Average monthly net burn | USD | 775 | 12,386.67 | 32,996.67 | 63,366.67 | 70,906.67 | 31020
+Runway at year-end burn (months) | months | 0.90 | 16.31 | 69.89 | 24.39 | 9.80 | 10.40
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset's useful life.

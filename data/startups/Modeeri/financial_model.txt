@@ -1,0 +1,128 @@
+# Modeeri Financial Model.xlsx
+
+## sheet: Summary
+ | Modeeri
+ | The operations platform for frontline teams across MENA
+ | Sector | B2B SaaS / Operations & compliance software
+ | Headquarters | Cairo, Egypt (expanding to the GCC)
+ | Founded / started operating | Founded 2024; commercial operations from January 2025
+ | Current stage | Pre-seed (raising USD 400K; USD 110K committed)
+ | Business model | Per-location monthly subscription + AI add-on + per-user fees
+ | Company overview
+ | Modeeri digitises inspections, audits, opening/closing checklists, HACCP and brand-standard compliance for multi-location
+ | operators (F&B, retail, fitness, hospitality). Every task is evidenced with photos, timestamps and signatures; failures become
+ | tracked corrective actions and every branch is scored on the same criteria. An AI layer (photo approval, agents, CCTV-based
+ | visual audits) is being rolled out from Q4 2026. Customers include adidas, Food & Beverage Group, TBS, Meat Party, Willy's,
+ | Espresso Lab and fitsole.
+ | Operating highlights (as of November 2026)
+ | Locations under contract | 155
+ | Contracted ARR | USD 45K+
+ | Active pipeline ARR | USD 400K+ (500+ locations incl. Marriott, Majid Al Futtaim, IHG, UFC Gym)
+ | Logo churn since March 2026 | 0%
+ | Tasks completed on platform | 250,000+
+ | Team | 4 full-time, 8 part-time
+ | List price | USD 50 / location / month (inspections); AI add-on USD 10
+ | Funding history
+ | Date | Round / source |  | Amount (USD) | Investors / notes
+ | 2024 | Founders' capital |  | 12000 | Founding team
+ | 2025 | Angel round |  | 185000 | Regional angel investors
+ | 2026 | Pre-seed (first close) |  | 110000 | Angels; part of a USD 400K round
+ | 2027 (planned) | Pre-seed (final close) |  | 290000 | Remaining allocation of the USD 400K round
+ | 2028 (planned) | Seed |  | 2500000 | GCC expansion and AI modules
+ | Financial summary (USD)
+ |  | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ | Total revenue | 11720 | 36152 | 128062 | 424419 | 1155116 | 2542800 | 4745088
+ | Revenue growth | n/m | 2.08 | 2.54 | 2.31 | 1.72 | 1.20 | 0.87
+ | Gross profit | 6570 | 23502 | 99,888.36 | 339,535.20 | 924,092.80 | 2059668 | 3,843,521.28
+ | Gross margin | 0.56 | 0.65 | 0.78 | 0.80 | 0.80 | 0.81 | 0.81
+ | EBITDA | -76430 | -110998 | -205,933.34 | -368,278.88 | -483,339.68 | -334032 | 301,601.92
+ | EBITDA margin | -6.52 | -3.07 | -1.61 | -0.87 | -0.42 | -0.13 | 0.06
+ | Net income | -77180 | -112873 | -211,558.34 | -381,403.88 | -508,214.68 | -376532 | 237,851.92
+ | Free cash flow (pre-financing) | -80602 | -117,941.20 | -230,124.34 | -427,914.58 | -606,409.38 | -547,800.40 | -18,626.88
+ | Equity raised | 185000 | 110000 | 290000 | 2500000 | 0 | 0 | 0
+ | Closing cash | 116398 | 108,456.80 | 168,332.46 | 2,240,417.88 | 1,634,008.50 | 1,086,208.10 | 1,067,581.22
+ | Locations under contract | 62 | 155 | 480 | 1250 | 2700 | 4800 | 7600
+ | Exit ARR | 16368 | 45384 | 173952 | 536250 | 1334880 | 2676096 | 4625664
+ | Headcount (FTE) | 3 | 6 | 12 | 22 | 36 | 52 | 68
+
+## sheet: Assumptions
+Modeeri | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions |  | Value |  |  |  |  |  |  | Basis
+Corporate income tax rate |  | 0.23 |  |  |  |  |  |  | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) |  | 4 |  |  |  |  |  |  | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) |  | 0.10 |  |  |  |  |  |  | Cash tied up in receivables net of payables as revenue grows.
+Driver assumptions | Unit | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Customers & pricing
+Locations under contract (year-end) | # | 62 | 155 | 480 | 1250 | 2700 | 4800 | 7600 | Conversion of the 500+ location pipeline in 2027, then GCC chains (10+ branches) from 2028. 7,600 locations = ~1.8% of the 420K chain locations in the ICP.
+Core subscription per location | USD / month | 22 | 24 | 29 | 33 | 37 | 41 | 44 | Early customers on discounted founding pricing (~USD 24). Rises toward USD 50 list as new contracts sign at list and GCC mix grows.
+Modeeri AI add-on attach rate | % of locations | 0 | 0.04 | 0.12 | 0.25 | 0.35 | 0.42 | 0.48 | AI approvals and agents launched Q4 2026; attach grows as Visual Intelligence and agents mature.
+AI add-on price | USD / month | 10 | 10 | 10 | 11 | 12 | 13 | 14 | USD 10 list today incl. 100 questions; usage overage at USD 0.10 per question lifts effective price.
+Visual Intelligence attach rate | % of locations |  |  | 0 | 0.03 | 0.07 | 0.11 | 0.15 | CCTV-based 24/7 audits launch 2028, priced per camera.
+Cameras connected per VI location | # |  |  | 4 | 4 | 4 | 4 | 4 | Typical branch camera count.
+Price per camera | USD / month |  |  | 15 | 15 | 16 | 17 | 18 | Priced below global video-analytics tools.
+Onboarding fee per new location | USD | 40 | 64 | 40 | 45 | 50 | 55 | 60 | One-off setup, SOP digitisation and training.
+Cost structure
+Cloud hosting & AI inference | % of revenue | 0.18 | 0.15 | 0.10 | 0.10 | 0.11 | 0.11 | 0.11 | Scale efficiencies offset by higher AI usage.
+Customer success & onboarding | % of revenue | 0.26 | 0.20 | 0.12 | 0.10 | 0.09 | 0.08 | 0.08 | Dedicated on-the-ground onboarding; leverage improves with larger accounts.
+Full-time equivalent headcount (year-end) | FTE | 3 | 6 | 12 | 22 | 36 | 52 | 68 | Product/engineering-led team; sales hires in KSA/UAE from 2028.
+Fully loaded cost per FTE | USD / year | 20667 | 16000 | 18000 | 21000 | 24000 | 26500 | 28500 | Cairo-based engineering with rising GCC sales mix.
+Sales & marketing (excl. salaries) | % of revenue | 0.77 | 0.58 | 0.35 | 0.32 | 0.28 | 0.25 | 0.22 | Enterprise sales, events, partnerships with consultancies and franchisors.
+Tools, office & G&A | USD / year | 12000 | 17500 | 45000 | 110000 | 220000 | 380000 | 560000 | Includes GCC entity set-up from 2028, audit, legal and insurance.
+Capital expenditure | USD / year | 3000 | 4500 | 15000 | 30000 | 50000 | 75000 | 100000 | Devices, test cameras and capitalised AI development.
+Funding
+Equity raised | USD | 185000 | 110000 | 290000 | 2500000 | 0 | 0 | 0 | Final close of the USD 400K pre-seed in Q1 2027; USD 2.5M seed in 2028.
+
+## sheet: Model
+Modeeri | Financial Model
+USD, fiscal year ending 31 December. 2025–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+ | Unit | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ |  | Actual | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Locations under contract (year-end) | # | 62 | 155 | 480 | 1250 | 2700 | 4800 | 7600
+Average billed locations | # | 35 | 104 | 317.50 | 865 | 1975 | 3750 | 6200
+Core subscription per location | USD / mo | 22 | 24 | 29 | 33 | 37 | 41 | 44
+AI add-on attach rate | % | 0 | 0.04 | 0.12 | 0.25 | 0.35 | 0.42 | 0.48
+Locations on Visual Intelligence (avg.) | # | 0 | 0 | 0 | 25.95 | 138.25 | 412.50 | 930
+Exit ARR (subscriptions + AI) | USD | 16368 | 45384 | 173952 | 536250 | 1334880 | 2676096 | 4625664
+Headcount (FTE, year-end) | FTE | 3 | 6 | 12 | 22 | 36 | 52 | 68
+Income statement (USD)
+Core subscriptions (inspections & SOPs) | USD | 9240 | 29952 | 110490 | 342540 | 876900 | 1845000 | 3273600
+Modeeri AI add-on | USD | 0 | 250 | 4572 | 28545 | 99540 | 245700 | 499968
+Visual Intelligence (per camera) | USD | 0 | 0 | 0 | 18684 | 106176 | 336600 | 803520
+Onboarding & implementation fees | USD | 2480 | 5950 | 13000 | 34650 | 72500 | 115500 | 168000
+Total revenue | USD | 11720 | 36152 | 128062 | 424419 | 1155116 | 2542800 | 4745088
+  Revenue growth (YoY) | % | n/m | 2.08 | 2.54 | 2.31 | 1.72 | 1.20 | 0.87
+Cloud hosting & AI inference | USD | -2100 | -5400 | -12,806.20 | -42,441.90 | -127,062.76 | -279708 | -521,959.68
+Customer success & onboarding | USD | -3050 | -7250 | -15,367.44 | -42,441.90 | -103,960.44 | -203424 | -379,607.04
+Total cost of revenue | USD | -5150 | -12650 | -28,173.64 | -84,883.80 | -231,023.20 | -483132 | -901,566.72
+Gross profit | USD | 6570 | 23502 | 99,888.36 | 339,535.20 | 924,092.80 | 2059668 | 3,843,521.28
+  Gross margin | % | 0.56 | 0.65 | 0.78 | 0.80 | 0.80 | 0.81 | 0.81
+Salaries & benefits | USD | -62000 | -96000 | -216000 | -462000 | -864000 | -1378000 | -1938000
+Sales & marketing | USD | -9000 | -21000 | -44,821.70 | -135,814.08 | -323,432.48 | -635700 | -1,043,919.36
+Tools, office & G&A | USD | -12000 | -17500 | -45000 | -110000 | -220000 | -380000 | -560000
+Total operating expenses | USD | -83000 | -134500 | -305,821.70 | -707,814.08 | -1,407,432.48 | -2393700 | -3,541,919.36
+EBITDA | USD | -76430 | -110998 | -205,933.34 | -368,278.88 | -483,339.68 | -334032 | 301,601.92
+  EBITDA margin | % | -6.52 | -3.07 | -1.61 | -0.87 | -0.42 | -0.13 | 0.06
+Depreciation & amortisation | USD | -750 | -1875 | -5625 | -13125 | -24875 | -42500 | -63750
+EBIT | USD | -77180 | -112873 | -211,558.34 | -381,403.88 | -508,214.68 | -376532 | 237,851.92
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -77180 | -112873 | -211,558.34 | -381,403.88 | -508,214.68 | -376532 | 237,851.92
+Income tax | USD | 0 | 0 | 0 | 0 | 0 | 0 | 0
+Net income | USD | -77180 | -112873 | -211,558.34 | -381,403.88 | -508,214.68 | -376532 | 237,851.92
+  Net margin | % | -6.59 | -3.12 | -1.65 | -0.90 | -0.44 | -0.15 | 0.05
+  Memo: tax losses carried forward (closing) | USD | 77180 | 190053 | 401,611.34 | 783,015.22 | 1,291,229.90 | 1,667,761.90 | 1,429,909.98
+Cash flow & runway (USD)
+Net income | USD | -77180 | -112873 | -211,558.34 | -381,403.88 | -508,214.68 | -376532 | 237,851.92
+Add back: D&A | USD | 750 | 1875 | 5625 | 13125 | 24875 | 42500 | 63750
+Change in working capital | USD | -1172 | -2,443.20 | -9191 | -29,635.70 | -73,069.70 | -138,768.40 | -220,228.80
+Cash flow from operations | USD | -77602 | -113,441.20 | -215,124.34 | -397,914.58 | -556,409.38 | -472,800.40 | 81,373.12
+Capital expenditure | USD | -3000 | -4500 | -15000 | -30000 | -50000 | -75000 | -100000
+Free cash flow (pre-financing) | USD | -80602 | -117,941.20 | -230,124.34 | -427,914.58 | -606,409.38 | -547,800.40 | -18,626.88
+Equity & SAFE funding raised | USD | 185000 | 110000 | 290000 | 2500000 | 0 | 0 | 0
+Net change in cash | USD | 104398 | -7,941.20 | 59,875.66 | 2,072,085.42 | -606,409.38 | -547,800.40 | -18,626.88
+Opening cash | USD | 12000 | 116398 | 108,456.80 | 168,332.46 | 2,240,417.88 | 1,634,008.50 | 1,086,208.10
+Closing cash | USD | 116398 | 108,456.80 | 168,332.46 | 2,240,417.88 | 1,634,008.50 | 1,086,208.10 | 1,067,581.22
+Average monthly net burn | USD | 6,716.83 | 9,828.43 | 19,177.03 | 35,659.55 | 50,534.11 | 45,650.03 | 1,552.24
+Runway at year-end burn (months) | months | 17.33 | 11.04 | 8.78 | 62.83 | 32.33 | 23.79 | 687.77
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset's useful life.

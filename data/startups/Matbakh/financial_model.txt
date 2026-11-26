@@ -1,0 +1,111 @@
+# Matbakh Financial Model.xlsx
+
+## sheet: Summary
+ | Matbakh
+ | Point-of-sale and operations system for Egypt's independent food businesses
+ | Sector | Vertical SaaS / Restaurant POS
+ | Headquarters | Cairo, Egypt
+ | Founded / started operating | Product built 2026; first paying merchants December 2026
+ | Current stage | Bootstrapped and profitable (raising ~EGP 1.5M in 2028)
+ | Business model | Monthly subscription per branch (Lite EGP 1,000 / Standard 2,000 / Pro 3,000); no setup fee or sales commission
+ | Company overview
+ | Browser-based POS for dine-in restaurants, cafés, bakeries, takeaway counters and kiosks. Runs on any tablet with an 80mm
+ | printer, keeps selling offline, deducts ingredients from stock on every sale, shows true margin per item and produces a
+ | closing report by payment method and cashier. Tables, kitchen display and QR ordering included on higher plans. Arabic-first,
+ | priced for independents with 1–5 branches who cannot afford enterprise POS (~EGP 50,000 per branch per year).
+ | Operating highlights (as of November 2026)
+ | Paying merchants | 3 (billing from December 2026)
+ | F&B brands in pipeline | 14
+ | Pricing | EGP 1,000–3,000 per branch per month, locked Nov 2026
+ | Partnerships | Paymob co-marketing to its merchant base
+ | Annual running cost today | ~EGP 10,600 (servers carry ~30–40 branches each)
+ | Team | Founder (full-stack); first sales hire planned Q2 2027
+ | Funding history
+ | Date | Round / source |  | Amount (USD) | Investors / notes
+ | 2026 | Founder capital |  | 1500 | Self-funded by founder
+ | 2028 (planned) | Seed |  | 25600 | ~EGP 1.5M for sales, marketing and expansion to Alexandria & the Delta
+ | Financial summary (USD)
+ |  | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ | Total revenue | 88 | 8,912.73 | 62,461.54 | 189,193.55 | 389,312.98 | 657,391.30
+ | Revenue growth | n/m | 100.28 | 6.01 | 2.03 | 1.06 | 0.69
+ | Gross profit | -120 | 8640 | 61,094.02 | 186,290.32 | 384,274.81 | 650,144.93
+ | Gross margin | -1.36 | 0.97 | 0.98 | 0.98 | 0.99 | 0.99
+ | EBITDA | -590 | 7,094.55 | 53,059.83 | 169,838.71 | 360,305.34 | 619,710.14
+ | EBITDA margin | -6.70 | 0.80 | 0.85 | 0.90 | 0.93 | 0.94
+ | Net income | -673.33 | 5,430.19 | 40,514.28 | 130,307.50 | 276,911.64 | 476,787.86
+ | Free cash flow (pre-financing) | -844.40 | 4,672.29 | 37,120.18 | 122,670.90 | 265,405.67 | 461,883.95
+ | Equity raised | 1500 | 0 | 25600 | 0 | 0 | 0
+ | Closing cash | 655.60 | 5,327.89 | 68,048.06 | 190,718.96 | 456,124.63 | 918,008.58
+ | Paying branches (year-end) | 3 | 40 | 250 | 600 | 1100 | 1700
+ | Exit ARR (EGP) | 54000 | 912000 | 6300000 | 16560000 | 33000000 | 55080000
+
+## sheet: Assumptions
+Matbakh | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions |  | Value |  |  |  |  |  | Basis
+Corporate income tax rate |  | 0.23 |  |  |  |  |  | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) |  | 3 |  |  |  |  |  | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) |  | 0.05 |  |  |  |  |  | Annual plans paid upfront offset receivables; low working capital need.
+Driver assumptions | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Macro
+EGP / USD exchange rate (average) | EGP per USD | 51 | 55 | 58.50 | 62 | 65.50 | 69 | Annual average EGP per USD. 2026 average reflects ~47.7 pre-February, then depreciation to ~53–56 by Q4 2026; forecast assumes ~6% annual depreciation in line with the inflation differential.
+Merchants & pricing
+Paying branches (year-end) | # | 3 | 40 | 250 | 600 | 1100 | 1700 | First 10 brands in Q1 2027, first sales hire Q2 2027, 40 branches by end-2027; Alexandria and the Delta from 2028. 1,700 branches ≈ 4% of Egypt's restaurants.
+Average subscription per branch | EGP / month | 1500 | 1900 | 2100 | 2300 | 2500 | 2700 | Blend of Lite (1,000), Standard (2,000) and Pro (3,000); founding brands locked for 12 months, then annual increases.
+Cost structure (EGP, built bottom-up at today's pay)
+Servers, backups & security | EGP / year | 10600 | 15000 | 80000 | 180000 | 330000 | 500000 | One server per ~35 branches (~EGP 10K/yr) plus off-site backups.
+Sales & support salaries | EGP / year |  | 72000 | 380000 | 620000 | 940000 | 1300000 | Fixed salaries, no commission: sales ~EGP 8K and support ~EGP 7K per month. No engineering hires.
+Founder salary | EGP / year |  | 0 | 0 | 240000 | 300000 | 360000 | Founder salary from 2029.
+Marketing (demos, content, events) | EGP / year |  | 13000 | 60000 | 100000 | 200000 | 260000
+Legal, accounting & G&A | EGP / year |  | 0 | 30000 | 60000 | 130000 | 180000 | Company registration and contracts funded from the 2028 raise.
+Capex (demo kits, laptops) | USD / year |  | 600 | 1500 | 3000 | 4500 | 6000
+Funding
+Equity raised | USD | 1500 | 0 | 25600 | 0 | 0 | 0 | ~EGP 1.5M raised in 2028 to hire sales ahead of revenue; the plan stays profitable without it.
+
+## sheet: Model
+Matbakh | Financial Model
+USD, fiscal year ending 31 December. 2026–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+ | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ |  | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Paying branches (year-end) | # | 3 | 40 | 250 | 600 | 1100 | 1700
+Average billed branches | # | 0.25 | 21.50 | 145 | 425 | 850 | 1400
+Average subscription per branch | EGP / mo | 1500 | 1900 | 2100 | 2300 | 2500 | 2700
+Exit ARR (EGP) | EGP | 54000 | 912000 | 6300000 | 16560000 | 33000000 | 55080000
+Income statement (USD)
+Branch subscriptions | USD | 88 | 8,912.73 | 62,461.54 | 189,193.55 | 389,312.98 | 657,391.30
+Total revenue | USD | 88 | 8,912.73 | 62,461.54 | 189,193.55 | 389,312.98 | 657,391.30
+  Revenue growth (YoY) | % | n/m | 100.28 | 6.01 | 2.03 | 1.06 | 0.69
+Servers, backups & security | USD | -208 | -272.73 | -1,367.52 | -2,903.23 | -5,038.17 | -7,246.38
+Total cost of revenue | USD | -208 | -272.73 | -1,367.52 | -2,903.23 | -5,038.17 | -7,246.38
+Gross profit | USD | -120 | 8640 | 61,094.02 | 186,290.32 | 384,274.81 | 650,144.93
+  Gross margin | % | -1.36 | 0.97 | 0.98 | 0.98 | 0.99 | 0.99
+Sales & support salaries | USD | 0 | -1,309.09 | -6,495.73 | -10000 | -14,351.15 | -18,840.58
+Founder salary | USD | 0 | 0 | 0 | -3,870.97 | -4,580.15 | -5,217.39
+Marketing | USD | -150 | -236.36 | -1,025.64 | -1,612.90 | -3,053.44 | -3,768.12
+Legal, accounting & G&A | USD | -320 | 0 | -512.82 | -967.74 | -1,984.73 | -2,608.70
+Total operating expenses | USD | -470 | -1,545.45 | -8,034.19 | -16,451.61 | -23,969.47 | -30,434.78
+EBITDA | USD | -590 | 7,094.55 | 53,059.83 | 169,838.71 | 360,305.34 | 619,710.14
+  EBITDA margin | % | -6.70 | 0.80 | 0.85 | 0.90 | 0.93 | 0.94
+Depreciation & amortisation | USD | -83.33 | -283.33 | -783.33 | -1700 | -3000 | -4500
+EBIT | USD | -673.33 | 6,811.21 | 52,276.50 | 168,138.71 | 357,305.34 | 615,210.14
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -673.33 | 6,811.21 | 52,276.50 | 168,138.71 | 357,305.34 | 615,210.14
+Income tax | USD | 0 | -1,381.02 | -11,762.21 | -37,831.21 | -80,393.70 | -138,422.28
+Net income | USD | -673.33 | 5,430.19 | 40,514.28 | 130,307.50 | 276,911.64 | 476,787.86
+  Net margin | % | -7.65 | 0.61 | 0.65 | 0.69 | 0.71 | 0.73
+  Memo: tax losses carried forward (closing) | USD | 673.33 | 0 | 0 | 0 | 0 | 0
+Cash flow & runway (USD)
+Net income | USD | -673.33 | 5,430.19 | 40,514.28 | 130,307.50 | 276,911.64 | 476,787.86
+Add back: D&A | USD | 83.33 | 283.33 | 783.33 | 1700 | 3000 | 4500
+Change in working capital | USD | -4.40 | -441.24 | -2,677.44 | -6,336.60 | -10,005.97 | -13,403.92
+Cash flow from operations | USD | -594.40 | 5,272.29 | 38,620.18 | 125,670.90 | 269,905.67 | 467,883.95
+Capital expenditure | USD | -250 | -600 | -1500 | -3000 | -4500 | -6000
+Free cash flow (pre-financing) | USD | -844.40 | 4,672.29 | 37,120.18 | 122,670.90 | 265,405.67 | 461,883.95
+Equity & SAFE funding raised | USD | 1500 | 0 | 25600 | 0 | 0 | 0
+Net change in cash | USD | 655.60 | 4,672.29 | 62,720.18 | 122,670.90 | 265,405.67 | 461,883.95
+Opening cash | USD | 0 | 655.60 | 5,327.89 | 68,048.06 | 190,718.96 | 456,124.63
+Closing cash | USD | 655.60 | 5,327.89 | 68,048.06 | 190,718.96 | 456,124.63 | 918,008.58
+Average monthly net burn | USD | 70.37 | 0 | 0 | 0 | 0 | 0
+Runway at year-end burn (months) | months | 9.32 | n/m | n/m | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset's useful life.

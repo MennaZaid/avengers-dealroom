@@ -16,6 +16,8 @@ Modeeri:
     - {source: deck, quote: "0 Churn since March 2026", note: "zero churn (slide shows 0 above the label)"}
     - {source: deck, quote: "4 full-time  ·  8 part-time"}
     - {source: video, quote: "in the Egypt, it's very, these businesses are very price sensitive"}
+    - {source: model, quote: "Seed |  | 2500000 | GCC expansion and AI modules"}
+    - {source: model, quote: "Marriott, Majid Al Futtaim, IHG, UFC Gym"}
 Blaze:
   sector: consumer fintech, education-first investing (Egypt)
   stage: pre-seed, pre-launch (pilot users)
@@ -40,15 +42,17 @@ Zaat:
     - {source: deck, quote: "Launches, and charges, in December."}
     - {source: video, quote: "raise between 100 to 500k, ideally more in the higher end"}
     - {source: video, quote: "I'm currently solo founding"}
+    - {source: model, quote: "51, of which 37 active in the month"}
 Hylix:
   sector: AI developer tooling (coding-agent efficiency)
   stage: pre-revenue, internal tests only
-  ask_usd: null
-  ask_note: no ask stated in deck; no video
+  ask_usd: 350000
+  ask_note: no ask in the deck; financial model plans a USD 350K pre-seed in 2027 for customer pilots, then USD 2.5M seed in 2028
   claims:
     - {source: deck, quote: "These are test results, not customer revenue."}
     - {source: deck, quote: "20% to 40% successful tasks and $1.1 to $0.5 per task on a tested setup"}
     - {source: deck, quote: "No recurring customer revenue is claimed in this deck."}
+    - {source: model, quote: "Pre-seed |  | 350000 | Customer pilots, first paid deployments"}
 TRNR:
   sector: sports coaching marketplace (Cairo)
   stage: pre-revenue, app built
@@ -77,6 +81,8 @@ Byota:
     - {source: video, quote: "approximately 1.1 million US dollars"}
     - {source: video, quote: "450,000 for the lab infrastructure"}
     - {source: video, quote: "we're taking an asset-light approach initially"}
+    - {source: deck, quote: "Raising USD 1.1M to launch our own lab"}
+    - {source: deck, quote: "Official pilot has not started"}
 Carbonless:
   sector: onboard ship carbon capture (climate hardware)
   stage: prototype
@@ -87,3 +93,60 @@ Carbonless:
     - {source: video, quote: "we developed a prototype"}
     - {source: video, quote: "Hopefully a unicorn."}
     - {source: video, quote: "We have mainly nine competitors."}
+IGNOT:
+  sector: proptech / fractional real-estate investing (Nvest), FRA sandbox
+  stage: pre-seed, live app, regulated sandbox
+  ask_usd: 500000
+  ask_note: $500K SAFE at a $3.5M post-money cap, 10% discount, 12-month runway (DECK)
+  claims:
+    - {source: deck, quote: "Valuation cap"}
+    - {source: deck, quote: "$3.5M post-money"}
+    - {source: deck, quote: "1,835 downloads and 500+ funded investors on our own app before a single marketing campaign"}
+    - {source: deck, quote: "FRA Fintech Regulatory Sandbox: IGNOT admitted, operating under licensed NBFI partners"}
+    - {source: deck, quote: "27 properties in pipeline, 8 live."}
+    - {source: deck, quote: "Minimum of 30% IRR by accessing exclusive"}
+    - {source: deck, quote: "10 yrs Real Estate, 4 times founder"}
+VELO:
+  sector: consumer services, mobile car detailing (New Cairo)
+  stage: pre-seed, 1 unit live, first paid jobs
+  ask_usd: 30000
+  ask_note: EGP 1.5M (about USD 30K at EGP 50/$; model says USD 27.3K) for three more units
+  claims:
+    - {source: deck, quote: "EGP 8,295 in revenue since the first paid job on 23 October."}
+    - {source: deck, quote: "Raising EGP 1.5M for three more units"}
+    - {source: deck, quote: "Bookings per compound are untested."}
+    - {source: deck, quote: "Contribution · 55%"}
+    - {source: model, quote: "Self-funded; raising EGP 1.5M seed"}
+Matbakh:
+  sector: vertical SaaS, restaurant POS (Egypt)
+  stage: product built, 3 paying merchants from December 2026, bootstrapped
+  ask_usd: 25600
+  ask_note: not raising now; model plans ~EGP 1.5M (USD 25.6K) seed in 2028; solo founder
+  claims:
+    - {source: model, quote: "Paying merchants | 3 (billing from December 2026)"}
+    - {source: model, quote: "F&B brands in pipeline | 14"}
+    - {source: model, quote: "Founder (full-stack); first sales hire planned Q2 2027"}
+    - {source: model, quote: "Bootstrapped and profitable (raising ~EGP 1.5M in 2028)"}
+REE:
+  sector: sports tech, court cameras and highlights (padel, squash, 5-a-side)
+  stage: pre-seed, revenue in 3 countries
+  ask_usd: 100000
+  ask_note: ASSUMPTION ~USD 100K - no amount in deck/video; model has USD 25K term sheet and a cash low of about -USD 69K by June 2027
+  claims:
+    - {source: model, quote: "Courts live | 37 (30 Egypt, 3 Iraq, 4 Libya)"}
+    - {source: model, quote: "MRR | USD 2,410"}
+    - {source: model, quote: "Paying operators | 11"}
+    - {source: model, quote: "Pre-seed (USD 55K raised from angels; USD 25K term sheet from Smashi's CEO)"}
+    - {source: video, quote: "we made more or less 6 or 7 failed products across different sports"}
+    - {source: video, quote: "the company in Israel do exactly more or less"}
+Motion+:
+  sector: sports health, biomechanics and running analysis
+  stage: bootstrapped, profitable service business
+  ask_usd: 80000
+  ask_note: VIDEO "around four million Egyptian pounds" (~USD 80K); model plans no raise
+  claims:
+    - {source: model, quote: "Clients assessed in 2026 | ~210 paying clients"}
+    - {source: model, quote: "Bootstrapped and profitable"}
+    - {source: model, quote: "Self-funded, with positive operating cash every year."}
+    - {source: video, quote: "ask for around four million Egyptian pounds"}
+    - {source: video, quote: "I'm in Egyptian professional triathlete"}

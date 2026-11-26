@@ -23,8 +23,8 @@ def verify(evidence):
         rows = []
         for c in e.get("claims", []):
             src = c["source"]
-            if src in ("deck", "video"):
-                f = DATA / "startups" / name / ("deck.txt" if src == "deck" else "video_transcript.txt")
+            if src in ("deck", "video", "model"):
+                f = DATA / "startups" / name / {"deck": "deck.txt", "video": "video_transcript.txt", "model": "financial_model.txt"}[src]
                 ok = f.exists() and norm(c["quote"]) in norm(f.read_text(encoding="utf-8"))
                 status = "VERIFIED" if ok else "NOT FOUND"
             else:

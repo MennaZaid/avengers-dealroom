@@ -1,0 +1,107 @@
+# REE - video transcript (REE Video.mp4)
+# language: ar, duration 5.5 min, model small
+# Machine transcript: names and numbers may be misheard; check against the video before quoting.
+
+[00:00] Hello my name is Anb Helkel
+[00:03] I am founder and CEO of eSports
+[00:05] we have been operating in sports tech market in Egypt for the past few years and a half
+[00:09] we made more or less 6 or 7 failed products across different sports
+[00:16] trying to found a product market fit
+[00:19] we started with analytics and football
+[00:22] and we found out that there is no infrastructure for recording across football
+[00:26] في أي أخر مكان في إيجابي
+[00:28] وعلى أساسي
+[00:30] ومثلنا نقوم بإمكانك
+[00:34] باستخدام باسكتبور
+[00:35] مع أساسي
+[00:37] ومثلنا أننا نفعل
+[00:39] أن المدينة جدا جدا
+[00:41] وقد نحتاج إلى تساعدة
+[00:43] في مدينة مدينة
+[00:46] ومثلنا إلى تساعدة
+[00:48] ونجد أساسي
+[00:51] بسبب
+[00:52] المساعدة على أساسي
+[00:54] وفي المال
+[00:56] ونحن نتحدث عن مجموعة في إيجابتا
+[01:00] ونحن نتحدث بأسراء في أدل
+[01:04] ونعطي أسراء المساعدة ومعرفة المساعدة
+[01:08] ويشهد أن نكون مجموعة في تطبيق شيء في هذا المكان
+[01:12] لأننا نحن نحن نفعله في مدينة أخرى
+[01:15] ونحن نحن نعرفه في ما يعمل ومعرفة ما يعمل
+[01:18] ونحن نتحدث عن هذا المكان
+[01:20] أخباري مجموعة
+[01:21] هو مجموعة تقنية
+[01:23] نحن كنت بشكل موجود فكرة في مجانيليد الواقع
+[01:24] that is specialised in computer visioning and embedded systems
+[01:27] The problem that we are solving right now in Paddle
+[01:33] is that players cannot capture their best moments
+[01:38] either to watch it or share it with their loved ones, friends and family
+[01:42] and the bigger problem that we are solving in this market
+[01:44] is the infrastructure problem
+[01:46] so in order to provide any added value
+[01:49] when it comes to tech and data in the sports market
+[01:51] we need first to have the infrastructure recording
+[01:54] وهذا هو one of the main problems we are solving with having the cameras installed at Google.
+[02:00] So we are both solving a very specific use case when it comes to recording enabling players to have the best highlights
+[02:09] and at the same time solving the market problem at scale with providing the infrastructure
+[02:14] where we can build the different use cases from scouting with data, player stats and match stats on top of it.
+[02:21] لذا لماذا now is the right time when we talk globally, sports tech has been a thing for the past 10 years
+[02:29] and in Egypt we have been lacking behind.
+[02:31] We have seen a couple of trends in Egypt that are globally actually enabling us to do that
+[02:36] so when it comes to globally, tech has become much more accessible
+[02:40] to provide solutions at a constant scale in Egypt
+[02:43] and when it comes also to what is happening here in Egypt
+[02:48] we have seen many commercial businesses in the sports growing at scale specifically in Padle
+[02:56] and we haven't seen that before in football or basketball or what.
+[03:00] Also at the same time this is the trend of streaming sports other than football in the nation.
+[03:08] So capitalizing on the money invested in streaming and capitalizing on having a lot of commercial businesses
+[03:13] ونقوم بإبطالنا بإستطاع التكليزة المتحدة بها
+[03:17] where we can lay out our infrastructure and expand accordingly.
+[03:22] لذا لتنظر نقوم بإستطاع التكليزة لإسطاع التكليزة
+[03:26] where we basically can stream for people to view
+[03:29] and at the same time having this infrastructure
+[03:31] will enable us to have different use cases
+[03:33] like player stats and match stats as I mentioned.
+[03:37] Our product now basically is
+[03:39] we have a buzzer installed at Gurt on a camera
+[03:42] someone hit a put shot, they press the buzzer
+[03:44] and the system automatically saves the last 30 seconds
+[03:47] and we do this with a B2B2C model
+[03:50] where we basically sell our product up from cost to
+[03:53] court owners and we charge them monthly subscription.
+[03:59] Our main competitors are companies in Europe
+[04:02] and companies from Israel
+[04:04] so the company in Israel do exactly more or less
+[04:07] the same thing that we do a camera and a buzzer
+[04:09] but they basically cannot sell in the region
+[04:11] given that they are an Israeli company
+[04:13] and at the same time we have
+[04:17] competitors in Europe that understand the market
+[04:20] and have their solutions very premium and expansive
+[04:23] and not easy to use when it comes to
+[04:26] the market in our region.
+[04:29] The main risk we have in our business is
+[04:34] being able to survive selling the infrastructure
+[04:37] here in the region.
+[04:39] So basically the main risk is
+[04:42] infrastructure, there are not a lot of money
+[04:44] that we can get from selling the infrastructure
+[04:46] however we cannot make a big chunk of money
+[04:48] when it comes to scouting
+[04:50] and in-match stats unless there is infrastructure
+[04:52] so we had to start from scratch
+[04:55] so one of the main risks is
+[04:57] the business itself or the investment
+[04:59] we will be able to sustain selling this infrastructure
+[05:02] at scale either to streaming classrooms
+[05:04] or to very very specific use cases like
+[05:07] at the post office.
+[05:09] We see our company in 5 years
+[05:12] having cameras installed
+[05:15] at almost 50% of all sports courts
+[05:18] with the different use cases on top of it
+[05:21] that can get us to have better data
+[05:23] better decision making and better entertainment
+[05:25] and better experience for both players
+[05:27] families and fans.

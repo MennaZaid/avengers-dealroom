@@ -46,7 +46,7 @@ def sources_for(question: str, limit: int = 2500) -> str:
     out = []
     for d in STARTUPS.iterdir():
         if d.is_dir() and d.name.lower() in question.lower():
-            for f in ("deck.txt", "video_transcript.txt"):
+            for f in ("deck.txt", "video_transcript.txt", "financial_model.txt"):
                 p = d / f
                 if p.exists():
                     out.append(f"--- {d.name} {f} ---\n" + p.read_text(encoding="utf-8")[:limit])

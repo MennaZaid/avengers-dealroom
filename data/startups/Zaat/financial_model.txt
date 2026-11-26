@@ -1,0 +1,117 @@
+# Zaat Financial Model.xlsx
+
+## sheet: Summary
+ | Zaat
+ | Agents that already know the founder
+ | Sector | AI software / Agents for solo founders
+ | Headquarters | Cairo, Egypt (selling globally online)
+ | Founded / started operating | Development began July 2026; private beta September 2026; paid launch December 2026
+ | Current stage | Pre-seed (raising USD 100K)
+ | Business model | Monthly plans (Founder USD 49, Startup USD 149) + credit top-ups + personal Zaat Plus (USD 20)
+ | Company overview
+ | Zaat Work gives solo founders a team of AI agents (chief of staff, Capital for grants and investors, Content) that share one
+ | brain built from the founder's personal Zaat: a working model of the person drawn from calendar, meetings, notes and
+ | conversations. Agents reach the founder in a web office, on WhatsApp, by email, or from Claude and ChatGPT via MCP.
+ | Growth comes through founder programmes that onboard whole cohorts, plus founder-led and AI-made content.
+ | Operating highlights (as of November 2026)
+ | Private beta users (personal Zaat) | 51, of which 37 active in the month
+ | Weekly active people | Grew from 7 to 24 since September
+ | Companies on Zaat Work (first week) | 3 (7 BuildCamp founders joined in week one)
+ | Engineering | 1,650 commits since 27 July; web, iPhone and WhatsApp
+ | Total spend to build both products | USD 1,948 to 22 Nov 2026
+ | Contribution margin | Founder plan: USD 21 kept of USD 49; Startup plan: USD 94 of USD 149
+ | Funding history
+ | Date | Round / source |  | Amount (USD) | Investors / notes
+ | 2026 | Founder capital |  | 3000 | Self-funded by founder
+ | 2027 (planned) | Pre-seed |  | 100000 | Twelve months to ~450 paying companies
+ | Financial summary (USD)
+ |  | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ | Total revenue | 269 | 133,318.80 | 752400 | 1876800 | 3660000 | 6092400
+ | Revenue growth | n/m | 494.61 | 4.64 | 1.49 | 0.95 | 0.66
+ | Gross profit | -270 | 51,327.74 | 331056 | 919632 | 1903200 | 3289896
+ | Gross margin | -1.00 | 0.39 | 0.44 | 0.49 | 0.52 | 0.54
+ | EBITDA | -2345 | -61,512.26 | 86056 | 406632 | 953200 | 1761896
+ | EBITDA margin | -8.72 | -0.46 | 0.11 | 0.22 | 0.26 | 0.29
+ | Net income | -2345 | -62,178.93 | 79,402.95 | 311,264.80 | 732,271.67 | 1,356,169.40
+ | Free cash flow (pre-financing) | -2345 | -63,512.26 | 76,736.28 | 308,264.80 | 728605 | 1,352,169.40
+ | Equity raised | 3000 | 100000 | 0 | 0 | 0 | 0
+ | Closing cash | 655 | 37,142.74 | 113,879.02 | 422,143.82 | 1,150,748.82 | 2,502,918.22
+ | Paying companies (year-end) | 3 | 390 | 1150 | 2600 | 4500 | 7000
+ | Exit MRR | 154.35 | 27,863.40 | 90000 | 211900 | 383000 | 613000
+
+## sheet: Assumptions
+Zaat | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions |  | Value |  |  |  |  |  | Basis
+Corporate income tax rate |  | 0.23 |  |  |  |  |  | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) |  | 3 |  |  |  |  |  | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) |  | 0 |  |  |  |  |  | Card payments collected upfront via Paddle; no working capital need.
+Driver assumptions | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Customers & pricing
+Paying companies on Zaat Work (year-end) | # | 3 | 390 | 1150 | 2600 | 4500 | 7000 | Programmes: cohorts of ~40 get a free month, 1 in 4 pays after (2 programmes a month from March 2027, 4 a month from September). Content: ~4% of sign-ups pay. 4% of paying companies leave each month. 456 paying by February 2028.
+Average paying companies | # | 0.25 | 135 | 760 | 1850 | 3500 | 5700 | Back-loaded ramp in 2027: 14 by February, 75 by May, 172 by August.
+Average plan revenue per company | USD / month | 46.55 | 60.80 | 64 | 67 | 70 | 72 | 85% Founder at USD 46.55 and 15% Startup at USD 141.55 after yearly discounts; Startup share rises over time.
+Credit top-ups per company | USD / month | 4.90 | 4.90 | 6 | 7 | 8 | 9 | 1 in 4 companies tops up in a month; top-ups repriced above cost from 2028.
+Zaat Plus members (avg.) | # | 0.50 | 120 | 500 | 1000 | 1600 | 2300 | 1.2% of free active people subscribe each month; 6% leave. 315 members by February 2028.
+Zaat Plus price (net of founding discounts) | USD / month |  | 18.67 | 19 | 19.50 | 20 | 20
+Cost structure
+Cost of serving: agents, Plus, free users (models, browser, meetings, hosting) | % of revenue |  | 0.56 | 0.50 | 0.45 | 0.42 | 0.40 | Costed task by task from measured agent runs and vendor prices; falls as model prices drop and free usage is paced.
+Payment fees (Paddle 5% + USD 0.50) | % of revenue |  | 0.06 | 0.06 | 0.06 | 0.06 | 0.06
+Headcount (avg. FTE, incl. founder) | FTE |  | 2.60 | 5 | 9 | 15 | 22 | Founder at USD 1,500/month from March 2027; engineer at 50 paying companies, partnerships at 100, content at 150.
+Cost per FTE (incl. 12% employer costs) | USD / year |  | 23400 | 27000 | 32000 | 38000 | 44000 | Cairo salaries; Gulf hires from 2028.
+Content, UGC & paid reach | USD / year |  | 20000 | 60000 | 140000 | 260000 | 400000 | 4 UGC videos a month (~USD 150 each) plus AI films and boosting in 2027.
+Hosting, tools, legal & SOC 2 | USD / year |  | 32000 | 50000 | 85000 | 120000 | 160000
+Capex (devices) | USD / year |  | 2000 | 5000 | 8000 | 12000 | 16000
+Funding
+Equity raised | USD | 3000 | 100000 | 0 | 0 | 0 | 0 | USD 100K in March 2027 covers twelve months to 456 paying companies; whole company profitable from March 2028, lowest cash ~USD 37K.
+
+## sheet: Model
+Zaat | Financial Model
+USD, fiscal year ending 31 December. 2026–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+ | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ |  | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Paying companies (year-end) | # | 3 | 390 | 1150 | 2600 | 4500 | 7000
+Average paying companies | # | 0.25 | 135 | 760 | 1850 | 3500 | 5700
+Zaat Plus members (avg.) | # | 0.50 | 120 | 500 | 1000 | 1600 | 2300
+Exit MRR | USD | 154.35 | 27,863.40 | 90000 | 211900 | 383000 | 613000
+Headcount (avg. FTE) | FTE | 1 | 2.60 | 5 | 9 | 15 | 22
+Income statement (USD)
+Zaat Work plans | USD | 168 | 98496 | 583680 | 1487400 | 2940000 | 4924800
+Credit top-ups | USD | 15 | 7938 | 54720 | 155400 | 336000 | 615600
+Zaat Plus (personal) | USD | 86 | 26,884.80 | 114000 | 234000 | 384000 | 552000
+Total revenue | USD | 269 | 133,318.80 | 752400 | 1876800 | 3660000 | 6092400
+  Revenue growth (YoY) | % | n/m | 494.61 | 4.64 | 1.49 | 0.95 | 0.66
+Cost of serving (models, browser, meetings, hosting) | USD | -520 | -73,991.93 | -376200 | -844560 | -1537200 | -2436960
+Payment fees | USD | -19 | -7,999.13 | -45144 | -112608 | -219600 | -365544
+Total cost of revenue | USD | -539 | -81,991.06 | -421344 | -957168 | -1756800 | -2802504
+Gross profit | USD | -270 | 51,327.74 | 331056 | 919632 | 1903200 | 3289896
+  Gross margin | % | -1.00 | 0.39 | 0.44 | 0.49 | 0.52 | 0.54
+Salaries & benefits | USD | 0 | -60840 | -135000 | -288000 | -570000 | -968000
+Content & marketing | USD | -125 | -20000 | -60000 | -140000 | -260000 | -400000
+Hosting, tools, legal & G&A | USD | -1950 | -32000 | -50000 | -85000 | -120000 | -160000
+Total operating expenses | USD | -2075 | -112840 | -245000 | -513000 | -950000 | -1528000
+EBITDA | USD | -2345 | -61,512.26 | 86056 | 406632 | 953200 | 1761896
+  EBITDA margin | % | -8.72 | -0.46 | 0.11 | 0.22 | 0.26 | 0.29
+Depreciation & amortisation | USD | 0 | -666.67 | -2,333.33 | -5000 | -8,333.33 | -12000
+EBIT | USD | -2345 | -62,178.93 | 83,722.67 | 401632 | 944,866.67 | 1749896
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -2345 | -62,178.93 | 83,722.67 | 401632 | 944,866.67 | 1749896
+Income tax | USD | 0 | 0 | -4,319.72 | -90,367.20 | -212595 | -393,726.60
+Net income | USD | -2345 | -62,178.93 | 79,402.95 | 311,264.80 | 732,271.67 | 1,356,169.40
+  Net margin | % | -8.72 | -0.47 | 0.11 | 0.17 | 0.20 | 0.22
+  Memo: tax losses carried forward (closing) | USD | 2345 | 64,523.93 | 0 | 0 | 0 | 0
+Cash flow & runway (USD)
+Net income | USD | -2345 | -62,178.93 | 79,402.95 | 311,264.80 | 732,271.67 | 1,356,169.40
+Add back: D&A | USD | 0 | 666.67 | 2,333.33 | 5000 | 8,333.33 | 12000
+Change in working capital | USD | 0 | 0 | 0 | 0 | 0 | 0
+Cash flow from operations | USD | -2345 | -61,512.26 | 81,736.28 | 316,264.80 | 740605 | 1,368,169.40
+Capital expenditure | USD | 0 | -2000 | -5000 | -8000 | -12000 | -16000
+Free cash flow (pre-financing) | USD | -2345 | -63,512.26 | 76,736.28 | 308,264.80 | 728605 | 1,352,169.40
+Equity & SAFE funding raised | USD | 3000 | 100000 | 0 | 0 | 0 | 0
+Net change in cash | USD | 655 | 36,487.74 | 76,736.28 | 308,264.80 | 728605 | 1,352,169.40
+Opening cash | USD | 0 | 655 | 37,142.74 | 113,879.02 | 422,143.82 | 1,150,748.82
+Closing cash | USD | 655 | 37,142.74 | 113,879.02 | 422,143.82 | 1,150,748.82 | 2,502,918.22
+Average monthly net burn | USD | 195.42 | 5,292.69 | 0 | 0 | 0 | 0
+Runway at year-end burn (months) | months | 3.35 | 7.02 | n/m | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset's useful life.

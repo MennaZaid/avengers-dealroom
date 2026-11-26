@@ -16,3 +16,13 @@ Byota:     {team: 4, market: 3, product: 2, competition: 3, sales: 2, funding_ne
             why: "Strong science team; ask $1.1M > fund, own-lab plan contradicts asset-light, health-adjacent"}
 Carbonless: {team: 2, market: 4, product: 2, competition: 2, sales: 1, funding_need: 1, other: 2,
             why: "Real regulatory pull; prototype only, $4M ask = 4x fund, certification + sea trial before revenue"}
+IGNOT: {team: 4, market: 4, product: 4, competition: 4, sales: 4, funding_need: 3, other: 3,
+        why: "Strongest traction among the pre-seeds: FRA sandbox, 500+ funded investors, 8 live properties, Beltone/CIB/EY stack, 4x founder; risks: $3.5M cap is above our base, licence roadmap must land, '30% IRR' promise is aggressive"}
+REE: {team: 4, market: 3, product: 4, competition: 3, sales: 4, funding_need: 4, other: 3,
+      why: "Real revenue in 3 countries (37 courts, 11 paying operators, USD 2.4K MRR) on USD 55K raised; capital-efficient; forecast leans on a Smashi streaming deal not yet signed"}
+Motion+: {team: 3, market: 2, product: 3, competition: 3, sales: 3, funding_need: 3, other: 2,
+          why: "Profitable and self-funded with ~210 paying clients, but a solo-founder service business; its own model reaches only ~USD 178K revenue by 2031, too small to return a VC fund"}
+Matbakh: {team: 2, market: 3, product: 3, competition: 2, sales: 2, funding_need: 3, other: 2,
+          why: "Solo full-stack founder, 3 paying merchants from December; crowded POS market; model's 94% EBITDA margins with almost no staff look unrealistic; not raising until 2028"}
+VELO: {team: 2, market: 2, product: 3, competition: 2, sales: 2, funding_need: 4, other: 3,
+       why: "Tiny ask (~USD 30K), working unit, 12 paid cars in 4 weeks; but a local service business that scales one tricycle at a time, ~USD 308K revenue by 2031 in its own model"}

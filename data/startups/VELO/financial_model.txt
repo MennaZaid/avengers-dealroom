@@ -1,0 +1,109 @@
+# VELO Financial Model.xlsx
+
+## sheet: Summary
+ | VELO
+ | Showroom shine, delivered to your driveway
+ | Sector | Consumer services / Mobile car detailing
+ | Headquarters | New Cairo, Egypt
+ | Founded / started operating | Unit built Sep 2026; first paid job 23 October 2026
+ | Current stage | Self-funded; raising EGP 1.5M seed
+ | Business model | Per-job detailing packages (EGP 350–4,000) plus VELO Club subscription (EGP 1,600 / month)
+ | Company overview
+ | Premium mobile car detailing for owners of premium cars in New Cairo's gated compounds, using German Sonax chemistry.
+ | Each VELO unit is a self-powered tricycle carrying a 5.5 kW generator, 200 L water tank, 130-bar pressure washer, air
+ | compressor and wet/dry vacuum, so a full studio-grade detail happens wherever the car is parked. Every job is a billboard:
+ | the branded unit and QR sign sit in the driveway for up to four hours, driving neighbour bookings via WhatsApp.
+ | Operating highlights (as of November 2026)
+ | Units on the road | 1 (fully built and licensed)
+ | Paid cars (first 4 weeks) | 12, EGP 8,295 revenue
+ | Portfolio details completed | 10+ high-end cars, filmed for social media
+ | Cars per paying household | 2
+ | Invested in first unit | EGP 257K (self-funded)
+ | Acquisition | Meta ads live since November 2026; loyalty card and Google reviews per job
+ | Funding history
+ | Date | Round / source |  | Amount (USD) | Investors / notes
+ | 2026 | Founder capital |  | 6800 | Self-funded build of unit 1 and launch
+ | 2027 (planned) | Seed |  | 27300 | EGP 1.5M: three units, brand & paid acquisition, ceramic certification
+ | Financial summary (USD)
+ |  | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ | Total revenue | 412 | 19,090.91 | 57,435.90 | 133,064.52 | 214,961.83 | 307,971.01
+ | Revenue growth | n/m | 45.34 | 2.01 | 1.32 | 0.62 | 0.43
+ | Gross profit | -372 | 10,003.64 | 32,164.10 | 77,044.35 | 124,677.86 | 178,623.19
+ | Gross margin | -0.90 | 0.52 | 0.56 | 0.58 | 0.58 | 0.58
+ | EBITDA | -1262 | -3,632.73 | 9,941.88 | 38,334.68 | 69,716.03 | 107,608.70
+ | EBITDA margin | -3.06 | -0.19 | 0.17 | 0.29 | 0.32 | 0.35
+ | Net income | -2,269.80 | -5,985.98 | 6,084.35 | 24,808.36 | 46,179.27 | 73,811.19
+ | Free cash flow (pre-financing) | -6,309.24 | -10,733.58 | 1,653.61 | 14,766.22 | 38,793.34 | 68,087.57
+ | Equity raised | 6800 | 27300 | 0 | 0 | 0 | 0
+ | Closing cash | 490.76 | 17,057.18 | 18,710.79 | 33,477.02 | 72,270.35 | 140,357.93
+ | Units on the road | 1 | 2 | 4 | 8 | 12 | 16
+ | Paid jobs | 30 | 840 | 2400 | 5500 | 8800 | 12500
+
+## sheet: Assumptions
+VELO | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions |  | Value |  |  |  |  |  | Basis
+Corporate income tax rate |  | 0.23 |  |  |  |  |  | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) |  | 5 |  |  |  |  |  | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) |  | 0.02 |  |  |  |  |  | Consumer jobs paid on completion; minimal working capital.
+Driver assumptions | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Macro
+EGP / USD exchange rate (average) | EGP per USD | 51 | 55 | 58.50 | 62 | 65.50 | 69 | Annual average EGP per USD. 2026 average reflects ~47.7 pre-February, then depreciation to ~53–56 by Q4 2026; forecast assumes ~6% annual depreciation in line with the inflation differential.
+Fleet & demand
+Units on the road (year-end) | # | 1 | 2 | 4 | 8 | 12 | 16 | Unit 2 in month 7 of 2027, four units by end-2028, eight by end-2029 (New Cairo); Sheikh Zayed and the New Capital from 2030 with the same unit model.
+Paid jobs completed | # | 30 | 840 | 2400 | 5500 | 8800 | 12500 | 2027: unit 1 at 50 jobs a month plus unit 2 from month 7 at 40 a month. A unit is added only when the fleet averages 2.5+ jobs a day.
+Average ticket (incl. add-ons) | EGP | 700 | 1250 | 1400 | 1500 | 1600 | 1700 | Job mix: 75% washes, 20% polishing, 5% VELO Club; add-ons on ~30% of jobs.
+Cost structure (EGP)
+Direct costs (detailer day wage + 10% commission, fuel, Sonax chemicals) | % of revenue |  | 0.48 | 0.44 | 0.42 | 0.42 | 0.42 | Per Precision detail: EGP 1,000 price, ~EGP 453 direct cost.
+Brand, content & paid acquisition | EGP / year |  | 150000 | 250000 | 450000 | 650000 | 850000 | Meta ads, reels, flyers; EGP 300K of the raise over the first two years.
+Licences, insurance, maintenance, staff & G&A | EGP / year |  | 600000 | 1050000 | 1950000 | 2950000 | 4050000
+Cost of a new unit | EGP |  | 220000 | 220000 | 240000 | 260000 | 280000 | Reflects the first build's design.
+Ceramic coating certification & equipment | EGP / year |  | 150000 | 0 | 0 | 0 | 0
+Funding
+Equity raised | USD | 6800 | 27300 | 0 | 0 | 0 | 0 | EGP 1.5M seed at the start of 2027; units 5–8 and beyond funded from cash flow.
+
+## sheet: Model
+VELO | Financial Model
+USD, fiscal year ending 31 December. 2026–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+ | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ |  | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Units on the road (year-end) | # | 1 | 2 | 4 | 8 | 12 | 16
+Paid jobs completed | # | 30 | 840 | 2400 | 5500 | 8800 | 12500
+Average ticket | EGP | 700 | 1250 | 1400 | 1500 | 1600 | 1700
+Revenue (EGP) | EGP | 21000 | 1050000 | 3360000 | 8250000 | 14080000 | 21250000
+Income statement (USD)
+Detailing services & add-ons | USD | 412 | 19,090.91 | 57,435.90 | 133,064.52 | 214,961.83 | 307,971.01
+Total revenue | USD | 412 | 19,090.91 | 57,435.90 | 133,064.52 | 214,961.83 | 307,971.01
+  Revenue growth (YoY) | % | n/m | 45.34 | 2.01 | 1.32 | 0.62 | 0.43
+Detailer wages & commission, fuel, chemicals | USD | -784 | -9,087.27 | -25,271.79 | -56,020.16 | -90,283.97 | -129,347.83
+Total cost of revenue | USD | -784 | -9,087.27 | -25,271.79 | -56,020.16 | -90,283.97 | -129,347.83
+Gross profit | USD | -372 | 10,003.64 | 32,164.10 | 77,044.35 | 124,677.86 | 178,623.19
+  Gross margin | % | -0.90 | 0.52 | 0.56 | 0.58 | 0.58 | 0.58
+Brand, content & paid acquisition | USD | -380 | -2,727.27 | -4,273.50 | -7,258.06 | -9,923.66 | -12,318.84
+Licences, insurance, maintenance, staff & G&A | USD | -510 | -10,909.09 | -17,948.72 | -31,451.61 | -45,038.17 | -58,695.65
+Total operating expenses | USD | -890 | -13,636.36 | -22,222.22 | -38,709.68 | -54,961.83 | -71,014.49
+EBITDA | USD | -1262 | -3,632.73 | 9,941.88 | 38,334.68 | 69,716.03 | 107,608.70
+  EBITDA margin | % | -3.06 | -0.19 | 0.17 | 0.29 | 0.32 | 0.35
+Depreciation & amortisation | USD | -1,007.80 | -2,353.25 | -3,857.53 | -6,954.30 | -10,129.87 | -12,368.45
+EBIT | USD | -2,269.80 | -5,985.98 | 6,084.35 | 31,380.38 | 59,586.16 | 95,240.24
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -2,269.80 | -5,985.98 | 6,084.35 | 31,380.38 | 59,586.16 | 95,240.24
+Income tax | USD | 0 | 0 | 0 | -6,572.01 | -13,406.89 | -21,429.05
+Net income | USD | -2,269.80 | -5,985.98 | 6,084.35 | 24,808.36 | 46,179.27 | 73,811.19
+  Net margin | % | -5.51 | -0.31 | 0.11 | 0.19 | 0.21 | 0.24
+  Memo: tax losses carried forward (closing) | USD | 2,269.80 | 8,255.78 | 2,171.43 | 0 | 0 | 0
+Cash flow & runway (USD)
+Net income | USD | -2,269.80 | -5,985.98 | 6,084.35 | 24,808.36 | 46,179.27 | 73,811.19
+Add back: D&A | USD | 1,007.80 | 2,353.25 | 3,857.53 | 6,954.30 | 10,129.87 | 12,368.45
+Change in working capital | USD | -8.24 | -373.58 | -766.90 | -1,512.57 | -1,637.95 | -1,860.18
+Cash flow from operations | USD | -1,270.24 | -4,006.31 | 9,174.98 | 30,250.09 | 54,671.20 | 84,319.46
+Capital expenditure | USD | -5039 | -6,727.27 | -7,521.37 | -15,483.87 | -15,877.86 | -16,231.88
+Free cash flow (pre-financing) | USD | -6,309.24 | -10,733.58 | 1,653.61 | 14,766.22 | 38,793.34 | 68,087.57
+Equity & SAFE funding raised | USD | 6800 | 27300 | 0 | 0 | 0 | 0
+Net change in cash | USD | 490.76 | 16,566.42 | 1,653.61 | 14,766.22 | 38,793.34 | 68,087.57
+Opening cash | USD | 0 | 490.76 | 17,057.18 | 18,710.79 | 33,477.02 | 72,270.35
+Closing cash | USD | 490.76 | 17,057.18 | 18,710.79 | 33,477.02 | 72,270.35 | 140,357.93
+Average monthly net burn | USD | 525.77 | 894.46 | 0 | 0 | 0 | 0
+Runway at year-end burn (months) | months | 0.93 | 19.07 | n/m | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset's useful life.

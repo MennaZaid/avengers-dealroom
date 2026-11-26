@@ -1,0 +1,298 @@
+
+--- slide 1 ---
+Understand how food
+affects your gut
+At-home gut microbiome assessment
+and nutritionist-led guidance
+Egypt · AUC DealRoom
+Kit concept
+November 2026
+
+--- slide 2 ---
+Client problem
+Eating becomes trial and error
+When meals leave you bloated or uncomfortable, it can
+be hard to tell what made the difference.
+Cut something out
+You avoid a food you suspect might be behind the discomfort.
+Try it again
+You feel fine one time and uncomfortable the next.
+Wonder what to eat next
+It’s hard to see a pattern when meals and symptoms keep changing.
+Every meal brings another decision about what to eat, avoid or try again.
+02 / 13
+
+--- slide 3 ---
+Product
+A clearer way to understand your gut
+Take a gut microbiome assessment at home. Track meals and symptoms in the bilingual app.
+Review your report and patterns with your nutritionist to decide what to try next.
+Byota patient app
+Demo report visualization · synthetic sample
+Available today · App, demo report and care workspace
+Egypt launch · Guidance around familiar Egyptian foods
+Authentic Byota interface screenshots. Demo report values are illustrative.
+03 / 13
+
+--- slide 4 ---
+Egypt evidence
+Early Egypt interest, before beta
+~100
+Waitlist registrations
+People signed up to hear about the beta. 3
+Nutritionists onboarded
+Founder-reported onboarding.
+Pilot enrollment is pending.
+Core platform and advanced gut profiling tested
+Internal testing covered profiling, report display, check-in trends and nutrition plan
+editing.
+Official pilot has not started
+Founder-reported Egypt evidence, November 2026. The customer pilot will measure real use and outcomes.
+04 / 13
+
+--- slide 5 ---
+Practitioner channel
+Nutritionists guide the next step
+Patients discover Byota through their nutritionist, who helps them use their results and follows up over time.
+Byota practitioner portal · fictional demo patient
+1
+Refer the patient
+Invite an eligible patient and explain the
+assessment.
+2
+Review the report and logs
+With patient authorization, review the released
+report alongside food and symptom trends.
+3
+Adjust the plan
+Publish a plan update and review changes at
+the next check-in.
+Pilot measures · Repeat referrals, portal use between visits and published plan updates.
+05 / 13
+
+--- slide 6 ---
+Egypt acquisition
+Nutritionists bring Byota to their clients
+Start with established nutritionists and private practices in Greater Cairo, then expand to Alexandria.
+01
+Recruit anchor practitioners
+Start with the three onboarded
+nutritionists and recruit private digestive
+wellness and weight-management
+practices.
+02
+Offer the test during a
+consultation
+The nutritionist introduces the kit to
+eligible clients, reviews results and
+schedules follow-up.
+03
+Expand through repeat
+referrals
+Grow the practitioner network after clinics
+demonstrate repeat referrals and clients
+purchase at the proposed prices.
+What the first-year target would require
+Illustrative referral funnel. Active practitioner count and conversion are untested.
+24 active practitioners × 10 eligible referrals/month × 25% paid conversion
+At that average for 12 months, the channel would deliver 720 paid packages. At 15% conversion it would deliver 432.
+06 / 13
+
+--- slide 7 ---
+Business model
+Assessment revenue and app renewals
+Byota earns a one-time assessment fee and an optional subscription after six included months.
+First-year price after the included period. The app
+supports the client between consultations.
+Customer price
+Testing, fulfilment and app delivery
+Practitioner referral commission (15%)
+Payment fee assumption (3%)
+Modeled contribution
+Year 1 planning inputs. Per-package contribution excludes acquisition, fixed overhead and taxes. Unpriced collection and retest costs may reduce it.
+EGP 6,900
+EGP 6,900
+At-home gut microbiome lab test
+Advanced package · EGP 12,200
+Deeper lab analysis in Byota’s own lab.
+App renewal · EGP 225/month
+− EGP 1,173
+− EGP 1,035
+− EGP 207
+EGP 4,485 · 65%
+Standard package
+Standard package economics
+07 / 13
+
+--- slide 8 ---
+Egypt market
+The premium nutrition segment in Egypt
+Initial segment
+Digitally engaged adults already paying for private nutrition care, starting
+with recurring digestive concerns in Greater Cairo.
+Expand through Alexandria practices after the Cairo pilot.
+Illustrative annual opportunity through practitioners
+150 practices × 20 eligible referrals per month × 12 months × 10–20% purchase rate
+3,600–7,200
+Assessments per year
+Bottom-up scenario. Practice coverage, referral counts and purchase rates are assumptions. Includes assessment billings only.
+EGP 31.2–62.4M
+Annual assessment billings at ~EGP 8,667 per package
+Byota’s initial slice · 720 paid packages in Year 1
+08 / 13
+
+--- slide 9 ---
+Competition
+A gut test that informs ongoing care
+Clients and nutritionists use the report and diary together to decide what to try next.
+Egypt alternatives
+myBIOME / SYNLAB Egypt
+Cairo-listed gut microbiome test with practitioner-led interpretation
+and dietary recommendations.
+Revere Clinic
+Private clinical nutrition in Sheikh Zayed, Cairo.
+International competitors
+ZOE
+Gut microbiome test and personalized nutrition app.
+Viome
+At-home RNA gut test and personalized food recommendations.
+Access in Egypt
+ZOE lists the UK and US. Viome’s Egypt access is unconfirmed.
+Byota’s proposed Egypt offer
+1
+Start with an at-home assessment
+Review the microbiome report with your nutritionist.
+2
+Log meals and symptoms
+Capture what you eat and how you feel between visits.
+3
+Adjust the plan together
+Your nutritionist reviews patterns and updates your plan
+around familiar Egyptian foods.
+Nubi guides clients in Arabic and English
+Sources · myBIOME locations
+myBIOME report
+Revere Clinic
+ZOE test
+ZOE markets
+Viome test
+Viome availability
+09 / 13
+
+--- slide 10 ---
+Team
+Founders and their launch roles
+OA
+Omar Ahmed
+Founder & CEO
+AUC graduate. Computational biology,
+AI and genomics research at
+Magdi Yacoub Heart Foundation.
+Product development, bioinformatics
+and practitioner launch
+AO
+Co-founder & COO
+20 years of genomics lab experience.
+Former lab manager at Generations
+Genetics Labs and scientist at AUC.
+control and supply chain
+NM
+Nesreen Mahmoud
+Co-founder & CSO
+MSc Biotechnology, AUC.
+Nutrigenomics research at AUC
+and Nile University.
+Scientific validation and
+nutrition research
+Lab operations, quality
+AO
+10 / 13
+
+--- slide 11 ---
+Roadmap
+Egypt pilot and launch milestones
+Pilot preparation
+Validate sample delivery
+finalize sample acceptance criteria, and
+prepare the onboarding process.
+Controlled pilot
+Test with the first cohort
+Activate the waitlist through the three
+onboarded nutritionists. Track sample
+pass rate, report turnaround and
+follow-up.
+Paid launch
+Build repeat referrals
+Start with Greater Cairo, then expand to
+Alexandria if conversion, contribution
+and repeat referrals support it.
+Main risk · Turning early interest into repeat paid referrals
+Longer-term aim · Expand to other MENA markets through local lab and practitioner partnerships.
+Launch from Byota’s own licensed lab. Byota leads testing, analysis, reporting and follow-up with its practitioners.
+License the lab, confirm couriers,
+Use the pilot to check the full path from kit return to paid conversion and repeat referrals. Grow lab batch sizes as
+referrals increase to lower the cost per test.
+11 / 13
+
+--- slide 12 ---
+Financials
+Three-year Egypt planning scenario
+EGP millions unless stated. Operating years start with commercial launch.
+Metric
+Year 1
+Year 2
+Year 3
+Paid assessment packages
+Recognized revenue
+Direct delivery costs
+Gross margin
+EBITDA
+Year 1 assumptions
+720
+2,000
+4,300
+6.40
+19.60
+45.41
+5.62
+10.87
+19.93
+12.2%
+44.5%
+56.1%
+(21.11)
+(8.26)
+4.52
+480 Standard + 240 Advanced packages. 33% of eligible app users convert to paid renewal after six included months.
+Source: Byota DealRoom financial model. Figures are projections and assume a USD 1.1M seed round.
+12 / 13
+
+--- slide 13 ---
+Funding ask
+13 / 13
+Raising USD 1.1M to launch our own lab
+A seed round at the start of Year 1, about EGP 59.4M at roughly EGP 54 per US dollar.
+The ask
+USD 1.1M
+Seed round · start of Year 1
+Year 3
+Positive EBITDA
+EGP 5.4M
+Lowest cash, end of Year 2
+No new raise
+Needed to reach profitability
+Use of funds
+Laboratory infrastructure
+USD 450k · 41%
+Regulatory readiness and quality systems
+USD 150k · 14%
+Product development and scientific validation
+USD 200k · 18%
+Practitioner partnerships and market expansion
+USD 200k · 18%
+Working capital
+USD 100k · 9%
+What the round delivers
+A licensed in-house lab in Year 1, a validated product and a growing practitioner network. Byota reaches positive EBITDA in Year 3
+without needing another raise.
+Indicative allocation. Lab and regulatory budgets are spent in Year 1; product development and partnership budgets over Years 1 and 2.

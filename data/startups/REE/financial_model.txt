@@ -1,0 +1,168 @@
+# REE Financial Model.xlsx
+
+## sheet: Summary
+ | REE
+ | We capture the moments that make the match
+ | Sector | Sports tech / Court video, highlights & player data
+ | Headquarters | Cairo, Egypt (live in Egypt, Iraq and Libya)
+ | Founded / started operating | Padel highlights product launched mid-2025 (team in sports tech for 2.5 years)
+ | Current stage | Pre-seed (USD 55K raised from angels; USD 25K term sheet from Smashi's CEO)
+ | Business model | Monthly subscription per court paid by operators (EGP 2,500–4,000), plus streaming, scoreboard ads, academy, club and platform revenue
+ | Company overview
+ | REE puts a button on the court wall and a camera above it. Players press it after a good point and the last 30 seconds land
+ | in the REE app before they leave the court. REE sells to the court operator and reaches every player through them, building
+ | player identity, scores and rankings on top of the footage. The same capture layer now runs across padel, squash, 5-a-side
+ | football and multi-sport clubs, and streams leagues for Smashi across MENA.
+ | Operating highlights (as of November 2026)
+ | Courts live | 37 (30 Egypt, 3 Iraq, 4 Libya)
+ | Paying operators | 11
+ | Players | 3,000
+ | MRR | USD 2,410 (Egypt USD 1,800, Iraq USD 330, Libya USD 280)
+ | Pipeline | 150 more courts; Iraq MRR to USD 3,300 by February 2027 (30 courts, exclusive distribution)
+ | Partnerships | NPT and MashPoint (NDA and validation agreement); Yalla Hagz (5-a-side); Smashi term sheet (45 leagues)
+ | Investors | Dr. Ayman Ismail, Dr. Moataz Darwish, Dr. Mahmoud Khalifa
+ | Funding history
+ | Date | Round / source |  | Amount (USD) | Investors / notes
+ | 2024 | Founders' capital |  | 6000 | Co-founders
+ | 2025 | Angel investment |  | 20000 | Angel investors
+ | 2026 | Angel investment |  | 35000 | Angel investors (USD 55K raised in total)
+ | 2027 (planned) | Angel investment |  | 25000 | Term sheet from Smashi's CEO
+ | Financial summary (USD)
+ |  | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ | Total revenue | 2340 | 17210 | 381,617.27 | 1,379,752.01 | 1,950,406.45 | 2,919,844.74 | 4,210,289.86
+ | Revenue growth | n/m | 6.35 | 21.17 | 2.62 | 0.41 | 0.50 | 0.44
+ | Gross profit | -1370 | 6130 | 165,093.27 | 795,202.01 | 1,568,804.45 | 2,316,246.74 | 3,353,201.86
+ | Gross margin | -0.59 | 0.36 | 0.43 | 0.58 | 0.80 | 0.79 | 0.80
+ | EBITDA | -9470 | -17470 | 31,601.27 | 520,366.01 | 1,208,972.45 | 1,888,224.74 | 2,832,253.86
+ | EBITDA margin | -4.05 | -1.02 | 0.08 | 0.38 | 0.62 | 0.65 | 0.67
+ | Net income | -9,636.67 | -17970 | 29,798.32 | 401,733.66 | 934,628.65 | 1,460,274.17 | 2,191,121.74
+ | Free cash flow (pre-financing) | -10321 | -20,700.50 | -25,696.10 | 251,013.45 | 848,030.48 | 1,313,858.43 | 1,996,554.97
+ | Equity raised | 20000 | 35000 | 25000 | 0 | 0 | 0 | 0
+ | Closing cash | 15679 | 29,978.50 | 29,282.40 | 280,295.84 | 1,128,326.33 | 2,442,184.76 | 4,438,739.73
+ | Courts & pitches live (year-end) | 12 | 37 | 287 | 647 | 1150 | 1800 | 2570
+ | Exit MRR | 669.32 | 2,464.71 | 30,545.45 | 100,718.38 | 137,917.74 | 188,146.95 | 248,340.58
+
+## sheet: Assumptions
+REE | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions |  | Value |  |  |  |  |  |  | Basis
+Corporate income tax rate |  | 0.23 |  |  |  |  |  |  | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) |  | 3 |  |  |  |  |  |  | Office equipment and test rigs. Court camera kits are expensed when installed and kept running through a monthly maintenance budget.
+Net working capital (% of change in revenue) |  | 0.15 |  |  |  |  |  |  | Collection delays: Egypt 2 months, MENA & North America 1 month, big clubs 5 months, Smashi 3 months.
+Driver assumptions | Unit | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Macro
+EGP / USD exchange rate (average) | EGP per USD | 50.20 | 51 | 55 | 58.50 | 62 | 65.50 | 69 | Annual average EGP per USD. 2026 average reflects ~47.7 pre-February, then depreciation to ~53–56 by Q4 2026; forecast assumes ~6% annual depreciation in line with the inflation differential.
+Courts & pitches (padel highlights)
+Egypt padel courts live (year-end) | # | 12 | 30 | 95 | 195 | 315 | 455 | 615 | 90 courts at large Egyptian operators and 40 at small operators already in the pipeline; +100–160 courts a year after.
+Egypt padel courts billed (avg.) | # | 3.50 | 21 | 62 | 145 | 255 | 385 | 535
+Egypt subscription per court | EGP / month | 2800 | 3000 | 3500 | 3900 | 4300 | 4700 | 5300 | Three tiers from EGP 2,500 to 4,000 (white-label) plus a scoreboard/add-on tier from July 2027; yearly price increases.
+MENA courts live (year-end) | # | 0 | 7 | 50 | 140 | 270 | 430 | 620 | Iraq: 30 courts by February 2027 via exclusive distribution with Padel Iraq; Libya live; Saudi Arabia, Oman, Jordan, Morocco and Tunisia via local partners.
+MENA courts billed (avg.) | # | 0 | 2 | 40 | 95 | 205 | 350 | 525
+MENA subscription per court | USD / month | 100 | 100 | 100 | 120 | 120 | 125 | 125 | USD 80 per court plus a USD 40 add-on on ~30% of courts; Iraq at ~USD 110.
+North America courts live (year-end) | # |  |  | 20 | 90 | 240 | 500 | 850 | Distributed by NPT into its and MashPoint's courts.
+North America courts billed (avg.) | # |  |  | 8 | 55 | 165 | 370 | 675
+North America subscription per court | USD / month |  |  | 45 | 45 | 45 | 48 | 50 | Priced in USD via NPT.
+North America set-up fee per new court | USD |  |  | 250 | 250 | 250 | 250 | 250
+Scoreboards & ads
+Courts with REE scoreboards | % of avg. padel courts |  |  | 0.09 | 0.15 | 0.25 | 0.33 | 0.40 | Clubs buy the screen; REE sells the ad inventory (with Court X and NPT in North America).
+Ad revenue per scoreboard | USD / month |  |  | 25 | 35 | 40 | 45 | 50
+New sports
+5-a-side pitches with REE (year-end) | # |  |  | 20 | 40 | 70 | 100 | 140 | Deployed through Yalla Hagz, Egypt's biggest 5-a-side reservation platform, from November 2026.
+Recorded 5-a-side matches sold | # / year |  |  | 8100 | 16000 | 28000 | 45000 | 66500 | Premium recorded matches across Yalla Hagz's ~40K reservations a year, growing with pitches and organised matches.
+Players per match | # |  |  | 12 | 12 | 12 | 12 | 12
+Price per player per recorded match | EGP |  |  | 50 | 55 | 60 | 65 | 70
+REE share of recorded-match revenue | % |  |  | 0.50 | 0.50 | 0.50 | 0.50 | 0.50 | Split with Yalla Hagz.
+Squash academy branches (year-end) | # |  |  | 12 | 62 | 75 | 90 | 105 | Recording live at Zed FC from January 2027; analytics and academies from July 2027, pilot with El Borolossy Academy.
+Squash academy branches billed (avg.) | # |  |  | 8 | 37 | 68 | 82 | 97
+Academy fee per branch | EGP / month |  |  | 4000 | 4400 | 4800 | 5200 | 6000 | Paid by the academy; no fees to parents.
+Big-club courts (year-end) | # |  |  | 90 | 120 | 180 | 225 | 240 | Zed FC from January 2027; Blue Ribbon and Mountain View from July 2027; Wadi Degla, O West, Ryze and Kode in pipeline.
+Big-club courts billed (avg.) | # |  |  | 60 | 105 | 150 | 202 | 232
+Big-club fee per court | EGP / year |  |  | 42000 | 48000 | 54000 | 58000 | 62000 | Full-match recording and highlights sold to members and parents across every sport.
+League streaming (Smashi)
+Streaming cameras live (year-end) | # |  |  | 150 | 675 | 675 | 675 | 675 | 45 leagues × 15 cameras across MENA; first milestone 45 cameras, paid half upfront. Without Smashi the plan is revenue of USD 205K (2027), 615K (2028) and 3.56M (2031), with EBITDA of −USD 29K, 166K and 2.25M.
+Streaming cameras billed (avg.) | # |  |  | 75 | 412 | 675 | 675 | 675
+Streaming fee per camera | USD / month |  |  | 80 | 80 | 80 | 80 | 80 | USD 648K ARR at full rollout.
+Camera hardware sold to Smashi (at cost) | USD / camera |  |  | 700 | 700 | 700 | 700 | 700 | Client pays for the hardware at cost. Technical R&D cost still to be confirmed.
+Platform (from 2028)
+Paying members: open matches & ranking (avg.) | # |  |  | 0 | 1200 | 2500 | 4200 | 6000 | Membership share plus ranking licence on NPT's engine; premium player features at EGP 100 a month.
+Player membership | EGP / month |  |  | 100 | 100 | 100 | 100 | 100
+Bookings through the reservation platform | # / year |  |  | 0 | 93200 | 278400 | 492600 | 796300 | Booking and open-match membership (Spark with JPadel), launched once highlights and ranking have built the user base.
+Fee per booking | EGP |  |  | 0 | 40 | 42 | 45 | 48
+Cost structure
+Camera kit & installation per new court or pitch | USD | 260 | 260 | 260 | 255 | 250 | 245 | 240 | Hardware ~EGP 13,000 per court, expensed on installation.
+Running cost per live court (SIM, cloud, storage) | USD / month | 14 | 14 | 13 | 12.50 | 12 | 11.50 | 11 | ~EGP 700 a month per court.
+Distribution partner share (MENA & North America) | % of revenue | 0.30 | 0.30 | 0.30 | 0.30 | 0.30 | 0.30 | 0.30
+Headcount (avg.) | # | 2 | 3 | 8.50 | 15 | 15 | 15 | 15 | 7 staff in H1 2027 (2 founders, ops, BD, tech), 10 in H2 2027, 15 from 2028.
+Cost per head | USD / year | 2400 | 4600 | 6000 | 6000 | 6300 | 6600 | 6900 | Founders at USD 400 a month; ops, BD and tech at USD 500–700 a month.
+Operations (field installs, support, travel) | USD / year | 1200 | 3600 | 27000 | 28000 | 37000 | 40000 | 45000
+Technical overhead (engineering, cloud R&D) | USD / year | 1800 | 4800 | 19500 | 32600 | 35200 | 35400 | 38600 | AI follow-cam live; voice-to-score in development.
+Maintenance per installed court / camera | USD / month |  |  | 7 | 7 | 7 | 6.50 | 6 | Replaces hardware depreciation.
+Marketing & communication | USD / year | 300 | 900 | 10900 | 44400 | 55000 | 80000 | 122000 | No paid marketing on 5-a-side or Smashi; reservation platform launch in 2028.
+Legal & office abroad | USD / year | 0 | 500 | 3000 | 6000 | 6000 | 6000 | 6000
+Capex (office equipment, test rigs) | USD / year | 500 | 1000 | 2000 | 3000 | 4000 | 5000 | 6000
+Funding
+Equity raised | USD | 20000 | 35000 | 25000 | 0 | 0 | 0 | 0 | USD 25K angel term sheet from Smashi's CEO. EBITDA positive from 2027 and cash-generative every year from 2028; low point about −USD 69K in June 2027 before funding.
+
+## sheet: Model
+REE | Financial Model
+USD, fiscal year ending 31 December. 2025–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+ | Unit | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ |  | Actual | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Courts & pitches live (year-end, excl. streaming) | # | 12 | 37 | 287 | 647 | 1150 | 1800 | 2570
+Padel courts billed (avg.) | # | 3.50 | 23 | 110 | 295 | 625 | 1105 | 1735
+All courts, pitches & cameras billed (avg.) | # | 3.50 | 23 | 263 | 879 | 1573 | 2149 | 2859
+Exit MRR (subscriptions & streaming) | USD | 669.32 | 2,464.71 | 30,545.45 | 100,718.38 | 137,917.74 | 188,146.95 | 248,340.58
+Headcount (avg.) | # | 2 | 3 | 8.50 | 15 | 15 | 15 | 15
+Income statement (USD)
+Highlights: Egypt padel | USD | 2340 | 14820 | 47,345.45 | 116000 | 212,225.81 | 331,511.45 | 493,130.43
+Highlights: MENA | USD | 0 | 2390 | 48000 | 136800 | 295200 | 525000 | 787500
+Highlights: North America | USD | 0 | 0 | 9320 | 47200 | 126600 | 278120 | 492500
+Scoreboards & ads | USD | 0 | 0 | 2970 | 18585 | 75000 | 196911 | 416400
+5-a-side football (Yalla Hagz) | USD | 0 | 0 | 44,181.82 | 90,256.41 | 162,580.65 | 267,938.93 | 404,782.61
+Squash academies | USD | 0 | 0 | 6,981.82 | 33,394.87 | 63,174.19 | 78,119.08 | 101,217.39
+Big-club deals (multi-sport) | USD | 0 | 0 | 45,818.18 | 86,153.85 | 130,645.16 | 178,870.23 | 208,463.77
+League streaming: Smashi subscriptions | USD | 0 | 0 | 72000 | 395520 | 648000 | 648000 | 648000
+League streaming: camera hardware (at cost) | USD | 0 | 0 | 105000 | 367500 | 0 | 0 | 0
+Open matches & ranking | USD | 0 | 0 | 0 | 24,615.38 | 48,387.10 | 76,946.56 | 104,347.83
+Reservation platform | USD | 0 | 0 | 0 | 63,726.50 | 188,593.55 | 338,427.48 | 553,947.83
+Total revenue | USD | 2340 | 17210 | 381,617.27 | 1,379,752.01 | 1,950,406.45 | 2,919,844.74 | 4,210,289.86
+  Revenue growth (YoY) | % | n/m | 6.35 | 21.17 | 2.62 | 0.41 | 0.50 | 0.44
+Camera kits & installation (new courts & pitches) | USD | -3120 | -6500 | -65000 | -91800 | -125750 | -159250 | -184800
+Running costs (SIM, cloud, storage) | USD | -590 | -3860 | -29328 | -70050 | -129312 | -203412 | -288288
+Distribution partner share | USD | 0 | -720 | -17196 | -55200 | -126540 | -240936 | -384000
+Streaming cameras at cost | USD | 0 | 0 | -105000 | -367500 | 0 | 0 | 0
+Total cost of revenue | USD | -3710 | -11080 | -216524 | -584550 | -381602 | -603598 | -857088
+Gross profit | USD | -1370 | 6130 | 165,093.27 | 795,202.01 | 1,568,804.45 | 2,316,246.74 | 3,353,201.86
+  Gross margin | % | -0.59 | 0.36 | 0.43 | 0.58 | 0.80 | 0.79 | 0.80
+Salaries | USD | -4800 | -13800 | -51000 | -90000 | -94500 | -99000 | -103500
+Operations (field installs, support, travel) | USD | -1200 | -3600 | -27000 | -28000 | -37000 | -40000 | -45000
+Technical overhead (engineering, cloud R&D) | USD | -1800 | -4800 | -19500 | -32600 | -35200 | -35400 | -38600
+Maintenance (courts & cameras) | USD | 0 | 0 | -22092 | -73836 | -132132 | -167622 | -205848
+Marketing & communication | USD | -300 | -900 | -10900 | -44400 | -55000 | -80000 | -122000
+Legal & office abroad | USD | 0 | -500 | -3000 | -6000 | -6000 | -6000 | -6000
+Total operating expenses | USD | -8100 | -23600 | -133492 | -274836 | -359832 | -428022 | -520948
+EBITDA | USD | -9470 | -17470 | 31,601.27 | 520,366.01 | 1,208,972.45 | 1,888,224.74 | 2,832,253.86
+  EBITDA margin | % | -4.05 | -1.02 | 0.08 | 0.38 | 0.62 | 0.65 | 0.67
+Depreciation & amortisation | USD | -166.67 | -500 | -1,166.67 | -2000 | -3000 | -4000 | -5000
+EBIT | USD | -9,636.67 | -17970 | 30,434.61 | 518,366.01 | 1,205,972.45 | 1,884,224.74 | 2,827,253.86
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -9,636.67 | -17970 | 30,434.61 | 518,366.01 | 1,205,972.45 | 1,884,224.74 | 2,827,253.86
+Income tax | USD | 0 | 0 | -636.29 | -116,632.35 | -271,343.80 | -423,950.57 | -636,132.12
+Net income | USD | -9,636.67 | -17970 | 29,798.32 | 401,733.66 | 934,628.65 | 1,460,274.17 | 2,191,121.74
+  Net margin | % | -4.12 | -1.04 | 0.08 | 0.29 | 0.48 | 0.50 | 0.52
+  Memo: tax losses carried forward (closing) | USD | 9,636.67 | 27,606.67 | 0 | 0 | 0 | 0 | 0
+Cash flow & runway (USD)
+Net income | USD | -9,636.67 | -17970 | 29,798.32 | 401,733.66 | 934,628.65 | 1,460,274.17 | 2,191,121.74
+Add back: D&A | USD | 166.67 | 500 | 1,166.67 | 2000 | 3000 | 4000 | 5000
+Change in working capital | USD | -351 | -2,230.50 | -54,661.09 | -149,720.21 | -85,598.17 | -145,415.74 | -193,566.77
+Cash flow from operations | USD | -9821 | -19,700.50 | -23,696.10 | 254,013.45 | 852,030.48 | 1,318,858.43 | 2,002,554.97
+Capital expenditure | USD | -500 | -1000 | -2000 | -3000 | -4000 | -5000 | -6000
+Free cash flow (pre-financing) | USD | -10321 | -20,700.50 | -25,696.10 | 251,013.45 | 848,030.48 | 1,313,858.43 | 1,996,554.97
+Equity & SAFE funding raised | USD | 20000 | 35000 | 25000 | 0 | 0 | 0 | 0
+Net change in cash | USD | 9679 | 14,299.50 | -696.10 | 251,013.45 | 848,030.48 | 1,313,858.43 | 1,996,554.97
+Opening cash | USD | 6000 | 15679 | 29,978.50 | 29,282.40 | 280,295.84 | 1,128,326.33 | 2,442,184.76
+Closing cash | USD | 15679 | 29,978.50 | 29,282.40 | 280,295.84 | 1,128,326.33 | 2,442,184.76 | 4,438,739.73
+Average monthly net burn | USD | 860.08 | 1,725.04 | 2,141.34 | 0 | 0 | 0 | 0
+Runway at year-end burn (months) | months | 18.23 | 17.38 | 13.67 | n/m | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset's useful life.

@@ -19,7 +19,7 @@ def forecast(vals: dict, alloc: dict, rules: dict) -> dict:
         p = f.get(n)
         if not p:
             continue
-        pre = vals[n]["blended_premoney"]
+        pre = p.get("premoney_override") or vals[n]["blended_premoney"]  # the price on the table, if the startup states one
         rnd = max(p["round_usd"], cheque)
         post = pre + rnd
         stake = cheque / post

@@ -1,0 +1,117 @@
+# Motion+ - video transcript (Motion+ Video.MOV)
+# language: en, duration 8.2 min, model small
+# Machine transcript: names and numbers may be misheard; check against the video before quoting.
+
+[00:00] Hi, my name is Lely Haitham and I'm the founder of MotionClass,
+[00:03] a startup, a technology-based startup focusing on the biomechanics and how
+[00:07] athletes perform in their daily lives, in their sports.
+[00:10] So what inspired me the most is that I'm in Egyptian professional triathlete
+[00:15] in the Egyptian National Team and I've experienced firsthand how we get injured
+[00:20] and how we perform so much training, so much high load of training
+[00:25] and then there's nothing in return where we don't expect the performance we wanted to happen.
+[00:31] So this brought me into thinking on why this happens
+[00:35] and we don't actually as athletes here in Egypt especially don't use the data we have
+[00:40] of our trainings and so many data that is unutilized
+[00:44] and this helps us perform better and also prevent any injury from happening
+[00:49] that would cost us a lot in our training.
+[00:51] So this brought me to MotionClass which is a biomechanics running analysis software
+[00:56] where we detect and prevent any injuries and any inefficiencies in our technique
+[01:00] and how we could perform better and boost our performance in our training.
+[01:04] So most athletes track their pace, their distance, their heart rate, their training load
+[01:09] however most of them don't track how their biomechanics are, how they actually move.
+[01:13] So poor biomechanics and muscle imbalances, the asymmetries in your body
+[01:17] this affects your performance and also could cause us so many injuries that cost us a lot.
+[01:23] So what we found in MotionClass and Evidence we have found that so many endurance sports
+[01:27] including running, CrossFit, Hyrogs athletes come and want our eager to know
+[01:32] what is limiting their performance or what is causing them the pain that they're experiencing
+[01:37] especially in running which is a core discipline in many sports.
+[01:40] So this shows us that the assessment we do could prevent so many injuries
+[01:45] and also solve so many pain that we experience as athletes
+[01:50] and this could cost us so much and preventing this in the long run
+[01:55] could boost our performance in some way that we didn't expect
+[02:00] or even have less training with better performance.
+[02:04] Sports are becoming data driven abroad and there's so many AI-driven technologies
+[02:10] and smart insoles and force plates that are used abroad in order to have
+[02:14] the data driven sports in order to enhance our performance as athletes.
+[02:19] However this is still something that is very very limited and niche here in Egypt
+[02:24] so and people are eager to know more and are eager to enhance their performance
+[02:29] and prevent any injuries.
+[02:31] And this time especially here in Egypt sports and fitness including
+[02:35] endurance sports such as Hyrogs and CrossFit are becoming kind of a trend.
+[02:39] So people are eager to run more and have like a healthy lifestyle.
+[02:43] So this is I think this is a very good time for startups such as Motion Plus
+[02:48] to start here in Egypt since people are actually eager to know more about
+[02:52] how their body moves and how they could enhance their performance
+[02:55] and their biomechanics and the technique of their body.
+[02:57] People want to know more.
+[02:59] People want to have a more healthy lifestyle.
+[03:01] So our competitors include here in Egypt they kind of are indirect
+[03:05] where they focus more on the force and the output the athlete performs in a certain test.
+[03:11] However Motion Plus focuses more on the biomechanics and the technique
+[03:14] the running analysis we perform in order to prevent any injuries.
+[03:17] So they focus more on the force and athlete performs while Motion Plus
+[03:22] focuses more on the biomechanics and how our body moves in the first place
+[03:26] to prevent any injury.
+[03:27] So our local competitors may include C, Stride, Encourte
+[03:32] and maybe Physiotherapist that focuses more on how an athlete moves
+[03:37] but they don't have the actual technology to use it for.
+[03:40] International competitors include Enform and Ochi.
+[03:44] They kind of do the similar thing as Motion Plus but they're not as accurate
+[03:48] especially Enform since you do it manually with your coach.
+[03:53] So I think Motion Plus differentiates in this part
+[03:57] where it combines both combines the power and the force an athlete puts
+[04:01] and also the biomechanics of an athlete and how they could enhance their performance
+[04:06] and prevent any injury by improving the inefficiencies in our technique.
+[04:12] So what's different with Motion Plus is that it's the first running analysis here in Egypt
+[04:16] in such an niche market where it performs both the force and the output
+[04:21] an athlete does and also fixes the technique and the biomechanics of an athlete
+[04:27] and seeing what's the inefficiencies they have in their technique
+[04:29] in order to prevent any injuries and also boost their performance.
+[04:32] Our customer acquisition strategy is built on three ways.
+[04:36] First of all is the partnerships with coaches and gyms and any teams
+[04:41] including endurance sports including triathlon, pentathlon, crossfit,
+[04:46] any of these teams in the short term run.
+[04:49] The second is community engagement also having events and university initiatives
+[04:54] and also athlete collaborations, education and social media.
+[04:58] We also have the digital marketing also improving the education of athletes
+[05:03] on social media where we want people to know more about what is the meaning
+[05:07] of running analysis and how does this actually help them in their training
+[05:12] and why is this important for them.
+[05:14] We don't view our customers as a one-time assessment.
+[05:17] Our business model is built on how the athlete should have a validation process
+[05:22] so they need to do an assessment first, work on the inefficiencies
+[05:25] and the exercises we provide in order to enhance their performance
+[05:28] and enhance their technique and their biomechanics
+[05:31] and then a revalidation in order to see the progress and so on.
+[05:35] And also having maybe a certain injury and coming back from a certain injury
+[05:39] so we need to see the muscle imbalances and the asymmetries in our body.
+[05:43] So we don't actually view it as a one-time service.
+[05:46] It needs to be something very core in our training such as nutrition and sleep.
+[05:52] This should be something also as important as other factors in training.
+[05:56] So our biggest risk is actual education and adoption.
+[06:00] Biomechanics is something very new and very unfamiliar in the Egyptian market
+[06:04] where athletes just focus on as I said maybe nutrition and recovery.
+[06:09] However, having actual results and measurements isn't something as important here in Egypt.
+[06:15] So how we mitigate this risk is education.
+[06:19] The first important thing is education.
+[06:22] So by having collaborations with gyms and coaches and seeing the results of actual athlete experiences
+[06:28] is what how we educate people and tell them how these measurements results
+[06:33] are actually improving our training and how does this actually affect how an athlete trains
+[06:39] and how to enhance the performance and how also this could lead them in a better
+[06:44] and better performance with lower training loads and long run.
+[06:48] So in five years my vision for MotionPlus is being a leading sports technology hub in the
+[06:53] Menor region also expanding more into other sports rather than just running in the first place.
+[06:59] Maybe in cycling, swimming, tennis, squash, other sports and also expanding our measurable test
+[07:05] including maybe like Viotomax and other data-driven technologies
+[07:09] and being a digital ecosystem for coaches and athletes in order to track the progress
+[07:14] of the athletes in all factors of their training and testing regularly every day
+[07:20] and every season and in order to see where is the problem of not improving in their training.
+[07:28] So yeah.
+[07:30] So a successful exit would be maybe like a strategic acquisition by an international company
+[07:35] or sports technology, healthcare or any international big companies.
+[07:40] So if we were raising capital today we would maybe ask for around four million Egyptian pounds
+[07:46] where we would allocate them first maybe like 40% for having our own place and building
+[07:51] and also enhancing our technology in the R&D and 30% going also for our operational capacity
+[07:59] involving physiotherapists and other additional equipment in order to strengthen
+[08:04] our measurable data-driven equipment.
+[08:07] 20% would go for customer acquisition and marketing and 10% would go for working competence.

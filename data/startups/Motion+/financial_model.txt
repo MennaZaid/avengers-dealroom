@@ -1,0 +1,110 @@
+# MotionPlus Financial Model.xlsx
+
+## sheet: Summary
+ | Motion+
+ | Egypt's clinical-grade biomechanics & performance analysis service
+ | Sector | Sports health / Biomechanics services
+ | Headquarters | Cairo, Egypt (operating at Motion Masters Clinic)
+ | Founded / started operating | Launched January 2026
+ | Current stage | Bootstrapped and profitable
+ | Business model | Tiered direct-to-consumer analysis packages (EGP 1,200–3,700); software licensing to clinics and clubs from 2028
+ | Company overview
+ | Motion+ combines four clinical-grade tools into one assessment: in-house high-speed gait analysis software (kinematics),
+ | Digitsole Pro smart insoles (real-world running kinetics), Meloq force plates (power, balance, asymmetry) and a Meloq
+ | dynamometer (isolated strength). Every client leaves with a diagnostic report and a corrective training plan, and can return
+ | for a progress re-analysis. Target clients: runners, triathletes, Hyrox and football athletes, and injured patients returning to sport.
+ | Operating highlights (as of November 2026)
+ | Clients assessed in 2026 | ~210 paying clients
+ | Sessions | Weekly analysis days at Motion Masters Clinic
+ | Core systems in use | Gait analysis software, Digitsole Pro, Meloq force plates & dynamometer
+ | Software | Own running-analysis platform built in 2026 (EGP 70K), IP owned by Motion+
+ | Channels | Triathlon community, AUC athletics, endurance events
+ | Funding history
+ | Date | Round / source |  | Amount (USD) | Investors / notes
+ | 2026 | Founder capital |  | 1000 | Self-funded; every pound of equipment earned from revenue, not raised
+ | Financial summary (USD)
+ |  | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ | Total revenue | 8235 | 21,109.09 | 44,170.94 | 79,274.19 | 125,801.53 | 177,536.23
+ | Revenue growth | n/m | 1.56 | 1.09 | 0.79 | 0.59 | 0.41
+ | Gross profit | 5353 | 12,775.45 | 28,540.17 | 53,141.13 | 86,351.15 | 123,405.80
+ | Gross margin | 0.65 | 0.61 | 0.65 | 0.67 | 0.69 | 0.70
+ | EBITDA | 3000 | 8,230.00 | 20,847.86 | 41,850.81 | 71,083.97 | 103,840.58
+ | EBITDA margin | 0.36 | 0.39 | 0.47 | 0.53 | 0.57 | 0.58
+ | Net income | 2,112.18 | 5,319.98 | 13,774.04 | 28,301.32 | 49,418.85 | 73,670.21
+ | Free cash flow (pre-financing) | 849.09 | 973.46 | 7,840.70 | 21,641.91 | 45,882.35 | 72,722.11
+ | Equity raised | 1000 | 0 | 0 | 0 | 0 | 0
+ | Closing cash | 1,849.09 | 2,822.55 | 10,663.25 | 32,305.16 | 78,187.51 | 150,909.61
+ | Clients assessed | 210 | 470 | 840 | 1350 | 1950 | 2600
+ | Revenue (EGP) | 419985 | 1,161,000.00 | 2584000 | 4,915,000.00 | 8240000 | 12250000
+ | EBITDA (EGP) | 153000 | 452,650.00 | 1219600 | 2,594,750.00 | 4656000 | 7165000
+
+## sheet: Assumptions
+Motion+ | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions |  | Value |  |  |  |  |  | Basis
+Corporate income tax rate |  | 0.23 |  |  |  |  |  | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) |  | 5 |  |  |  |  |  | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) |  | 0.02 |  |  |  |  |  | Clients pay at booking; minimal working capital.
+Driver assumptions | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Macro
+EGP / USD exchange rate (average) | EGP per USD | 51 | 55 | 58.50 | 62 | 65.50 | 69 | Annual average EGP per USD. 2026 average reflects ~47.7 pre-February, then depreciation to ~53–56 by Q4 2026; forecast assumes ~6% annual depreciation in line with the inflation differential.
+Clients & pricing
+Clients assessed | # | 210 | 470 | 840 | 1350 | 1950 | 2600 | Capture path to 1,950 clients a year by 2030 (~0.4% of 450K premium-intent athletes) via triathlon networks, AUC and collegiate bulk assessments and event activations; regional hub from 2031.
+Blended revenue per client | EGP | 2000 | 2300 | 2600 | 2900 | 3200 | 3500 | ~EGP 2,000 blended in 2026, rising 10–15% a year with inflation and add-ons (force plates, dynamometer, progress re-analysis).
+Clinics & clubs licensing Motion+ software | # | 0 | 2 | 8 | 16 | 25 | 35 | Licensing to clinics and clubs starts 2027 and scales from 2028 with new sport modules.
+Annual licence fee per clinic | EGP / year |  | 40000 | 50000 | 62500 | 80000 | 90000 | Fee rises as multi-sport modules are added.
+Cost structure (EGP)
+Direct costs (clinic space, physiotherapist fees, consumables) | % of service revenue | 0.35 | 0.35 | 0.35 | 0.35 | 0.35 | 0.35
+Software hosting & upkeep | EGP / year |  | 80000 | 150000 | 250000 | 400000 | 550000 | Running costs start in 2027; the 2026 build is already paid for.
+Operating expenses (marketing, events, operations, G&A) | EGP / year | 120000 | 250000 | 450000 | 700000 | 1000000 | 1350000 | Founder full-time and self-funded; no salary drawn in the plan.
+Capex | EGP / year |  | 300000 | 500000 | 700000 | 650000 | 600000 | 2027: own Meloq force plates (USD 3,500, ~EGP 190K) and equipment; 2028–29: multi-sport software modules; 2030–31: regional sport science hub.
+Funding
+Equity raised | USD | 1000 | 0 | 0 | 0 | 0 | 0 | Self-funded, with positive operating cash every year.
+
+## sheet: Model
+Motion+ | Financial Model
+USD, fiscal year ending 31 December. 2026–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+ | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+ |  | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Clients assessed | # | 210 | 470 | 840 | 1350 | 1950 | 2600
+Blended revenue per client | EGP | 2000 | 2300 | 2600 | 2900 | 3200 | 3500
+Licensing clinics / clubs | # | 0 | 2 | 8 | 16 | 25 | 35
+Revenue (EGP) | EGP | 419985 | 1,161,000.00 | 2584000 | 4,915,000.00 | 8240000 | 12250000
+EBITDA (EGP) | EGP | 153000 | 452,650.00 | 1219600 | 2,594,750.00 | 4656000 | 7165000
+Income statement (USD)
+Analysis services | USD | 8235 | 19,654.55 | 37,333.33 | 63,145.16 | 95,267.18 | 131,884.06
+Software licensing | USD | 0 | 1,454.55 | 6,837.61 | 16,129.03 | 30,534.35 | 45,652.17
+Total revenue | USD | 8235 | 21,109.09 | 44,170.94 | 79,274.19 | 125,801.53 | 177,536.23
+  Revenue growth (YoY) | % | n/m | 1.56 | 1.09 | 0.79 | 0.59 | 0.41
+Direct service costs | USD | -2882 | -6,879.09 | -13,066.67 | -22,100.81 | -33,343.51 | -46,159.42
+Software hosting & upkeep | USD | 0 | -1,454.55 | -2,564.10 | -4,032.26 | -6,106.87 | -7,971.01
+Total cost of revenue | USD | -2882 | -8,333.64 | -15,630.77 | -26,133.06 | -39,450.38 | -54,130.43
+Gross profit | USD | 5353 | 12,775.45 | 28,540.17 | 53,141.13 | 86,351.15 | 123,405.80
+  Gross margin | % | 0.65 | 0.61 | 0.65 | 0.67 | 0.69 | 0.70
+Operating expenses (marketing, events, operations, G&A) | USD | -2353 | -4,545.45 | -7,692.31 | -11,290.32 | -15,267.18 | -19,565.22
+Total operating expenses | USD | -2353 | -4,545.45 | -7,692.31 | -11,290.32 | -15,267.18 | -19,565.22
+EBITDA | USD | 3000 | 8,230.00 | 20,847.86 | 41,850.81 | 71,083.97 | 103,840.58
+  EBITDA margin | % | 0.36 | 0.39 | 0.47 | 0.53 | 0.57 | 0.58
+Depreciation & amortisation | USD | -274.60 | -1,365.51 | -3,074.91 | -5,332.98 | -7,317.71 | -8,782.24
+EBIT | USD | 2,725.40 | 6,864.49 | 17,772.95 | 36,517.83 | 63,766.26 | 95,058.34
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | 2,725.40 | 6,864.49 | 17,772.95 | 36,517.83 | 63,766.26 | 95,058.34
+Income tax | USD | -613.22 | -1,544.51 | -3,998.91 | -8,216.51 | -14,347.41 | -21,388.13
+Net income | USD | 2,112.18 | 5,319.98 | 13,774.04 | 28,301.32 | 49,418.85 | 73,670.21
+  Net margin | % | 0.26 | 0.25 | 0.31 | 0.36 | 0.39 | 0.41
+  Memo: tax losses carried forward (closing) | USD | 0 | 0 | 0 | 0 | 0 | 0
+Cash flow & runway (USD)
+Net income | USD | 2,112.18 | 5,319.98 | 13,774.04 | 28,301.32 | 49,418.85 | 73,670.21
+Add back: D&A | USD | 274.60 | 1,365.51 | 3,074.91 | 5,332.98 | 7,317.71 | 8,782.24
+Change in working capital | USD | -164.70 | -257.48 | -461.24 | -702.07 | -930.55 | -1,034.69
+Cash flow from operations | USD | 2,222.09 | 6,428.01 | 16,387.71 | 32,932.23 | 55,806.01 | 81,417.76
+Capital expenditure | USD | -1373 | -5,454.55 | -8,547.01 | -11,290.32 | -9,923.66 | -8,695.65
+Free cash flow (pre-financing) | USD | 849.09 | 973.46 | 7,840.70 | 21,641.91 | 45,882.35 | 72,722.11
+Equity & SAFE funding raised | USD | 1000 | 0 | 0 | 0 | 0 | 0
+Net change in cash | USD | 1,849.09 | 973.46 | 7,840.70 | 21,641.91 | 45,882.35 | 72,722.11
+Opening cash | USD | 0 | 1,849.09 | 2,822.55 | 10,663.25 | 32,305.16 | 78,187.51
+Closing cash | USD | 1,849.09 | 2,822.55 | 10,663.25 | 32,305.16 | 78,187.51 | 150,909.61
+Average monthly net burn | USD | 0 | 0 | 0 | 0 | 0 | 0
+Runway at year-end burn (months) | months | n/m | n/m | n/m | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset's useful life.
