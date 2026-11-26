@@ -3,7 +3,7 @@ Writes data/benchmarks.json. Every number must come from a search result snippet
 Usage: python -m dealroom.benchmarks"""
 import json, datetime as dt
 from pathlib import Path
-from venture_os.tools.search import searxng_search
+from dealroom.search import searxng_search
 from dealroom.research import ask_json
 
 ROOT = Path(__file__).resolve().parent.parent

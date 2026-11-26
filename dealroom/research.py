@@ -4,8 +4,8 @@ Usage: python -m dealroom.research [Startup ...]"""
 import json, sys, datetime as dt
 from pathlib import Path
 import yaml
-from venture_os.tools.search import searxng_search
-from venture_os.llm.client import chat_json as _chat, usage_mark, usage_summary
+from dealroom.search import searxng_search
+from dealroom.llm import chat_json as _chat, usage_mark, usage_summary
 import re
 
 

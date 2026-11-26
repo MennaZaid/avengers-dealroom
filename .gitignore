@@ -2,17 +2,7 @@ __pycache__/
 *.pyc
 .venv/
 .env
-.pytest_cache/
-.ruff_cache/
-*.egg-info/
-data/
-results/
-
-# per-brief working data of pipeline runs (evidence items)
-runs/
-
-# Internal team planning notes (kept locally, not part of the product documentation)
-docs/planning/
-docs/HANDOFF.md
-
 .streamlit/secrets.toml
+.claude/
+data/research_run*.log
+outputs/dealroom/approvals.json

@@ -3,7 +3,7 @@ import json, os, sys, html, datetime as dt
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT / "src")); sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT))
 import streamlit as st
 
 st.set_page_config(page_title="Avengers Capital · DealRoom", page_icon="🛡️", layout="wide",
@@ -91,7 +91,7 @@ with tabs[0]:
     researched = sum(1 for n in order if res.get(n))
     st.markdown(f"""<div class="kpis">
 <div class="kpi"><div class="l">Deployed</div><div class="v">{money(sum(alloc.values()))}</div></div>
-<div class="kpi"><div class="l">Reserve</div><div class="v">{money(rules['reserve_usd'])}</div></div>
+<div class="kpi"><div class="l">Reserve</div><div class="v">{money(rules['fund_usd'] - sum(alloc.values()))}</div></div>
 <div class="kpi"><div class="l">Backed</div><div class="v">{len(alloc)} / {len(vals)}</div></div>
 <div class="kpi"><div class="l">Researched</div><div class="v">{researched} / {len(vals)}</div></div></div>""", unsafe_allow_html=True)
     cards = []
