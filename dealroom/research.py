@@ -7,6 +7,7 @@ import yaml
 from dealroom.search import searxng_search
 from dealroom.llm import chat_json as _chat, usage_mark, usage_summary
 import re
+from dealroom import registry
 
 
 def ask_json(prompt: str) -> dict:
@@ -44,12 +45,44 @@ verdict: "supported" (results confirm the claim), "contradicted" (results confli
 Return JSON: {{"verdict": "...", "finding": "<2-4 sentences with figures as stated in the snippets>", "sources": ["<urls from the results you relied on>"], "risk_flag": "<one short investor risk this suggests, or empty>"}}"""
 
 
+TRUSTED_PROMPT = """You plan due-diligence searches restricted to trusted sources from our team's source registry.
+Startup: {name}. Sector: {sector}. Stage: {stage}.
+Registry of fact sources (domain [tier, coverage]: what it provides):
+{catalogue}
+Case-study sources (for analogies to similar businesses):
+{cases}
+Pick the 3 fact sources most useful for checking this startup's market size, regulation or customers in Egypt/MENA,
+and 1 case-study source likely to hold a comparable business case. Write a short English query for each (no site: prefix).
+Return JSON: {{"picks": [{{"domain": "<domain from the lists>", "topic": "market|regulation|competition|case_study", "query": "<query>"}}]}}"""
+
+
+def trusted_queries(name: str, e: dict) -> list[dict]:
+    """Up to 4 searches restricted (site:) to tier A/B registry sources picked for this startup."""
+    try:
+        plan = ask_json(TRUSTED_PROMPT.format(name=name, sector=e["sector"], stage=e["stage"],
+                                              catalogue=registry.catalogue("fact"), cases=registry.catalogue("analogy", ("A", "B", "C"))))
+    except Exception:
+        return []
+    known = {s["domain"] for s in registry.sources()}
+    out = []
+    for p in plan.get("picks", [])[:4]:
+        d = str(p.get("domain", "")).lower().removeprefix("www.")
+        if d in known and p.get("query"):
+            out.append({"topic": p.get("topic", "market"), "claim": "", "site": d, "trusted": True,
+                        "query": f"site:{d} {p['query']}"})
+    return out
+
+
 def research(name: str, e: dict) -> dict:
     claims = "\n".join(f"- [{c['source']}] {c['quote']}" for c in e.get("claims", []))
     plan = ask_json(PLAN_PROMPT.format(name=name, sector=e["sector"], stage=e["stage"], ask=e.get("ask_usd"), claims=claims))
+    queries = plan.get("queries", [])[:6] + trusted_queries(name, e)
     findings = []
-    for q in plan.get("queries", [])[:6]:
+    for q in queries:
         hits = [h for h in searxng_search(q["query"], limit=6) if "://" in h.url and not h.url.startswith("http:///")]
+        if q.get("site") and not hits:  # site: search found nothing; retry as a plain query naming the source
+            hits = [h for h in searxng_search(q["query"].replace("site:" + q["site"], q["site"]), limit=6)
+                    if "://" in h.url and not h.url.startswith("http:///")]
         if not hits:
             findings.append({**q, "verdict": "unverified", "finding": "No search results.", "sources": [], "risk_flag": ""})
             continue
@@ -59,8 +92,9 @@ def research(name: str, e: dict) -> dict:
         j["sources"] = [u for u in j.get("sources", []) if u in allowed]  # drop any URL the model made up
         if not j["sources"] and j.get("verdict") in ("supported", "contradicted"):
             j["verdict"] = "unverified"
+        j["source_tiers"] = {u: registry.tier_of(u) for u in j["sources"]}  # A/B/C from the team registry, None = not in it
         findings.append({**q, **j})
-        print(f"  {name} | {q.get('topic')} | {j.get('verdict')}")
+        print(f"  {name} | {q.get('topic')} | {j.get('verdict')} | tiers {list(j['source_tiers'].values())}")
     return {"startup": name, "generated": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"), "findings": findings}
 
 

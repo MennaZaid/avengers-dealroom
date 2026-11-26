@@ -1,0 +1,9 @@
+# Sources added for The DealRoom (investor due diligence). Same schema as registry_seed.yaml.
+- {id: DR-001, scope: country, coverage: Egypt, source_name: "FRA - Financial Regulatory Authority", url: https://fra.gov.eg, provides: "Non-bank finance, brokerage, fintech sandbox, real-estate fund rules", tier: A, use: fact}
+- {id: DR-002, scope: country, coverage: Egypt, source_name: "EGX - The Egyptian Exchange", url: https://www.egx.com.eg, provides: "Listed companies, market data, IPO comparables", tier: A, use: fact}
+- {id: DR-003, scope: region, coverage: MENA, source_name: "MAGNiTT", url: https://magnitt.com, provides: "MENA venture funding data, round sizes, valuations", tier: B, use: fact}
+- {id: DR-004, scope: region, coverage: MENA, source_name: "Wamda", url: https://www.wamda.com, provides: "MENA startup and funding news and reports", tier: B, use: fact}
+- {id: DR-005, scope: global, coverage: global, source_name: "Carta - private market data", url: https://carta.com, provides: "Dilution, round sizes, valuations by stage", tier: B, use: fact}
+- {id: DR-006, scope: global, coverage: global, source_name: "Damodaran Online (NYU Stern)", url: https://pages.stern.nyu.edu, provides: "Valuation multiples by industry and region", tier: A, use: fact}
+- {id: DR-007, scope: region, coverage: Egypt, source_name: "Enterprise (Egypt business news)", url: https://enterprise.press, provides: "Egypt business, regulation and deal news", tier: B, use: fact}
+- {id: DR-008, scope: region, coverage: MENA, source_name: "MENAbytes", url: https://www.menabytes.com, provides: "MENA startup funding rounds", tier: C, use: fact}
