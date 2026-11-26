@@ -1,6 +1,6 @@
 # CLAUDE.md: DealRoom VC copilot
 
-This repo supports a team in **The DealRoom** (ES x MADS, AUC): a simulated VC fund of **USD 1,000,000** choosing among 14 pre-seed/seed startups. Portfolio + presentation due **Fri 27 Nov 2026, 16:00**.
+This repo supports a team in **The DealRoom** (ES x MADS, AUC): a simulated VC fund of **USD 1,000,000** choosing among 13 pre-seed/seed startups (see data/briefing.txt). **Deck as PDF emailed by Fri 27 Nov 2026, 15:00**; filtration 16:00 (5-min pitch + Q&A, every member presents); final Sat 28 Nov. Deliver: picks + weights + reserve, year-5 value after dilution (base + downside), and the why. Equity % = cheque ÷ post-money.
 
 ## Pipeline (`python -m dealroom.run`)
 1. **Brief** - `data/evidence.yaml`: per-startup claims, each a verbatim `quote` with a `source` (`deck`, `video`, `deck_image:<page>`, or a URL).

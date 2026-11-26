@@ -1,0 +1,513 @@
+
+=== p1
+The DealRoom
+The VC Simulation
+Team Briefing
+FILTRATION · FRI 27 NOV  //  FINAL · SAT 28 NOV  //  AUC NEW CAIRO
+
+=== p2
+01 · The competition
+What is The DealRoom?
+The DealRoom is a Venture Capital simulation. Your team is a VC fund. You research real 
+early-stage startups, meet their founders, value each business and decide where your capital 
+goes. Then you defend your portfolio in front of judges and industry professionals.
+As the first AI-driven VC competition in MENA, you can build your own AI workflows to power 
+your research and decisions.
+13
+Startups to evaluate
+$1M
+Of capital per team
+5 yrs
+Return horizon
+2
+Claude Pro accounts 
+per team
+THE DEALROOM // TEAM BRIEFING
+02
+
+=== p3
+02 · Your mission
+Invest $1M. Maximise returns in 5 years.
+You act as VCs with USD 1,000,000 to deploy across 13 startups. You choose who gets a 
+cheque, how big each cheque is, and what you expect the portfolio to be worth five years from 
+now. Use the numbers and your judgment of the people and the business.
+01
+Research
+Study each startup, 
+its team, market 
+and numbers.
+02
+Value
+Decide what 
+each company is 
+worth today.
+03
+Allocate
+Split the $1M: which 
+startups, what 
+weights, any 
+reserve.
+04
+Forecast
+Project your 
+portfolio’s value at 
+year 5.
+05
+Defend
+Justify every pick, 
+with numbers and 
+judgment.
+THE DEALROOM // TEAM BRIEFING
+03
+
+=== p4
+03 · The startups (1 of 2)
+13 startups in the room
+Blaze
+AI investing
+Learn-and-invest app for 
+first-time investors, with an AI 
+chatbot. Seeking FRA licence.
+Raafat El-Saeed, Ahmed 
+El-Geneidy
+Byota
+Health & nutrition
+At-home gut health test plus 
+an app and nutritionist 
+guidance. Waitlist live.
+Omar Ahmed, Nesreen 
+Mahmoud +1
+Carbonless
+Climate tech
+Onboard CO₂ capture from 
+ship exhaust, turned into 
+sellable products.
+Mohab Mohamed, 
+Huda Elbindary
+Finalyze
+Financial data
+Turns Arabic and scanned 
+statements into clean, 
+traceable data. Egypt first.
+Adam El Beblawy, Mohamed 
+Gamal, Tony Gerges
+Hylix
+AI software
+EVE helps AI agents skip 
+wasted steps, so tasks run 
+faster and cheaper.
+Andrew Rufail, Hesham 
+Waleed, Abdelrahman 
+Montasser
+IGNOT
+Real estate tech
+Nvest: fractional, property-
+backed investing. In the 
+FRA sandbox.
+Ahmed Mamdouh +3 
+co-founders
+Matbakh
+Food business POS
+Offline-ready POS and stock 
+system for independent food 
+businesses.
+Karim Hany Mikhail (solo)
+Full profiles
+Your data room
+Every startup’s story, 
+founders and programs are in 
+The DealRoom Startup 
+Directory.
+THE DEALROOM // TEAM BRIEFING
+04
+
+=== p5
+03 · The startups (2 of 2)
+13 startups in the room
+Modeeri
+Business operations
+Tasks, checklists and AI cameras that keep 
+multi-branch frontline teams on standard. 
+150+ locations under contract.
+Ali Dajani (solo)
+Motion+
+Sports performance
+Gait and running analysis, smart 
+insoles, force plates and strength tests 
+for athletes.
+Lilly Hatem (solo)
+REE
+Sports technology
+Court cameras plus a clicker: players 
+mark a moment and get the highlight on 
+their phone.
+Amr Hekal, Abdelrahman Atef
+TRNR
+Sports coaching
+Find, compare and book coaches. Starting 
+with tennis and running clubs in Cairo.
+Ahmed M. Gamal, Rawan Khashaba
+VELO
+Mobile car care
+Detailing at your parking spot in New 
+Cairo, from a unit with its own water 
+and power.
+Mostafa (solo)
+Zaat
+AI for founders
+AI agents that handle follow-ups, investor 
+updates, grants and research for solo 
+founders. Private beta.
+Mohamed Fadel (solo)
+THE DEALROOM // TEAM BRIEFING
+05
+
+=== p6
+04 · Questions to ask (1 of 2)
+Think about the company
+Not every reason to invest fits in a spreadsheet. Weigh the qualitative case as seriously as 
+the numbers.
+
+Team & founders
+Why is this team the one to win 
+this market?
+What did you learn from them at 
+the Open Day?
+Can a solo founder carry it, or 
+who is missing?
+Have they executed before?
+
+Market & competition
+How big is the real market in 
+Egypt, and beyond?
+Who else solves this problem, and 
+what’s the edge?
+How do regulation and timing help 
+or hurt?
+Why now?
+
+Traction & product
+What is proven, and what is still 
+a promise?
+Paying customers, pilots or 
+a waitlist?
+What has to be true for this 
+to work?
+What is the biggest single risk?
+THE DEALROOM // TEAM BRIEFING
+06
+
+=== p7
+04 · Questions to ask (2 of 2)
+Think about the deal
+
+Valuation
+What is a fair price at 
+this stage?
+Which method fits pre-
+seed or seed?
+Do local 
+benchmarks agree?
+
+Runway
+How long does your 
+cheque last?
+Which milestone does 
+it unlock before the 
+next raise?
+
+Returns & risk
+What could it be worth 
+in 5 years?
+How much will later 
+rounds dilute you?
+What if it fails?
+
+Allocation
+How many bets, and 
+how big?
+Do cheque sizes follow 
+conviction?
+Do you keep a reserve?
+THE DEALROOM // TEAM BRIEFING
+07
+
+=== p8
+05 · What you deliver
+Your answer: a 5-year portfolio
+01
+“We invest in these startups, 
+with these weights.”
+Which startups get a cheque, how 
+much each, and whether you hold 
+a reserve.
+02
+“After 5 years, our portfolio 
+looks like this.”
+Your forecast of what each stake, 
+and the whole fund, is worth at year 
+5, after dilution. Show a base case 
+and a downside.
+03
+“Here is why.”
+Why each startup is in: the numbers, 
+the qualitative case for the founders 
+and the business, and the methods 
+behind your decision.
+Invest no more than USD 1,000,000
+Equity % = cheque ÷ post-money
+No need to back all 13 or fund a full ask
+THE DEALROOM // TEAM BRIEFING
+08
+
+=== p9
+06 · Your pitch deck
+Don’t pitch the startups. 
+Pitch your decisions.
+The judges already know every detail of all 13 startups. Your deck needs no slides explaining 
+what a startup does. Spend your time on why you invested.
+SKIP
+“We chose Startup X because it does 1, 2 and 3.”
+SAY
+“We put 20% in Startup X because of the team, 
+the price and the return we expect by year 5.”
+THE DEALROOM // TEAM BRIEFING
+09
+
+=== p10
+07 · How you’ll be judged
+The rubric: 8 key questions
+Type
+Criterion
+Key question
+Pts
+Quantitative
+Valuation
+Is each startup’s price justified with a method that fits pre-seed / seed?
+15
+Quantitative
+Financials & runway
+Did you use the numbers given, and does each cheque reach the next 
+milestone?
+10
+Quantitative
+Capital allocation
+Is the split (cheque sizes, number of bets, reserve) deliberate?
+15
+Quantitative
+Returns & downside
+Can your best picks return the fund after dilution? What if they fail?
+10
+Qualitative
+Founders & Open Day
+What did you learn about the founders, and did it change your decisions?
+15
+Qualitative
+Market & competition
+Do you understand the problem, market size, competitors and Egypt context?
+10
+Qualitative
+Investment thesis
+Is there a clear thesis that explains your picks?
+10
+Qualitative
+Pitch & Q&A
+Clear, on time, whole team involved, choices defended under questions?
+15
+TOTAL 100 POINTS · QUANTITATIVE 50 · QUALITATIVE 50
+THE DEALROOM // TEAM BRIEFING
+10
+
+=== p11
+08 · The most important slide
+There is no right answer.
+No portfolio wins because it holds X, Y and Z. Judges score how you got there: your 
+reasoning, your evidence, your judgment and your process. Two teams can back 
+completely different startups and both score top marks.
+Think creatively. Build your own method. Own your choices.
+THE DEALROOM // TEAM BRIEFING
+11
+
+=== p12
+09 · Your AI analyst
+Claude access is coming very soon
+2
+Claude Pro accounts 
+per team
+Each team gets two Claude Pro accounts to use for research, 
+modelling and pitch prep throughout the competition.
+The login verification codes reach you through Gmail forwarding. You 
+will get an email asking you to accept a forwarding request.
+Every team member must accept it. If you don’t, you won’t receive 
+your login codes.
+THE DEALROOM // TEAM BRIEFING
+12
+
+=== p13
+09 · Activate your access
+3 steps, every team member
+01
+Find the email
+In Gmail, open the email from “Gmail 
+Team” titled “Gmail Forwarding 
+Confirmation - Receive Mail from 
+kairaky@gmail.com”. Not there? 
+Check Spam.
+02
+Confirm the request
+Click the link under “Please click the 
+link below to confirm the request:”. 
+Check the address shown is yours, then 
+click Confirm.
+03
+Email us when done
+Send the email below. Use the exact 
+team name you registered with. No body 
+text needed.
+To mads@aucegypt.edu
+CC sarahhegazyy@aucegypt.edu, ganna30@aucegypt.edu
+Subject [Your Team Name] - Forwarding Confirmation
+THE DEALROOM // TEAM BRIEFING
+13
+
+=== p14
+10 · Working with AI
+AI is optional. 
+Your investment case is not.
+You don’t have to build AI workflows or use Skills. They can help you work faster and dig 
+deeper, so your work is better. But you are judged on your presentation and how you invest, 
+not on how you used AI.
+OPTIONAL
+AI workflows, Skills, Research, AI-built models
+WHAT YOU’RE JUDGED ON
+Your deck, your portfolio and weights, your 5-year 
+forecast and your reasoning
+THE DEALROOM // TEAM BRIEFING
+14
+
+=== p15
+10 · Working with AI
+Six ways to put Claude to work
+
+A Project as your data room
+Create a Project and upload the directory, 
+decks, financial models and your Open 
+Day notes. Every chat starts with the 
+full context.
+
+Research for market 
+questions
+Run Research on questions like market 
+size or competitors in Egypt, and get a 
+cited report back. Check the sources.
+
+Build the models
+Ask Claude to build a spreadsheet: 
+valuation, dilution across rounds and 
+year-5 portfolio value, with base and 
+downside cases.
+
+Skills for your method
+Save your scoring method as a Skill, so 
+every one of the 13 startups is judged the 
+same way, in every chat.
+
+A sparring partner
+Ask Claude to play a tough VC judge, 
+attack your allocation and find the holes 
+before Q&A does.
+
+Pitch prep
+Shape your story, cut it to time and 
+rehearse answers to the hardest 
+questions on your picks.
+THE DEALROOM // TEAM BRIEFING
+15
+
+=== p16
+10 · Working with AI
+Chain it into a workflow
+01
+Load
+One Project holds 
+every startup file and 
+your notes.
+02
+Screen
+Your Skill scores all 13 
+against your thesis.
+03
+Dig
+Research the markets 
+and rivals of your 
+shortlist.
+04
+Model
+Value, size cheques, 
+forecast year 5.
+05
+Challenge
+Claude plays judge. Fix 
+the gaps.
+Example prompts
+“Using this startup’s financial model, how far does a $150K cheque take them, and which milestone does 
+it reach?”
+“Act as a VC judge. Here is our allocation. Ask us the 10 hardest questions you can.”
+THE DEALROOM // TEAM BRIEFING
+16
+
+=== p17
+11 · Submission
+Deadline and where to send it
+DEADLINE
+Fri 27 Nov 
+3:00 PM
+Email your presentation as a PDF by 3:00 PM sharp.
+SEND TO
+mads@aucegypt.edu 
+es@aucegypt.edu 
+sarahhegazyy@aucegypt.edu 
+ganna30@aucegypt.edu
+FILTRATION
+4:00 PM, Walid Hall, HUSS, AUC New Cairo. Final on Sat 
+28 Nov.
+5-minute pitch, then Q&A
+Every team member presents
+THE DEALROOM // TEAM BRIEFING
+17
+
+=== p18
+11 · Submission
+What your deck should cover
+Thesis
+What kind of startups you back, 
+and why.
+Your picks
+Why each startup in your portfolio 
+is in.
+Valuation
+How you priced each startup you 
+invest in.
+Allocation
+How you split the $1M, and why 
+those weights.
+Returns & risk
+What you expect at year 5, and what 
+if it fails.
+Entrepreneurial criteria
+The qualitative case: the founders 
+and what numbers can’t show.
+No startup intro slides needed: the judges know all 13
+THE DEALROOM // TEAM BRIEFING
+18
+
+=== p19
+12 · We’re here for you
+Good luck, VCs.
+Questions about the startups, the rules or your Claude access? Email us anytime. We’re here 
+to support you all week.
+mads@aucegypt.edu 
+es@aucegypt.edu
+CC sarahhegazyy@aucegypt.edu and ganna30@aucegypt.edu
+THE DEALROOM // TEAM BRIEFING
+19
