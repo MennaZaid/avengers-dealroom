@@ -1,0 +1,122 @@
+# HUMAN LENS - filled in at the team meeting. The tool never writes here except through the Three Lenses tab.
+# conviction: each member 1-5 (1 = would not invest, 5 = must have). open_day: what we saw at the pitches.
+# decision: invest | pass | watch | undecided. final_cheque_usd: the team's number (overrides the tool's proposal).
+# override_reason: required when the team disagrees with the tool - this becomes a pitch talking point.
+members: [Menna, Roufayda, Abdelrahman]
+
+Modeeri:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Blaze:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Zaat:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Hylix:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+TRNR:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Finalyze:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Byota:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Carbonless:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+IGNOT:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+VELO:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Matbakh:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+REE:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""
+
+Motion+:
+  conviction: {}
+  open_day: ""
+  gut_feeling: ""
+  concerns: ""
+  decision: undecided
+  final_cheque_usd: null
+  override_reason: ""

@@ -18,7 +18,7 @@ except Exception:
 
 import yaml
 import dealroom  # loads a local .env when present
-from dealroom import dossier, analyst, research, forecast
+from dealroom import dossier, analyst, research, forecast, lenses
 
 DATA, OUT = ROOT / "data", ROOT / "outputs" / "dealroom"
 APPROVALS = OUT / "approvals.json"
@@ -85,7 +85,7 @@ every ticket signed off by a human.</p>
 
 fc = forecast.forecast(vals, alloc, rules)
 post = lambda n, a: vals[n]["blended_premoney"] + max(evidence[n].get("ask_usd") or 0, a)
-tabs = st.tabs(["Portfolio", "Year 5", "Startups", "Research", "Analyst", "Approve", "Glossary", "Rules"])
+tabs = st.tabs(["Portfolio", "Three Lenses", "Year 5", "Startups", "Research", "Analyst", "Approve", "Glossary", "Rules"])
 
 with tabs[0]:
     researched = sum(1 for n in order if res.get(n))
@@ -108,7 +108,7 @@ with tabs[0]:
     st.markdown("".join(cards), unsafe_allow_html=True)
     st.download_button("Download the full data room", room, "data_room.md", use_container_width=True)
 
-with tabs[2]:
+with tabs[3]:
     name = st.selectbox("Startup", order)
     st.markdown(f"#### Scorecard · {name}")
     st.caption("1 = far below a typical pre-seed startup · 3 = typical · 5 = far above")
@@ -125,7 +125,7 @@ with tabs[2]:
     with st.expander("Full dossier: claims and research", expanded=True):
         st.markdown((OUT / f"dossier_{name}.md").read_text(encoding="utf-8"))
 
-with tabs[3]:
+with tabs[4]:
     st.markdown("#### Independent research")
     st.caption("For each startup, 6 targeted web searches (market, competitors, regulation, checkable claims). "
                "Every finding cites only links the search returned.")
@@ -151,7 +151,7 @@ with tabs[3]:
                 (DATA / "research" / f"{n}.json").write_text(json.dumps(out, indent=1, ensure_ascii=False), encoding="utf-8")
         st.rerun()
 
-with tabs[4]:
+with tabs[5]:
     st.markdown("#### Ask the analyst")
     st.caption("Answers come only from our data room. Name a startup to load its full deck and transcript. "
                "Check facts before using them on a slide.")
@@ -177,7 +177,7 @@ with tabs[4]:
         st.chat_message("assistant", avatar="🛡️").markdown(a)
         st.session_state.chat += [{"role": "user", "content": q}, {"role": "assistant", "content": a}]
 
-with tabs[5]:
+with tabs[6]:
     approvals = json.loads(APPROVALS.read_text(encoding="utf-8")) if APPROVALS.exists() else {}
     st.markdown("#### Investment committee sign-off")
     st.caption("Nothing is final until approved here. On the hosted app, approvals can reset when it restarts, so keep a record.")
@@ -201,6 +201,66 @@ with tabs[5]:
     st.metric("Approved so far", money(total) if total else "$0", delta=f"{money(rules['fund_usd'] - total)} left")
 
 with tabs[1]:
+    L = lenses.build()
+    team = lenses.load_team()
+    members = team.get("members") or ["Member 1", "Member 2", "Member 3"]
+    st.markdown("#### Human judgment · data analysis · agent research")
+    st.caption("The tool proposes; the team decides. Where the lenses disagree, the team writes why, and that reason goes in the pitch.")
+    agree = sum(1 for x in L.values() if x["agree"]); dis = sum(1 for x in L.values() if x["flags"])
+    und = sum(1 for x in L.values() if x["human"]["decision"] == "undecided")
+    fp = lenses.final_portfolio(L)
+    st.markdown(f"""<div class="kpis">
+<div class="kpi"><div class="l">Lenses agree</div><div class="v">{agree}</div></div>
+<div class="kpi"><div class="l">Disagreements</div><div class="v">{dis}</div></div>
+<div class="kpi"><div class="l">Team undecided</div><div class="v">{und}</div></div>
+<div class="kpi"><div class="l">Final portfolio</div><div class="v">{money(sum(a for a, _ in fp.values()))}</div></div></div>""", unsafe_allow_html=True)
+    if fp:
+        st.markdown("**Final portfolio** (team decision where made, otherwise the tool's proposal): " +
+                    " · ".join(f"{n} {money(a)} ({who})" for n, (a, who) in fp.items()))
+    for n, x in L.items():
+        h, d, a = x["human"], x["data"], x["agents"]
+        badge = "✅ agree" if x["agree"] else ("⚠️ " + "; ".join(x["flags"]) if x["flags"] else "⏳ team to decide")
+        with st.expander(f"{n} · tool: {x['tool_call'].upper()} {money(d['tool_cheque'])} · team: {h['decision'].upper()} · {badge}"):
+            c1, c2, c3 = st.columns(3)
+            with c1:
+                st.markdown("**🧠 Human judgment**")
+                st.write(f"Conviction: {h['avg'] if h['avg'] is not None else 'not voted'}"
+                         + (f"  ({', '.join(f'{k} {v}' for k, v in h['votes'].items())})" if h["votes"] else ""))
+                for lab, key in (("Open Day", "open_day"), ("Gut feeling", "gut"), ("Concerns", "concerns"), ("Why we differ", "override_reason")):
+                    if h[key]:
+                        st.caption(f"{lab}: {h[key]}")
+            with c2:
+                st.markdown("**📊 Data analysis**")
+                st.write(f"Score {d['score']}/5 · pre-money {money(d['premoney_ours'])}"
+                         + (f" (their price {money(d['price_stated'])})" if d["price_stated"] else ""))
+                st.caption(f"Ask {money(d['ask'])} · runway {d['runway_m']:.0f} months · Y5 base {money(d['y5_base'])}, downside {money(d['y5_down'])}"
+                           if d["runway_m"] else f"Ask {money(d['ask'])}")
+                st.caption(d["why"])
+            with c3:
+                st.markdown("**🔎 Agent research**")
+                st.write(f"{a['quotes_ok']}/{a['quotes']} quotes verified · " +
+                         ", ".join(f"{k} {v}" for k, v in a["verdicts"].items() if v))
+                for r in a["risks"]:
+                    st.caption("Risk: " + r)
+            with st.form(f"human-{n}"):
+                st.markdown("**Team input**")
+                vc = st.columns(len(members))
+                votes = {mbr: vc[i].number_input(mbr, 0, 5, int(h["votes"].get(mbr, 0)), key=f"v-{n}-{mbr}") for i, mbr in enumerate(members)}
+                od = st.text_input("What we saw at the Open Day", h["open_day"])
+                gut = st.text_input("Gut feeling about the founder(s)", h["gut"])
+                con = st.text_input("Biggest concern", h["concerns"])
+                opts = ["undecided", "invest", "pass", "watch"]
+                dec = st.selectbox("Team decision", opts, index=opts.index(h["decision"]) if h["decision"] in opts else 0)
+                chq = st.number_input("Team cheque (USD, 0 = none)", 0, rules["fund_usd"], int(h["final_cheque"] or 0), 10000)
+                why = st.text_input("If we disagree with the tool, why", h["override_reason"])
+                if st.form_submit_button("Save team view", use_container_width=True):
+                    team[n] = {"conviction": {k: v for k, v in votes.items() if v}, "open_day": od, "gut_feeling": gut,
+                               "concerns": con, "decision": dec, "final_cheque_usd": chq or None, "override_reason": why}
+                    lenses.save_team(team); st.rerun()
+    st.download_button("Download the meeting worksheet (fill in on paper)", lenses.worksheet(), "meeting_worksheet.md",
+                       use_container_width=True)
+
+with tabs[2]:
     st.markdown(f"""<div class="kpis">
 <div class="kpi"><div class="l">Y5 base case</div><div class="v">${fc['base']/1e6:.1f}M</div></div>
 <div class="kpi"><div class="l">Base multiple</div><div class="v">{fc['moic_base']:.1f}x</div></div>
@@ -210,10 +270,10 @@ with tabs[1]:
     st.markdown(forecast.benchmarks_markdown())
     st.caption("Edit year-5 company values, burn rates and dilution in data/forecast.yaml. Words unclear? See the Glossary tab.")
 
-with tabs[6]:
+with tabs[7]:
     st.markdown((ROOT / "for-the-team" / "GLOSSARY.md").read_text(encoding="utf-8"))
 
-with tabs[7]:
+with tabs[8]:
     st.markdown("#### Fund rules")
     st.code((DATA / "rules.yaml").read_text(encoding="utf-8"), language="yaml")
 
