@@ -73,10 +73,13 @@ def trusted_queries(name: str, e: dict) -> list[dict]:
     return out
 
 
-def research(name: str, e: dict) -> dict:
-    claims = "\n".join(f"- [{c['source']}] {c['quote']}" for c in e.get("claims", []))
-    plan = ask_json(PLAN_PROMPT.format(name=name, sector=e["sector"], stage=e["stage"], ask=e.get("ask_usd"), claims=claims))
-    queries = plan.get("queries", [])[:6] + trusted_queries(name, e)
+def research(name: str, e: dict, trusted_only: bool = False) -> dict:
+    if trusted_only:
+        queries = trusted_queries(name, e)
+    else:
+        claims = "\n".join(f"- [{c['source']}] {c['quote']}" for c in e.get("claims", []))
+        plan = ask_json(PLAN_PROMPT.format(name=name, sector=e["sector"], stage=e["stage"], ask=e.get("ask_usd"), claims=claims))
+        queries = plan.get("queries", [])[:6] + trusted_queries(name, e)
     findings = []
     for q in queries:
         hits = [h for h in searxng_search(q["query"], limit=6) if "://" in h.url and not h.url.startswith("http:///")]
@@ -105,11 +108,21 @@ def main():
     mark = usage_mark()
     for n in names:
         print("researching", n)
+        trusted_only = "--trusted-only" in sys.argv
         try:
-            out = research(n, evidence[n])
+            out = research(n, evidence[n], trusted_only)
         except Exception as exc:  # keep going; one failure shouldn't lose the others
             print("  FAILED", n, exc); continue
         f = RES / f"{n}.json"
+        if trusted_only:  # add the trusted-source findings that found something; keep all earlier findings
+            if not f.exists():
+                continue
+            old = json.loads(f.read_text(encoding="utf-8"))
+            new = [x for x in out["findings"] if x.get("sources")]
+            old["findings"] = [x for x in old["findings"] if not (x.get("trusted") and not x.get("sources"))] + new
+            f.write_text(json.dumps(old, indent=1, ensure_ascii=False), encoding="utf-8")
+            print(f"  added {len(new)} trusted-source findings for {n}")
+            continue
         sourced = lambda d: sum(1 for x in d["findings"] if x.get("sources"))
         if f.exists() and "--force" not in sys.argv:
             old = json.loads(f.read_text(encoding="utf-8"))
