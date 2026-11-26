@@ -2,13 +2,13 @@
 # round_usd: total the startup is raising now. monthly_burn_usd: what the company spends per month.
 # y5_base / y5_downside: what the whole company is worth in 5 years (USD) in each case. 0 = the company fails.
 dilution:
-  base_keep: 0.64      # ASSUMPTION: two later rounds (seed, Series A) each sell ~20% -> we keep 0.8 x 0.8
-  downside_keep: 0.50  # ASSUMPTION: three rounds or a down-round -> we keep about half
+  base_keep: 0.66      # SOURCE Carta Q2 2026 medians: seed 19.4%, Series A 18.7% dilution -> 0.806 x 0.813 = 0.655 (carta.com/learn/startups/fundraising)
+  downside_keep: 0.50  # ASSUMPTION: a third round or a down-round on top of the Carta medians -> we keep about half
 Modeeri:
   round_usd: 400000            # DECK: "$400K Round size"
   monthly_burn_usd: 19000      # MODEL: 2027 free cash flow -USD 230K / 12 months
   milestone: "GCC expansion and AI modules (DECK use of funds: 60% product, 30% sales, 10% opex); aim ~$300K ARR for a seed round"
-  y5_base: 25000000            # MODEL: 2031 exit ARR USD 4.6M; we haircut to ~$3M ARR x ~8x (ASSUMPTION)
+  y5_base: 25000000            # MODEL 2031 exit ARR USD 4.6M, haircut to ~$3M (ASSUMPTION) x 8x = top of vertical B2B SaaS 4-8x ARR (l40.com/insights/saas-multiples, 2026)
   y5_downside: 3000000         # ASSUMPTION: stalls near $0.5M ARR x 6x
 Finalyze:
   round_usd: 140000            # DECK image: $140K for 5%
@@ -21,7 +21,7 @@ Blaze:
   round_usd: 500000            # DECK: "$500,000" pre-seed, $200K secured
   monthly_burn_usd: 20000      # ASSUMPTION
   milestone: "FRA approval and public launch, targeted Q1 2027 (VIDEO); then paying users"
-  y5_base: 20000000            # ASSUMPTION: licensed investing app with a sizeable young user base
+  y5_base: 20000000            # ASSUMPTION ~$4M revenue x 5x; SOURCE Fawry (EGX) market cap EGP 57.7B vs ~EGP 11B annualised revenue = ~5x (stockanalysis.com, Nov 2026)
   y5_downside: 0               # ASSUMPTION: FRA approval fails or is too slow -> company fails
 Hylix:
   round_usd: 350000            # MODEL: USD 350K pre-seed planned 2027
@@ -57,14 +57,14 @@ IGNOT:
   round_usd: 500000            # DECK: $500K SAFE
   monthly_burn_usd: 41700      # DECK: 12-month runway on $500K
   milestone: "Fintech + REIT licences, EGP 749M ($15M) listed, 13K funded investors, $1.9M revenue run-rate (DECK 12-month milestones)"
-  y5_base: 60000000            # ASSUMPTION: deck plan $24M revenue FY31; we haircut to ~$10M x 6x
+  y5_base: 60000000            # DECK plan $24M revenue FY31, haircut to ~$10M (ASSUMPTION) x 6x; SOURCE proptech M&A average 7.1x EV/revenue (fortlane.com PropTech M&A report 2026)
   y5_downside: 0               # ASSUMPTION: licences refused -> sandbox ends
   premoney_override: 3000000   # DECK: $3.5M post-money cap minus $500K
 REE:
   round_usd: 100000            # ASSUMPTION: no amount stated; covers the model's -USD 69K cash low with buffer
   monthly_burn_usd: 5800       # MODEL: low cash point about -USD 69K by June 2027
   milestone: "Iraq to 30 courts by Feb 2027, 150-court pipeline, first Smashi league cameras (MODEL)"
-  y5_base: 15000000            # ASSUMPTION: model 2031 revenue $4.2M; haircut to ~$3M x 5x
+  y5_base: 12000000            # MODEL 2031 revenue $4.2M, haircut to ~$3M (ASSUMPTION) x 4x; SOURCE eSports/sports-tech ~4.1x EV/Sales (dealmatrix.com, 2026)
   y5_downside: 1000000         # ASSUMPTION: stays a small Egypt/Iraq camera business
 Motion+:
   round_usd: 80000             # VIDEO: about EGP 4M
@@ -76,7 +76,7 @@ Matbakh:
   round_usd: 25600             # MODEL: EGP 1.5M planned 2028
   monthly_burn_usd: 1000       # MODEL: profitable, minimal burn
   milestone: "40 paying branches by end-2027, first sales hire (MODEL)"
-  y5_base: 3000000             # ASSUMPTION: model 2031 revenue $657K x ~5x
+  y5_base: 3000000             # MODEL 2031 revenue $657K x ~5x; SOURCE private SaaS median 4-5x ARR (l40.com, 2026)
   y5_downside: 0
 VELO:
   round_usd: 30000             # DECK: EGP 1.5M

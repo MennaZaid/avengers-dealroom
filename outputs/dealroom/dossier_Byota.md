@@ -19,6 +19,8 @@
 - [VIDEO, VERIFIED] "approximately 1.1 million US dollars"
 - [VIDEO, VERIFIED] "450,000 for the lab infrastructure"
 - [VIDEO, VERIFIED] "we're taking an asset-light approach initially"
+- [DECK, VERIFIED] "Raising USD 1.1M to launch our own lab"
+- [DECK, VERIFIED] "Official pilot has not started"
 
 ### Independent research (web, cited)
 

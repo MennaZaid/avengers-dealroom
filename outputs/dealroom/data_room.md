@@ -1,40 +1,63 @@
 # DealRoom data room
 
-Fund $1,000,000, reserve $100,000, max ticket $300,000, investment bar: weighted score >= 3.0. Proposed deployment $900,000.
+Fund $1,000,000, reserve $100,000, max ticket $300,000, investment bar: weighted score >= 3.0. Proposed deployment $850,000.
 Labels: DECK/VIDEO = founder claim; web findings cite URLs; base pre-money in rules.yaml is an ASSUMPTION.
 
 | Startup | Score | Blended pre-money | Ask | Ticket |
 |---|---|---|---|---|
-| Modeeri | 4.0 | $2,380,000 | $400,000 | $300,000 |
+| Modeeri | 4.0 | $2,380,000 | $400,000 | $290,000 |
+| IGNOT | 3.9 | $2,250,000 | $500,000 | $260,000 |
 | Finalyze | 3.6 | $2,050,000 | $140,000 | $140,000 |
-| Blaze | 3.15 | $1,800,000 | $500,000 | $300,000 |
-| Hylix | 3.0 | $1,750,000 | not stated | $160,000 |
+| REE | 3.6 | $2,100,000 | $100,000 | $100,000 |
+| Blaze | 3.15 | $1,800,000 | $500,000 | $60,000 |
+| Hylix | 3.0 | $1,750,000 | $350,000 | PASS |
 | Byota | 2.9 | $1,620,000 | $1,100,000 | PASS |
 | Zaat | 2.8 | $1,680,000 | $100,000 | PASS |
+| Motion+ | 2.7 | $1,550,000 | $80,000 | PASS |
+| Matbakh | 2.45 | $1,420,000 | $25,600 | PASS |
 | Carbonless | 2.35 | $1,330,000 | $4,000,000 | PASS |
 | TRNR | 2.3 | $1,370,000 | $80,000 | PASS |
+| VELO | 2.3 | $1,370,000 | $30,000 | PASS |
 
 ## Year-5 forecast (base case and downside)
 
-Dilution ASSUMPTION: we keep 64% of our stake in the base case, 50% in the downside. Company values at year 5 are ASSUMPTIONS in data/forecast.yaml.
+Dilution ASSUMPTION: we keep 66% of our stake in the base case, 50% in the downside. Company values at year 5 are ASSUMPTIONS in data/forecast.yaml.
 
 | Startup | Cheque | Post-money | Stake now | Runway (whole round) | Milestone it funds | Y5 value base | Y5 value downside |
 |---|---|---|---|---|---|---|---|
-| Modeeri | $300,000 | $2,780,000 | 10.8% | 16 months | GCC expansion and AI modules (DECK use of funds: 60% product, 30% sales, 10% opex); aim ~$300K ARR for a seed round | $1,726,619 | $161,871 |
-| Finalyze | $140,000 | $2,190,000 | 6.4% | 14 months | Close first paid data contracts (talks with LSEG, Thndr, Azimut, Beltone, Mubasher per DECK); build bank/lender model | $818,265 | $31,963 |
-| Blaze | $300,000 | $2,300,000 | 13.0% | 25 months | FRA approval and public launch, targeted Q1 2027 (VIDEO); then paying users | $1,669,565 | $0 |
-| Hylix | $160,000 | $1,910,000 | 8.4% | 13 months | Repeatable customer results and paid deployments (DECK: next milestone) | $804,188 | $0 |
+| Modeeri | $290,000 | $2,780,000 | 10.4% | 21 months | GCC expansion and AI modules (DECK use of funds: 60% product, 30% sales, 10% opex); aim ~$300K ARR for a seed round | $1,721,223 | $156,475 |
+| Finalyze | $140,000 | $2,800,000 | 5.0% | 14 months | Close first paid data contracts (talks with LSEG, Thndr, Azimut, Beltone, Mubasher per DECK); build bank/lender model | $660,000 | $25,000 |
+| Blaze | $60,000 | $2,300,000 | 2.6% | 25 months | FRA approval and public launch, targeted Q1 2027 (VIDEO); then paying users | $344,348 | $0 |
+| IGNOT | $260,000 | $3,500,000 | 7.4% | 12 months | Fintech + REIT licences, EGP 749M ($15M) listed, 13K funded investors, $1.9M revenue run-rate (DECK 12-month milestones) | $2,941,714 | $0 |
+| REE | $100,000 | $2,200,000 | 4.5% | 17 months | Iraq to 30 courts by Feb 2027, 150-court pipeline, first Smashi league cameras (MODEL) | $360,000 | $22,727 |
 
-Reserve (cash): $100,000.
-**Fund at year 5: base $5,118,637 (5.1x), downside $293,834 (0.29x).**
-Best pick in base case: Modeeri - returns the whole fund on its own.
+Reserve (cash): $150,000.
+**Fund at year 5: base $6,177,285 (6.2x), downside $354,202 (0.35x).**
+Best pick in base case: IGNOT - returns the whole fund on its own.
+
+### Where the forecast numbers come from (web benchmarks)
+
+| Topic | Finding | Source |
+|---|---|---|
+| Median founder dilution in a seed round | According to Carta's Q2 2026 fundraising benchmarks, the median seed round had a 19.4% dilution. | https://carta.com/learn/startups/fundraising/seed-funding/ |
+| Median dilution in a Series A round | According to Carta’s Q2 2026 benchmarks, the median dilution for a Series A round is 18.7%. | https://carta.com/learn/startups/fundraising/series-a/ |
+| Typical dilution per funding round (rule of thumb) | The median dilution per round according to Carta data is approximately 19.4% for seed funding and around 18% for Series A. | https://carta.com/learn/startups/fundraising/seed-funding/ |
+| Egypt startup funding 2026 totals and typical round sizes | In 2026 Egyptian startups raised a total of $87 million across five Series B deals; the snippets do not provide typical round‑size figures. | https://www.instagram.com/reel/Df4_Q4hocyR/ |
+| Revenue multiples by industry (Damodaran) | No revenue multiple numbers by industry appear in the provided snippets. | https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/vebitda.html |
+| Private SaaS / vertical SaaS revenue multiples | In 2026 the median private SaaS company trades at roughly 4–5× ARR, while vertical B2B SaaS companies are valued at about 4.0–8.0× ARR. | https://www.l40.com/insights/saas-multiples |
+| Proptech / real-estate platform revenue multiples | The 2026 PropTech M&A report shows an average EV/Revenue multiple of 7.1x for PropTech companies. | https://www.fortlane.com/en/resources/insights/brochure/proptech-ma-report.html |
+| Sports tech valuation multiples | In 2026 eSports (a segment of sports‑tech) traded at about 4.1× EV/Sales and 15.9× EV/EBITDA. | https://dealmatrix.com/valuation-multiples/by-industry/esports/ |
+| Fawry valuation and revenue (EGX-listed fintech) | Fawry’s market capitalisation was about 57.74 billion (as of 17 Nov 2026) and its revenue reached EGP 8.352 billion for the nine months ended September 2026 (H1 2026 revenue was EGP 5.222 billion). | https://stockanalysis.com/quote/egx/FWRY/market-cap/ |
+| Nawy Series A (Egypt proptech) | Nawy raised $52 million in Series A equity funding. | https://www.menabytes.com/nawy-75-million/ |
+| Foodics funding (MENA restaurant POS) | Foodics raised $170 million in a Series C round in April 2022, bringing its total funding to $198 million across four rounds. | https://www.forbesmiddleeast.com/innovation/startups/foodics-raises-%24170-million-in-a-series-c-funding-round |
+| Share of seed startups that fail or return nothing | According to a 2025 Medium article, 67% of seed‑funded startups stalled, failing to either exit or raise follow‑on funding. An AVC post from 2021 notes roughly half of seed‑stage investments fail completely. | https://medium.com/@gp2030/why-most-startups-shouldnt-raise-venture-capital-b766e579a1b4 |
 
 ## Modeeri
 
 **Sector:** B2B SaaS, frontline operations / inspections (Egypt, UAE, GCC)  
 **Stage:** pre-seed, revenue  
 **Their ask:** $400,000 (video and deck body say $400K; $110K already secured from a Saudi-based VC)  
-**Our proposed ticket:** $300,000 (~10.8% stake = cheque / post-money)
+**Our proposed ticket:** $290,000 (~10.4% stake = cheque / post-money)
 
 **Score:** 4.0 / 5 - Scorecard pre-money $2,670,000, Berkus $2,100,000, blended $2,380,000
 
@@ -55,6 +78,8 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
 - [DECK, VERIFIED] "0 Churn since March 2026"
 - [DECK, VERIFIED] "4 full-time  ·  8 part-time"
 - [VIDEO, VERIFIED] "in the Egypt, it's very, these businesses are very price sensitive"
+- [MODEL, VERIFIED] "Seed |  | 2500000 | GCC expansion and AI modules"
+- [MODEL, VERIFIED] "Marriott, Majid Al Futtaim, IHG, UFC Gym"
 
 ### Independent research (web, cited)
 
@@ -68,6 +93,45 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
 - **CLAIM - UNVERIFIED** (query: _Almarai digital inspection platform provider_): The search results do not provide specific information about the number of locations or brands associated with Modeeri. While some sources mention companies like Almarai operating multiple facilities and using various technologies, there is no direct confirmation of Modeeri's claimed presence at 150 locations across 12 brands. Sources: no source
 - **CLAIM - UNVERIFIED** (query: _Modeeri contracted ARR $45k_): The available search result for Meska Grup does not mention Modeeri, its ARR, or any contracted revenue figures, so it provides no evidence regarding the $45K+ ARR claim. Sources: https://meskagrup.com/
   - Risk: lack of verifiable revenue evidence
+
+## IGNOT
+
+**Sector:** proptech / fractional real-estate investing (Nvest), FRA sandbox  
+**Stage:** pre-seed, live app, regulated sandbox  
+**Their ask:** $500,000 ($500K SAFE at a $3.5M post-money cap, 10% discount, 12-month runway (DECK))  
+**Our proposed ticket:** $260,000 (~9.5% stake = cheque / post-money)
+
+**Score:** 3.9 / 5 - Scorecard pre-money $2,600,000, Berkus $1,900,000, blended $2,250,000
+
+| team | market | product | competition | sales | funding_need | other |
+|---|---|---|---|---|---|---|
+| 4 | 4 | 4 | 4 | 4 | 3 | 3 |
+
+**Team's reasoning:** Strongest traction among the pre-seeds: FRA sandbox, 500+ funded investors, 8 live properties, Beltone/CIB/EY stack, 4x founder; risks: $3.5M cap is above our base, licence roadmap must land, '30% IRR' promise is aggressive
+
+### Founder claims (verified against deck/video text)
+
+- [DECK, VERIFIED] "Valuation cap"
+- [DECK, VERIFIED] "$3.5M post-money"
+- [DECK, VERIFIED] "1,835 downloads and 500+ funded investors on our own app before a single marketing campaign"
+- [DECK, VERIFIED] "FRA Fintech Regulatory Sandbox: IGNOT admitted, operating under licensed NBFI partners"
+- [DECK, VERIFIED] "27 properties in pipeline, 8 live."
+- [DECK, VERIFIED] "Minimum of 30% IRR by accessing exclusive"
+- [DECK, VERIFIED] "10 yrs Real Estate, 4 times founder"
+
+### Independent research (web, cited)
+
+- **MARKET - CONTEXT** (query: _global fractional real estate investment market size 2024_): Fractional real‑estate investing lets investors allocate small capital across multiple rental properties, with each token representing a share. The global real‑estate market was valued at USD 7,517.4 billion in 2025 and is projected to reach USD 8,760.4 billion by 2034 (CAGR 1.66%). Statista forecasts a 3.03% annual growth rate (CAGR 2026‑2031) to a market volume of US$725.05 trillion by 2031. Sources: https://www.lofty.ai/blog/fractional-vs-traditional-ownership, https://www.imarcgroup.com/real-estate-market, https://www.statista.com/outlook/fmo/real-estate/worldwide/
+- **MARKET - CONTEXT** (query: _Egypt proptech market size 2023 fractional ownership_): Egypt’s proptech market is evolving from a digital advertising and property‑search ecosystem toward broader services, and investors such as IFC are considering equity stakes in platforms like Nawy. Recent deals include Aqar Exit raising $200 K at a $2 M valuation and the launch of a $38.3 M real‑estate investment fund by Amtar & Beltone to expand fractional ownership. Sources: https://www.kenresearch.com/egypt-proptech-and-real-estate-digital-platforms-market, https://disclosures.ifc.org/project-detail/ESRS/52194/nawy, https://dealroom.co/news/170839-egypt-s-aqar-exit-raises-200k-at-2m-valuation-to-grow-installment-resale/, https://waya.media/amtar-beltone-launch-usd-38-3m-real-estate-investment-fund/
+  - Risk: Early‑stage market with limited funding history
+- **COMPETITION - CONTEXT** (query: _leading fractional real estate platforms funding rounds 2023_): Recent market activity shows strong competition in fractional real‑estate investing: Piece, founded in May 2023, secured €1.65 million in a pre‑Series A first close; Mogul closed an oversubscribed $15.5 million Series A; and Ark7 distinguishes itself by offering monthly income distributions to investors. These examples illustrate both funding momentum and product differentiation among peers. Sources: https://dealroom.co/news/138426-real-estate-fintech-piece-raises-1-65m-pre-series-a-first-close/, https://superbcrew.com/mogul-raises-15-5-million-in-series-a-funding-round/, https://assettokenizationblog.wordpress.com/2026/05/10/best-fractional-ownership-platforms/
+  - Risk: high competition
+- **COMPETITION - CONTEXT** (query: _Egypt real estate crowdfunding platforms investors funding 2023_): Tharwa Crowd offers fractional real‑estate shares in Egypt starting at 50,000 EGP, while SmartCrowd (via DEPAR) uses an award‑winning crowdfunding model to make real‑estate investments accessible across the Middle East, indicating existing competition in the fractional property space. Sources: https://tharwa-crowd.com/en/home/, https://depar.unescwa.org/dashboard/crowdfunding
+  - Risk: Competitive market with established players
+- **REGULATION - CONTEXT** (query: _Egypt financial regulator sandbox non-bank financial institution real estate crowdfunding licensing_): The FRA Sandbox outlines the regulatory framework for fintech startups through Board of Directors Decree No. 268 of 2023, which sets rules and procedures for licensing non‑bank financial activities. The FRA also engages internationally, hosting delegations such as the Sudanese team to share Egypt's non‑bank MSME financing model, indicating an active regulatory environment for innovative financing platforms. Sources: https://frasandbox.com/regulations, https://fra.gov.eg/en/
+  - Risk: regulatory compliance risk
+- **CLAIM - UNVERIFIED** (query: _Egypt real estate crowdfunding app user numbers 2023 download statistics_): None of the provided sources mention IGNOT’s download count or the number of funded investors, so the claim of 1,835 downloads and 500+ funded investors cannot be verified from the available evidence. Sources: https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/06/sme-and-entrepreneurship-policy-in-egypt_cc4bfa71/195d9c43-en.pdf, https://www.researchgate.net/publication/371678267_FINANCIAL_TECHNOLOGY_IN_EGYPT_BETWEEN_OPPORTUNITIES_AND_CHALLENGES, https://fount.aucegypt.edu/cgi/viewcontent.cgi?article=3342&context=etds, https://www.bis.org/publications/working-paper-1129-big-techs-finance.pdf
+  - Risk: lack of verifiable traction
 
 ## Finalyze
 
@@ -105,12 +169,50 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
 - **CLAIM - CONTEXT** (query: _Partnerships between Finalyze and major banks in Egypt_): The cited sources highlight a growing ecosystem for cross‑border and instant payments in Egypt and the broader Arab region: the Central Bank of Egypt runs an Instant Payment Network (IPN) for domestic transfers, while PAPSS and BUNA are building a payment gateway linking African and Arab banks. Additionally, major banks such as Suez Canal Bank are partnering with technology firms like Temenos to modernise digital banking, indicating strong institutional demand for data‑driven financial services. Sources: https://www.cbe.org.eg/en/payment-systems-and-services/instant-payment-network, https://www.afreximbank.com/papss-announces-collaboration-with-buna-to-build-a-payment-gateway-between-africa-and-the-arab-region/, https://www.temenos.com/press_release/top-egyptian-bank-selects-temenos-to-transform-digital-banking-in-egypt/
   - Risk: Regulatory and integration challenges in a fragmented payment landscape
 
+## REE
+
+**Sector:** sports tech, court cameras and highlights (padel, squash, 5-a-side)  
+**Stage:** pre-seed, revenue in 3 countries  
+**Their ask:** $100,000 (ASSUMPTION ~USD 100K - no amount in deck/video; model has USD 25K term sheet and a cash low of about -USD 69K by June 2027)  
+**Our proposed ticket:** $100,000 (~4.5% stake = cheque / post-money)
+
+**Score:** 3.6 / 5 - Scorecard pre-money $2,400,000, Berkus $1,800,000, blended $2,100,000
+
+| team | market | product | competition | sales | funding_need | other |
+|---|---|---|---|---|---|---|
+| 4 | 3 | 4 | 3 | 4 | 4 | 3 |
+
+**Team's reasoning:** Real revenue in 3 countries (37 courts, 11 paying operators, USD 2.4K MRR) on USD 55K raised; capital-efficient; forecast leans on a Smashi streaming deal not yet signed
+
+### Founder claims (verified against deck/video text)
+
+- [MODEL, VERIFIED] "Courts live | 37 (30 Egypt, 3 Iraq, 4 Libya)"
+- [MODEL, VERIFIED] "MRR | USD 2,410"
+- [MODEL, VERIFIED] "Paying operators | 11"
+- [MODEL, VERIFIED] "Pre-seed (USD 55K raised from angels; USD 25K term sheet from Smashi's CEO)"
+- [VIDEO, VERIFIED] "we made more or less 6 or 7 failed products across different sports"
+- [VIDEO, VERIFIED] "the company in Israel do exactly more or less"
+
+### Independent research (web, cited)
+
+- **MARKET - CONTEXT** (query: _MENA sports technology market size court camera highlights 2023 report_): The sports streaming services market is led by football/soccer, which held over 36% share in 2025, and North America is the largest regional market at 35.1%. The broader sports technology market was valued at $22.69 B in 2024 and is projected to reach $123.37 B by 2033, indicating strong growth. Platforms that capture, distribute, and share youth sports games and highlights are highlighted as emerging opportunities. Sources: https://www.grandviewresearch.com/industry-analysis/sports-streaming-services-technology-market-report, https://cdn.hl.com/pdf/2025/sports-market-update-hl-fall-2025.pdf, https://www.skyquestt.com/report/sports-technology-market
+  - Risk: Heavy reliance on football and North American markets may limit growth in niche sports like padel or squash.
+- **MARKET - CONTEXT** (query: _global sports video analytics market CAGR 2024-2030_): The global sports analytics market was valued at USD 5.7 billion in 2025 and is projected to reach USD 7.0 billion; the AI in sports market is expected to grow from USD 1.03 billion in 2024 to USD 2.61 billion by 2030 (CAGR 16.7%). Sports media video and audio formats held 64.31% of the market in 2025 and are projected to grow at 17.88% CAGR through 2031. Worldwide sports revenue is forecast to reach US$74.02 billion in 2026, growing at 1.39% CAGR 2026‑2031. Sources: https://www.grandviewresearch.com/industry-analysis/sports-analytics-market, https://www.marketsandmarkets.com/Market-Reports/ai-in-sports-market-122129412.html, https://www.mordorintelligence.com/industry-reports/sports-media-market, https://www.statista.com/outlook/amo/sports/worldwide/
+- **COMPETITION - CONTEXT** (query: _padel court live streaming startup funding round_): Recent funding rounds show strong investor interest in padel and related sports tech: Pro Padel League raised $15 million (Mar 2026) and a $10 million seed (Mar 2025); The Padel City secured €12 million Series A (Aug 2026); Epic Padel raised $10 million seed (Sep 2025); and 1club raised €2.2 million for its AI‑native sports platform (Oct 2026). This signals a competitive market with multiple well‑funded players targeting growth in the U.S. and Europe. Sources: https://www.cnbc.com/2026/03/24/pro-padel-league-raises-15-million-us-growth.html, https://dealroom.co/news/144202-the-padel-city-raises-12m-series-a-to-expand-across-europe/, https://www.nytimes.com/athletic/7141487/2026/03/24/pro-padel-league-investment-rick-schnall/, https://www.sportsbusinessjournal.com/Articles/2025/03/26/pro-padel-league-raises-10m-seed-round-as-it-prepares-for-second-full-season/, https://www.forbes.com/sites/davidprosser/2025/09/24/match-point-meet-the-start-up-hoping-to-win-big-in-us-padel/, https://1club.ai/blog/1club-raises-over2m-seed-funding
+  - Risk: high competition
+- **COMPETITION - CONTEXT** (query: _Egypt sports tech court camera company funding_): The market includes several established players offering court‑side AI camera and broadcast solutions: Wingfield provides AI‑tracking cameras mounted on court fences; Quidich delivers drone‑based capture, AR and AI analytics; Pixotope offers the Pixotope Zone camera‑tracking system for AR graphics; Pixellot supplies AI‑automated sports cameras for live streaming without staff. Additionally, a list of 31 top sports companies in Egypt indicates a crowded local ecosystem. Sources: https://www.wingfield.io/en/products, https://www.quidich.com/, https://www.pixotope.com/products/pixotope-zone, https://www.pixellot.tv/, https://www.f6s.com/companies/sports/egypt/co
+  - Risk: high competition
+- **REGULATION - CONTEXT** (query: _Egypt Ministry of Youth and Sports licensing requirements for video recording in sports venues_): International guidance (UN Guide on the Security of Major Sporting Events) notes that video‑surveillance IP cameras are deployed inside and outside stadiums to mitigate terrorism and crowd‑related threats. Sports law publications (2022, 2025) highlight that anti‑doping rules are strictly regulated and enforced, affecting any technology that captures athlete performance. Additionally, Egypt’s travel advisory underscores safety, security and legal considerations for operating sports‑related services in the country. Sources: https://www.un.org/counterterrorism/sites/default/files/211006_guide_on_security_major_sporting_events_web.pdf, https://www.herrick.com/content/uploads/2025/03/Sports_Law_2025.pdf, https://abreuadvogados.com/wp-content/uploads/2022/04/Sports_Law_2022.pdf, https://travel.gc.ca/destinations/egypt
+  - Risk: Regulatory compliance for video surveillance and data privacy
+- **CLAIM - UNVERIFIED** (query: _Al Ahly Sports Club Egypt court camera provider REE partnership_): None of the provided sources directly state that REE's paying operators include major clubs in Egypt. The only mention of a major Egyptian club (Al‑Ahly) appears in a Khater Sports portfolio PDF, which is unrelated to REE, and the other results discuss unrelated companies or topics. Sources: https://www.khatersports.com/Khater_english_portfile.pdf
+  - Risk: lack of customer validation
+
 ## Blaze
 
 **Sector:** consumer fintech, education-first investing (Egypt)  
 **Stage:** pre-seed, pre-launch (pilot users)  
 **Their ask:** $500,000 ($200K secured, $300K to go; launch depends on FRA approval targeted Q1 2027)  
-**Our proposed ticket:** $300,000 (~13.0% stake = cheque / post-money)
+**Our proposed ticket:** $60,000 (~2.6% stake = cheque / post-money)
 
 **Score:** 3.15 / 5 - Scorecard pre-money $2,100,000, Berkus $1,500,000, blended $1,800,000
 
@@ -148,8 +250,8 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
 
 **Sector:** AI developer tooling (coding-agent efficiency)  
 **Stage:** pre-revenue, internal tests only  
-**Their ask:** not stated (no ask stated in deck; no video)  
-**Our proposed ticket:** $160,000 (~8.4% stake = cheque / post-money)
+**Their ask:** $350,000 (no ask in the deck; financial model plans a USD 350K pre-seed in 2027 for customer pilots, then USD 2.5M seed in 2028)  
+**Our proposed ticket:** PASS
 
 **Score:** 3.0 / 5 - Scorecard pre-money $2,000,000, Berkus $1,500,000, blended $1,750,000
 
@@ -164,6 +266,7 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
 - [DECK, VERIFIED] "These are test results, not customer revenue."
 - [DECK, VERIFIED] "20% to 40% successful tasks and $1.1 to $0.5 per task on a tested setup"
 - [DECK, VERIFIED] "No recurring customer revenue is claimed in this deck."
+- [MODEL, VERIFIED] "Pre-seed |  | 350000 | Customer pilots, first paid deployments"
 
 ### Independent research (web, cited)
 
@@ -201,6 +304,8 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
 - [VIDEO, VERIFIED] "approximately 1.1 million US dollars"
 - [VIDEO, VERIFIED] "450,000 for the lab infrastructure"
 - [VIDEO, VERIFIED] "we're taking an asset-light approach initially"
+- [DECK, VERIFIED] "Raising USD 1.1M to launch our own lab"
+- [DECK, VERIFIED] "Official pilot has not started"
 
 ### Independent research (web, cited)
 
@@ -239,6 +344,7 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
 - [DECK, VERIFIED] "Launches, and charges, in December."
 - [VIDEO, VERIFIED] "raise between 100 to 500k, ideally more in the higher end"
 - [VIDEO, VERIFIED] "I'm currently solo founding"
+- [MODEL, VERIFIED] "51, of which 37 active in the month"
 
 ### Independent research (web, cited)
 
@@ -254,6 +360,77 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
   - Risk: Potential misstatement of pricing could mislead investors
 - **CLAIM - UNVERIFIED** (query: _AI SaaS private beta user count benchmarks Egypt_): None of the provided sources mention Zaat or any private‑beta user count for an AI‑agent startup in Egypt, so the claim cannot be confirmed or refuted. Sources: https://www.ilo.org/media/381371/download, https://www.bondcap.com/report/pdf/Trends_Artificial_Intelligence.pdf, https://blog.cloudflare.com/radar-2025-year-in-review, https://www.evanik.ai/reviews-and-ratings, https://kx.com/blog/the-kx-nyse-taq-benchmark/, https://voxel51.com/fiftyone-alternatives
   - Risk: lack of traction data
+
+## Motion+
+
+**Sector:** sports health, biomechanics and running analysis  
+**Stage:** bootstrapped, profitable service business  
+**Their ask:** $80,000 (VIDEO "around four million Egyptian pounds" (~USD 80K); model plans no raise)  
+**Our proposed ticket:** PASS
+
+**Score:** 2.7 / 5 - Scorecard pre-money $1,800,000, Berkus $1,300,000, blended $1,550,000
+
+| team | market | product | competition | sales | funding_need | other |
+|---|---|---|---|---|---|---|
+| 3 | 2 | 3 | 3 | 3 | 3 | 2 |
+
+**Team's reasoning:** Profitable and self-funded with ~210 paying clients, but a solo-founder service business; its own model reaches only ~USD 178K revenue by 2031, too small to return a VC fund
+
+### Founder claims (verified against deck/video text)
+
+- [MODEL, VERIFIED] "Clients assessed in 2026 | ~210 paying clients"
+- [MODEL, VERIFIED] "Bootstrapped and profitable"
+- [MODEL, VERIFIED] "Self-funded, with positive operating cash every year."
+- [VIDEO, VERIFIED] "ask for around four million Egyptian pounds"
+- [VIDEO, VERIFIED] "I'm in Egyptian professional triathlete"
+
+### Independent research (web, cited)
+
+- **MARKET - CONTEXT** (query: _Egypt sports technology market size 2024 report_): The sports technology market is valued at USD 34.25 billion in 2025 and is projected to reach USD 68.7 billion by 2030, a 14.9% CAGR. In the Middle East and Africa, the sports‑tech market is expected to hit US$3.37 billion by 2030, with Saudi Arabia leading growth. Egypt’s overall sports market is experiencing moderate growth driven by higher participation and facility investment. Gaming‑related figures (e.g., Egypt gaming market $2.13 billion in 2025) are tangential but illustrate broader digital entertainment expansion in the region. Sources: https://www.researchandmarkets.com/report/sports-technology, https://www.pwc.com/m1/en/services/consulting/technology/sports-technology.html, https://www.statista.com/outlook/amo/sports/egypt/
+  - Risk: Intense competition from established sports‑tech players
+- **MARKET - CONTEXT** (query: _MENA sports health and biomechanics market CAGR 2023-2028_): The human augmentation market was valued at $253.6 billion in 2023 and is projected to reach $545.1 billion by 2028, indicating a strong growth trajectory. The sports analytics market is expanding globally, with the Middle East (e.g., Saudi Arabia) investing in analytics pilots for cricket and football under Vision 2030. In sports AI, software accounts for 60.85% of the market share, and services are rapidly advancing, underscoring a broad, technology‑driven growth trend in sports health and biomechanics. Sources: https://www.marketsandmarkets.com/Market-Reports/human-augmentation-market-177215310.html, https://www.mordorintelligence.com/industry-reports/sports-analytics-market, https://www.mordorintelligence.com/industry-reports/artificial-intelligence-market-in-sports
+  - Risk: high competition
+- **COMPETITION - CONTEXT** (query: _global running biomechanics analysis startups funding RunScribe Garmin wearable analytics_): The market includes several established wearables that capture running biomechanics, such as RunScribe (a startup highlighted for its motion‑data capture for coaches and clinicians), RunScribe Pro and Lumo Run which analyze cadence and other triathlon‑relevant metrics, and Stryd which introduced the first running power meter. RunScribe, founded in 2013, has raised an undisclosed amount of funding to develop its RunScribe Plus device. A broader ecosystem of running sensors is emerging, offering biomechanics analytics at various price points. Sources: https://sportstechnologyblog.com/2021/05/22/startup-spotlight-runscribe/, https://www.facebook.com/Avaathletes/posts/in-a-sport-where-every-second-counts-technology-makes-the-difference-to-be-fast/122184157724677838/, https://www.theupside.us/p/upside-analysis-smart-footwear-market-29b, https://www.dcrainmaker.com/2015/01/stryd-first-running.html, https://fellrnr.com/wiki/Running_Sensors
+  - Risk: High competitive fragmentation
+- **COMPETITION - UNVERIFIED** (query: _Egypt sports biomechanics companies funding Fitlab Egypt HealthifyME_): No search results. Sources: no source
+- **REGULATION - CONTEXT** (query: _Egypt Ministry of Health medical device registration requirements for sports biomechanics software_): The provided search results discuss various aspects related to technology applications in sports health, biomechanics, and running analysis but do not directly verify or contradict any specific claims made by the founder of Motion+. They cover topics such as virtual reality interventions for sports injuries, mobile health apps in sport training, biomedical engineering programs, artificial intelligence in biomechanics, and regulatory frameworks for medical devices. Sources: https://pmc.ncbi.nlm.nih.gov/articles/PMC13367076/, https://www.mdpi.com/1424-8220/26/17/5394, https://www.pua.edu.eg/applied-health-sciences-technology/study-program-2/radiological-sciences-and-medical-imaging-technology-study-program/, https://onlinelibrary.wiley.com/doi/10.1002/pri.70120, https://ciu.edu.tr/en/programs/undergraduate/biomedical-engineering, https://www.sciencedirect.com/science/chapter/edited-volume/pii/B9780128148167000030
+- **CLAIM - UNVERIFIED** (query: _Motion+ client list 2026 210 paying customers_): None of the provided snippets mention Motion+ or the number of paying clients in 2026; the sources relate to immigration forms, tipped occupations, court self‑help, legal ethics, SEC broker‑dealer rules, and Medicare claim processing, which do not address the claim. Sources: https://www.uscis.gov/i-290b, https://home.treasury.gov/system/files/136/Tipped-Occupations-Detailed-8-27-2025.pdf, https://metro.nmcourts.gov/self-representation/self-help-center/, https://www.calbar.ca.gov/legal-professionals/rules/rules-professional-conduct/previous-rules-professional-conduct/rule-4-210-payment-personal-or-business-expenses-incurred-or-client, https://www.sec.gov/files/rules/final/2024/34-102022.pdf, https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c20.pdf
+  - Risk: lack of verifiable traction
+
+## Matbakh
+
+**Sector:** vertical SaaS, restaurant POS (Egypt)  
+**Stage:** product built, 3 paying merchants from December 2026, bootstrapped  
+**Their ask:** $25,600 (not raising now; model plans ~EGP 1.5M (USD 25.6K) seed in 2028; solo founder)  
+**Our proposed ticket:** PASS
+
+**Score:** 2.45 / 5 - Scorecard pre-money $1,630,000, Berkus $1,200,000, blended $1,420,000
+
+| team | market | product | competition | sales | funding_need | other |
+|---|---|---|---|---|---|---|
+| 2 | 3 | 3 | 2 | 2 | 3 | 2 |
+
+**Team's reasoning:** Solo full-stack founder, 3 paying merchants from December; crowded POS market; model's 94% EBITDA margins with almost no staff look unrealistic; not raising until 2028
+
+### Founder claims (verified against deck/video text)
+
+- [MODEL, VERIFIED] "Paying merchants | 3 (billing from December 2026)"
+- [MODEL, VERIFIED] "F&B brands in pipeline | 14"
+- [MODEL, VERIFIED] "Founder (full-stack); first sales hire planned Q2 2027"
+- [MODEL, VERIFIED] "Bootstrapped and profitable (raising ~EGP 1.5M in 2028)"
+
+### Independent research (web, cited)
+
+- **MARKET - SUPPORTED** (query: _Egypt restaurant point of sale market size 2023 report_): According to Mordor Intelligence, Quick Service Restaurants held a significant 45.99% share of the Egyptian food service market in 2026. IMARC Group reported growth in QSRs from 17,626 to 18,324 between 2020 and 2022. This indicates a substantial presence of QSRs in the Egyptian market. Sources: https://www.mordorintelligence.com/industry-reports/egypt-foodservice-market, https://www.imarcgroup.com/egypt-foodservice-market
+- **MARKET - CONTEXT** (query: _MENA cloud POS market growth forecast 2025_): The global cloud POS market was valued at USD 6.51 billion in 2025 and is expected to rise to USD 7.72 billion in 2026. Overall POS market size was USD 28.9 billion in 2025 and is projected to reach USD 111 billion by 2035. In 2025, software accounted for 59.40% of the cloud POS market share, while services are forecast to grow at a 20.95% CAGR. The Middle East and Africa region represented 7% of the market in 2025 and is expected to expand at an 8.08% CAGR through 2035, with the broader MENA POS market projected to grow at a 16.8% CAGR. Sources: https://www.fortunebusinessinsights.com/cloud-point-of-sale-pos-market-104912, https://www.mordorintelligence.com/industry-reports/cloud-point-of-sale-market, https://www.researchnester.com/reports/point-of-sale-pos-market/264, https://www.gminsights.com/industry-analysis/smart-payment-terminals-market, https://www.fortunebusinessinsights.com/middle-east-and-africa-point-of-sale-pos-market-107524
+  - Risk: regional adoption and competition risk in the MENA POS market
+- **COMPETITION - CONTEXT** (query: _Toast POS funding round 2023_): Toast, the leading US restaurant POS, reported FY2023 revenue of roughly $3.9 billion, with financial‑technology solutions as its biggest revenue stream and subscription software contributing significantly. The company has raised between $902 M and $966 M across multiple rounds since 2015 and achieved adjusted profitability in 2023. Toast’s addressable market includes about 220 k locations, and it expanded into the retail vertical in 2023, adding roughly 1 k new sites. Sources: https://s28.q4cdn.com/141746709/files/doc_financials/2023/q4/TOAST-Investor-Presentation-Q4FY23-1.pdf, https://crustdata.com/profiles/company/toast, https://alexandre.substack.com/p/toast-a-lesson-on-expanding-your, https://www.popularfintech.com/p/toast-eyes-the-throne-micros-ncr-voyix, https://www.revenuememo.com/p/who-owns-toast, https://umbrex.com/resources/company-profiles/toast/
+  - Risk: strong competition from a well‑capitalized, profitable incumbent
+- **COMPETITION - CONTEXT** (query: _Egyptian restaurant POS startup funding 2024_): The search results provide information about various startups in Egypt across different sectors such as fintech, logistics, and restaurant technology. However, there is no specific mention of any direct competitors to Matbakh within the vertical SaaS space for restaurants. Sources: no source
+- **REGULATION - CONTEXT** (query: _Egypt Ministry of Communications and Information Technology digital payment licensing requirements for POS providers_): Egypt’s central bank requires payment system operators to obtain a licence and pay a fee of 70,000 EGP for account‑information service providers, and to submit all required documents (source [1]). The Ministry of Communications and Information Technology (MCIT) is actively promoting digital payments, exemplified by Egypt Post’s relaunch of Easy Pay and government‑backed subsidies for POS terminals and mobile‑payment acceptance (sources [2],[3]). Open‑banking rules and e‑invoicing frameworks are also being formalised under MCIT and ITIDA, indicating a tightening regulatory environment for fintech and POS providers (sources [4],[6]). Sources: https://www.cbe.org.eg/-/media/project/cbe/page-content/rich-text/payment-system/payment-systems-and-services-oversight/rules-for-licensing-and-registration-of-payment-system-operators.pdf, https://www.facebook.com/MCITEgypt/posts/egypt-post-relaunches-easy-pay-bringing-full-suite-of-digital-financial-services/1476668064503482/, https://documents1.worldbank.org/curated/en/099835205172219236/pdf/P1647700d934520960bdbe0ed8f693f57fb.pdf, https://www.amf.org.ae/uploads/migrated/publications/2021-12/arab-region-fintech-guide-second-edition.pdf, https://www.daftra.com/en/hub/questions-about-e-invoicing
+  - Risk: Regulatory compliance and licensing costs
+- **CLAIM - UNVERIFIED** (query: _Matbakh three paying merchants December 2026_): None of the provided snippets mention Matbakh's merchant count or any paying customers after December 2026. The references are unrelated to the claim, covering a podcast ranking, tender deadlines, an Instagram post, and historical or regional topics. Sources: https://open.spotify.com/show/4GuszMVmvx0XM2zYLmVQK2, https://www.developmentaid.org/tenders/search?showAdvancedFilters=1&sectors=13%2C15%2C93%2C95, https://www.instagram.com/p/DViVo3dF1G_/, https://www.aramcoworld.com/-/media/aramco-world/issues/files/2026/aramcoworld-sep-oct-2026.pdf?sc_lang=en, https://www.researchgate.net/publication/367944967_Al-Makrizi's_Khitat_and_the_Markets_in_Cairo_during_the_Mamluks_Era, https://www.countryreports.org/articles/damascus
+  - Risk: lack of verifiable customer traction
 
 ## Carbonless
 
@@ -324,3 +501,40 @@ Best pick in base case: Modeeri - returns the whole fund on its own.
   - Risk: lack of verifiable commitments
 - **CLAIM - UNVERIFIED** (query: _WhatsApp testimonial startup validation sports coaching Egypt_): None of the available snippets confirm that the founder used a WhatsApp message to a friend as validation. While WhatsApp is mentioned as a communication channel in the Egyptian Coach platform (source [1]) and as a tool for gathering customer reviews (source [4]), there is no evidence that a personal WhatsApp message to a friend was used to validate the market need. Sources: https://www.wijhan.com/work/egyptian-coach, https://www.reddit.com/r/startups/comments/1c1k7f1/share_your_startup_quarterly_post/
   - Risk: validation methodology may be too informal
+
+## VELO
+
+**Sector:** consumer services, mobile car detailing (New Cairo)  
+**Stage:** pre-seed, 1 unit live, first paid jobs  
+**Their ask:** $30,000 (EGP 1.5M (about USD 30K at EGP 50/$; model says USD 27.3K) for three more units)  
+**Our proposed ticket:** PASS
+
+**Score:** 2.3 / 5 - Scorecard pre-money $1,530,000, Berkus $1,200,000, blended $1,370,000
+
+| team | market | product | competition | sales | funding_need | other |
+|---|---|---|---|---|---|---|
+| 2 | 2 | 3 | 2 | 2 | 4 | 3 |
+
+**Team's reasoning:** Tiny ask (~USD 30K), working unit, 12 paid cars in 4 weeks; but a local service business that scales one tricycle at a time, ~USD 308K revenue by 2031 in its own model
+
+### Founder claims (verified against deck/video text)
+
+- [DECK, VERIFIED] "EGP 8,295 in revenue since the first paid job on 23 October."
+- [DECK, VERIFIED] "Raising EGP 1.5M for three more units"
+- [DECK, VERIFIED] "Bookings per compound are untested."
+- [DECK, VERIFIED] "Contribution · 55%"
+- [MODEL, VERIFIED] "Self-funded; raising EGP 1.5M seed"
+
+### Independent research (web, cited)
+
+- **MARKET - CONTEXT** (query: _Egypt car detailing market size 2023 Statista_): The global car‑wash service market was valued at USD 40.86 billion in 2025 and is projected to rise to USD 43.48 billion in 2026, indicating modest growth (source 3). The U.S. car‑wash and auto‑detailing sector also has a published market‑size estimate for 2026 (source 4). Additionally, the broader automotive industry profit pool by segment is tracked by Statista, providing context on overall industry profitability (source 2). Sources: https://straitsresearch.com/report/car-wash-service-market, https://www.ibisworld.com/united-states/market-size/car-wash-auto-detailing/1695/, https://www.statista.com/statistics/979663/global-auto-industry-profit-pool-by-segment/
+  - Risk: Potential market saturation and intense competition in the car‑wash sector
+- **COMPETITION - CONTEXT** (query: _Spiffy car detailing startup funding_): Spiffy, an on‑demand mobile car wash and detailing platform, has raised substantial capital – $90.8 M total as of Oct 2026, including a $32 M Series B (with a $10 M Edison Partners contribution) and a later $30 M raise – highlighting a well‑funded competitor in the same market. Sources: https://tracxn.com/d/companies/spiffy/__pL7wS8pBDRfSEMONQ25jP8-8RipXILmx5Stsk6-Cad0, https://www.edisonpartners.com/blog/spiffy-raises-32m-in-extended-series-b-funding-with-new-investment-by-edison-partners, https://forgeglobal.com/get-spiffy_ipo/, https://grepbeat.com/2022/03/16/spiffy-lands-new-10m-investment-to-lift-total-series-b-round-to-32m/, https://www.forbes.com/sites/julianmitchell/2017/03/22/spiffy-the-mobile-car-wash-company-reshaping-the-on-demand-economy/
+  - Risk: intense competition from well‑funded players
+- **COMPETITION - CONTEXT** (query: _MENA mobile car wash startup funding_): The MENA region hosts several on‑demand car‑care platforms that compete with VELO, including Egypt’s FriendyM which offers mobile car management and maintenance services, Dubai‑based Keno which raised an undisclosed round from Kuwait’s JustClean, and UAE’s MySyara which secured $400K and bought a distributor for $2.6M. Recent market signals show robust investor activity, with UAE startups alone attracting roughly $400M in 2021 and MENA funding rebounding in 2026, driven by about 70% of deals in September, indicating a lively but competitive funding environment for car‑service startups. Sources: https://www.startuplist.africa/startups/friendym, https://www.wamda.com/2019/11/keno-raises-funding-justclean, https://magnitt.com/news/mysyara-raises-400k-52813, https://mena.entrepreneur.com/starting-a-business/kuwaits-on-demand-car-wash-app-offers-convenience-to/340238, https://www.instagram.com/reel/DeHaqV9MTKz/, https://www.facebook.com/ForbesMENA.English/posts/here-are-the-most-funded-startups-in-the-mena-since-the-beginning-of-this-year-p/274711210970110/
+  - Risk: high competition
+- **REGULATION - CONTEXT** (query: _Egypt Ministry of Trade mobile car cleaning licensing requirements_): The search results provide information about various regulations in Egypt but do not specifically support or contradict any claims made by the founder of VELO regarding their startup. For instance, there are labeling requirements for imported goods which include specifying the country of origin and producer’s name. Additionally, engineering and design work done outside of Egypt might face certain restrictions if they pertain to producing imported goods. There is no direct mention of specific regulations affecting mobile car detailing services. Sources: https://www.commerce.gov.pk/important-links-of-african-countries/egypt-important-links-faqs/egypt-faqs/, https://customs.gov.eg/Upload/ECAAdminace/2c2777f7-499b-4ce9-8171-78deb005de42.pdf
+- **CLAIM - UNVERIFIED** (query: _average monthly revenue mobile car detailing unit Egypt October 2023_): None of the provided sources mention VELO’s revenue or the specific figure of EGP 8,295 since the first paid job on 23 October, so the claim cannot be confirmed or refuted from the available data. Sources: no source
+  - Risk: lack of verifiable revenue data
+- **CLAIM - UNVERIFIED** (query: _car detailing contribution margin Egypt_): The available sources discuss margins in the car detailing and related automotive sectors but do not provide a 55% margin figure. For example, a 2018 S‑1 filing reports a 9% core platform contribution margin, and Geely's 2025 report shows a 16.6% gross profit margin for automotive manufacturing. No source confirms a 55% margin for car detailing services. Sources: https://www.sec.gov/Archives/edgar/data/1543151/000119312519103850/d647752ds1.htm, https://www.geelyauto.com.hk/wp-content/uploads/2026/04/e00175_2025-annual-report.pdf
+  - Risk: Margin assumptions may be overly optimistic

@@ -21,6 +21,7 @@
 - [DECK, VERIFIED] "Launches, and charges, in December."
 - [VIDEO, VERIFIED] "raise between 100 to 500k, ideally more in the higher end"
 - [VIDEO, VERIFIED] "I'm currently solo founding"
+- [MODEL, VERIFIED] "51, of which 37 active in the month"
 
 ### Independent research (web, cited)
 

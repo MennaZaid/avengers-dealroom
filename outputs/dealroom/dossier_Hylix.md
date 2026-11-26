@@ -2,8 +2,8 @@
 
 **Sector:** AI developer tooling (coding-agent efficiency)  
 **Stage:** pre-revenue, internal tests only  
-**Their ask:** not stated (no ask stated in deck; no video)  
-**Our proposed ticket:** $160,000 (~8.4% stake = cheque / post-money)
+**Their ask:** $350,000 (no ask in the deck; financial model plans a USD 350K pre-seed in 2027 for customer pilots, then USD 2.5M seed in 2028)  
+**Our proposed ticket:** PASS
 
 **Score:** 3.0 / 5 - Scorecard pre-money $2,000,000, Berkus $1,500,000, blended $1,750,000
 
@@ -18,6 +18,7 @@
 - [DECK, VERIFIED] "These are test results, not customer revenue."
 - [DECK, VERIFIED] "20% to 40% successful tasks and $1.1 to $0.5 per task on a tested setup"
 - [DECK, VERIFIED] "No recurring customer revenue is claimed in this deck."
+- [MODEL, VERIFIED] "Pre-seed |  | 350000 | Customer pilots, first paid deployments"
 
 ### Independent research (web, cited)
 

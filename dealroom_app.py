@@ -207,6 +207,7 @@ with tabs[1]:
 <div class="kpi"><div class="l">Y5 downside</div><div class="v">${fc['down']/1e6:.2f}M</div></div>
 <div class="kpi"><div class="l">Downside multiple</div><div class="v">{fc['moic_down']:.2f}x</div></div></div>""", unsafe_allow_html=True)
     st.markdown(forecast.markdown(fc))
+    st.markdown(forecast.benchmarks_markdown())
     st.caption("Edit year-5 company values, burn rates and dilution in data/forecast.yaml. Words unclear? See the Glossary tab.")
 
 with tabs[6]:

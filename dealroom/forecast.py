@@ -55,3 +55,18 @@ def markdown(fc: dict) -> str:
           f"**Fund at year 5: base {m(fc['base'])} ({fc['moic_base']:.1f}x), downside {m(fc['down'])} ({fc['moic_down']:.2f}x).**",
           f"Best pick in base case: {fc['best']} - " + ("returns the whole fund on its own." if fc["best_returns_fund"] else "does not return the whole fund on its own.")]
     return "\n".join(L) + "\n"
+
+
+def benchmarks_markdown() -> str:
+    """Cited benchmark numbers behind the forecast (from dealroom.benchmarks)."""
+    import json
+    f = DATA / "benchmarks.json"
+    if not f.exists():
+        return ""
+    rows = json.loads(f.read_text(encoding="utf-8"))["rows"]
+    L = ["### Where the forecast numbers come from (web benchmarks)", "",
+         "| Topic | Finding | Source |", "|---|---|---|"]
+    for r in rows:
+        if r.get("sources"):
+            L.append(f"| {r['question']} | {r['answer'].replace('|', '/')} | {r['sources'][0]} |")
+    return "\n".join(L) + "\n"

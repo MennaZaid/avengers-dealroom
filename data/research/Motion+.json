@@ -1,0 +1,88 @@
+{
+ "startup": "Motion+",
+ "generated": "2026-11-26T16:43:58+00:00",
+ "findings": [
+  {
+   "topic": "market",
+   "claim": "",
+   "query": "Egypt sports technology market size 2024 report",
+   "verdict": "context",
+   "finding": "The sports technology market is valued at USD 34.25 billion in 2025 and is projected to reach USD 68.7 billion by 2030, a 14.9% CAGR. In the Middle East and Africa, the sports‑tech market is expected to hit US$3.37 billion by 2030, with Saudi Arabia leading growth. Egypt’s overall sports market is experiencing moderate growth driven by higher participation and facility investment. Gaming‑related figures (e.g., Egypt gaming market $2.13 billion in 2025) are tangential but illustrate broader digital entertainment expansion in the region.",
+   "sources": [
+    "https://www.researchandmarkets.com/report/sports-technology",
+    "https://www.pwc.com/m1/en/services/consulting/technology/sports-technology.html",
+    "https://www.statista.com/outlook/amo/sports/egypt/"
+   ],
+   "risk_flag": "Intense competition from established sports‑tech players"
+  },
+  {
+   "topic": "market",
+   "claim": "",
+   "query": "MENA sports health and biomechanics market CAGR 2023-2028",
+   "verdict": "context",
+   "finding": "The human augmentation market was valued at $253.6 billion in 2023 and is projected to reach $545.1 billion by 2028, indicating a strong growth trajectory. The sports analytics market is expanding globally, with the Middle East (e.g., Saudi Arabia) investing in analytics pilots for cricket and football under Vision 2030. In sports AI, software accounts for 60.85% of the market share, and services are rapidly advancing, underscoring a broad, technology‑driven growth trend in sports health and biomechanics.",
+   "sources": [
+    "https://www.marketsandmarkets.com/Market-Reports/human-augmentation-market-177215310.html",
+    "https://www.mordorintelligence.com/industry-reports/sports-analytics-market",
+    "https://www.mordorintelligence.com/industry-reports/artificial-intelligence-market-in-sports"
+   ],
+   "risk_flag": "high competition"
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "global running biomechanics analysis startups funding RunScribe Garmin wearable analytics",
+   "verdict": "context",
+   "finding": "The market includes several established wearables that capture running biomechanics, such as RunScribe (a startup highlighted for its motion‑data capture for coaches and clinicians), RunScribe Pro and Lumo Run which analyze cadence and other triathlon‑relevant metrics, and Stryd which introduced the first running power meter. RunScribe, founded in 2013, has raised an undisclosed amount of funding to develop its RunScribe Plus device. A broader ecosystem of running sensors is emerging, offering biomechanics analytics at various price points.",
+   "sources": [
+    "https://sportstechnologyblog.com/2021/05/22/startup-spotlight-runscribe/",
+    "https://www.facebook.com/Avaathletes/posts/in-a-sport-where-every-second-counts-technology-makes-the-difference-to-be-fast/122184157724677838/",
+    "https://www.theupside.us/p/upside-analysis-smart-footwear-market-29b",
+    "https://www.dcrainmaker.com/2015/01/stryd-first-running.html",
+    "https://fellrnr.com/wiki/Running_Sensors"
+   ],
+   "risk_flag": "High competitive fragmentation"
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "Egypt sports biomechanics companies funding Fitlab Egypt HealthifyME",
+   "verdict": "unverified",
+   "finding": "No search results.",
+   "sources": [],
+   "risk_flag": ""
+  },
+  {
+   "topic": "regulation",
+   "claim": "",
+   "query": "Egypt Ministry of Health medical device registration requirements for sports biomechanics software",
+   "verdict": "context",
+   "finding": "The provided search results discuss various aspects related to technology applications in sports health, biomechanics, and running analysis but do not directly verify or contradict any specific claims made by the founder of Motion+. They cover topics such as virtual reality interventions for sports injuries, mobile health apps in sport training, biomedical engineering programs, artificial intelligence in biomechanics, and regulatory frameworks for medical devices.",
+   "sources": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC13367076/",
+    "https://www.mdpi.com/1424-8220/26/17/5394",
+    "https://www.pua.edu.eg/applied-health-sciences-technology/study-program-2/radiological-sciences-and-medical-imaging-technology-study-program/",
+    "https://onlinelibrary.wiley.com/doi/10.1002/pri.70120",
+    "https://ciu.edu.tr/en/programs/undergraduate/biomedical-engineering",
+    "https://www.sciencedirect.com/science/chapter/edited-volume/pii/B9780128148167000030"
+   ],
+   "risk_flag": ""
+  },
+  {
+   "topic": "claim",
+   "claim": "~210 paying clients in 2026",
+   "query": "Motion+ client list 2026 210 paying customers",
+   "verdict": "unverified",
+   "finding": "None of the provided snippets mention Motion+ or the number of paying clients in 2026; the sources relate to immigration forms, tipped occupations, court self‑help, legal ethics, SEC broker‑dealer rules, and Medicare claim processing, which do not address the claim.",
+   "sources": [
+    "https://www.uscis.gov/i-290b",
+    "https://home.treasury.gov/system/files/136/Tipped-Occupations-Detailed-8-27-2025.pdf",
+    "https://metro.nmcourts.gov/self-representation/self-help-center/",
+    "https://www.calbar.ca.gov/legal-professionals/rules/rules-professional-conduct/previous-rules-professional-conduct/rule-4-210-payment-personal-or-business-expenses-incurred-or-client",
+    "https://www.sec.gov/files/rules/final/2024/34-102022.pdf",
+    "https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c20.pdf"
+   ],
+   "risk_flag": "lack of verifiable traction"
+  }
+ ]
+}

@@ -64,7 +64,7 @@ def build():
         (OUT / f"dossier_{n}.md").write_text(d, encoding="utf-8")
         parts.append(d)
     from dealroom import forecast
-    fc_md = forecast.markdown(forecast.forecast(vals, alloc, rules))
+    fc_md = forecast.markdown(forecast.forecast(vals, alloc, rules)) + chr(10) + forecast.benchmarks_markdown()
     text = "\n".join(head) + "\n\n" + fc_md + "\n" + "\n".join(parts)
     (OUT / "data_room.md").write_text(text, encoding="utf-8")
     return text

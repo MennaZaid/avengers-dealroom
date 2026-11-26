@@ -1,0 +1,89 @@
+{
+ "startup": "REE",
+ "generated": "2026-11-26T16:43:03+00:00",
+ "findings": [
+  {
+   "topic": "market",
+   "claim": "",
+   "query": "MENA sports technology market size court camera highlights 2023 report",
+   "verdict": "context",
+   "finding": "The sports streaming services market is led by football/soccer, which held over 36% share in 2025, and North America is the largest regional market at 35.1%. The broader sports technology market was valued at $22.69 B in 2024 and is projected to reach $123.37 B by 2033, indicating strong growth. Platforms that capture, distribute, and share youth sports games and highlights are highlighted as emerging opportunities.",
+   "sources": [
+    "https://www.grandviewresearch.com/industry-analysis/sports-streaming-services-technology-market-report",
+    "https://cdn.hl.com/pdf/2025/sports-market-update-hl-fall-2025.pdf",
+    "https://www.skyquestt.com/report/sports-technology-market"
+   ],
+   "risk_flag": "Heavy reliance on football and North American markets may limit growth in niche sports like padel or squash."
+  },
+  {
+   "topic": "market",
+   "claim": "",
+   "query": "global sports video analytics market CAGR 2024-2030",
+   "verdict": "context",
+   "finding": "The global sports analytics market was valued at USD 5.7 billion in 2025 and is projected to reach USD 7.0 billion; the AI in sports market is expected to grow from USD 1.03 billion in 2024 to USD 2.61 billion by 2030 (CAGR 16.7%). Sports media video and audio formats held 64.31% of the market in 2025 and are projected to grow at 17.88% CAGR through 2031. Worldwide sports revenue is forecast to reach US$74.02 billion in 2026, growing at 1.39% CAGR 2026‑2031.",
+   "sources": [
+    "https://www.grandviewresearch.com/industry-analysis/sports-analytics-market",
+    "https://www.marketsandmarkets.com/Market-Reports/ai-in-sports-market-122129412.html",
+    "https://www.mordorintelligence.com/industry-reports/sports-media-market",
+    "https://www.statista.com/outlook/amo/sports/worldwide/"
+   ],
+   "risk_flag": ""
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "padel court live streaming startup funding round",
+   "verdict": "context",
+   "finding": "Recent funding rounds show strong investor interest in padel and related sports tech: Pro Padel League raised $15 million (Mar 2026) and a $10 million seed (Mar 2025); The Padel City secured €12 million Series A (Aug 2026); Epic Padel raised $10 million seed (Sep 2025); and 1club raised €2.2 million for its AI‑native sports platform (Oct 2026). This signals a competitive market with multiple well‑funded players targeting growth in the U.S. and Europe.",
+   "sources": [
+    "https://www.cnbc.com/2026/03/24/pro-padel-league-raises-15-million-us-growth.html",
+    "https://dealroom.co/news/144202-the-padel-city-raises-12m-series-a-to-expand-across-europe/",
+    "https://www.nytimes.com/athletic/7141487/2026/03/24/pro-padel-league-investment-rick-schnall/",
+    "https://www.sportsbusinessjournal.com/Articles/2025/03/26/pro-padel-league-raises-10m-seed-round-as-it-prepares-for-second-full-season/",
+    "https://www.forbes.com/sites/davidprosser/2025/09/24/match-point-meet-the-start-up-hoping-to-win-big-in-us-padel/",
+    "https://1club.ai/blog/1club-raises-over2m-seed-funding"
+   ],
+   "risk_flag": "high competition"
+  },
+  {
+   "topic": "competition",
+   "claim": "",
+   "query": "Egypt sports tech court camera company funding",
+   "verdict": "context",
+   "finding": "The market includes several established players offering court‑side AI camera and broadcast solutions: Wingfield provides AI‑tracking cameras mounted on court fences; Quidich delivers drone‑based capture, AR and AI analytics; Pixotope offers the Pixotope Zone camera‑tracking system for AR graphics; Pixellot supplies AI‑automated sports cameras for live streaming without staff. Additionally, a list of 31 top sports companies in Egypt indicates a crowded local ecosystem.",
+   "sources": [
+    "https://www.wingfield.io/en/products",
+    "https://www.quidich.com/",
+    "https://www.pixotope.com/products/pixotope-zone",
+    "https://www.pixellot.tv/",
+    "https://www.f6s.com/companies/sports/egypt/co"
+   ],
+   "risk_flag": "high competition"
+  },
+  {
+   "topic": "regulation",
+   "claim": "",
+   "query": "Egypt Ministry of Youth and Sports licensing requirements for video recording in sports venues",
+   "verdict": "context",
+   "finding": "International guidance (UN Guide on the Security of Major Sporting Events) notes that video‑surveillance IP cameras are deployed inside and outside stadiums to mitigate terrorism and crowd‑related threats. Sports law publications (2022, 2025) highlight that anti‑doping rules are strictly regulated and enforced, affecting any technology that captures athlete performance. Additionally, Egypt’s travel advisory underscores safety, security and legal considerations for operating sports‑related services in the country.",
+   "sources": [
+    "https://www.un.org/counterterrorism/sites/default/files/211006_guide_on_security_major_sporting_events_web.pdf",
+    "https://www.herrick.com/content/uploads/2025/03/Sports_Law_2025.pdf",
+    "https://abreuadvogados.com/wp-content/uploads/2022/04/Sports_Law_2022.pdf",
+    "https://travel.gc.ca/destinations/egypt"
+   ],
+   "risk_flag": "Regulatory compliance for video surveillance and data privacy"
+  },
+  {
+   "topic": "claim",
+   "claim": "paying operators include major clubs in Egypt",
+   "query": "Al Ahly Sports Club Egypt court camera provider REE partnership",
+   "verdict": "unverified",
+   "finding": "None of the provided sources directly state that REE's paying operators include major clubs in Egypt. The only mention of a major Egyptian club (Al‑Ahly) appears in a Khater Sports portfolio PDF, which is unrelated to REE, and the other results discuss unrelated companies or topics.",
+   "sources": [
+    "https://www.khatersports.com/Khater_english_portfile.pdf"
+   ],
+   "risk_flag": "lack of customer validation"
+  }
+ ]
+}

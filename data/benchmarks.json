@@ -1,0 +1,173 @@
+{
+ "generated": "2026-11-26T16:47:27+00:00",
+ "rows": [
+  {
+   "kind": "dilution",
+   "question": "Median founder dilution in a seed round",
+   "query": "Carta median dilution seed round 2026",
+   "answer": "According to Carta's Q2 2026 fundraising benchmarks, the median seed round had a 19.4% dilution.",
+   "value": "19.4%",
+   "sources": [
+    "https://carta.com/learn/startups/fundraising/seed-funding/",
+    "https://www.crv.com/content/average-seed-round-size",
+    "https://www.linkedin.com/posts/ryanallis_you-start-at-100-by-series-c-the-median-activity-7529583391885660160-oLAV"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "dilution",
+   "question": "Median dilution in a Series A round",
+   "query": "Carta median dilution Series A 2026",
+   "answer": "According to Carta’s Q2 2026 benchmarks, the median dilution for a Series A round is 18.7%.",
+   "value": "18.7%",
+   "sources": [
+    "https://carta.com/learn/startups/fundraising/series-a/"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "dilution",
+   "question": "Typical dilution per funding round (rule of thumb)",
+   "query": "typical startup dilution per funding round seed series A percent",
+   "answer": "The median dilution per round according to Carta data is approximately 19.4% for seed funding and around 18% for Series A.",
+   "value": "19.4%",
+   "sources": [
+    "https://carta.com/learn/startups/fundraising/seed-funding/",
+    "https://www.saastr.com/carta-the-actual-real-dilution-from-series-a-b-c-and-d-rounds/"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "valuation",
+   "question": "Median pre-seed / seed valuation in MENA or Egypt",
+   "query": "MAGNiTT median seed valuation MENA Egypt startups 2026",
+   "answer": "No specific median pre‑seed or seed valuation figures for MENA or Egypt are provided in the available snippets.",
+   "value": "",
+   "sources": [],
+   "confidence": "low"
+  },
+  {
+   "kind": "valuation",
+   "question": "Egypt startup funding 2026 totals and typical round sizes",
+   "query": "Egypt startup funding 2026 report pre-seed seed round size",
+   "answer": "In 2026 Egyptian startups raised a total of $87 million across five Series B deals; the snippets do not provide typical round‑size figures.",
+   "value": "$87 million",
+   "sources": [
+    "https://www.instagram.com/reel/Df4_Q4hocyR/"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "kind": "multiple",
+   "question": "Revenue multiples by industry (Damodaran)",
+   "query": "Damodaran EV/Sales by industry emerging markets 2026",
+   "answer": "No revenue multiple numbers by industry appear in the provided snippets.",
+   "value": "",
+   "sources": [
+    "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/vebitda.html",
+    "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datacurrent.html",
+    "https://bizminer.com/valuation-multiples-by-industry/",
+    "https://sellside.broker/ebitda-multiples-by-industry",
+    "https://aswathdamodaran.blogspot.com/2026/11/",
+    "https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/margin.html"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "multiple",
+   "question": "Private SaaS / vertical SaaS revenue multiples",
+   "query": "private SaaS company valuation revenue multiple 2026",
+   "answer": "In 2026 the median private SaaS company trades at roughly 4–5× ARR, while vertical B2B SaaS companies are valued at about 4.0–8.0× ARR.",
+   "value": "4–5x ARR (private SaaS) and 4.0–8.0x ARR (vertical B2B SaaS)",
+   "sources": [
+    "https://www.l40.com/insights/saas-multiples",
+    "https://www.adastraequity.com/ebitda-multiples/saas-company"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "multiple",
+   "question": "Fintech revenue multiples",
+   "query": "fintech startup valuation revenue multiple 2026",
+   "answer": "No fintech revenue multiple figures appear in the provided snippets.",
+   "value": "",
+   "sources": [],
+   "confidence": "low"
+  },
+  {
+   "kind": "multiple",
+   "question": "Proptech / real-estate platform revenue multiples",
+   "query": "proptech valuation revenue multiple 2026",
+   "answer": "The 2026 PropTech M&A report shows an average EV/Revenue multiple of 7.1x for PropTech companies.",
+   "value": "7.1x",
+   "sources": [
+    "https://www.fortlane.com/en/resources/insights/brochure/proptech-ma-report.html"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "multiple",
+   "question": "Sports tech valuation multiples",
+   "query": "sports technology company valuation revenue multiple",
+   "answer": "In 2026 eSports (a segment of sports‑tech) traded at about 4.1× EV/Sales and 15.9× EV/EBITDA.",
+   "value": "4.1× EV/Sales, 15.9× EV/EBITDA",
+   "sources": [
+    "https://dealmatrix.com/valuation-multiples/by-industry/esports/"
+   ],
+   "confidence": "medium"
+  },
+  {
+   "kind": "comparable",
+   "question": "Fawry valuation and revenue (EGX-listed fintech)",
+   "query": "Fawry market capitalization revenue 2026",
+   "answer": "Fawry’s market capitalisation was about 57.74 billion (as of 17 Nov 2026) and its revenue reached EGP 8.352 billion for the nine months ended September 2026 (H1 2026 revenue was EGP 5.222 billion).",
+   "value": "",
+   "sources": [
+    "https://stockanalysis.com/quote/egx/FWRY/market-cap/",
+    "https://www.tradingview.com/news/urn:summary_document_report:quartr.com:4339964:0-fwry-revenue-reached-egp-8-352bn-as-9m-net-profit-rose-to-egp-2-877bn/",
+    "https://www.arabfinance.com/en/news/newdetails/fawry-h1-2026-revenue-rises-yoy"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "comparable",
+   "question": "Nawy Series A (Egypt proptech)",
+   "query": "Nawy Series A 75 million valuation",
+   "answer": "Nawy raised $52 million in Series A equity funding.",
+   "value": "$52 million",
+   "sources": [
+    "https://www.menabytes.com/nawy-75-million/",
+    "https://www.wamda.com/2025/05/nawy-secures-75-million-equity-debt-fuel-mena-expansion",
+    "https://fintechnews.africa/45277/fintech-egypt/nawy-raises-75m/",
+    "https://techcrunch.com/2025/05/11/egypts-nawy-lands-a-52m-series-a-to-take-on-mena/",
+    "https://en.sharikatmubasher.com/news/article/21484474/nawy-raises-52mn-to-transform-egypts-real-estate-market?lang=en"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "comparable",
+   "question": "Foodics funding (MENA restaurant POS)",
+   "query": "Foodics Series C funding valuation",
+   "answer": "Foodics raised $170 million in a Series C round in April 2022, bringing its total funding to $198 million across four rounds.",
+   "value": "$170 million",
+   "sources": [
+    "https://www.forbesmiddleeast.com/innovation/startups/foodics-raises-%24170-million-in-a-series-c-funding-round",
+    "https://multiples.vc/private-comps/foodics",
+    "https://www.foodics.com/press/saas-series-c-funding/"
+   ],
+   "confidence": "high"
+  },
+  {
+   "kind": "outcomes",
+   "question": "Share of seed startups that fail or return nothing",
+   "query": "percentage of seed stage startups fail return zero venture capital power law",
+   "answer": "According to a 2025 Medium article, 67% of seed‑funded startups stalled, failing to either exit or raise follow‑on funding. An AVC post from 2021 notes roughly half of seed‑stage investments fail completely.",
+   "value": "67%",
+   "sources": [
+    "https://medium.com/@gp2030/why-most-startups-shouldnt-raise-venture-capital-b766e579a1b4",
+    "https://avc.com/2021/11/seed-rounds-at-100mm-post-money/"
+   ],
+   "confidence": "high"
+  }
+ ]
+}
