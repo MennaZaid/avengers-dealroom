@@ -2,121 +2,116 @@
 # conviction: each member 1-5 (1 = would not invest, 5 = must have). open_day: what we saw at the pitches.
 # decision: invest | pass | watch | undecided. final_cheque_usd: the team's number (overrides the tool's proposal).
 # override_reason: required when the team disagrees with the tool - this becomes a pitch talking point.
-members: [Menna, Omar]
-
+members:
+- Menna
+- Omar
 Modeeri:
-  conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
-  final_cheque_usd: null
-  override_reason: ""
-
+  conviction:
+    Menna: 4
+    Omar: 4
+  open_day: ''
+  gut_feeling: ''
+  concerns: small localrival
+  decision: invest
+  final_cheque_usd: 290000
+  override_reason: ''
 Blaze:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: pass
   final_cheque_usd: null
-  override_reason: ""
-
+  override_reason: ''
 Zaat:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: pass
   final_cheque_usd: null
-  override_reason: ""
-
+  override_reason: ''
 Hylix:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
-  final_cheque_usd: null
-  override_reason: ""
-
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: invest
+  final_cheque_usd: 200000
+  override_reason: ''
 TRNR:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
-  final_cheque_usd: null
-  override_reason: ""
-
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: invest
+  final_cheque_usd: 80000
+  override_reason: ''
 Finalyze:
-  conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
-  final_cheque_usd: null
-  override_reason: ""
-
+  conviction:
+    Menna: 4
+    Omar: 3
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: invest
+  final_cheque_usd: 100000
+  override_reason: ''
 Byota:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: pass
   final_cheque_usd: null
-  override_reason: ""
-
+  override_reason: ''
 Carbonless:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: pass
   final_cheque_usd: null
-  override_reason: ""
-
+  override_reason: ''
 IGNOT:
-  conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
+  conviction:
+    Menna: 2
+    Omar: 2
+  open_day: ''
+  gut_feeling: ''
+  concerns: Too much competition
+  decision: pass
   final_cheque_usd: null
-  override_reason: ""
-
+  override_reason: ''
 VELO:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
-  final_cheque_usd: null
-  override_reason: ""
-
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: invest
+  final_cheque_usd: 30000
+  override_reason: ''
 Matbakh:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: pass
   final_cheque_usd: null
-  override_reason: ""
-
+  override_reason: ''
 REE:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
-  final_cheque_usd: null
-  override_reason: ""
-
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: invest
+  final_cheque_usd: 100000
+  override_reason: ''
 Motion+:
   conviction: {}
-  open_day: ""
-  gut_feeling: ""
-  concerns: ""
-  decision: undecided
-  final_cheque_usd: null
-  override_reason: ""
+  open_day: ''
+  gut_feeling: ''
+  concerns: ''
+  decision: invest
+  final_cheque_usd: 80000
+  override_reason: ''
