@@ -74,6 +74,10 @@ h1,h2,h3,h4 { font-family:'Playfair Display',serif !important; color:var(--navy)
 
 room = dossier.build()
 evidence, scores, rules, res, vals, alloc = dossier.load()
+tool_alloc = dict(alloc)
+# The team's input (Three Lenses tab) overrides the tool: team cheque or pass wins, otherwise the tool's proposal.
+alloc = {n: a for n, (a, _) in lenses.final_portfolio(lenses.build()).items()}
+team_set = {n for n, t in lenses.load_team().items() if isinstance(t, dict) and (t.get("final_cheque_usd") or t.get("decision") in ("invest", "pass"))}
 order = sorted(vals, key=lambda n: -vals[n]["weighted"])
 money = lambda x: f"${x:,.0f}" if x else "—"
 
@@ -94,11 +98,13 @@ with tabs[0]:
 <div class="kpi"><div class="l">Reserve</div><div class="v">{money(rules['fund_usd'] - sum(alloc.values()))}</div></div>
 <div class="kpi"><div class="l">Backed</div><div class="v">{len(alloc)} / {len(vals)}</div></div>
 <div class="kpi"><div class="l">Researched</div><div class="v">{researched} / {len(vals)}</div></div></div>""", unsafe_allow_html=True)
+    st.caption(f"TEAM = the team decided in the Three Lenses tab ({len(team_set)} of {len(vals)}); TOOL = the tool's proposal, until the team decides.")
     cards = []
     for n in order:
         v, a, e = vals[n], alloc.get(n, 0), evidence[n]
         stake = f"{a / post(n, a):.1%}" if a else "—"
-        tag = '<span class="tag in">INVEST</span>' if a else '<span class="tag out">PASS</span>'
+        tag = ('<span class="tag in">INVEST</span>' if a else '<span class="tag out">PASS</span>') + \
+              (' <span class="tag in">TEAM</span>' if n in team_set else ' <span class="tag out">TOOL</span>')
         cards.append(f"""<div class="deal {'' if a else 'pass'}">
 <div class="head"><div class="n">{esc(n)} {tag}</div><div class="s">{esc(e['sector'])}</div></div>
 <div><div class="l">Score</div><div class="v">{v['weighted']} / 5</div></div>
