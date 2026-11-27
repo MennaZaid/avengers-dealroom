@@ -1,0 +1,116 @@
+### sheet Summary
+TRNR
+Sports discovery reimagined
+Sector | Consumer marketplace / Sports coaching
+Headquarters | Cairo, Egypt (5th Settlement and Sheikh Zayed)
+Founded / started operating | 2026 (app built and supply signed; public launch Q1 2027)
+Current stage | Pre-revenue; raising pre-seed
+Business model | 10% commission on the full session price, charged to the coach (0% for the first 20 founding coaches; free for run clubs)
+Company overview
+TRNR is one straight line from wanting to play a sport to playing it. Players pick a sport, compare coaches by profile, price
+and open slots, chat with the coach and lock the session with an in-app deposit. The coach then books the venue in the app,
+and venues fill their quiet hours. TRNR launches with tennis and run clubs in 5th Settlement and Sheikh Zayed, targeting
+adults aged 18 to 35, and replaces the WhatsApp chains most people use today to find a coach.
+Operating highlights (as of November 2026)
+Coaches committed | 7
+Venues committed | 3, across two areas
+Product | Working app with player, coach and venue roles
+Validation | Interviews with tennis coaches, stakeholders and customers
+Market | USD 92M sports coaching market in Egypt (2025); ~USD 19M in Greater Cairo
+Funding history
+Date | Round / source | Amount (USD) | Investors / notes
+2026 | Founders' capital | 3000 | Co-founders
+2027 (planned) | Pre-seed | 120000 | Launch, founding coaches, first Greater Cairo areas
+2028 (planned) | Seed | 400000 | More Greater Cairo areas, next sports and a second city
+Financial summary (USD)
+2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Total revenue | 0 | 2798 | 31015 | 129774 | 318540 | 631861
+Revenue growth | n/m | n/m | 10.0841205578048 | 3.18418778801843 | 1.45457474483552 | 0.983612610787837
+Gross profit | -600 | -21.545454545455 | 20708 | 95643 | 236807 | 472143
+Gross margin | 0 | -0.00769980506822627 | 0.66765873015873 | 0.736994780014914 | 0.7434136615479 | 0.747226962457338
+EBITDA | -1300 | -31022 | -68292 | -89357 | -57193 | 52143
+EBITDA margin | 0 | -11.0863222871995 | -2.20188492063492 | -0.688558289833458 | -0.179546020973524 | 0.0825236705934164
+Net income | -1300 | -31688 | -70292 | -93357 | -63193 | 44143
+Free cash flow (pre-financing) | -1300 | -32938 | -71446 | -92394 | -59530 | 51543
+Equity raised | 3000 | 120000 | 400000 | 0 | 0 | 0
+Closing cash | 1700 | 88762 | 417317 | 324922 | 265393 | 316936
+Active coaches (year-end) | 7 | 50 | 160 | 380 | 700 | 1100
+Sessions booked | 0 | 3420 | 20160 | 71280 | 168480 | 324000
+GMV (USD) | 0 | 55964 | 344615 | 1264645 | 3086656 | 6104348
+### sheet Assumptions
+TRNR | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions | Value | Basis
+Corporate income tax rate | 0.225 | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) | 3 | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) | -0.03 | Players pay deposits in the app before the session, so the marketplace holds customer cash (negative working capital).
+Driver assumptions | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Macro
+EGP / USD exchange rate (average) | EGP per USD | 51 | 55 | 58.5 | 62 | 65.5 | 69 | Annual average EGP per USD. 2026 average reflects ~47.7 pre-February, then depreciation to ~53–56 by Q4 2026; forecast assumes ~6% annua
+Supply & demand
+Active coaches on TRNR (year-end) | # | 7 | 50 | 160 | 380 | 700 | 1100 | 20 founding coaches in months 1–3, then new coaches on commission; more Greater Cairo areas and the next sport from month 7; second city from 2029
+Sessions booked per active coach | # / month | 10 | 16 | 22 | 26 | 30 | Founding coaches bring the players they already train; repeat bookings from the same players grow coach utilisation.
+Average session price | EGP | 900 | 1000 | 1100 | 1200 | 1300 | Tennis and racket-sport coaching; run-club sessions are free and excluded.
+Effective commission rate | % of session value | 0.05 | 0.09 | 0.1 | 0.1 | 0.1 | Flat 10% on every coach after the 20 founding coaches, who pay 0% during the founding period.
+Coaches on TRNR Pro scheduling tools | % of active coaches | 0 | 0 | 0.15 | 0.22 | 0.28 | Scheduling tools for coaches launch in months 19–24 of the roadmap.
+TRNR Pro subscription | EGP / month | 0 | 0 | 300 | 350 | 400
+Cost structure
+Share of session value paid in the app | % | 0.3 | 0.5 | 0.7 | 0.8 | 0.85 | Deposit only at launch; full payment in the app as the habit builds.
+Payment processing fee | % of in-app payments | 0.025 | 0.025 | 0.025 | 0.025 | 0.025
+Hosting & infrastructure | USD / year | 600 | 2400 | 6000 | 12000 | 20000 | 30000
+Team (avg. FTE) | FTE | 2 | 3 | 6 | 10 | 14 | 18 | Two co-founders plus coach success, growth and engineering hires.
+Cost per FTE | USD / year | 0 | 6000 | 8500 | 11000 | 13000 | 15000 | Founders on modest salaries from the 2027 raise; Cairo market pay for hires.
+Marketing (run clubs, venue QR codes, bilingual content) | USD / year | 300 | 10000 | 30000 | 60000 | 90000 | 120000
+Legal, accounting & G&A | USD / year | 400 | 3000 | 8000 | 15000 | 22000 | 30000
+Capex (devices) | USD / year | 2000 | 4000 | 6000 | 8000 | 10000
+Funding
+Equity raised | USD | 3000 | 120000 | 400000 | 0 | 0 | 0 | Pre-seed at launch in 2027; seed in 2028 to open more areas, add sports and enter a second city.
+### sheet Model
+TRNR | Financial Model
+USD, fiscal year ending 31 December. 2026–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Active coaches (year-end) | # | 7 | 50 | 160 | 380 | 700 | 1100
+Average active coaches | # | 0 | 28.5 | 105 | 270 | 540 | 900
+Sessions booked | # | 0 | 3420 | 20160 | 71280 | 168480 | 324000
+Session value booked, GMV (EGP) | EGP | 0 | 3078000 | 20160000 | 78408000 | 202176000 | 421200000
+Session value booked, GMV (USD) | USD | 0 | 55964 | 344615 | 1264645 | 3086656 | 6104348
+Income statement (USD)
+Coach commissions | USD | 0 | 2798 | 31015 | 126465 | 308666 | 610435
+TRNR Pro subscriptions | USD | 0 | 0 | 0 | 3310 | 9875 | 21426
+Total revenue | USD | 0 | 2798 | 31015 | 129774 | 318540 | 631861
+  Revenue growth (YoY) | % | n/m | n/m | 10.0841205578048 | 3.18418778801843 | 1.45457474483552 | 0.983612610787837
+Payment processing | USD | 0 | -420 | -4308 | -22131 | -61733 | -129717
+Hosting & infrastructure | USD | -600 | -2400 | -6000 | -12000 | -20000 | -30000
+Total cost of revenue | USD | -600 | -2820 | -10308 | -34131 | -81733 | -159717
+Gross profit | USD | -600 | -21.545454545455 | 20708 | 95643 | 236807 | 472143
+  Gross margin | % | 0 | -0.00769980506822627 | 0.66765873015873 | 0.736994780014914 | 0.7434136615479 | 0.747226962457338
+Salaries & benefits | USD | 0 | -18000 | -51000 | -110000 | -182000 | -270000
+Marketing | USD | -300 | -10000 | -30000 | -60000 | -90000 | -120000
+Legal, accounting & G&A | USD | -400 | -3000 | -8000 | -15000 | -22000 | -30000
+Total operating expenses | USD | -700 | -31000 | -89000 | -185000 | -294000 | -420000
+EBITDA | USD | -1300 | -31022 | -68292 | -89357 | -57193 | 52143
+  EBITDA margin | % | 0 | -11.0863222871995 | -2.20188492063492 | -0.688558289833458 | -0.179546020973524 | 0.0825236705934164
+Depreciation & amortisation | USD | 0 | -667 | -2000 | -4000 | -6000 | -8000
+EBIT | USD | -1300 | -31688 | -70292 | -93357 | -63193 | 44143
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -1300 | -31688 | -70292 | -93357 | -63193 | 44143
+Income tax | USD | 0 | 0 | 0 | 0 | 0 | 0
+Net income | USD | -1300 | -31688 | -70292 | -93357 | -63193 | 44143
+  Net margin | % | 0 | -11.3245722330518 | -2.26636904761905 | -0.71938105891126 | -0.198381932861717 | 0.0698626555102941
+  Memo: tax losses carried forward (closing) | USD | 1300 | 32988 | 103281 | 196638 | 259830 | 215687
+Cash flow & runway (USD)
+Net income | USD | -1300 | -31688 | -70292 | -93357 | -63193 | 44143
+Add back: D&A | USD | 0 | 667 | 2000 | 4000 | 6000 | 8000
+Change in working capital | USD | 0 | 83.9454545454545 | 847 | 2963 | 5663 | 9400
+Cash flow from operations | USD | -1300 | -30938 | -67446 | -86394 | -51530 | 61543
+Capital expenditure | USD | 0 | -2000 | -4000 | -6000 | -8000 | -10000
+Free cash flow (pre-financing) | USD | -1300 | -32938 | -71446 | -92394 | -59530 | 51543
+Equity & SAFE funding raised | USD | 3000 | 120000 | 400000 | 0 | 0 | 0
+Net change in cash | USD | 1700 | 87062 | 328554 | -92394 | -59530 | 51543
+Opening cash | USD | 0 | 1700 | 88762 | 417317 | 324922 | 265393
+Closing cash | USD | 1700 | 88762 | 417317 | 324922 | 265393 | 316936
+Average monthly net burn | USD | 108 | 2745 | 5954 | 7700 | 4961 | 0
+Runway at year-end burn (months) | months | 15.6923076923077 | 32.3383853104051 | 70.0922921835345 | 42.2002865853603 | 53.497866951585 | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset

@@ -1,0 +1,122 @@
+### sheet Summary
+Byota
+Understand how food affects your gut
+Sector | Healthtech / Gut microbiome diagnostics & nutrition care
+Headquarters | Cairo, Egypt
+Founded / started operating | 2026 (platform development and internal testing)
+Current stage | Pre-revenue; raising USD 1.1M seed
+Business model | One-time assessment package (EGP 6,900 standard / 12,200 advanced) via nutritionists, plus app renewal (EGP 225 / month)
+Company overview
+Byota offers an at-home gut microbiome assessment combined with a bilingual app for meal and symptom tracking and a
+practitioner portal. Nutritionists refer eligible clients, review the released report alongside food and symptom trends,
+and publish plan updates between visits. Guidance is built around familiar Egyptian foods. The seed round funds Byota's own
+licensed lab so testing, analysis, reporting and follow-up stay in-house.
+Operating highlights (as of November 2026)
+Waitlist registrations | ~100
+Nutritionists onboarded | 3
+Product | Patient app, demo report and practitioner workspace built; core profiling tested internally
+Pilot | Controlled pilot with first cohort scheduled after lab licensing
+Team | 3 co-founders (computational biology, 20 yrs genomics lab ops, nutrigenomics research)
+Funding history
+Date | Round / source | Amount (USD) | Investors / notes
+2026 | Founders' capital | 20000 | Co-founders
+2027 (planned) | Seed | 1100000 | Lab infrastructure, regulatory readiness, validation, practitioner network
+Financial summary (USD)
+2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Total revenue | 0 | 116377 | 335149 | 732369 | 1188065 | 1709090
+Revenue growth | n/m | n/m | 1.8798567111709 | 1.18520545426545 | 0.622222338939054 | 0.438549069424662
+Gross profit | 0 | 14185 | 149220 | 411080 | 721772 | 1086467
+Gross margin | 0 | 0.121884785605637 | 0.445233854597015 | 0.561301519906703 | 0.60751874431528 | 0.635699177119443
+EBITDA | -17300 | -383815 | -141208 | 72854 | 332459 | 651684
+EBITDA margin | 0 | -3.29803869809809 | -0.421328763350369 | 0.0994770900947007 | 0.279832157645262 | 0.381304940675264
+Net income | -17300 | -448101 | -209779 | -4289 | 249602 | 532026
+Free cash flow (pre-financing) | -17300 | -843126 | -188710 | -18924 | 256003 | 530344
+Equity raised | 20000 | 1100000 | 0 | 0 | 0 | 0
+Closing cash | 2700 | 259574 | 70865 | 51941 | 307944 | 838288
+Paid assessment packages | 0 | 720 | 2000 | 4300 | 6800 | 9500
+Active practitioners | 3 | 24 | 60 | 120 | 180 | 250
+Revenue (EGP) | 0 | 6400728 | 19606200 | 45406866 | 77818260 | 117927200
+EBITDA (EGP) | -882300 | -21109849 | -8260656 | 4516943 | 21776052 | 44966224
+### sheet Assumptions
+Byota | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions | Value | Basis
+Corporate income tax rate | 0.225 | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) | 7 | Lab equipment depreciated over 7 years.
+Net working capital (% of change in revenue) | 0.08 | Cash tied up in receivables net of payables as revenue grows.
+Driver assumptions | Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Macro
+EGP / USD exchange rate (average) | EGP per USD | 51 | 55 | 58.5 | 62 | 65.5 | 69 | Annual average EGP per USD. 2026 average reflects ~47.7 pre-February, then depreciation to ~53–56 by Q4 2026; forecast assumes ~6% annua
+Volumes & pricing
+Active referring practitioners (year-end) | # | 3 | 24 | 60 | 120 | 180 | 250 | 24 active practitioners × 10 eligible referrals a month × 25% paid conversion delivers 720 packages in Year 1; Alexandria practices from 202
+Paid assessment packages | # | 0 | 720 | 2000 | 4300 | 6800 | 9500 | Year 1: 480 Standard + 240 Advanced. Growth through repeat referrals and practice expansion.
+Advanced package share | % of packages | 0.333 | 0.333 | 0.333 | 0.333 | 0.333
+Standard package price | EGP | 6900 | 7500 | 8070 | 8700 | 9400 | Repriced annually (~8%).
+Advanced package price | EGP | 12200 | 13200 | 14210 | 15350 | 16600 | Deeper analysis in Byota's own lab.
+Paying app subscribers (avg.) | # | 0 | 60 | 270 | 580 | 1000 | 1500 | 33% of eligible app users convert to paid renewal after six included months.
+App renewal price | EGP / month | 225 | 250 | 275 | 300 | 325
+Cost structure (EGP)
+Testing, fulfilment & app delivery | % of assessment revenue | 0.2 | 0.2 | 0.17 | 0.16 | 0.15 | EGP 1,173 per Standard package; larger lab batches lower cost per test.
+Practitioner referral commission | % of assessment revenue | 0.15 | 0.15 | 0.15 | 0.15 | 0.15
+Payment processing | % of revenue | 0.03 | 0.03 | 0.03 | 0.03 | 0.03
+Lab fixed delivery costs (lab staff, QC, licences, maintenance) | EGP / year | 3245000 | 3710000 | 4640000 | 5200000 | 5800000
+Salaries (non-lab) | EGP / year | 7000000 | 8500000 | 10500000 | 12500000 | 14500000
+Practitioner partnerships & marketing | EGP / year | 4500000 | 4000000 | 5000000 | 6500000 | 8000000 | USD 200K partnership and expansion budget across Years 1–2.
+Product development & scientific validation | EGP / year | 5400000 | 2500000 | 2500000 | 3000000 | 3500000 | USD 200K budget across Years 1–2.
+Regulatory, quality systems & G&A | EGP / year | 4990000 | 1990000 | 2970000 | 3500000 | 4000000 | USD 150K regulatory and quality budget spent in Year 1.
+Capex (licensed in-house lab) | USD / year | 450000 | 30000 | 60000 | 40000 | 50000 | Laboratory infrastructure in Year 1.
+Funding
+Equity raised | USD | 20000 | 1100000 | 0 | 0 | 0 | 0 | USD 1.1M seed at the start of 2027; no further raise needed to reach profitability (lowest cash ~EGP 5–6M at end-2028).
+### sheet Model
+Byota | Financial Model
+USD, fiscal year ending 31 December. 2026–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+Unit | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Active referring practitioners (year-end) | # | 3 | 24 | 60 | 120 | 180 | 250
+Paid assessment packages | # | 0 | 720 | 2000 | 4300 | 6800 | 9500
+Blended package price | EGP | 0 | 8665 | 9398 | 10115 | 10914 | 11798
+Paying app subscribers (avg.) | # | 0 | 60 | 270 | 580 | 1000 | 1500
+Recognised revenue (EGP) | EGP | 0 | 6400728 | 19606200 | 45406866 | 77818260 | 117927200
+EBITDA (EGP) | EGP | -882300 | -21109849 | -8260656 | 4516943 | 21776052 | 44966224
+Income statement (USD)
+Assessment packages | USD | 0 | 113431 | 321303 | 701498 | 1133103 | 1624307
+App renewals | USD | 0 | 2945 | 13846 | 30871 | 54962 | 84783
+Total revenue | USD | 0 | 116377 | 335149 | 732369 | 1188065 | 1709090
+  Revenue growth (YoY) | % | n/m | n/m | 1.8798567111709 | 1.18520545426545 | 0.622222338939054 | 0.438549069424662
+Testing, fulfilment & app delivery | USD | 0 | -22686 | -64261 | -119255 | -181297 | -243646
+Practitioner commissions | USD | 0 | -17015 | -48195 | -105225 | -169965 | -243646
+Payment processing | USD | 0 | -3491 | -10054 | -21971 | -35642 | -51273
+Lab fixed delivery costs | USD | 0 | -59000 | -63419 | -74839 | -79389 | -84058
+Total cost of revenue | USD | 0 | -102192 | -185929 | -321289 | -466293 | -622623
+Gross profit | USD | 0 | 14185 | 149220 | 411080 | 721772 | 1086467
+  Gross margin | % | 0 | 0.121884785605637 | 0.445233854597015 | 0.561301519906703 | 0.60751874431528 | 0.635699177119443
+Salaries (non-lab) | USD | 0 | -127273 | -145299 | -169355 | -190840 | -210145
+Practitioner partnerships & marketing | USD | -600 | -81818 | -68376 | -80645 | -99237 | -115942
+Product development & scientific validation | USD | -14500 | -98182 | -42735 | -40323 | -45802 | -50725
+Regulatory, quality & G&A | USD | -2200 | -90727 | -34017 | -47903 | -53435 | -57971
+Total operating expenses | USD | -17300 | -398000 | -290427 | -338226 | -389313 | -434783
+EBITDA | USD | -17300 | -383815 | -141208 | 72854 | 332459 | 651684
+  EBITDA margin | % | 0 | -3.29803869809809 | -0.421328763350369 | 0.0994770900947007 | 0.279832157645262 | 0.381304940675264
+Depreciation & amortisation | USD | 0 | -64286 | -68571 | -77143 | -82857 | -90000
+EBIT | USD | -17300 | -448101 | -209779 | -4289 | 249602 | 561684
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -17300 | -448101 | -209779 | -4289 | 249602 | 561684
+Income tax | USD | 0 | 0 | 0 | 0 | 0 | -29659
+Net income | USD | -17300 | -448101 | -209779 | -4289 | 249602 | 532026
+  Net margin | % | 0 | -3.85043122059151 | -0.625928765973446 | -0.00585625625113921 | 0.210090905950058 | 0.311291786931437
+  Memo: tax losses carried forward (closing) | USD | 17300 | 465401 | 675180 | 679469 | 429868 | 0
+Cash flow & runway (USD)
+Net income | USD | -17300 | -448101 | -209779 | -4289 | 249602 | 532026
+Add back: D&A | USD | 0 | 64286 | 68571 | 77143 | 82857 | 90000
+Change in working capital | USD | 0 | -9310 | -17502 | -31778 | -36456 | -41682
+Cash flow from operations | USD | -17300 | -393126 | -158710 | 41076 | 296003 | 580344
+Capital expenditure | USD | 0 | -450000 | -30000 | -60000 | -40000 | -50000
+Free cash flow (pre-financing) | USD | -17300 | -843126 | -188710 | -18924 | 256003 | 530344
+Equity & SAFE funding raised | USD | 20000 | 1100000 | 0 | 0 | 0 | 0
+Net change in cash | USD | 2700 | 256874 | -188710 | -18924 | 256003 | 530344
+Opening cash | USD | 0 | 2700 | 259574 | 70865 | 51941 | 307944
+Closing cash | USD | 2700 | 259574 | 70865 | 51941 | 307944 | 838288
+Average monthly net burn | USD | 1442 | 70260 | 15726 | 1577 | 0 | 0
+Runway at year-end burn (months) | months | 1.8728323699422 | 3.69445918804537 | 4.50628263558416 | 32.9372487197088 | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset

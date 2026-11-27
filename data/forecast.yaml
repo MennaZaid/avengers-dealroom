@@ -13,9 +13,9 @@ Modeeri:
 Finalyze:
   round_usd: 140000            # DECK image: $140K for 5%
   premoney_override: 2660000   # DECK image: $2.66M pre-money
-  monthly_burn_usd: 10000      # ASSUMPTION: 3 founders, lean data team
+  monthly_burn_usd: 6650       # MODEL: 2027F average monthly net burn USD 6,650
   milestone: "Close first paid data contracts (talks with LSEG, Thndr, Azimut, Beltone, Mubasher per DECK); build bank/lender model"
-  y5_base: 20000000            # ASSUMPTION: ~$3M revenue x ~7x data-business multiple
+  y5_base: 20000000            # MODEL 2031 revenue $3.76M, haircut to ~$3M (ASSUMPTION) x ~7x data-business multiple
   y5_downside: 1000000         # ASSUMPTION: stays a small Egypt-only data vendor
 Blaze:
   round_usd: 500000            # DECK: "$500,000" pre-seed, $200K secured
@@ -36,10 +36,10 @@ Zaat:
   y5_base: 8000000             # ASSUMPTION
   y5_downside: 0
 TRNR:
-  round_usd: 80000             # VIDEO: about $80K for 15 months
-  monthly_burn_usd: 5300       # from VIDEO: $80K / 15 months
+  round_usd: 120000            # MODEL: USD 120K pre-seed planned 2027 (VIDEO said about $80K)
+  monthly_burn_usd: 2745       # MODEL: 2027F average monthly net burn USD 2,745
   milestone: "Launch in two areas, 20 founding coaches, repeat bookings (DECK roadmap)"
-  y5_base: 4000000             # ASSUMPTION: small local marketplace
+  y5_base: 2500000             # MODEL 2031 revenue $632K, haircut to ~$0.5M (ASSUMPTION) x 5x
   y5_downside: 0
 Byota:
   round_usd: 1100000           # VIDEO

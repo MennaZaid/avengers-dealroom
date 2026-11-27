@@ -1,0 +1,117 @@
+### sheet Summary
+Finalyze
+Emerging-market financial data, made usable and verifiable
+Sector | Data & AI / Financial data infrastructure
+Headquarters | Cairo, Egypt
+Founded / started operating | 2025
+Current stage | Pre-seed (raising USD 140K for 5% at USD 2.66M pre-money)
+Business model | Redistribution licences to data vendors, display licences to institutions, and on-premise engine licences to banks and lenders
+Company overview
+Finalyze reads Arabic, scanned and legacy financial filings that machines cannot, turning them into structured, source-linked
+financial statements. Every figure is cross-checked across years and statements and linked to its source page, with an
+analyst reviewing anything the engine is unsure of. Data is delivered in English or Arabic via feed, app or Excel. The same
+engine runs inside banks and lenders on their own servers to turn private-company documents into credit-ready data.
+Operating highlights (as of November 2026)
+First market live | 14 November 2026 (Egypt)
+History extracted | Q1 2020 to Q2 2026
+Accuracy on Arabic financial statements | 98.2% (vs 85.7% for GPT-4o on Arabic tables)
+Supply | Financial statements purchased directly from EGID
+Buyers in talks | LSEG, Thndr, Azimut, Beltone; three deals in discussion with Mubasher and Decypha
+Programmes & awards | BitRoot BuildCamp; AUC Venture Lab; SU Reallife 2nd place (2025); Entrepreneur Society 1st place (2026)
+Funding history
+Date | Round / source | Amount (USD) | Investors / notes
+2025 | Founders' capital | 15000 | Co-founders
+2026 | Founders' capital | 15000 | Co-founders
+2026 | Competition prizes | 10000 | Entrepreneur Society 1st place and programme awards (non-dilutive)
+2027 (planned) | Pre-seed | 140000 | 5% at USD 2.66M pre-money
+2028 (planned) | Seed | 1000000 | Gulf markets and own on-premise model for lenders
+Financial summary (USD)
+2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Total revenue | 0 | 0 | 62000 | 355000 | 1020000 | 2154000 | 3755000
+Revenue growth | n/m | n/m | n/m | 4.7258064516129 | 1.87323943661972 | 1.11176470588235 | 0.743268337975859
+Gross profit | -2300 | -10400 | 34500 | 259000 | 811800 | 1782440 | 3209400
+Gross margin | 0 | 0 | 0.556451612903226 | 0.729577464788732 | 0.795882352941177 | 0.827502321262767 | 0.854700399467377
+EBITDA | -4800 | -26700 | -67500 | -61000 | 143800 | 632440 | 1525400
+EBITDA margin | 0 | 0 | -1.08870967741935 | -0.171830985915493 | 0.140980392156863 | 0.293611884865367 | 0.406231691078562
+Net income | -5000 | -17300 | -69100 | -70733 | 124467 | 474074 | 1151185
+Free cash flow (pre-financing) | -5400 | -17900 | -79800 | -129950 | 14050 | 295641 | 901035
+Equity raised | 15000 | 15000 | 140000 | 1000000 | 0 | 0 | 0
+Closing cash | 9600 | 6700 | 66900 | 936950 | 951000 | 1246641 | 2147676
+Markets covered | 0 | 1 | 2 | 3 | 5 | 6 | 7
+Headcount (FTE) | 0 | 1.5 | 4 | 10 | 18 | 28 | 38
+### sheet Assumptions
+Finalyze | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions | Value | Basis
+Corporate income tax rate | 0.225 | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) | 3 | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) | 0.15 | Institutional customers on annual contracts with 30–60 day payment terms.
+Driver assumptions | Unit | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Customers & pricing
+Data vendors on redistribution licences (avg.) | # | 0 | 0 | 1 | 3 | 5 | 7 | 9 | Commercial discussions with 2 vendors (one global, one regional) convert in 2027; more vendors as markets are added.
+Annual value per vendor licence | USD | 30000 | 45000 | 60000 | 72000 | 85000 | Expands with each market covered.
+Institutions on display licences (avg.) | # | 0 | 0 | 4 | 16 | 40 | 75 | 115 | Asset managers, brokers' research desks and investment banks; 3 non-bank financial institutions and 2 retail platforms in discussion.
+Annual value per display licence | USD | 8000 | 10000 | 12000 | 14000 | 16000 | Benchmarked to I-Score (~USD 17–25K per institution) at the low end; depth (notes, ownership) lifts price.
+Banks & lenders on on-premise engine (avg.) | # | 0 | 1 | 3 | 6 | 10 | Lender design partners in 2027; first paid deployment in 2028.
+Annual value per lender deployment | USD | 0 | 60000 | 80000 | 100000 | 115000 | Priced in bands by institution size, like credit bureaus.
+Markets covered (year-end) | # | 0 | 1 | 2 | 3 | 5 | 6 | 7 | Egypt first, then Arabic-speaking markets outside the five largest EMs.
+Cost structure
+Data acquisition (exchange filings, licences) | USD / year | 1500 | 6500 | 12000 | 25000 | 45000 | 70000 | 95000
+Analyst review & compute | % of revenue | 0.25 | 0.2 | 0.16 | 0.14 | 0.12
+Headcount (avg. FTE) | FTE | 0 | 1.5 | 4 | 10 | 18 | 28 | 38
+Cost per FTE | USD / year | 0 | 6000 | 18000 | 22000 | 26000 | 30000 | 33000
+Sales & marketing | USD / year | 10000 | 40000 | 90000 | 150000 | 220000
+Product, model training & G&A | USD / year | 20000 | 60000 | 110000 | 160000 | 210000 | Own model training for in-bank deployment from 2028.
+Capex | USD / year | 3000 | 25000 | 30000 | 40000 | 50000 | On-premise test servers and GPUs from 2028.
+Funding
+Equity raised | USD | 15000 | 15000 | 140000 | 1000000 | 0 | 0 | 0
+### sheet Model
+Finalyze | Financial Model
+USD, fiscal year ending 31 December. 2025–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+Unit | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Actual | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Markets covered (year-end) | # | 0 | 1 | 2 | 3 | 5 | 6 | 7
+Vendor redistribution licences (avg.) | # | 0 | 0 | 1 | 3 | 5 | 7 | 9
+Institutional display licences (avg.) | # | 0 | 0 | 4 | 16 | 40 | 75 | 115
+Lender deployments (avg.) | # | 0 | 0 | 0 | 1 | 3 | 6 | 10
+Headcount (avg. FTE) | FTE | 0 | 1.5 | 4 | 10 | 18 | 28 | 38
+Income statement (USD)
+Redistribution licences (data vendors) | USD | 0 | 0 | 30000 | 135000 | 300000 | 504000 | 765000
+Display licences (institutions) | USD | 0 | 0 | 32000 | 160000 | 480000 | 1050000 | 1840000
+On-premise engine (banks & lenders) | USD | 0 | 0 | 0 | 60000 | 240000 | 600000 | 1150000
+Total revenue | USD | 0 | 0 | 62000 | 355000 | 1020000 | 2154000 | 3755000
+  Revenue growth (YoY) | % | n/m | n/m | n/m | 4.7258064516129 | 1.87323943661972 | 1.11176470588235 | 0.743268337975859
+Data acquisition | USD | -1500 | -6500 | -12000 | -25000 | -45000 | -70000 | -95000
+Analyst review & compute | USD | -800 | -3900 | -15500 | -71000 | -163200 | -301560 | -450600
+Total cost of revenue | USD | -2300 | -10400 | -27500 | -96000 | -208200 | -371560 | -545600
+Gross profit | USD | -2300 | -10400 | 34500 | 259000 | 811800 | 1782440 | 3209400
+  Gross margin | % | 0 | 0 | 0.556451612903226 | 0.729577464788732 | 0.795882352941177 | 0.827502321262767 | 0.854700399467377
+Salaries & benefits | USD | 0 | -9000 | -72000 | -220000 | -468000 | -840000 | -1254000
+Sales & marketing | USD | -300 | -1800 | -10000 | -40000 | -90000 | -150000 | -220000
+Product, model training & G&A | USD | -2200 | -5500 | -20000 | -60000 | -110000 | -160000 | -210000
+Total operating expenses | USD | -2500 | -16300 | -102000 | -320000 | -668000 | -1150000 | -1684000
+EBITDA | USD | -4800 | -26700 | -67500 | -61000 | 143800 | 632440 | 1525400
+  EBITDA margin | % | 0 | 0 | -1.08870967741935 | -0.171830985915493 | 0.140980392156863 | 0.293611884865367 | 0.406231691078562
+Depreciation & amortisation | USD | -200 | -600 | -1600 | -9733 | -19333 | -31667 | -40000
+EBIT | USD | -5000 | -27300 | -69100 | -70733 | 124467 | 600773 | 1485400
+Grants, prizes & other income | USD | 0 | 10000 | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -5000 | -17300 | -69100 | -70733 | 124467 | 600773 | 1485400
+Income tax | USD | 0 | 0 | 0 | 0 | 0 | -126699 | -334215
+Net income | USD | -5000 | -17300 | -69100 | -70733 | 124467 | 474074 | 1151185
+  Net margin | % | 0 | 0 | -1.11451612903226 | -0.19924882629108 | 0.12202614379085 | 0.220090219746209 | 0.306573901464714
+  Memo: tax losses carried forward (closing) | USD | 5000 | 22300 | 91400 | 162133 | 37667 | 0 | 0
+Cash flow & runway (USD)
+Net income | USD | -5000 | -17300 | -69100 | -70733 | 124467 | 474074 | 1151185
+Add back: D&A | USD | 200 | 600 | 1600 | 9733 | 19333 | 31667 | 40000
+Change in working capital | USD | 0 | 0 | -9300 | -43950 | -99750 | -170100 | -240150
+Cash flow from operations | USD | -4800 | -16700 | -76800 | -104950 | 44050 | 335641 | 951035
+Capital expenditure | USD | -600 | -1200 | -3000 | -25000 | -30000 | -40000 | -50000
+Free cash flow (pre-financing) | USD | -5400 | -17900 | -79800 | -129950 | 14050 | 295641 | 901035
+Equity & SAFE funding raised | USD | 15000 | 15000 | 140000 | 1000000 | 0 | 0 | 0
+Net change in cash | USD | 9600 | -2900 | 60200 | 870050 | 14050 | 295641 | 901035
+Opening cash | USD | 0 | 9600 | 6700 | 66900 | 936950 | 951000 | 1246641
+Closing cash | USD | 9600 | 6700 | 66900 | 936950 | 951000 | 1246641 | 2147676
+Average monthly net burn | USD | 450 | 1492 | 6650 | 10829 | 0 | 0 | 0
+Runway at year-end burn (months) | months | 21.3333333333333 | 4.49162011173184 | 10.0601503759399 | 86.5209696036937 | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset

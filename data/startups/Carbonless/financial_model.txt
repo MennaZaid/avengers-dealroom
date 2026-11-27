@@ -1,0 +1,124 @@
+### sheet Summary
+Carbonless
+The first MENA onboard carbon capture (OCCS) startup
+Sector | Climate tech / Maritime decarbonisation
+Headquarters | Mansoura & Cairo, Egypt
+Founded / started operating | Project started Nov 2022 (first funding 2023); company incorporated 2026
+Current stage | Pre-seed; raising USD 4M in three milestone-based tranches
+Business model | Sale or lease of SENU onboard capture systems + maintenance contracts + sale of captured CO2 (with cash-back to shipowners)
+Company overview
+Carbonless builds SENU, an onboard carbon capture and storage system (scrubbing → capture → regeneration → liquid storage)
+that lets shipowners keep conventional fuels while complying with EU ETS, FuelEU and IMO net-zero rules. It claims 35–60%
+lower energy use than MEA-based systems through waste-heat regeneration, 82–90% capture rates and a ~36-month payback.
+Captured CO2 is offloaded and sold to industry (e-fuels, F&B, greenhouses), with a share returned to the shipowner.
+Operating highlights (as of November 2026)
+Prototype | SENU I tested on a 2.2L diesel engine at Mansoura University Energy Lab; captured 30 g CO2 from exhaust
+Current phase | 4-stage onland MVP; shipowner negotiations under NDA
+Next milestones | Class society Approval in Principle; first onboard pilot and sea trials (Q4 2027)
+Addressable fleet | 34,000 vessels >5,000 GT must comply; ~7,000 use the Suez Canal
+Recognition | 12 national & international awards since 2022 (ASRT, ASU / USAID, ISF, Abou Hashima Foundation, MSMEDA)
+Funding history
+Date | Round / source | Amount (USD) | Investors / notes
+2023 | Grant | 9800 | Academy of Scientific Research & Technology (My Project, My Startup)
+2023–2026 | Founders' capital | 35000 | Co-founders
+2024 | Prizes & grants | 21500 | Venture Development Program (ASU), Egyptian Startup Olympics, eSeed Challenge
+2025 | Prizes | 12000 | Startup Power Season 3 (Abou Hashima Foundation – MSMEDA)
+2026 | Award | 8000 | Athar Award for Best Practice in Sustainability
+2027 (planned) | Pre-seed tranches 1–2 | 1520000 | Validate (USD 0.52M) and Certify (USD 1.0M)
+2028 (planned) | Pre-seed tranche 3 | 2480000 | Deploy: production design, manufacture, install, sea trials
+Financial summary (USD)
+2023A | 2024A | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Total revenue | 0 | 0 | 0 | 0 | 0 | 6170000 | 26230900 | 62160400 | 122053200
+Revenue growth | n/m | n/m | n/m | n/m | n/m | n/m | 3.25136142625608 | 1.36973950569748 | 0.963520183267804
+Gross profit | 0 | 0 | 0 | 0 | 0 | 3336000 | 16703470 | 41107320 | 83932560
+Gross margin | 0 | 0 | 0 | 0 | 0 | 0.540680713128039 | 0.636786004292647 | 0.661310416277888 | 0.687671933222562
+EBITDA | -9800 | -16300 | -13600 | -30500 | -1144000 | 1604000 | 14003470 | 37087320 | 78532560
+EBITDA margin | 0 | 0 | 0 | 0 | 0 | 0.259967585089141 | 0.533853966123923 | 0.596639017766938 | 0.643428930990748
+Net income | 0 | 5200 | -1600 | -22875 | -1106875 | 1458253 | 10658649 | 28432382 | 60407131
+Free cash flow (pre-financing) | 0 | 5200 | -1600 | -25500 | -1194000 | -231772 | 7701716 | 23321217 | 52307870
+Equity raised | 3000 | 2000 | 5000 | 25000 | 1520000 | 2480000 | 0 | 0 | 0
+Closing cash | 3000 | 10200 | 13600 | 13100 | 339100 | 2587328 | 10289044 | 33610261 | 85918131
+Systems delivered | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 7 | 12
+Installed base (year-end) | 0 | 0 | 0 | 0 | 0 | 2 | 5 | 12 | 24
+CO2 captured (t) | 0 | 0 | 0 | 0 | 0 | 15000 | 83300 | 202300 | 428400
+### sheet Assumptions
+Carbonless | Key Assumptions
+USD unless stated. Blue = input. Shaded columns = forecast drivers; grey columns show actual levels for reference.
+General assumptions | Value | Basis
+Corporate income tax rate | 0.225 | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) | 8 | Test facility, pilot system and production tooling depreciated over 8 years.
+Net working capital (% of change in revenue) | 0.12 | Milestone billing on system sales; CO2 offtake receivables.
+Driver assumptions | Unit | 2023A | 2024A | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Systems & pricing
+Commercial SENU systems delivered | # | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 7 | 12 | Onland MVP Q2 2027, class approval and first onboard pilot Q4 2027 to early 2028, first commercial SENU system Q2 2028.
+Pilot systems installed (non-revenue) | # | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 0 | 0 | Onboard pilot for sea trials, funded by the Deploy tranche.
+Price per SENU system | USD | 0 | 3200000 | 3100000 | 3000000 | 2900000 | Sold upfront to shipowners, who take full ownership; ~36-month average payback against penalties and fuel switching.
+Maintenance contract per operating system | USD / year | 0 | 120000 | 125000 | 130000 | 135000 | Long-term maintenance and customer support contracts.
+CO2 captured per operating system | tonnes / year | 0 | 15000 | 23800 | 23800 | 23800 | 82,000 DWT bulk carrier emitting 28,000 t CO2 a year at an 85% capture rate (SENU tested range 82–90%); pilot year lower.
+Liquefied CO2 sale price | USD / tonne | 0 | 220 | 220 | 220 | 220 | Lower of the two liquid CO2 price cases (USD 220 and USD 650 per tonne; ChemAnalyst).
+Cash-back to shipowner | % of CO2 sales | 0.1 | 0.1 | 0.1 | 0.1 | 0.1
+Cost structure
+Manufacturing & installation cost | % of system revenue | 0.7 | 0.7 | 0.65 | 0.6 | 0.58 | Falling with volume and design standardisation.
+Service delivery cost | % of maintenance revenue | 0.45 | 0.45 | 0.42 | 0.4 | 0.4
+CO2 offloading, storage & logistics | % of CO2 revenue | 0.2 | 0.2 | 0.2 | 0.2 | 0.2
+Headcount (avg. FTE) | FTE | 0 | 0 | 0 | 0 | 8 | 18 | 30 | 45 | 60 | Founders unpaid until the 2027 raise.
+Cost per FTE | USD / year | 18000 | 24000 | 30000 | 36000 | 40000 | Marine and process engineers; rising international mix.
+R&D, testing & certification | USD / year | 900000 | 900000 | 1000000 | 1200000 | 1400000 | Validate (concept design, AiP, 4-stage MVP) and Certify (VFI cycle, functional design, HAZID/HAZOP, class review) in 2027; FAT a
+Sales & business development | USD / year | 40000 | 150000 | 300000 | 450000 | 600000
+G&A | USD / year | 60000 | 250000 | 500000 | 750000 | 1000000
+Capex | USD / year | 100000 | 1100000 | 800000 | 1200000 | 1500000 | Onland test rig (2027), onboard pilot system (2028), production tooling and capacity.
+Grants & non-dilutive funding | USD / year | 50000 | 100000 | 0 | 0 | 0 | Innovation and climate grants alongside the equity tranches.
+Funding
+Equity raised | USD | 3000 | 2000 | 5000 | 25000 | 1520000 | 2480000 | 0 | 0 | 0 | USD 4M in three milestone tranches: Validate USD 0.52M and Certify USD 1.0M before class approval (2027); Deploy USD 2.48M (2028).
+### sheet Model
+Carbonless | Financial Model
+USD, fiscal year ending 31 December. 2023–2026 actuals; 2027–2031 forecast (drivers on 'Assumptions').
+Unit | 2023A | 2024A | 2025A | 2026A | 2027F | 2028F | 2029F | 2030F | 2031F
+Actual | Actual | Actual | Actual | Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Commercial systems delivered | # | 0 | 0 | 0 | 0 | 0 | 1 | 3 | 7 | 12
+Installed base incl. pilot (year-end) | # | 0 | 0 | 0 | 0 | 0 | 2 | 5 | 12 | 24
+Average operating systems | # | 0 | 0 | 0 | 0 | 0 | 1 | 3.5 | 8.5 | 18
+CO2 captured & sold | tonnes | 0 | 0 | 0 | 0 | 0 | 15000 | 83300 | 202300 | 428400
+Headcount (avg. FTE) | FTE | 0 | 0 | 0 | 0 | 8 | 18 | 30 | 45 | 60
+Income statement (USD)
+SENU system sales | USD | 0 | 0 | 0 | 0 | 0 | 3200000 | 9300000 | 21000000 | 34800000
+Maintenance contracts | USD | 0 | 0 | 0 | 0 | 0 | 0 | 437500 | 1105000 | 2430000
+Captured CO2 sales (net of cash-back) | USD | 0 | 0 | 0 | 0 | 0 | 2970000 | 16493400 | 40055400 | 84823200
+Total revenue | USD | 0 | 0 | 0 | 0 | 0 | 6170000 | 26230900 | 62160400 | 122053200
+  Revenue growth (YoY) | % | n/m | n/m | n/m | n/m | n/m | n/m | 3.25136142625608 | 1.36973950569748 | 0.963520183267804
+Manufacturing & installation | USD | 0 | 0 | 0 | 0 | 0 | -2240000 | -6045000 | -12600000 | -20184000
+Service delivery | USD | 0 | 0 | 0 | 0 | 0 | 0 | -183750 | -442000 | -972000
+CO2 handling & storage | USD | 0 | 0 | 0 | 0 | 0 | -594000 | -3298680 | -8011080 | -16964640
+Total cost of revenue | USD | 0 | 0 | 0 | 0 | 0 | -2834000 | -9527430 | -21053080 | -38120640
+Gross profit | USD | 0 | 0 | 0 | 0 | 0 | 3336000 | 16703470 | 41107320 | 83932560
+  Gross margin | % | 0 | 0 | 0 | 0 | 0 | 0.540680713128039 | 0.636786004292647 | 0.661310416277888 | 0.687671933222562
+Salaries & benefits | USD | 0 | 0 | 0 | 0 | -144000 | -432000 | -900000 | -1620000 | -2400000
+R&D, prototyping, testing & certification | USD | -9000 | -13500 | -11000 | -26000 | -900000 | -900000 | -1000000 | -1200000 | -1400000
+Sales & business development | USD | 0 | 0 | 0 | 0 | -40000 | -150000 | -300000 | -450000 | -600000
+G&A, travel & incorporation | USD | -800 | -2800 | -2600 | -4500 | -60000 | -250000 | -500000 | -750000 | -1000000
+Total operating expenses | USD | -9800 | -16300 | -13600 | -30500 | -1144000 | -1732000 | -2700000 | -4020000 | -5400000
+EBITDA | USD | -9800 | -16300 | -13600 | -30500 | -1144000 | 1604000 | 14003470 | 37087320 | 78532560
+  EBITDA margin | % | 0 | 0 | 0 | 0 | 0 | 0.259967585089141 | 0.533853966123923 | 0.596639017766938 | 0.643428930990748
+Depreciation & amortisation | USD | 0 | 0 | 0 | -375 | -12875 | -150375 | -250375 | -400375 | -587875
+EBIT | USD | -9800 | -16300 | -13600 | -30875 | -1156875 | 1453625 | 13753095 | 36686945 | 77944685
+Grants, prizes & other income | USD | 9800 | 21500 | 12000 | 8000 | 50000 | 100000 | 0 | 0 | 0
+Profit before tax | USD | 0 | 5200 | -1600 | -22875 | -1106875 | 1553625 | 13753095 | 36686945 | 77944685
+Income tax | USD | 0 | 0 | 0 | 0 | 0 | -95372 | -3094446 | -8254563 | -17537554
+Net income | USD | 0 | 5200 | -1600 | -22875 | -1106875 | 1458253 | 10658649 | 28432382 | 60407131
+  Net margin | % | 0 | 0 | 0 | 0 | 0 | 0.23634572528363 | 0.406339417442787 | 0.457403465469978 | 0.494924597429645
+  Memo: tax losses carried forward (closing) | USD | 0 | 0 | 0 | 22875 | 1129750 | 0 | 0 | 0 | 0
+Cash flow & runway (USD)
+Net income | USD | 0 | 5200 | -1600 | -22875 | -1106875 | 1458253 | 10658649 | 28432382 | 60407131
+Add back: D&A | USD | 0 | 0 | 0 | 375 | 12875 | 150375 | 250375 | 400375 | 587875
+Change in working capital | USD | 0 | 0 | 0 | 0 | 0 | -740400 | -2407308 | -4311540 | -7187136
+Cash flow from operations | USD | 0 | 5200 | -1600 | -22500 | -1094000 | 868228 | 8501716 | 24521217 | 53807870
+Capital expenditure | USD | 0 | 0 | 0 | -3000 | -100000 | -1100000 | -800000 | -1200000 | -1500000
+Free cash flow (pre-financing) | USD | 0 | 5200 | -1600 | -25500 | -1194000 | -231772 | 7701716 | 23321217 | 52307870
+Equity & SAFE funding raised | USD | 3000 | 2000 | 5000 | 25000 | 1520000 | 2480000 | 0 | 0 | 0
+Net change in cash | USD | 3000 | 7200 | 3400 | -500 | 326000 | 2248228 | 7701716 | 23321217 | 52307870
+Opening cash | USD | 0 | 3000 | 10200 | 13600 | 13100 | 339100 | 2587328 | 10289044 | 33610261
+Closing cash | USD | 3000 | 10200 | 13600 | 13100 | 339100 | 2587328 | 10289044 | 33610261 | 85918131
+Average monthly net burn | USD | 0 | 0 | 133 | 2125 | 99500 | 19314 | 0 | 0 | 0
+Runway at year-end burn (months) | months | n/m | n/m | 102 | 6.16470588235294 | 3.40804020100503 | 134 | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied to positive pre-tax profit only. Tax losses carried forward against future profits. Working capital modelled as a % of the change in revenue. D&A straight-line over each asset

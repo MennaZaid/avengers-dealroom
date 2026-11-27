@@ -1,0 +1,132 @@
+### sheet Summary
+Blaze
+Powering the future of investing for the new generation
+Sector | Fintech / Education-first retail investing app
+Headquarters | Cairo, Egypt
+Founded / started operating | Launching 2027 (first year of operations in the model)
+Current stage | Pre-seed (USD 500K round; USD 200K secured)
+Business model | Freemium subscription (USD 7 / month premium) + 0.30% commission on trades placed through Blaze (70% to Blaze, 30% to the execution broker; post FRA approval)
+Company overview
+Blaze is an AI-powered, education-first investing app for first-time investors across Millennials, Gen Z and Gen Alpha.
+Users learn through Duolingo-style gamified modules, build personalised Investment Playlists by goal, risk, sector and theme,
+explore charts and discuss ideas with the Blaze AI chatbot. Premium unlocks personalised playlists, analytics and AI guidance.
+The pre-seed funds the FRA licence that allows trade execution through Blaze, unlocking commission revenue.
+Key operating metrics (model forecast)
+Registered users | 0 at the start of 2027, rising to 954,568 by 2031F
+Funded trading accounts | 28,433 on average in 2027F (trading from mid-2027), 628,424 by 2031F
+Gross margin | 75%-76% across 2027F-2031F (after app-store fees, broker share and cloud costs)
+LTV / CAC | 10.7x in 2027F (lifetime gross profit per user at 20% annual churn vs. cost per new user)
+Angel funding | USD 200K secured from Dr. Nader Khedr (CEO, RXHealthcare Group UAE)
+Recognition | START Fellowship, START Summit, AUC Venture Lab, MINT
+Funding history
+Date | Round / source | Amount (USD) | Investors / notes
+2025 | Founders' capital | 25000 | Co-founders
+2026 | Pre-seed (first close) | 200000 | Dr. Nader Khedr, angel investor
+2027 (planned) | Pre-seed (final close) | 300000 | Remaining USD 300K of the USD 500K round
+2028 (planned) | Seed | 2000000 | Scale acquisition and MENA expansion
+Financial summary (USD)
+2027F | 2028F | 2029F | 2030F | 2031F
+Total revenue | 247695 | 1399936 | 3610527 | 7236972 | 13196906
+Revenue growth | n/m | 4.651858151608893 | 1.5790666811219753 | 1.004408825126343 | 0.8235396744888714
+Gross profit | 187822 | 1052174 | 2722572 | 5484929 | 10031220
+Gross margin | 0.7582781456953643 | 0.7515873015873017 | 0.7540650406504065 | 0.7579037800687285 | 0.7601190476190476
+EBITDA | -197150 | 373796 | 1622588 | 3823874 | 7654370
+EBITDA margin | -0.7959413903575564 | 0.2670097909071826 | 0.44940463419048626 | 0.5283803595722456 | 0.5800124766802571
+Net income | -199150 | 329851 | 1248980 | 2951877 | 5918445
+Free cash flow (pre-financing) | -203150 | 323851 | 1244980 | 2948877 | 5916112
+Equity raised | 300000 | 2000000 | 0 | 0 | 0
+Closing cash | 296850 | 2620701 | 3865681 | 6814558 | 12730670
+Registered users (year-end) | 87486 | 208797 | 378281 | 616492 | 954568
+Premium subscribers (avg.) | 2187 | 9259 | 22015 | 43521 | 78553
+### sheet Assumptions
+Blaze | Key Assumptions
+USD unless stated. Blue = input. Forecast years 2027F-2031F; opening balances at the start of 2027 are inputs below.
+General assumptions | Value | Basis
+Corporate income tax rate | 0.225 | Egyptian corporate income tax rate (22.5%).
+Useful life of capitalised assets (years) | 3 | Straight-line depreciation on cumulative capex (equipment, devices, capitalised build).
+Net working capital (% of change in revenue) | 0 | App-store subscriptions are collected upfront and broker commissions settle monthly, so no material working capital build-up (was 5%).
+Driver assumptions | Unit | 2027F | 2028F | 2029F | 2030F | 2031F | Basis / rationale
+Users & monetisation
+Registered users (year-end) | # | 87486 | 208797 | 378281 | 616492 | 954568 | Calculated: opening users less churn, plus gross new registrations from the user build (row 44).
+Premium conversion | % of avg. users | 0.05 | 0.0625 | 0.075 | 0.0875 | 0.1 | Premium subscribers: 5% of average users in 2027, rising to 10% by 2031.
+Premium price | USD / month | 7 | 7 | 7 | 7 | 7 | Held flat in USD.
+Users with funded brokerage accounts via Blaze | % of avg. users | 0.65 | 0.7 | 0.8 | 0.8 | 0.8 | Users with funded accounts (traders): 65% in 2027, rising to 85% by 2031. Execution starts mid-2027 after FRA approval (ro
+Annual trading value per funded account | USD | 1500 | 2000 | 2500 | 3000 | 3500 | Small first-time portfolios growing with salaries.
+Trade commission | % of trade value | 0.003 | 0.003 | 0.003 | 0.003 | 0.003 | 0.30% per transaction (brokerage commission on trades placed through Blaze).
+Annual churn of registered users | % of opening users | 0.2 | 0.2 | 0.2 | 0.2 | 0.2 | PLACEHOLDER - replace with Blaze data. Registered users (row 11) are net of churn; marketing pays for net adds plus users who churned.
+Cost structure
+Execution partner share of commissions | % of commission | 0.3 | 0.3 | 0.3 | 0.3 | 0.3 | Blaze keeps 70% of the commission; the execution broker keeps 30% (agreed split).
+Cloud, market data & AI per average user | USD / year | 0.3 | 0.3 | 0.28 | 0.26 | 0.25
+App store & payment fees | % of subscription revenue | 0.15 | 0.15 | 0.15 | 0.15 | 0.15
+Headcount (avg. FTE) | FTE | 10 | 18 | 26 | 34 | 40
+Cost per FTE | USD / year | 14000 | 16000 | 18000 | 20000 | 22000
+Blended cost per new registered user | USD | 2 | 2.2 | 2.4 | 2.6 | 2.8 | Micro-influencer, campus and referral led.
+Licensing, legal & compliance | USD / year | 45000 | 35000 | 45000 | 55000 | 65000 | FRA licence in 2027.
+Product tools & G&A | USD / year | 25000 | 50000 | 80000 | 110000 | 140000
+Capex | USD / year | 6000 | 12000 | 15000 | 18000 | 20000
+Funding
+Equity raised | USD | 300000 | 2000000 | 0 | 0 | 0
+Timing
+Months of in-app trade execution in year | months | 6 | 12 | 12 | 12 | 12 | FRA approval expected mid-2027, so 2027 earns commissions for ~6 months.
+Opening balances (start of 2027)
+Registered users at start of 2027 | # | 0 | 2027 is Blaze's first year of operation, so it starts with no users.
+Cash at start of 2027 | USD | 200000
+User build
+New retail investors in Egypt (per year) | # | 436000 | 540000 | 681000 | 871000 | 1133000 | EGX Annual Reports: 297.6K new retail investors in 2025 (+30% vs 2024). Growth assumed to rise with financial literacy: 20% in 
+Share aged 18-45 | % | 0.79 | 0.79 | 0.79 | 0.79 | 0.79 | EGX Annual Report 2025: 79% of new retail investors were aged 18-45.
+New first-time investors aged 18-45 | # | 344440 | 426600 | 537990 | 688090 | 895070 | Calculated.
+Blaze sign-ups as % of new first-time investors | % | 0.15 | 0.2 | 0.25 | 0.3 | 0.35 | ASSUMPTION - share of each year's new first-time investors (aged 18-45) who sign up to Blaze.
+Existing investors in Egypt (start of year) | # | 1791000 | 2227000 | 2767000 | 3448000 | 4319000 | EGX Annual Reports: 526K registered investors at end-2022 plus new investors since (~1.43M at end-2025), plus ~357K in 2
+Blaze sign-ups as % of existing investors not yet on Blaze | % | 0.02 | 0.025 | 0.03 | 0.035 | 0.04 | ASSUMPTION - share of existing investors NOT yet on Blaze who join each year (Blaze's users at the start of the year a
+Gross new registered users | # | 87486 | 138808 | 211244 | 313867 | 461375 | Calculated: new first-time investors x sign-up % + (existing investors - Blaze users at start of year) x sign-up %. Feeds registered users (row
+### sheet Model
+Blaze | Financial Model
+USD, fiscal year ending 31 December. Forecast 2027-2031 (drivers and opening balances on 'Assumptions').
+Unit | 2027F | 2028F | 2029F | 2030F | 2031F
+Forecast | Forecast | Forecast | Forecast | Forecast
+Key operating metrics
+Registered users (year-end) | # | 87486 | 208797 | 378281 | 616492 | 954568
+Average registered users | # | 43743 | 148141 | 293539 | 497386 | 785530
+Premium subscribers (avg.) | # | 2187 | 9259 | 22015 | 43521 | 78553
+Funded trading accounts (avg.) | # | 28433 | 103699 | 234831 | 397909 | 628424
+Headcount (avg. FTE) | FTE | 10 | 18 | 26 | 34 | 40
+Gross new registered users | # | 87486 | 138808 | 211244 | 313867 | 461375
+Income statement (USD)
+Premium subscriptions | USD | 183721 | 777742 | 1849294 | 3655790 | 6598453
+Trading commissions | USD | 63974 | 622194 | 1761233 | 3581182 | 6598453
+Total revenue | USD | 247695 | 1399936 | 3610527 | 7236972 | 13196906
+  Revenue growth (YoY) | % | n/m | 4.651858151608893 | 1.5790666811219753 | 1.004408825126343 | 0.8235396744888714
+Execution partner share | USD | -19192 | -186658 | -528370 | -1074355 | -1979536
+Cloud, market data & AI | USD | -13123 | -44442 | -82191 | -129320 | -196383
+App store & payment fees | USD | -27558 | -116661 | -277394 | -548369 | -989768
+Total cost of revenue | USD | -59873 | -347762 | -887955 | -1752044 | -3165686
+Gross profit | USD | 187822 | 1052174 | 2722572 | 5484929 | 10031220
+  Gross margin | % | 0.7582781456953643 | 0.7515873015873017 | 0.7540650406504065 | 0.7579037800687285 | 0.7601190476190476
+Salaries & benefits | USD | -140000 | -288000 | -468000 | -680000 | -880000
+User acquisition & marketing | USD | -174972 | -305377 | -506985 | -816055 | -1291850
+Licensing, legal & compliance | USD | -45000 | -35000 | -45000 | -55000 | -65000
+Product tools & G&A | USD | -25000 | -50000 | -80000 | -110000 | -140000
+Total operating expenses | USD | -384972 | -678377 | -1099985 | -1661055 | -2376850
+EBITDA | USD | -197150 | 373796 | 1622588 | 3823874 | 7654370
+  EBITDA margin | % | -0.7959413903575564 | 0.2670097909071826 | 0.44940463419048626 | 0.5283803595722456 | 0.5800124766802571
+Depreciation & amortisation | USD | -2000 | -6000 | -11000 | -15000 | -17667
+EBIT | USD | -199150 | 367796 | 1611588 | 3808874 | 7636704
+Grants, prizes & other income | USD | 0 | 0 | 0 | 0 | 0
+Profit before tax | USD | -199150 | 367796 | 1611588 | 3808874 | 7636704
+Income tax | USD | 0 | -37945 | -362607 | -856997 | -1718258
+Net income | USD | -199150 | 329851 | 1248980 | 2951877 | 5918445
+  Net margin | % | -0.8040158453103993 | 0.23561880991412668 | 0.34592744037988266 | 0.40788844393086826 | 0.44847217877969026
+Cash flow & runway (USD)
+Net income | USD | -199150 | 329851 | 1248980 | 2951877 | 5918445
+Add back: D&A | USD | 2000 | 6000 | 11000 | 15000 | 17667
+Change in working capital | USD | 0 | 0 | 0 | 0 | 0
+Cash flow from operations | USD | -197150 | 335851 | 1259980 | 2966877 | 5936112
+Capital expenditure | USD | -6000 | -12000 | -15000 | -18000 | -20000
+Free cash flow (pre-financing) | USD | -203150 | 323851 | 1244980 | 2948877 | 5916112
+Equity & SAFE funding raised | USD | 300000 | 2000000 | 0 | 0 | 0
+Net change in cash | USD | 96850 | 2323851 | 1244980 | 2948877 | 5916112
+Opening cash | USD | 200000 | 296850 | 2620701 | 3865681 | 6814558
+Closing cash | USD | 296850 | 2620701 | 3865681 | 6814558 | 12730670
+Average monthly net burn | USD | 16929 | 0 | 0 | 0 | 0
+Runway at year-end burn (months) | months | 17.534754699556327 | n/m | n/m | n/m | n/m
+Notes: Costs shown as negatives. Tax applied once cumulative pre-tax profit is positive (losses carried forward). Working capital modelled as a % of the change in revenue. D&A straight-line on capex still within its usef
