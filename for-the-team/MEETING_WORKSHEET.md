@@ -12,8 +12,8 @@ Y5 company value: base $25,000,000, downside $3,000,000. Milestone: GCC expansio
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -31,8 +31,8 @@ Y5 company value: base $60,000,000, downside -. Milestone: Fintech + REIT licenc
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -50,8 +50,8 @@ Y5 company value: base $20,000,000, downside $1,000,000. Milestone: Close first 
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -69,8 +69,8 @@ Y5 company value: base $12,000,000, downside $1,000,000. Milestone: Iraq to 30 c
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -88,8 +88,8 @@ Y5 company value: base $20,000,000, downside -. Milestone: FRA approval and publ
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -107,8 +107,8 @@ Y5 company value: base $15,000,000, downside -. Milestone: Repeatable customer r
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -126,8 +126,8 @@ Y5 company value: base $15,000,000, downside -. Milestone: Paid pilot in Egypt, 
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -145,8 +145,8 @@ Y5 company value: base $8,000,000, downside -. Milestone: Paid launch of Zaat Wo
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -164,8 +164,8 @@ Y5 company value: base $700,000, downside $200,000. Milestone: Own force plates,
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -183,8 +183,8 @@ Y5 company value: base $3,000,000, downside -. Milestone: 40 paying branches by 
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -202,8 +202,8 @@ Y5 company value: base $40,000,000, downside -. Milestone: Onshore MVP, class ce
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -221,8 +221,8 @@ Y5 company value: base $4,000,000, downside -. Milestone: Launch in two areas, 2
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________
@@ -240,8 +240,8 @@ Y5 company value: base $1,000,000, downside -. Milestone: Four units serving New
 
 **HUMAN:**
 
-| Menna | Kirollos | Omar | Hana | Average |
-|---|---|---|---|---|
+| Menna | Omar | Hana | Average |
+|---|---|---|---|
 |   /5 |   /5 |   /5 |   /5 |  |
 
 - What we saw at the Open Day: ______________________________________________

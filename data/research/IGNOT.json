@@ -139,39 +139,6 @@
     "https://amtaar.app/developers/": null,
     "https://shehatalaw.com/wp-content/uploads/2025/12/Shehata-and-Partners-Publications-Cover-Chambers-Partners-Fintech-2025-Guide.pdf": null
    }
-  },
-  {
-   "topic": "market",
-   "claim": "",
-   "site": "data.worldbank.org",
-   "trusted": true,
-   "query": "site:data.worldbank.org Total addressable market for digital real‑estate investment and fractional property ownership in Egypt and MENA, including household savings and fintech adoption rates.",
-   "verdict": "unverified",
-   "finding": "No search results.",
-   "sources": [],
-   "risk_flag": ""
-  },
-  {
-   "topic": "competition",
-   "claim": "",
-   "site": "itida.gov.eg",
-   "trusted": true,
-   "query": "site:itida.gov.eg List of active proptech and real‑estate fintech startups in Egypt, their funding status, and market share in the digital property investment segment.",
-   "verdict": "unverified",
-   "finding": "No search results.",
-   "sources": [],
-   "risk_flag": ""
-  },
-  {
-   "topic": "case_study",
-   "claim": "",
-   "site": "mitsloan.mit.edu",
-   "trusted": true,
-   "query": "site:mitsloan.mit.edu Case study of a fractional real‑estate investment platform or fintech operating under a regulatory sandbox.",
-   "verdict": "unverified",
-   "finding": "No search results.",
-   "sources": [],
-   "risk_flag": ""
   }
  ]
 }

@@ -2,7 +2,7 @@
 # conviction: each member 1-5 (1 = would not invest, 5 = must have). open_day: what we saw at the pitches.
 # decision: invest | pass | watch | undecided. final_cheque_usd: the team's number (overrides the tool's proposal).
 # override_reason: required when the team disagrees with the tool - this becomes a pitch talking point.
-members: [Menna, Kirollos, Omar, Hana]
+members: [Menna, Omar, Hana]
 
 Modeeri:
   conviction: {}
