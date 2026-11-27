@@ -1,8 +1,8 @@
-# HUMAN LENS - filled in at the team meeting. The tool never writes here except through the Three Lenses tab.
+﻿# HUMAN LENS - filled in at the team meeting. The tool never writes here except through the Three Lenses tab.
 # conviction: each member 1-5 (1 = would not invest, 5 = must have). open_day: what we saw at the pitches.
 # decision: invest | pass | watch | undecided. final_cheque_usd: the team's number (overrides the tool's proposal).
 # override_reason: required when the team disagrees with the tool - this becomes a pitch talking point.
-members: [Menna, Omar, Hana]
+members: [Menna, Omar]
 
 Modeeri:
   conviction: {}

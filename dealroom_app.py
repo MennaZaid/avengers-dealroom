@@ -1,4 +1,4 @@
-"""DealRoom VC Copilot, by Team Avengers. Run: streamlit run dealroom_app.py"""
+﻿"""DealRoom VC Copilot, by Team Avengers. Run: streamlit run dealroom_app.py"""
 import json, os, sys, html, datetime as dt
 from pathlib import Path
 
@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 import streamlit as st
 
-st.set_page_config(page_title="Avengers Capital · DealRoom", page_icon="🛡️", layout="wide",
+st.set_page_config(page_title="Avengers Capital Â· DealRoom", page_icon="ðŸ›¡ï¸", layout="wide",
                    initial_sidebar_state="collapsed")
 # Streamlit Cloud: keys live in st.secrets; copy them into the environment before the LLM client loads.
 try:
@@ -75,13 +75,13 @@ h1,h2,h3,h4 { font-family:'Playfair Display',serif !important; color:var(--navy)
 room = dossier.build()
 evidence, scores, rules, res, vals, alloc = dossier.load()
 order = sorted(vals, key=lambda n: -vals[n]["weighted"])
-money = lambda x: f"${x:,.0f}" if x else "—"
+money = lambda x: f"${x:,.0f}" if x else "â€”"
 
-st.markdown(f"""<div class="hero"><div class="kicker">Avengers Capital · The DealRoom 2026</div>
+st.markdown(f"""<div class="hero"><div class="kicker">Avengers Capital Â· The DealRoom 2026</div>
 <h1>Investment Committee Console</h1>
 <p>A ${rules['fund_usd']:,} simulated fund. Founder claims checked word for word, markets researched with cited sources,
 every ticket signed off by a human.</p>
-<div class="team">TEAM AVENGERS · ASSEMBLE</div></div>""", unsafe_allow_html=True)
+<div class="team">TEAM AVENGERS Â· ASSEMBLE</div></div>""", unsafe_allow_html=True)
 
 fc = forecast.forecast(vals, alloc, rules)
 post = lambda n, a: vals[n]["blended_premoney"] + max(evidence[n].get("ask_usd") or 0, a)
@@ -97,21 +97,21 @@ with tabs[0]:
     cards = []
     for n in order:
         v, a, e = vals[n], alloc.get(n, 0), evidence[n]
-        stake = f"{a / post(n, a):.1%}" if a else "—"
+        stake = f"{a / post(n, a):.1%}" if a else "â€”"
         tag = '<span class="tag in">INVEST</span>' if a else '<span class="tag out">PASS</span>'
         cards.append(f"""<div class="deal {'' if a else 'pass'}">
 <div class="head"><div class="n">{esc(n)} {tag}</div><div class="s">{esc(e['sector'])}</div></div>
 <div><div class="l">Score</div><div class="v">{v['weighted']} / 5</div></div>
 <div><div class="l">Pre-money</div><div class="v">{money(v['blended_premoney'])}</div></div>
 <div><div class="l">Their ask</div><div class="v">{money(e.get('ask_usd')) if e.get('ask_usd') else 'n/a'}</div></div>
-<div><div class="l">Ticket · stake</div><div class="v">{money(a) if a else 'Pass'} · {stake}</div></div></div>""")
+<div><div class="l">Ticket Â· stake</div><div class="v">{money(a) if a else 'Pass'} Â· {stake}</div></div></div>""")
     st.markdown("".join(cards), unsafe_allow_html=True)
     st.download_button("Download the full data room", room, "data_room.md", use_container_width=True)
 
 with tabs[3]:
     name = st.selectbox("Startup", order)
-    st.markdown(f"#### Scorecard · {name}")
-    st.caption("1 = far below a typical pre-seed startup · 3 = typical · 5 = far above")
+    st.markdown(f"#### Scorecard Â· {name}")
+    st.caption("1 = far below a typical pre-seed startup Â· 3 = typical Â· 5 = far above")
     new = {}
     for i in range(0, len(dossier.CRITERIA), 4):
         cols = st.columns(4)
@@ -131,11 +131,11 @@ with tabs[4]:
                "Every finding cites only links the search returned.")
     for n in order:
         fs = res.get(n, {}).get("findings", [])
-        with st.expander(f"{n} · {len(fs)} findings" if fs else f"{n} · not researched"):
+        with st.expander(f"{n} Â· {len(fs)} findings" if fs else f"{n} Â· not researched"):
             for f in fs:
                 vd = str(f.get("verdict", "")).lower()
                 srcs = " ".join(f"[source {i + 1}]({u})" for i, u in enumerate(f.get("sources", [])))
-                st.markdown(f"<span class='v-{vd}'>{vd.upper()}</span> · **{esc(str(f.get('topic', '')).title())}**: "
+                st.markdown(f"<span class='v-{vd}'>{vd.upper()}</span> Â· **{esc(str(f.get('topic', '')).title())}**: "
                             f"{esc(f.get('finding', ''))} {srcs}", unsafe_allow_html=True)
                 if f.get("risk_flag"):
                     st.caption("Risk: " + f["risk_flag"])
@@ -165,16 +165,16 @@ with tabs[5]:
         if cols[i].button(s, key=f"st{i}", use_container_width=True):
             picked = s
     for m in st.session_state.chat:
-        st.chat_message(m["role"], avatar="🛡️" if m["role"] == "assistant" else "💼").markdown(m["content"])
+        st.chat_message(m["role"], avatar="ðŸ›¡ï¸" if m["role"] == "assistant" else "ðŸ’¼").markdown(m["content"])
     q = st.chat_input("Ask about any startup, ticket or risk...") or picked
     if q:
-        st.chat_message("user", avatar="💼").markdown(q)
+        st.chat_message("user", avatar="ðŸ’¼").markdown(q)
         with st.spinner("The analyst is reviewing the data room..."):
             try:
                 a = analyst.answer(q, st.session_state.chat)
             except Exception as exc:
                 a = f"The model could not be reached ({type(exc).__name__}). Check the API keys in Secrets."
-        st.chat_message("assistant", avatar="🛡️").markdown(a)
+        st.chat_message("assistant", avatar="ðŸ›¡ï¸").markdown(a)
         st.session_state.chat += [{"role": "user", "content": q}, {"role": "assistant", "content": a}]
 
 with tabs[6]:
@@ -185,7 +185,7 @@ with tabs[6]:
         if n not in alloc and n not in approvals:
             continue
         with st.container(border=True):
-            st.markdown(f"**{n}** · proposed {money(alloc.get(n, 0))}")
+            st.markdown(f"**{n}** Â· proposed {money(alloc.get(n, 0))}")
             amt = st.number_input("Ticket (USD)", 0, rules["fund_usd"],
                                   int(approvals.get(n, {}).get("amount", alloc.get(n, 0))), 10000, key=f"amt-{n}")
             c1, c2 = st.columns(2)
@@ -196,7 +196,7 @@ with tabs[6]:
                     APPROVALS.parent.mkdir(parents=True, exist_ok=True)
                     APPROVALS.write_text(json.dumps(approvals, indent=1), encoding="utf-8"); st.rerun()
             if n in approvals:
-                st.caption(f"{approvals[n]['outcome'].upper()} · {money(approvals[n]['amount'])} · {approvals[n]['timestamp']}")
+                st.caption(f"{approvals[n]['outcome'].upper()} Â· {money(approvals[n]['amount'])} Â· {approvals[n]['timestamp']}")
     total = sum(a["amount"] for a in approvals.values())
     st.metric("Approved so far", money(total) if total else "$0", delta=f"{money(rules['fund_usd'] - total)} left")
 
@@ -204,7 +204,7 @@ with tabs[1]:
     L = lenses.build()
     team = lenses.load_team()
     members = team.get("members") or ["Member 1", "Member 2", "Member 3"]
-    st.markdown("#### Human judgment · data analysis · agent research")
+    st.markdown("#### Human judgment Â· data analysis Â· agent research")
     st.caption("The tool proposes; the team decides. Where the lenses disagree, the team writes why, and that reason goes in the pitch.")
     agree = sum(1 for x in L.values() if x["agree"]); dis = sum(1 for x in L.values() if x["flags"])
     und = sum(1 for x in L.values() if x["human"]["decision"] == "undecided")
@@ -216,29 +216,29 @@ with tabs[1]:
 <div class="kpi"><div class="l">Final portfolio</div><div class="v">{money(sum(a for a, _ in fp.values()))}</div></div></div>""", unsafe_allow_html=True)
     if fp:
         st.markdown("**Final portfolio** (team decision where made, otherwise the tool's proposal): " +
-                    " · ".join(f"{n} {money(a)} ({who})" for n, (a, who) in fp.items()))
+                    " Â· ".join(f"{n} {money(a)} ({who})" for n, (a, who) in fp.items()))
     for n, x in L.items():
         h, d, a = x["human"], x["data"], x["agents"]
-        badge = "✅ agree" if x["agree"] else ("⚠️ " + "; ".join(x["flags"]) if x["flags"] else "⏳ team to decide")
-        with st.expander(f"{n} · tool: {x['tool_call'].upper()} {money(d['tool_cheque'])} · team: {h['decision'].upper()} · {badge}"):
+        badge = "âœ… agree" if x["agree"] else ("âš ï¸ " + "; ".join(x["flags"]) if x["flags"] else "â³ team to decide")
+        with st.expander(f"{n} Â· tool: {x['tool_call'].upper()} {money(d['tool_cheque'])} Â· team: {h['decision'].upper()} Â· {badge}"):
             c1, c2, c3 = st.columns(3)
             with c1:
-                st.markdown("**🧠 Human judgment**")
+                st.markdown("**ðŸ§  Human judgment**")
                 st.write(f"Conviction: {h['avg'] if h['avg'] is not None else 'not voted'}"
                          + (f"  ({', '.join(f'{k} {v}' for k, v in h['votes'].items())})" if h["votes"] else ""))
                 for lab, key in (("Open Day", "open_day"), ("Gut feeling", "gut"), ("Concerns", "concerns"), ("Why we differ", "override_reason")):
                     if h[key]:
                         st.caption(f"{lab}: {h[key]}")
             with c2:
-                st.markdown("**📊 Data analysis**")
-                st.write(f"Score {d['score']}/5 · pre-money {money(d['premoney_ours'])}"
+                st.markdown("**ðŸ“Š Data analysis**")
+                st.write(f"Score {d['score']}/5 Â· pre-money {money(d['premoney_ours'])}"
                          + (f" (their price {money(d['price_stated'])})" if d["price_stated"] else ""))
-                st.caption(f"Ask {money(d['ask'])} · runway {d['runway_m']:.0f} months · Y5 base {money(d['y5_base'])}, downside {money(d['y5_down'])}"
+                st.caption(f"Ask {money(d['ask'])} Â· runway {d['runway_m']:.0f} months Â· Y5 base {money(d['y5_base'])}, downside {money(d['y5_down'])}"
                            if d["runway_m"] else f"Ask {money(d['ask'])}")
                 st.caption(d["why"])
             with c3:
-                st.markdown("**🔎 Agent research**")
-                st.write(f"{a['quotes_ok']}/{a['quotes']} quotes verified · " +
+                st.markdown("**ðŸ”Ž Agent research**")
+                st.write(f"{a['quotes_ok']}/{a['quotes']} quotes verified Â· " +
                          ", ".join(f"{k} {v}" for k, v in a["verdicts"].items() if v))
                 for r in a["risks"]:
                     st.caption("Risk: " + r)
@@ -277,5 +277,5 @@ with tabs[8]:
     st.markdown("#### Fund rules")
     st.code((DATA / "rules.yaml").read_text(encoding="utf-8"), language="yaml")
 
-st.markdown("<div class='foot'>Built by <b>Team Avengers</b> · Assemble · The DealRoom, ES × MADS, AUC</div>",
+st.markdown("<div class='foot'>Built by <b>Team Avengers</b> Â· Assemble Â· The DealRoom, ES Ã— MADS, AUC</div>",
             unsafe_allow_html=True)
