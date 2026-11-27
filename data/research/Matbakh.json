@@ -84,6 +84,64 @@
     "https://www.countryreports.org/articles/damascus"
    ],
    "risk_flag": "lack of verifiable customer traction"
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Egypt restaurant POS startups funding",
+   "verdict": "context",
+   "finding": "Key restaurant‑POS and related SaaS players in Egypt/MENA include Foodics (KSA‑based POS/F&B platform expanding into Egypt)【3】, POS Rocket (Jordanian cloud‑based POS startup)【6】, Suplyd (Cairo‑based HORECA supply‑chain platform)【1】, and Funding Souq (Saudi‑based restaurant‑lending platform backed by Foodics)【2】.",
+   "sources": [
+    "https://www.foodics.com/press/ksa-based-pos-fb-and-retail-tech-startup-foodics-expands-into-egypt/",
+    "https://hala.capital/startups/pos-rocket/",
+    "https://www.arageek.com/en/suplyd-secures-2m-to-revolutionize-egypts-horeca-supply-chain",
+    "https://dealroom.co/news/168745-foodics-backs-funding-souq-to-embed-restaurant-lending-across-saudi-arab/"
+   ],
+   "risk_flag": "high competition",
+   "source_tiers": {
+    "https://www.foodics.com/press/ksa-based-pos-fb-and-retail-tech-startup-foodics-expands-into-egypt/": null,
+    "https://hala.capital/startups/pos-rocket/": null,
+    "https://www.arageek.com/en/suplyd-secures-2m-to-revolutionize-egypts-horeca-supply-chain": null,
+    "https://dealroom.co/news/168745-foodics-backs-funding-souq-to-embed-restaurant-lending-across-saudi-arab/": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "MENA restaurant POS companies competitors",
+   "verdict": "context",
+   "finding": "The market includes several POS providers active in Egypt and the broader MENA region such as Foodics, Unidiner, SpotOn, RTYLR, Loyverse, Square, Lightspeed, Toast, and MAPOS. Zyda’s Dec 2022 article lists the top nine restaurant POS systems for the Middle East, indicating a fragmented competitive landscape. Recent 2026 articles highlight fast‑growing players like Foodics and emerging local solutions, underscoring strong competition for Matbakh.",
+   "sources": [
+    "https://zyda.com/en/blog/pos-systems-restaurants-middle-east",
+    "https://unidiner.ai/compare-competitors/",
+    "https://www.landbase.com/blog/fastest-growing-restaurant-tech",
+    "https://voxire.com/blog/best-pos-systems-lebanese-restaurants-2026/",
+    "https://www.mapos.tech/en/blog/best-restaurant-management-system-lebanon-mena-2026"
+   ],
+   "risk_flag": "High competitive pressure",
+   "source_tiers": {
+    "https://zyda.com/en/blog/pos-systems-restaurants-middle-east": null,
+    "https://unidiner.ai/compare-competitors/": null,
+    "https://www.landbase.com/blog/fastest-growing-restaurant-tech": null,
+    "https://voxire.com/blog/best-pos-systems-lebanese-restaurants-2026/": null,
+    "https://www.mapos.tech/en/blog/best-restaurant-management-system-lebanon-mena-2026": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Egyptian restaurant management SaaS competitors and funding",
+   "verdict": "supported",
+   "finding": "Matbakh faces significant competition in the Egyptian and broader MENA region from established players like Foodics, a Saudi Arabian company providing cloud-based POS and restaurant management solutions since at least September 2023.",
+   "sources": [
+    "https://multiples.vc/private-comps/foodics",
+    "https://www.foodics.com/press/foodics-celebrates-3-years-in-egypt/"
+   ],
+   "risk_flag": "Market saturation and intense competition could hinder growth.",
+   "source_tiers": {
+    "https://multiples.vc/private-comps/foodics": null,
+    "https://www.foodics.com/press/foodics-celebrates-3-years-in-egypt/": null
+   }
   }
  ]
 }

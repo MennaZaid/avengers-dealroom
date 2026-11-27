@@ -82,6 +82,60 @@
     "https://www.fatf-gafi.org/content/dam/fatf-gafi/guidance/Guidance-Financial-Inclusion%20-Anti-Money-Laundering-Terrorist-Financing-Measures.pdf.coredownload.pdf"
    ],
    "risk_flag": "pricing model not substantiated"
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Egypt consumer fintech education investing competitors of Blaze funding",
+   "verdict": "context",
+   "finding": "The search results provide information about various fintech companies operating in Egypt and MENA region, but they do not specifically mention any direct competitors to Blaze. However, some notable players include Niyya Finance, which focuses on Sharia-compliant finance, and Lucky, which recently raised $23 million in a series B funding round.",
+   "sources": [
+    "https://www.f6s.com/companies/fintech/egypt/co",
+    "https://www.dealmakerssouthafrica.com/who-s-doing-what-in-the-africa-m-a-space"
+   ],
+   "risk_flag": "",
+   "source_tiers": {
+    "https://www.f6s.com/companies/fintech/egypt/co": null,
+    "https://www.dealmakerssouthafrica.com/who-s-doing-what-in-the-africa-m-a-space": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Sarwa robo‑advisor MENA funding round",
+   "verdict": "unverified",
+   "finding": "Sarwa, a UAE‑based low‑cost robo‑advisor, raised $8.4 million in a Series A round (Jan 2020) and $15 million in a Series B round (Aug 2021) and was the first fintech licensed as a digital financial advisor for young professionals in MENA. Thndr is also mentioned as a fast‑growing retail‑investing platform in the region, indicating multiple well‑funded competitors for Blaze’s education‑first investing model.",
+   "sources": [
+    "https://www.wamda.com/2021/08/sarwa-closes-15-million-series-b-round-led-mubadala",
+    "https://magnitt.com/news/uae-based-fintech-startup-sarwa-raises-8-4m-series-a-funding-round-led-by-kipco-51442",
+    "https://www.forbesmiddleeast.com/money/fintech/from-sarwa-to-thndr-how-retail-investing-is-booming-across-mena"
+   ],
+   "risk_flag": "Strong competition from capital‑rich robo‑advisors",
+   "source_tiers": {
+    "https://www.wamda.com/2021/08/sarwa-closes-15-million-series-b-round-led-mubadala": "B",
+    "https://magnitt.com/news/uae-based-fintech-startup-sarwa-raises-8-4m-series-a-funding-round-led-by-kipco-51442": "B",
+    "https://www.forbesmiddleeast.com/money/fintech/from-sarwa-to-thndr-how-retail-investing-is-booming-across-mena": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Wahed Invest Egypt investment education app funding",
+   "verdict": "context",
+   "finding": "Wahed Invest is a digital halal investing platform that has crossed $2 billion in assets under management, is authorised and regulated by the UK Financial Conduct Authority, and raised $50 million in a Series B round in 2022. The company aims to reduce financial exclusion by offering Sharia‑compliant investment products.",
+   "sources": [
+    "https://www.wahed.com/mme/crossing-2-billion-in-aum-what-this-milestone-means-for-wahed-and-the-future-of-islamic-finance",
+    "https://www.wahed.com/mme/new-to-wahed-heres-what-happens-before-you-invest",
+    "https://www.wahed.com/",
+    "https://www.instagram.com/reel/CfJpeZLrM4Y/"
+   ],
+   "risk_flag": "",
+   "source_tiers": {
+    "https://www.wahed.com/mme/crossing-2-billion-in-aum-what-this-milestone-means-for-wahed-and-the-future-of-islamic-finance": null,
+    "https://www.wahed.com/mme/new-to-wahed-heres-what-happens-before-you-invest": null,
+    "https://www.wahed.com/": null,
+    "https://www.instagram.com/reel/CfJpeZLrM4Y/": null
+   }
   }
  ]
 }

@@ -83,6 +83,64 @@
     "https://www.cms.gov/regulations-and-guidance/guidance/manuals/downloads/clm104c20.pdf"
    ],
    "risk_flag": "lack of verifiable traction"
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Fitlab Egypt sports biomechanics startup funding",
+   "verdict": "unverified",
+   "finding": "The provided sources do not mention any sports‑health or biomechanics competitors operating in Egypt or the broader MENA region. Source [1] discusses FitActive’s studio brands (Yoga Vida, Racked) and group activities, while source [2] is an academic paper listing authors from European universities and Egypt but contains no information on market players relevant to Motion+.",
+   "sources": [
+    "https://www.fitactive.it/images/rassegna-stampa/fitnessnewseurope.pdf",
+    "https://dl.acm.org/action/showFmPdf?doi=10.1145%2F3613904"
+   ],
+   "risk_flag": "Insufficient data on local competition could affect market entry assessment",
+   "source_tiers": {
+    "https://www.fitactive.it/images/rassegna-stampa/fitnessnewseurope.pdf": null,
+    "https://dl.acm.org/action/showFmPdf?doi=10.1145%2F3613904": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "MediFit Egypt running analysis platform investors",
+   "verdict": "unverified",
+   "finding": "The supplied documents cover PRIMA portfolio analyses, Mediterranean food technology, a mining & energy handbook, the MedFIT event, and a CRO annual return. None of these sources mention sports‑health, biomechanics, running analysis, or any competitors in Egypt/MENA relevant to Motion+.",
+   "sources": [
+    "https://prima-med.org/wp-content/uploads/2025/05/PRIMA-PORTFOLIO-ANALYSIS-FINAL-DEC-17-1-1.pdf",
+    "https://prima-med.org/wp-content/uploads/documents/Booklet-PRIMA-2019-def.pdf",
+    "https://epaper.thebrief24.com/2025/Magazines%202025/Mining-&-Energy-2025-Handbook.pdf",
+    "https://www.photonics21.org/events-workshops/",
+    "https://astp4kt.eu/resources/research-and-development?page=56",
+    "https://cro.ie/wp-content/uploads/2024/04/28-September-2022-Annual-Returns-Registered.pdf"
+   ],
+   "risk_flag": "lack of verifiable regional competitor data",
+   "source_tiers": {
+    "https://prima-med.org/wp-content/uploads/2025/05/PRIMA-PORTFOLIO-ANALYSIS-FINAL-DEC-17-1-1.pdf": null,
+    "https://prima-med.org/wp-content/uploads/documents/Booklet-PRIMA-2019-def.pdf": null,
+    "https://epaper.thebrief24.com/2025/Magazines%202025/Mining-&-Energy-2025-Handbook.pdf": null,
+    "https://www.photonics21.org/events-workshops/": null,
+    "https://astp4kt.eu/resources/research-and-development?page=56": null,
+    "https://cro.ie/wp-content/uploads/2024/04/28-September-2022-Annual-Returns-Registered.pdf": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "MENA sports health tech competitors to Motion+ funding",
+   "verdict": "context",
+   "finding": "The sources show increasing investor interest in sports‑tech: the Cayman Islands fund registry lists dedicated vehicles such as Health Investment Fund I, L.P. and Sports Partners Access Offshore LP (source 1); a 2025 Houlihan Lokey market update notes that leading global financial investors are bullish on the future of sports tech (source 3); and a 2025 Atlantic Council article highlights the MENA region’s opportunity to unlock youth potential through sports (source 4). No specific financial data about Motion+ is provided.",
+   "sources": [
+    "https://www.cima.ky/upimages/commonfiles/QuarterlyListofallPrivateFundsregisteredandlicensedwiththeCaymanIslandsMonetaryAuthority-30September2022_1665522214.pdf",
+    "https://cdn.hl.com/pdf/2025/sports-market-update-hl-fall-2025.pdf",
+    "https://www.atlanticcouncil.org/blogs/menasource/mena-sports-unlock-its-youth-potential/"
+   ],
+   "risk_flag": "Emerging market regulatory environment",
+   "source_tiers": {
+    "https://www.cima.ky/upimages/commonfiles/QuarterlyListofallPrivateFundsregisteredandlicensedwiththeCaymanIslandsMonetaryAuthority-30September2022_1665522214.pdf": null,
+    "https://cdn.hl.com/pdf/2025/sports-market-update-hl-fall-2025.pdf": null,
+    "https://www.atlanticcouncil.org/blogs/menasource/mena-sports-unlock-its-youth-potential/": null
+   }
   }
  ]
 }

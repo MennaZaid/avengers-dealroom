@@ -84,6 +84,70 @@
     "https://www.databricks.com/blog/introducing-databricks-ai-index-state-enterprise-ai-tokenomics"
    ],
    "risk_flag": "potential overstatement of performance"
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Instadeep AI developer tooling funding Tunisia",
+   "verdict": "context",
+   "finding": "InstaDeep, a Tunis‑and‑London AI startup founded in 2014, secured a $549 million deal (2026) and was acquired by BioNTech for up to £562 m, tripling revenue and expanding across Africa with supply‑chain AI for Nigeria’s Dangote Refinery and a program training 1,000 African developers. Its strong funding and regional presence represent a notable competitor to Hylix’s AI developer‑tooling focus.",
+   "sources": [
+    "https://www.wired.me/story/tunisias-start-up-boom-started-with-one-exit",
+    "https://iafrica.com/instadeep-tunisias-ai-powerhouse-transforming-global-industries/",
+    "https://www.actuia.com/en/news/what-has-become-of-instadeep-three-years-after-its-record-takeover-by-biontech/"
+   ],
+   "risk_flag": "Strong competition from well‑funded regional AI firms",
+   "source_tiers": {
+    "https://www.wired.me/story/tunisias-start-up-boom-started-with-one-exit": null,
+    "https://iafrica.com/instadeep-tunisias-ai-powerhouse-transforming-global-industries/": null,
+    "https://www.actuia.com/en/news/what-has-become-of-instadeep-three-years-after-its-record-takeover-by-biontech/": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Keen AI Egypt coding assistant startup funding",
+   "verdict": "context",
+   "finding": "The available sources show an emerging AI ecosystem in Egypt and the broader MENA region. The Egypt National AI Strategy outlines government support for AI adoption. Mirendil, an AI startup, recently raised US$1 billion in Series A funding, indicating strong capital flow into AI ventures. Flat6Labs and the National Telecommunication Institute are actively investing in and training AI talent, while the Startup Genome report highlights that most AI‑native funding still goes to the US and China, suggesting limited local financing for niche AI developer tooling.",
+   "sources": [
+    "https://ai.gov.eg/Egypt%20National%20AI%20Strategy-%20English.pdf",
+    "https://womenstabloid.com/ai-company-mirendil-raises-us1-billion-in-series-a-funding/",
+    "https://flat6labs.com/page/2/?lang=ar",
+    "https://www.facebook.com/MCITEgypt/posts/ai-ambassadors-program-the-national-telecommunication-institute-nti-is-accepting/1520824363421185/",
+    "https://startupgenome.com/contents/report/gser-2025_4786.pdf"
+   ],
+   "risk_flag": "Limited local developer‑tooling ecosystem may hinder rapid market adoption",
+   "source_tiers": {
+    "https://ai.gov.eg/Egypt%20National%20AI%20Strategy-%20English.pdf": null,
+    "https://womenstabloid.com/ai-company-mirendil-raises-us1-billion-in-series-a-funding/": null,
+    "https://flat6labs.com/page/2/?lang=ar": null,
+    "https://www.facebook.com/MCITEgypt/posts/ai-ambassadors-program-the-national-telecommunication-institute-nti-is-accepting/1520824363421185/": null,
+    "https://startupgenome.com/contents/report/gser-2025_4786.pdf": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "MENA region AI code generation startup funding",
+   "verdict": "context",
+   "finding": "The MENA region sees activity in AI infrastructure and services, with Think raising over $8 million in the largest pre‑seed AI infrastructure round, HUMAIN offering AI services, tools and data‑center capabilities, iMENA raising $214 million to expand digital platforms in Saudi Arabia, and HeyBreez providing enterprise voice AI. These players indicate a growing ecosystem but are not direct developer‑tooling competitors to Hylix.",
+   "sources": [
+    "https://raed.vc/news/think-closes-menas-largest-ai-infrastructure-pre-seed-round-at-over-8-million/",
+    "https://dealroom.co/news/173208-imena-raises-214m-to-expand-digital-platforms-in-saudi-arabia/",
+    "https://www.linkedin.com/top-content/artificial-intelligence/ai-startup-funding-opportunities/ai-startup-funding-in-abu-dhabi-and-saudi-arabia/",
+    "https://en.incarabia.com/ksabased-think-raises-over-us8-million-in-the-mena%E2%80%99s-largest-ai-infrastructure-preseed-round-878056.html",
+    "https://shizune.co/investors/artificial-intelligence-vc-funds-middle-east",
+    "https://www.instagram.com/p/DdYhgU7NWr6/"
+   ],
+   "risk_flag": "Intense competition from well‑funded AI infrastructure firms",
+   "source_tiers": {
+    "https://raed.vc/news/think-closes-menas-largest-ai-infrastructure-pre-seed-round-at-over-8-million/": null,
+    "https://dealroom.co/news/173208-imena-raises-214m-to-expand-digital-platforms-in-saudi-arabia/": null,
+    "https://www.linkedin.com/top-content/artificial-intelligence/ai-startup-funding-opportunities/ai-startup-funding-in-abu-dhabi-and-saudi-arabia/": null,
+    "https://en.incarabia.com/ksabased-think-raises-over-us8-million-in-the-mena%E2%80%99s-largest-ai-infrastructure-preseed-round-878056.html": null,
+    "https://shizune.co/investors/artificial-intelligence-vc-funds-middle-east": null,
+    "https://www.instagram.com/p/DdYhgU7NWr6/": null
+   }
   }
  ]
 }

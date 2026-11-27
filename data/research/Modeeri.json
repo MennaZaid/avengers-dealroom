@@ -76,6 +76,60 @@
     "https://meskagrup.com/"
    ],
    "risk_flag": "lack of verifiable revenue evidence"
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Modeeri competitors Egypt inspections SaaS funding",
+   "verdict": "unverified",
+   "finding": "The available snippets mention overall SaaS market activity in Egypt—e.g., $37.4M funded in 2022 and $19.5M raised in 2025 across 6 rounds—but they do not list any specific competitors in the frontline operations or inspection space in Egypt or the broader MENA region.",
+   "sources": [
+    "https://tr.linkedin.com/in/mustafa-sokullu-782471249",
+    "https://baseballdevelopmentgroup.com/2022/08/humeral-retrotorsion-part-1-at-what-age-should-athletes-begin-throwing/",
+    "http:///go/v1/Abf8m5RLmtgjawmjnAEoEQDeorIyUEzXw0YJaHDXgmehThn_5NdaM-zYWD6JpvvCvJs7xjy1w2-T0Of3trC8bVF4gcTjOakbhvzbqArXdeYxeYc7BP1kbd1hhRagerNLLMyv_P2BkdhXJ_dYTXo9p4f3zRdaZiPen8T4_EecmK72S348rqAwe1TkSC3k6aHpS5zsb1sWA5quGfWvtLajmkCK6DEiG4_HhACwGv3bo7oKvFETPKc0K24hy4P-fkffKpn3XOimx6UEsZyPIcDr_0VHYg0",
+    "https://yased-api.yased.org.tr/Uploads/Reports/YASED-Faaliyet-Raporu-2023.pdf",
+    "https://www.eralp.av.tr/startup-girisim-yatirim-hukuku-ile-ilgili-basvurulabilecek-kaynaklar-nelerdir-soru-464/",
+    "https://www.scribd.com/document/979541106/UMTEB-K%C4%B0TAP"
+   ],
+   "risk_flag": "Lack of clear competitive landscape data",
+   "source_tiers": {
+    "https://tr.linkedin.com/in/mustafa-sokullu-782471249": null,
+    "https://baseballdevelopmentgroup.com/2022/08/humeral-retrotorsion-part-1-at-what-age-should-athletes-begin-throwing/": null,
+    "http:///go/v1/Abf8m5RLmtgjawmjnAEoEQDeorIyUEzXw0YJaHDXgmehThn_5NdaM-zYWD6JpvvCvJs7xjy1w2-T0Of3trC8bVF4gcTjOakbhvzbqArXdeYxeYc7BP1kbd1hhRagerNLLMyv_P2BkdhXJ_dYTXo9p4f3zRdaZiPen8T4_EecmK72S348rqAwe1TkSC3k6aHpS5zsb1sWA5quGfWvtLajmkCK6DEiG4_HhACwGv3bo7oKvFETPKc0K24hy4P-fkffKpn3XOimx6UEsZyPIcDr_0VHYg0": null,
+    "https://yased-api.yased.org.tr/Uploads/Reports/YASED-Faaliyet-Raporu-2023.pdf": null,
+    "https://www.eralp.av.tr/startup-girisim-yatirim-hukuku-ile-ilgili-basvurulabilecek-kaynaklar-nelerdir-soru-464/": null,
+    "https://www.scribd.com/document/979541106/UMTEB-K%C4%B0TAP": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Egypt B2B SaaS inspection platform competitors funding",
+   "verdict": "context",
+   "finding": "The market includes several B2B SaaS players targeting operations and inspections in Egypt/MENA. beXel.io is a Cairo‑based cloud inspection‑management platform that recently raised a six‑figure round (Flat6Labs, JH Investments, etc.) [5]. E‑Stebdal, also Cairo‑based, offers a returns‑and‑exchanges SaaS solution for e‑commerce merchants across MENA [4]. A broader survey lists 538 SaaS startups in Egypt, underscoring a crowded competitive environment [3].",
+   "sources": [
+    "https://tiec.gov.eg/English/Programs/Start-IT/Pages/default.aspx"
+   ],
+   "risk_flag": "High competition from numerous local SaaS providers",
+   "source_tiers": {
+    "https://tiec.gov.eg/English/Programs/Start-IT/Pages/default.aspx": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "MENA frontline operations SaaS startups funding",
+   "verdict": "context",
+   "finding": "The provided snippets highlight MENA funding activity and mention a few SaaS‑related startups (AYAN in the UAE, Chipverse in Egypt, and Beekeeper – a Swiss platform for frontline workers). None of the excerpts specifically name competitors to Modeeri in the frontline operations/inspections space in Egypt, UAE, or the broader GCC.",
+   "sources": [
+    "https://www.linkedin.com/posts/hannaan_mena-ai-startup-activity-7518580315695702016-Xq4g",
+    "https://dealroom.co/lists/saas-startups-switzerland/"
+   ],
+   "risk_flag": "unclear competitive landscape",
+   "source_tiers": {
+    "https://www.linkedin.com/posts/hannaan_mena-ai-startup-activity-7518580315695702016-Xq4g": null,
+    "https://dealroom.co/lists/saas-startups-switzerland/": null
+   }
   }
  ]
 }

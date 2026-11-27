@@ -84,6 +84,70 @@
     "https://www.khatersports.com/Khater_english_portfile.pdf"
    ],
    "risk_flag": "lack of customer validation"
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "Egypt sports video analytics startups",
+   "verdict": "context",
+   "finding": "The market includes AI‑driven sports camera providers such as Pixellot (AI‑automated capture, streaming and analytics) and hardware‑focused firms like BCD Video that supply validated AI video‑analytics platforms. In Egypt, broader sports‑tech activity is noted with companies like Mawaheb (football‑focused tech) and Globant’s Sports Studio offering digital‑experience solutions, while deep‑tech studios such as Novelari operate in the region but are not specifically camera‑focused.",
+   "sources": [
+    "https://www.pixellot.tv/",
+    "https://www.bcdvideo.com/solutions/validated-analytics-solutions/",
+    "https://www.f6s.com/companies/football/egypt/co",
+    "https://www.globant.com/studio/sports",
+    "https://www.novelari.com/"
+   ],
+   "risk_flag": "strong competition from established AI camera and analytics providers",
+   "source_tiers": {
+    "https://www.pixellot.tv/": null,
+    "https://www.bcdvideo.com/solutions/validated-analytics-solutions/": null,
+    "https://www.f6s.com/companies/football/egypt/co": null,
+    "https://www.globant.com/studio/sports": null,
+    "https://www.novelari.com/": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "padel court camera companies Egypt",
+   "verdict": "context",
+   "finding": "The search results indicate that there are several companies operating in the Egyptian and MENA region providing services related to padel courts, including IM Trust which claims to be the leading company in Egypt for implementing padel courts, Supply Padel based in the UAE offering premium padel courts globally, and Sport Floor supplying super panoramic padel courts.",
+   "sources": [
+    "https://imtrust-eg.com/en/padel-courts/",
+    "https://supplypadel.com/",
+    "https://sportfloor-m.com/super-panoramic-padel-court/"
+   ],
+   "risk_flag": "",
+   "source_tiers": {
+    "https://imtrust-eg.com/en/padel-courts/": null,
+    "https://supplypadel.com/": null,
+    "https://sportfloor-m.com/super-panoramic-padel-court/": null
+   }
+  },
+  {
+   "topic": "competition_egypt",
+   "claim": "",
+   "query": "MENA sports tech highlight platforms funding",
+   "verdict": "unverified",
+   "finding": "The provided snippets discuss Visa's partnership with LaLiga in MENA, Investcorp's private‑equity activities, Deloitte's commentary on Olympic women athletes, PwC's MENA media outlook, recent MENA startup funding trends, and Omdia's SVOD market forecast. None of them mention competitors to REE's court‑camera and highlight technology in Egypt or the broader MENA region.",
+   "sources": [
+    "https://www.visa.com/en-ae/newsroom/visa-laliga-official-partnership",
+    "https://www.investcorp.com/what-we-do/private-equity/",
+    "https://www.deloitte.com/global/en/industries/tmt/perspectives/charting-the-next-phase-of-growth.html",
+    "https://www.strategyand.pwc.com/m1/en/industries/media/mena-media-outlook.html",
+    "https://www.arabnews.com/startups/startup-wrap-mena-funding-continues-momentum-amid-regional-tensions-3012881",
+    "https://omdia.tech.informa.com/pr/2025/may/svod-growth-to-drive-mena-streaming-market-past-1point5-billion-dollars-in-2025"
+   ],
+   "risk_flag": "lack of publicly documented competitors in the target market",
+   "source_tiers": {
+    "https://www.visa.com/en-ae/newsroom/visa-laliga-official-partnership": null,
+    "https://www.investcorp.com/what-we-do/private-equity/": null,
+    "https://www.deloitte.com/global/en/industries/tmt/perspectives/charting-the-next-phase-of-growth.html": null,
+    "https://www.strategyand.pwc.com/m1/en/industries/media/mena-media-outlook.html": null,
+    "https://www.arabnews.com/startups/startup-wrap-mena-funding-continues-momentum-amid-regional-tensions-3012881": null,
+    "https://omdia.tech.informa.com/pr/2025/may/svod-growth-to-drive-mena-streaming-market-past-1point5-billion-dollars-in-2025": null
+   }
   }
  ]
 }
